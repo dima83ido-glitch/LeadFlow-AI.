@@ -10,7 +10,11 @@ function createPrismaClient() {
   if (!connectionString) {
     throw new Error("DATABASE_URL is not set — see .env.example");
   }
-  const adapter = new PrismaPg({ connectionString });
+  const isLocalHost = /localhost|127\.0\.0\.1/.test(connectionString);
+  const adapter = new PrismaPg({
+    connectionString,
+    ssl: isLocalHost ? undefined : { rejectUnauthorized: false },
+  });
   return new PrismaClient({ adapter });
 }
 
