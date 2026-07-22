@@ -1,10 +1,6 @@
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/generated/prisma/client";
 
-// Deferred: no page or component imports `prisma` from here yet. All data
-// in the UI phase comes from `src/lib/mock`. This wiring exists so the
-// switch to real persistence later is a data-layer change only.
-
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };

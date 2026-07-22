@@ -1,7 +1,4 @@
 // LeadFlow AI — data model.
-// Architecture only for this phase: no migrations are run against a live
-// database. `npx prisma generate` is safe to run without a DATABASE_URL
-// connection and is used purely to validate this file compiles.
 
 generator client {
   provider = "prisma-client"

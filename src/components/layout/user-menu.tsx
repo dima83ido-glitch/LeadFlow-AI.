@@ -9,6 +9,7 @@ import {
   Shield,
   User,
 } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -22,25 +23,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const currentUser = {
-  name: "Dmitry",
-  email: "dima83ido@gmail.com",
-  initials: "D",
-};
-
 export function UserMenu() {
+  const { data: session } = useSession();
+
+  const name = session?.user?.name ?? "Account";
+  const email = session?.user?.email ?? "";
+  const initials = name.charAt(0).toUpperCase();
+  const isAdmin = session?.user?.role === "ADMIN";
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant="ghost" className="h-8 gap-2 px-1.5" />}>
         <Avatar className="size-6">
-          <AvatarFallback className="text-xs">{currentUser.initials}</AvatarFallback>
+          <AvatarFallback className="text-xs">{initials}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-64">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-0.5">
-            <p className="text-sm font-medium">{currentUser.name}</p>
-            <p className="text-muted-foreground text-xs">{currentUser.email}</p>
+            <p className="text-sm font-medium">{name}</p>
+            <p className="text-muted-foreground text-xs">{email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -57,17 +59,19 @@ export function UserMenu() {
             <CreditCard />
             Billing
           </DropdownMenuItem>
-          <DropdownMenuItem render={<Link href="/admin" />}>
-            <Shield />
-            Admin Panel
-          </DropdownMenuItem>
+          {isAdmin && (
+            <DropdownMenuItem render={<Link href="/admin" />}>
+              <Shield />
+              Admin Panel
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem render={<Link href="/help" />}>
             <LifeBuoy />
             Help
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem render={<Link href="/login" />}>
+        <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>
           <LogOut />
           Log out
         </DropdownMenuItem>

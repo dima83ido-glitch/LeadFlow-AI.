@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -21,6 +23,16 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field
 import { Input } from "@/components/ui/input";
 
 export default function LoginPage() {
+  return (
+    <React.Suspense fallback={null}>
+      <LoginForm />
+    </React.Suspense>
+  );
+}
+
+function LoginForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const {
     register,
@@ -28,13 +40,23 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm<LoginFormValues>({ resolver: zodResolver(loginSchema) });
 
-  function onSubmit() {
+  async function onSubmit(values: LoginFormValues) {
     setIsSubmitting(true);
-    // No real authentication yet — this phase is UI only.
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast.info("Authentication isn't wired up yet — this is a UI preview.");
-    }, 900);
+    const result = await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      redirect: false,
+    });
+    setIsSubmitting(false);
+
+    if (!result || result.error) {
+      toast.error("Invalid email or password");
+      return;
+    }
+
+    const callbackUrl = searchParams.get("callbackUrl") ?? "/dashboard";
+    router.push(callbackUrl);
+    router.refresh();
   }
 
   return (

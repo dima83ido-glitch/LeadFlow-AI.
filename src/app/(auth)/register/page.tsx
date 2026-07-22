@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -22,6 +24,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field
 import { Input } from "@/components/ui/input";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const {
     register,
@@ -31,12 +34,37 @@ export default function RegisterPage() {
     formState: { errors },
   } = useForm<RegisterFormValues>({ resolver: zodResolver(registerSchema) });
 
-  function onSubmit() {
+  async function onSubmit(values: RegisterFormValues) {
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => null);
       setIsSubmitting(false);
-      toast.info("Account creation isn't wired up yet — this is a UI preview.");
-    }, 900);
+      toast.error(data?.error ?? "Could not create account");
+      return;
+    }
+
+    const result = await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      redirect: false,
+    });
+    setIsSubmitting(false);
+
+    if (!result || result.error) {
+      toast.success("Account created — please log in");
+      router.push("/login");
+      return;
+    }
+
+    router.push("/dashboard");
+    router.refresh();
   }
 
   return (
