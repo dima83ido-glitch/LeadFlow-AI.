@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+
+import { SecurityView } from "@/components/settings/security-view";
+
+export const metadata: Metadata = { title: "Security" };
+
+export default function SecuritySettingsPage() {
+  return <SecurityView />;
+}
