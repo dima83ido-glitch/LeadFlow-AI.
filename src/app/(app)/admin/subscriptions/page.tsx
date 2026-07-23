@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-import { mockAdminSubscriptions } from "@/lib/mock/admin";
 import { PageHeader } from "@/components/shared/page-header";
-import { DataTable } from "@/components/shared/data-table";
-import { adminSubscriptionsColumns } from "@/components/admin/admin-subscriptions-columns";
+import { AdminSubscriptionsView } from "@/components/admin/admin-subscriptions-view";
 
 export const metadata: Metadata = { title: "Subscriptions" };
 
-export default function AdminSubscriptionsPage() {
+export default async function AdminSubscriptionsPage() {
+  const t = await getTranslations("admin.subscriptions");
   return (
     <div className="space-y-6">
-      <PageHeader title="Subscriptions" description="All active and past workspace subscriptions." />
-      <DataTable columns={adminSubscriptionsColumns} data={mockAdminSubscriptions} />
+      <PageHeader title={t("title")} description={t("description")} />
+      <AdminSubscriptionsView />
     </div>
   );
 }

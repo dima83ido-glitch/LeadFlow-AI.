@@ -1,0 +1,69 @@
+{
+  "page": {
+    "title": "Поиск лидов",
+    "description": "Находите потенциальных клиентов по стране, отрасли, ключевым словам и другим параметрам."
+  },
+  "filterBar": {
+    "countryLabel": "Страна",
+    "anyCountry": "Любая страна",
+    "cityLabel": "Город",
+    "cityPlaceholder": "например, Остин",
+    "industryLabel": "Отрасль",
+    "anyIndustry": "Любая отрасль",
+    "keywordsLabel": "Ключевые слова",
+    "keywordsPlaceholder": "например, аналитика, логистика",
+    "hasWebsite": "Есть сайт",
+    "hasEmail": "Есть email",
+    "hasPhone": "Есть телефон",
+    "minRating": "Мин. рейтинг",
+    "any": "Любой",
+    "reset": "Сбросить",
+    "search": "Найти лидов"
+  },
+  "columns": {
+    "company": "Компания",
+    "contact": "Контакт",
+    "location": "Местоположение",
+    "channels": "Каналы связи",
+    "rating": "Рейтинг",
+    "status": "Статус"
+  },
+  "searchView": {
+    "noResultsTitle": "Нет лидов, соответствующих фильтрам",
+    "noResultsDescription": "Попробуйте расширить поиск — уберите фильтр или измените ключевые слова.",
+    "startTitle": "Начните поиск лидов",
+    "startDescription": "Задайте фильтры выше и нажмите «Найти лидов», чтобы найти компании для связи."
+  },
+  "detail": {
+    "analyze": "Анализ",
+    "generateEmail": "Сгенерировать письмо",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "deleteDialogTitle": "Удалить этого лида?",
+    "deleteDialogDescription": "Компания {company} будет безвозвратно удалена из вашего рабочего пространства. Это действие нельзя отменить.",
+    "deleteConfirmLabel": "Удалить лида",
+    "deletedToast": "{company} удалён.",
+    "savedToast": "{company} сохранён в вашей CRM.",
+    "tabs": {
+      "overview": "Обзор",
+      "activity": "Активность",
+      "campaigns": "История кампаний"
+    },
+    "details": {
+      "title": "Данные лида",
+      "source": "Источник",
+      "employees": "Сотрудников",
+      "addedOn": "Добавлен",
+      "lastUpdated": "Обновлён"
+    },
+    "noActivityTitle": "Пока нет активности",
+    "noActivityDescription": "Здесь будут отображаться отправленные письма и совершённые звонки.",
+    "noCampaignsTitle": "Пока не участвует ни в одной кампании",
+    "noCampaignsDescription": "Добавьте этого лида в кампанию, чтобы начать отслеживать взаимодействие.",
+    "browseCampaigns": "Смотреть кампании",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "page": {
+    "title": "Шаблони",
+    "description": "Готові email-шаблони для ваших кампаній.",
+    "generateWithAi": "Згенерувати з ШІ"
+  },
+  "allCategories": "Усі",
+  "categories": {
+    "Cold Outreach": "Холодний контакт",
+    "Introduction": "Знайомство",
+    "Follow-up": "Нагадування",
+    "Proposal": "Пропозиція",
+    "Re-engagement": "Реактивація"
+  },
+  "searchPlaceholder": "Пошук шаблонів...",
+  "noResultsTitle": "Шаблони не знайдено",
+  "noResultsDescription": "Спробуйте іншу категорію або пошуковий запит.",
+  "aiBadge": "ШІ",
+  "edit": "Редагувати",
+  "duplicate": "Дублювати",
+  "delete": "Видалити",
+  "editNotWiredUp": "Редагування ще не підключено.",
+  "duplicatedToast": "«{name}» дубльовано.",
+  "deletedToast": "«{name}» видалено.",
+  "campaignsCount": "кампаній: {count}",
+  "updatedOn": "Оновлено {date}"
+}

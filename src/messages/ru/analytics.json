@@ -1,0 +1,50 @@
+{
+  "page": {
+    "title": "Аналитика",
+    "description": "Отслеживайте эффективность рассылок и доход в вашем рабочем пространстве."
+  },
+  "vsLastMonth": "за прошлый месяц",
+  "metrics": {
+    "openRate": "Процент открытий",
+    "replyRate": "Процент ответов",
+    "conversionRate": "Конверсия",
+    "revenue": "Доход"
+  },
+  "emailPerformance": {
+    "title": "Эффективность писем",
+    "sent": "Отправлено",
+    "opened": "Открыто",
+    "replied": "Ответы"
+  },
+  "leadsBySource": {
+    "title": "Лиды по источникам",
+    "value": "Лиды",
+    "sources": {
+      "googleMaps": "Google Карты",
+      "linkedIn": "LinkedIn",
+      "referral": "Рекомендации",
+      "website": "Сайт",
+      "manualImport": "Ручной импорт"
+    }
+  },
+  "revenueByPlan": {
+    "title": "Доход по тарифам",
+    "value": "Доход",
+    "plans": {
+      "free": "Бесплатный",
+      "starter": "Стартовый",
+      "pro": "Про",
+      "enterprise": "Корпоративный"
+    }
+  },
+  "conversionFunnel": {
+    "title": "Воронка конверсии",
+    "stages": {
+      "leadsFound": "Найдено лидов",
+      "contacted": "Связались",
+      "qualified": "Квалифицировано",
+      "proposalSent": "Отправлено предложение",
+      "won": "Сделка закрыта"
+    }
+  }
+}

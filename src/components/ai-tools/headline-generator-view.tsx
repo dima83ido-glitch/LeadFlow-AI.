@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Lightbulb, Loader2, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,6 +24,7 @@ function buildResults(product: string, valueProp: string): string[] {
 }
 
 export default function HeadlineGeneratorView() {
+  const t = useTranslations("aiTools.headlineGenerator");
   const [product, setProduct] = React.useState("");
   const [valueProp, setValueProp] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -41,52 +43,52 @@ export default function HeadlineGeneratorView() {
     <div className="grid gap-6 lg:grid-cols-5">
       <Card className="h-fit lg:col-span-2">
         <CardHeader>
-          <CardTitle className="text-base">Product Details</CardTitle>
+          <CardTitle className="text-base">{t("form.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Field>
-            <FieldLabel htmlFor="product">Product / company name</FieldLabel>
+            <FieldLabel htmlFor="product">{t("form.productLabel")}</FieldLabel>
             <Input
               id="product"
-              placeholder="e.g. LeadFlow AI"
+              placeholder={t("form.productPlaceholder")}
               value={product}
               onChange={(e) => setProduct(e.target.value)}
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="valueProp">Value proposition</FieldLabel>
+            <FieldLabel htmlFor="valueProp">{t("form.valuePropLabel")}</FieldLabel>
             <Input
               id="valueProp"
-              placeholder="e.g. find and close new clients faster"
+              placeholder={t("form.valuePropPlaceholder")}
               value={valueProp}
               onChange={(e) => setValueProp(e.target.value)}
             />
           </Field>
           <Button className="w-full" onClick={handleGenerate} disabled={isLoading}>
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
-            Generate
+            {t("form.submit")}
           </Button>
         </CardContent>
       </Card>
 
       <Card className="lg:col-span-3">
         <CardHeader>
-          <CardTitle className="text-base">Headline Variants</CardTitle>
+          <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={results !== null}
             emptyIcon={Lightbulb}
-            emptyTitle="No headlines yet"
-            emptyDescription="Describe your product and click Generate to see headline options."
+            emptyTitle={t("result.emptyTitle")}
+            emptyDescription={t("result.emptyDescription")}
           >
             {results && (
               <div className="space-y-2">
                 {results.map((headline) => (
                   <div key={headline} className="flex items-center justify-between gap-3 rounded-lg border p-3">
                     <p className="text-sm font-medium">{headline}</p>
-                    <CopyButton value={headline} label="Copy" />
+                    <CopyButton value={headline} />
                   </div>
                 ))}
               </div>

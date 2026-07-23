@@ -1,8 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 
+import type { Locale } from "@/i18n/config";
 import { mockPromoCodes } from "@/lib/mock/admin";
 import type { PromoCode } from "@/types/admin";
 import { DataTable } from "@/components/shared/data-table";
@@ -10,6 +12,8 @@ import { CreatePromoCodeDialog } from "@/components/admin/create-promo-code-dial
 import { getPromoCodesColumns } from "@/components/admin/promo-codes-columns";
 
 export function PromoCodesView() {
+  const t = useTranslations("admin.promoCodes");
+  const locale = useLocale() as Locale;
   const [promoCodes, setPromoCodes] = React.useState<PromoCode[]>(mockPromoCodes);
 
   function handleToggleActive(id: string, active: boolean) {
@@ -19,7 +23,7 @@ export function PromoCodesView() {
   function handleDelete(id: string) {
     const promo = promoCodes.find((p) => p.id === id);
     setPromoCodes((prev) => prev.filter((p) => p.id !== id));
-    if (promo) toast.success(`"${promo.code}" was deleted.`);
+    if (promo) toast.success(t("deletedToast", { code: promo.code }));
   }
 
   function handleCreate(code: string, discountPercent: number) {
@@ -29,7 +33,22 @@ export function PromoCodesView() {
     ]);
   }
 
-  const columns = getPromoCodesColumns(handleToggleActive, handleDelete);
+  const columns = getPromoCodesColumns(
+    handleToggleActive,
+    handleDelete,
+    {
+      code: t("columns.code"),
+      discount: t("columns.discount"),
+      redemptions: t("columns.redemptions"),
+      expires: t("columns.expires"),
+      active: t("columns.active"),
+      never: t("columns.never"),
+      deleteTitle: t("deleteDialog.title"),
+      deleteDescription: (code: string) => t("deleteDialog.description", { code }),
+      deleteConfirmLabel: t("deleteDialog.confirmLabel"),
+    },
+    locale,
+  );
 
   return (
     <div className="space-y-4">

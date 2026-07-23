@@ -1,13 +1,13 @@
 import type { LucideIcon } from "lucide-react";
 
 export interface NavItem {
-  title: string;
+  titleKey: string;
   href: string;
   icon: LucideIcon;
   badge?: string;
 }
 
 export interface NavGroup {
-  title?: string;
+  titleKey?: string;
   items: NavItem[];
 }

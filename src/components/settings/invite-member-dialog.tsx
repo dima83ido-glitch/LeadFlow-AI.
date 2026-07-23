@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { UserPlus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -18,13 +19,15 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
 export function InviteMemberDialog() {
+  const t = useTranslations("settings.workspace");
+  const tc = useTranslations("common.actions");
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email.trim()) return;
-    toast.success(`Invite sent to ${email.trim()}.`);
+    toast.success(t("inviteSuccessToast", { email: email.trim() }));
     setEmail("");
     setOpen(false);
   }
@@ -33,21 +36,21 @@ export function InviteMemberDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button variant="outline" size="sm" />}>
         <UserPlus className="size-4" />
-        Invite member
+        {t("inviteMember")}
       </DialogTrigger>
       <DialogContent>
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Invite a teammate</DialogTitle>
-            <DialogDescription>They&apos;ll receive an email invite to join this workspace.</DialogDescription>
+            <DialogTitle>{t("inviteDialogTitle")}</DialogTitle>
+            <DialogDescription>{t("inviteDialogDescription")}</DialogDescription>
           </DialogHeader>
           <FieldGroup className="py-4">
             <Field>
-              <FieldLabel htmlFor="inviteEmail">Email address</FieldLabel>
+              <FieldLabel htmlFor="inviteEmail">{t("emailAddress")}</FieldLabel>
               <Input
                 id="inviteEmail"
                 type="email"
-                placeholder="teammate@company.com"
+                placeholder={t("emailPlaceholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -55,9 +58,9 @@ export function InviteMemberDialog() {
           </FieldGroup>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
-              Cancel
+              {tc("cancel")}
             </Button>
-            <Button type="submit">Send invite</Button>
+            <Button type="submit">{t("sendInvite")}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

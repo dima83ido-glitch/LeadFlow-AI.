@@ -1,0 +1,50 @@
+{
+  "page": {
+    "title": "Аналітика",
+    "description": "Відстежуйте ефективність розсилок і дохід у вашому робочому просторі."
+  },
+  "vsLastMonth": "за минулий місяць",
+  "metrics": {
+    "openRate": "Відсоток відкриттів",
+    "replyRate": "Відсоток відповідей",
+    "conversionRate": "Конверсія",
+    "revenue": "Дохід"
+  },
+  "emailPerformance": {
+    "title": "Ефективність листів",
+    "sent": "Надіслано",
+    "opened": "Відкрито",
+    "replied": "Відповіді"
+  },
+  "leadsBySource": {
+    "title": "Ліди за джерелами",
+    "value": "Ліди",
+    "sources": {
+      "googleMaps": "Google Карти",
+      "linkedIn": "LinkedIn",
+      "referral": "Рекомендації",
+      "website": "Сайт",
+      "manualImport": "Ручний імпорт"
+    }
+  },
+  "revenueByPlan": {
+    "title": "Дохід за тарифами",
+    "value": "Дохід",
+    "plans": {
+      "free": "Безкоштовний",
+      "starter": "Стартовий",
+      "pro": "Про",
+      "enterprise": "Корпоративний"
+    }
+  },
+  "conversionFunnel": {
+    "title": "Вирва конверсії",
+    "stages": {
+      "leadsFound": "Знайдено лідів",
+      "contacted": "Зв'язалися",
+      "qualified": "Кваліфіковано",
+      "proposalSent": "Надіслано пропозицію",
+      "won": "Угоду закрито"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "common": {
+    "editNotWired": "Editing isn't wired up yet."
+  },
+  "companies": {
+    "pageTitle": "Companies",
+    "pageDescription": "Organizations you're working with.",
+    "emptyTitle": "No companies yet",
+    "emptyDescription": "Companies you add contacts or deals for will show up here.",
+    "columns": {
+      "company": "Company",
+      "size": "Size",
+      "location": "Location",
+      "deals": "Deals",
+      "contacts": "Contacts",
+      "added": "Added"
+    },
+    "employeesCount": "{size} employees",
+    "dealsCount": "{count} deals",
+    "contactsCount": "{count} contacts",
+    "contactsOnFile": "{count} contacts on file",
+    "addedOn": "Added {date}",
+    "deleteTitle": "Delete this company?",
+    "deleteDescription": "This will permanently remove {name} and its associated records from your CRM.",
+    "deleteConfirm": "Delete company",
+    "deletedToast": "{name} was deleted."
+  },
+  "contacts": {
+    "pageTitle": "Contacts",
+    "pageDescription": "People you're building relationships with.",
+    "emptyTitle": "No contacts yet",
+    "emptyDescription": "Add a contact to start tracking outreach with them.",
+    "columns": {
+      "contact": "Contact",
+      "company": "Company",
+      "email": "Email",
+      "phone": "Phone",
+      "added": "Added"
+    },
+    "deleteTitle": "Delete this contact?",
+    "deleteDescription": "This will permanently remove {name} from your CRM.",
+    "deleteConfirm": "Delete contact",
+    "deletedToast": "{name} was deleted.",
+    "addDialog": {
+      "trigger": "Add Contact",
+      "title": "Add Contact",
+      "description": "Add a new contact to your CRM.",
+      "firstNameLabel": "First name",
+      "lastNameLabel": "Last name",
+      "emailLabel": "Email",
+      "jobTitleLabel": "Job title",
+      "firstNameRequired": "First name is required",
+      "submit": "Add Contact",
+      "successToast": "{name} was added to your CRM."
+    }
+  },
+  "meetings": {
+    "pageTitle": "Meetings",
+    "pageDescription": "Upcoming calls and meetings with your leads and contacts.",
+    "emptyTitle": "No meetings scheduled",
+    "emptyDescription": "Meetings you schedule with leads and contacts will show up here.",
+    "scheduleDialog": {
+      "trigger": "Schedule Meeting",
+      "title": "Schedule Meeting",
+      "description": "Add a new meeting to your calendar.",
+      "titleLabel": "Title",
+      "titlePlaceholder": "e.g. Discovery Call",
+      "titleRequired": "Title is required",
+      "dateTimeLabel": "Date & time",
+      "dateTimeRequired": "Date and time are required",
+      "locationLabel": "Location",
+      "locationPlaceholder": "e.g. Google Meet",
+      "submit": "Schedule Meeting",
+      "successToast": "\"{title}\" was scheduled."
+    }
+  },
+  "notes": {
+    "pageTitle": "Notes",
+    "pageDescription": "Shared notes about your leads, contacts, and deals.",
+    "placeholder": "Write a note...",
+    "submit": "Add Note",
+    "emptyTitle": "No notes yet",
+    "emptyDescription": "Notes about your leads, contacts, and deals will show up here.",
+    "relatedTo": "Re: {name}"
+  },
+  "pipeline": {
+    "pageTitle": "Pipeline",
+    "pageDescription": "Track deals as they move toward closed-won.",
+    "stages": {
+      "stage_1": "New",
+      "stage_2": "Contacted",
+      "stage_3": "Proposal Sent",
+      "stage_4": "Negotiation",
+      "stage_5": "Won"
+    },
+    "stageTotal": "{amount} total",
+    "noDeals": "No deals in this stage",
+    "notWiredUp": "Not wired up yet."
+  },
+  "tasks": {
+    "pageTitle": "Tasks",
+    "pageDescription": "Track what needs to get done across your pipeline.",
+    "emptyTitle": "No tasks yet",
+    "emptyDescription": "Tasks you create for yourself or your team will show up here.",
+    "priority": {
+      "LOW": "Low",
+      "MEDIUM": "Medium",
+      "HIGH": "High"
+    },
+    "due": "Due {when}",
+    "noTasks": "No tasks",
+    "addDialog": {
+      "trigger": "Add Task",
+      "title": "Add Task",
+      "description": "Create a new task for your team.",
+      "titleLabel": "Title",
+      "titlePlaceholder": "e.g. Follow up with Fjord Studio",
+      "titleRequired": "Title is required",
+      "dueDateLabel": "Due date",
+      "submit": "Add Task",
+      "successToast": "\"{title}\" was added to your tasks."
+    }
+  }
+}

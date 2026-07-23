@@ -1,7 +1,9 @@
 "use client";
 
 import { Building2, Globe, MapPin, Users } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
+import type { Locale } from "@/i18n/config";
 import type { Company } from "@/types/company";
 import { formatDate } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -33,6 +35,8 @@ export function CompanyDetailSheet({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const t = useTranslations("crm.companies");
+  const locale = useLocale() as Locale;
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent>
@@ -52,9 +56,11 @@ export function CompanyDetailSheet({
 
             <div className="space-y-4 px-4 text-sm">
               <div className="flex flex-wrap gap-1.5">
-                {company.size && <Badge variant="secondary">{company.size} employees</Badge>}
-                <Badge variant="outline">{company.dealCount} deals</Badge>
-                <Badge variant="outline">{company.contactCount} contacts</Badge>
+                {company.size && (
+                  <Badge variant="secondary">{t("employeesCount", { size: company.size })}</Badge>
+                )}
+                <Badge variant="outline">{t("dealsCount", { count: company.dealCount })}</Badge>
+                <Badge variant="outline">{t("contactsCount", { count: company.contactCount })}</Badge>
               </div>
 
               <Separator />
@@ -82,11 +88,11 @@ export function CompanyDetailSheet({
                 )}
                 <div className="flex items-center gap-2.5">
                   <Building2 className="text-muted-foreground size-4 shrink-0" />
-                  <span>Added {formatDate(company.createdAt)}</span>
+                  <span>{t("addedOn", { date: formatDate(company.createdAt, locale) })}</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Users className="text-muted-foreground size-4 shrink-0" />
-                  <span>{company.contactCount} contacts on file</span>
+                  <span>{t("contactsOnFile", { count: company.contactCount })}</span>
                 </div>
               </div>
             </div>

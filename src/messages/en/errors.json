@@ -1,0 +1,21 @@
+{
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or may have been moved.",
+    "backButton": "Back to Dashboard"
+  },
+  "appError": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred while loading this page.",
+    "retry": "Try again"
+  },
+  "globalError": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Try reloading the page.",
+    "retry": "Try again"
+  },
+  "leadsError": {
+    "title": "Couldn't load leads",
+    "description": "Something went wrong while loading your leads search."
+  }
+}

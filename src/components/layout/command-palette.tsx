@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { Search, Users } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { commandPaletteNav } from "@/lib/nav-config";
 import { mockLeads } from "@/lib/mock/leads";
@@ -21,6 +22,8 @@ import {
 export function CommandPalette() {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
+  const t = useTranslations();
+  const tc = useTranslations("common");
 
   React.useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -47,27 +50,27 @@ export function CommandPalette() {
       >
         <span className="flex items-center gap-2">
           <Search className="size-4" />
-          <span className="hidden sm:inline">Search...</span>
+          <span className="hidden sm:inline">{tc("search")}</span>
         </span>
         <CommandShortcut className="hidden sm:inline-flex">Ctrl K</CommandShortcut>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Search pages, leads, companies..." />
+        <CommandInput placeholder={t("nav.commandPalettePlaceholder")} />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Navigate">
+          <CommandEmpty>{tc("noResults")}</CommandEmpty>
+          <CommandGroup heading={t("nav.commandPaletteNavigate")}>
             {commandPaletteNav.map((item) => (
               <CommandItem
                 key={item.href}
                 onSelect={() => runCommand(() => router.push(item.href))}
               >
                 <item.icon />
-                {item.title}
+                {t(item.titleKey)}
               </CommandItem>
             ))}
           </CommandGroup>
           <CommandSeparator />
-          <CommandGroup heading="Leads">
+          <CommandGroup heading={t("nav.commandPaletteLeads")}>
             {mockLeads.slice(0, 5).map((lead) => (
               <CommandItem
                 key={lead.id}

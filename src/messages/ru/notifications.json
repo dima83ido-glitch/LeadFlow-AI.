@@ -1,0 +1,47 @@
+{
+  "page": {
+    "title": "Уведомления",
+    "description": "Будьте в курсе событий в вашем рабочем пространстве."
+  },
+  "tabs": {
+    "all": "Все",
+    "unread": "Непрочитанные"
+  },
+  "markAllRead": "Отметить все как прочитанные",
+  "empty": {
+    "unreadTitle": "Все прочитано",
+    "unreadDescription": "Новые уведомления будут появляться здесь.",
+    "allTitle": "Пока нет уведомлений",
+    "allDescription": "Здесь будут отображаться события вашего рабочего пространства."
+  },
+  "titles": {
+    "campaignSent": "Кампания отправлена",
+    "newLeadAdded": "Добавлен новый лид",
+    "campaignPaused": "Кампания приостановлена",
+    "meetingReminder": "Напоминание о встрече",
+    "dealWon": "Сделка выиграна",
+    "paymentFailed": "Ошибка оплаты"
+  },
+  "activity": {
+    "sentCampaign": "отправил(а) кампанию",
+    "addedLead": "добавил(а) лид",
+    "movedDealToNegotiation": "перевёл(а) сделку в статус «Переговоры»",
+    "generatedEmailWithAi": "сгенерировал(а) письмо с помощью AI",
+    "closedDeal": "закрыл(а) сделку",
+    "createdTemplate": "создал(а) шаблон"
+  },
+  "messages": {
+    "campaignSent": "«{campaign}» доставлена {count} получателям.",
+    "newLeadAdded": "«{lead}» добавлен(а) через поиск в Google Maps.",
+    "campaignPaused": "«{campaign}» приостановлена из-за низкого процента открытий.",
+    "meetingReminder": "Ознакомительный звонок с {person} начнётся через 1 час.",
+    "dealWon": "«{deal}» переведена в статус «Выиграна» ({amount}).",
+    "paymentFailed": "Не удалось списать средства с карты, оканчивающейся на {digits}."
+  },
+  "popover": {
+    "ariaLabel": "Уведомления",
+    "title": "Уведомления",
+    "newBadge": "новых: {count}",
+    "viewAll": "Все уведомления"
+  }
+}

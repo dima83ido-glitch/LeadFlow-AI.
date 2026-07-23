@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Loader2, Mails, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -37,6 +38,7 @@ function buildResults(context: string): SubjectVariant[] {
 }
 
 export default function SubjectGeneratorView() {
+  const t = useTranslations("aiTools.subjectGenerator");
   const [context, setContext] = React.useState("");
   const [tone, setTone] = React.useState<string>("Curious");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -55,29 +57,29 @@ export default function SubjectGeneratorView() {
     <div className="grid gap-6 lg:grid-cols-5">
       <Card className="h-fit lg:col-span-2">
         <CardHeader>
-          <CardTitle className="text-base">Context</CardTitle>
+          <CardTitle className="text-base">{t("form.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Field>
-            <FieldLabel htmlFor="context">What&apos;s the email about?</FieldLabel>
+            <FieldLabel htmlFor="context">{t("form.contextLabel")}</FieldLabel>
             <Textarea
               id="context"
-              placeholder="e.g. following up on a demo for our analytics platform"
+              placeholder={t("form.contextPlaceholder")}
               value={context}
               onChange={(e) => setContext(e.target.value)}
               rows={4}
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="tone">Tone</FieldLabel>
+            <FieldLabel htmlFor="tone">{t("form.toneLabel")}</FieldLabel>
             <Select value={tone} onValueChange={(value) => value && setTone(value)}>
               <SelectTrigger id="tone" className="w-full">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {tones.map((t) => (
-                  <SelectItem key={t} value={t}>
-                    {t}
+                {tones.map((toneOption) => (
+                  <SelectItem key={toneOption} value={toneOption}>
+                    {t(`form.tones.${toneOption}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -85,22 +87,22 @@ export default function SubjectGeneratorView() {
           </Field>
           <Button className="w-full" onClick={handleGenerate} disabled={isLoading}>
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
-            Generate
+            {t("form.submit")}
           </Button>
         </CardContent>
       </Card>
 
       <Card className="lg:col-span-3">
         <CardHeader>
-          <CardTitle className="text-base">Subject Line Variants</CardTitle>
+          <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={results !== null}
             emptyIcon={Mails}
-            emptyTitle="No subject lines yet"
-            emptyDescription="Describe the email and click Generate to see subject line variants."
+            emptyTitle={t("result.emptyTitle")}
+            emptyDescription={t("result.emptyDescription")}
           >
             {results && (
               <div className="space-y-2">
@@ -112,10 +114,10 @@ export default function SubjectGeneratorView() {
                     <div className="space-y-1">
                       <p className="text-sm font-medium">{variant.text}</p>
                       <Badge variant="secondary" className="text-xs">
-                        ~{variant.openRate}% predicted open rate
+                        {t("result.openRate", { rate: variant.openRate })}
                       </Badge>
                     </div>
-                    <CopyButton value={variant.text} label="Copy" />
+                    <CopyButton value={variant.text} />
                   </div>
                 ))}
               </div>

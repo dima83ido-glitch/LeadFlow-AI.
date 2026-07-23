@@ -1,0 +1,185 @@
+{
+  "hub": {
+    "title": "AI Tools",
+    "description": "Generate outreach copy and analyze prospects with AI-powered tools."
+  },
+  "copyButton": {
+    "success": "Copied to clipboard",
+    "error": "Couldn't copy to clipboard"
+  },
+  "websiteAnalyzer": {
+    "cardDescription": "Scan a prospect's site for tech stack, SEO health, and messaging gaps.",
+    "form": {
+      "cardTitle": "Website",
+      "urlLabel": "Website URL",
+      "urlPlaceholder": "e.g. northwindanalytics.com",
+      "submit": "Analyze"
+    },
+    "result": {
+      "cardTitle": "Analysis",
+      "emptyTitle": "No analysis yet",
+      "emptyDescription": "Enter a website URL and click Analyze to see a report.",
+      "overallScore": "Overall score"
+    }
+  },
+  "emailGenerator": {
+    "cardDescription": "Draft a personalized outreach email from a lead's profile.",
+    "form": {
+      "cardTitle": "Details",
+      "recipientLabel": "Recipient / Company",
+      "recipientPlaceholder": "e.g. Northwind Analytics",
+      "toneLabel": "Tone",
+      "tones": {
+        "Formal": "Formal",
+        "Friendly": "Friendly",
+        "Direct": "Direct"
+      },
+      "keyPointsLabel": "Key points",
+      "keyPointsPlaceholder": "What should the email mention?",
+      "submit": "Generate"
+    },
+    "result": {
+      "cardTitle": "Generated Email",
+      "emptyTitle": "No email generated yet",
+      "emptyDescription": "Fill in the details and click Generate to draft a personalized email.",
+      "subject": "Subject",
+      "body": "Body",
+      "copySubject": "Copy subject",
+      "copyBody": "Copy body"
+    }
+  },
+  "subjectGenerator": {
+    "cardDescription": "Generate high-open-rate subject line variants.",
+    "form": {
+      "cardTitle": "Context",
+      "contextLabel": "What's the email about?",
+      "contextPlaceholder": "e.g. following up on a demo for our analytics platform",
+      "toneLabel": "Tone",
+      "tones": {
+        "Curious": "Curious",
+        "Direct": "Direct",
+        "Playful": "Playful",
+        "Formal": "Formal"
+      },
+      "submit": "Generate"
+    },
+    "result": {
+      "cardTitle": "Subject Line Variants",
+      "emptyTitle": "No subject lines yet",
+      "emptyDescription": "Describe the email and click Generate to see subject line variants.",
+      "openRate": "~{rate}% predicted open rate"
+    }
+  },
+  "headlineGenerator": {
+    "cardDescription": "Produce landing page and ad headline options.",
+    "form": {
+      "cardTitle": "Product Details",
+      "productLabel": "Product / company name",
+      "productPlaceholder": "e.g. LeadFlow AI",
+      "valuePropLabel": "Value proposition",
+      "valuePropPlaceholder": "e.g. find and close new clients faster",
+      "submit": "Generate"
+    },
+    "result": {
+      "cardTitle": "Headline Variants",
+      "emptyTitle": "No headlines yet",
+      "emptyDescription": "Describe your product and click Generate to see headline options."
+    }
+  },
+  "ctaGenerator": {
+    "cardDescription": "Generate call-to-action copy tuned to campaign goals.",
+    "form": {
+      "cardTitle": "Campaign Goal",
+      "goalLabel": "Goal",
+      "goals": {
+        "Book a call": "Book a call",
+        "Start free trial": "Start free trial",
+        "Reply to email": "Reply to email",
+        "Download resource": "Download resource"
+      },
+      "contextLabel": "Context (optional)",
+      "contextPlaceholder": "e.g. the pricing guide",
+      "submit": "Generate"
+    },
+    "result": {
+      "cardTitle": "CTA Variants",
+      "emptyTitle": "No CTAs yet",
+      "emptyDescription": "Pick a goal and click Generate to see call-to-action variants."
+    }
+  },
+  "seoAudit": {
+    "cardDescription": "Run an automated SEO health check on any domain.",
+    "form": {
+      "cardTitle": "Website",
+      "urlLabel": "Website URL",
+      "urlPlaceholder": "e.g. berlinbrew.de",
+      "submit": "Run Audit"
+    },
+    "result": {
+      "cardTitle": "SEO Report",
+      "emptyTitle": "No audit yet",
+      "emptyDescription": "Enter a website URL and click Run Audit to see an SEO health report.",
+      "score": "SEO score"
+    }
+  },
+  "landingPageAnalyzer": {
+    "cardDescription": "Evaluate a landing page's structure and conversion signals.",
+    "form": {
+      "cardTitle": "Landing Page",
+      "urlLabel": "Page URL",
+      "urlPlaceholder": "e.g. copperheadoutfitters.com/spring-sale",
+      "submit": "Analyze"
+    },
+    "result": {
+      "cardTitle": "Conversion Report",
+      "emptyTitle": "No analysis yet",
+      "emptyDescription": "Enter a landing page URL and click Analyze to see conversion signals.",
+      "score": "Conversion readiness"
+    }
+  },
+  "rewriteEmail": {
+    "cardDescription": "Rewrite an existing email in a different tone or length.",
+    "form": {
+      "cardTitle": "Original Email",
+      "originalLabel": "Paste your email",
+      "originalPlaceholder": "Paste the email you want to rewrite...",
+      "toneLabel": "Rewrite as",
+      "tones": {
+        "More formal": "More formal",
+        "More friendly": "More friendly",
+        "More concise": "More concise",
+        "More persuasive": "More persuasive"
+      },
+      "submit": "Rewrite"
+    },
+    "result": {
+      "cardTitle": "Result",
+      "emptyTitle": "No rewrite yet",
+      "emptyDescription": "Paste an email and click Rewrite to see a new version.",
+      "rewrittenTab": "Rewritten",
+      "originalTab": "Original"
+    }
+  },
+  "translateEmail": {
+    "cardDescription": "Translate outreach copy while preserving tone and intent.",
+    "form": {
+      "cardTitle": "Original Email",
+      "originalLabel": "Paste your email",
+      "originalPlaceholder": "Paste the email you want to translate...",
+      "languageLabel": "Target language",
+      "languages": {
+        "Spanish": "Spanish",
+        "French": "French",
+        "German": "German",
+        "Japanese": "Japanese",
+        "Portuguese": "Portuguese"
+      },
+      "submit": "Translate"
+    },
+    "result": {
+      "cardTitle": "Translation",
+      "emptyTitle": "No translation yet",
+      "emptyDescription": "Paste an email and pick a language to translate it."
+    }
+  }
+}

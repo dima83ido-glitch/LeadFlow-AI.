@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Check, Copy } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -13,17 +14,18 @@ interface CopyButtonProps {
   className?: string;
 }
 
-export function CopyButton({ value, label = "Copy", className }: CopyButtonProps) {
+export function CopyButton({ value, label, className }: CopyButtonProps) {
+  const t = useTranslations();
   const [copied, setCopied] = React.useState(false);
 
   async function handleCopy() {
     try {
       await navigator.clipboard.writeText(value);
       setCopied(true);
-      toast.success("Copied to clipboard");
+      toast.success(t("aiTools.copyButton.success"));
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      toast.error("Couldn't copy to clipboard");
+      toast.error(t("aiTools.copyButton.error"));
     }
   }
 
@@ -36,7 +38,7 @@ export function CopyButton({ value, label = "Copy", className }: CopyButtonProps
       onClick={handleCopy}
     >
       {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
-      {label}
+      {label ?? t("common.actions.copy")}
     </Button>
   );
 }

@@ -1,0 +1,69 @@
+{
+  "page": {
+    "title": "Пошук лідів",
+    "description": "Знаходьте потенційних клієнтів за країною, галуззю, ключовими словами та іншими параметрами."
+  },
+  "filterBar": {
+    "countryLabel": "Країна",
+    "anyCountry": "Будь-яка країна",
+    "cityLabel": "Місто",
+    "cityPlaceholder": "наприклад, Остін",
+    "industryLabel": "Галузь",
+    "anyIndustry": "Будь-яка галузь",
+    "keywordsLabel": "Ключові слова",
+    "keywordsPlaceholder": "наприклад, аналітика, логістика",
+    "hasWebsite": "Є сайт",
+    "hasEmail": "Є email",
+    "hasPhone": "Є телефон",
+    "minRating": "Мін. рейтинг",
+    "any": "Будь-який",
+    "reset": "Скинути",
+    "search": "Знайти лідів"
+  },
+  "columns": {
+    "company": "Компанія",
+    "contact": "Контакт",
+    "location": "Розташування",
+    "channels": "Канали зв'язку",
+    "rating": "Рейтинг",
+    "status": "Статус"
+  },
+  "searchView": {
+    "noResultsTitle": "Немає лідів, що відповідають фільтрам",
+    "noResultsDescription": "Спробуйте розширити пошук — приберіть фільтр або змініть ключові слова.",
+    "startTitle": "Почніть пошук лідів",
+    "startDescription": "Задайте фільтри вище та натисніть «Знайти лідів», щоб знайти компанії для звернення."
+  },
+  "detail": {
+    "analyze": "Аналіз",
+    "generateEmail": "Згенерувати лист",
+    "save": "Зберегти",
+    "delete": "Видалити",
+    "deleteDialogTitle": "Видалити цього ліда?",
+    "deleteDialogDescription": "Компанію {company} буде безповоротно видалено з вашого робочого простору. Цю дію не можна скасувати.",
+    "deleteConfirmLabel": "Видалити ліда",
+    "deletedToast": "{company} видалено.",
+    "savedToast": "{company} збережено у вашій CRM.",
+    "tabs": {
+      "overview": "Огляд",
+      "activity": "Активність",
+      "campaigns": "Історія кампаній"
+    },
+    "details": {
+      "title": "Дані ліда",
+      "source": "Джерело",
+      "employees": "Співробітників",
+      "addedOn": "Додано",
+      "lastUpdated": "Оновлено"
+    },
+    "noActivityTitle": "Поки що немає активності",
+    "noActivityDescription": "Тут з'являться надіслані листи та здійснені дзвінки.",
+    "noCampaignsTitle": "Поки не бере участі в жодній кампанії",
+    "noCampaignsDescription": "Додайте цього ліда до кампанії, щоб почати відстежувати взаємодію.",
+    "browseCampaigns": "Переглянути кампанії",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  }
+}

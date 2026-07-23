@@ -1,30 +1,50 @@
 import { z } from "zod";
 
-export const profileSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.email("Enter a valid email address"),
-  jobTitle: z.string().optional(),
-});
+type ProfileValidationMessages = {
+  nameMin: string;
+  emailInvalid: string;
+};
 
-export const workspaceSchema = z.object({
-  name: z.string().min(2, "Workspace name is required"),
-  slug: z
-    .string()
-    .min(2, "Slug is required")
-    .regex(/^[a-z0-9-]+$/, "Lowercase letters, numbers, and hyphens only"),
-});
+type WorkspaceValidationMessages = {
+  nameRequired: string;
+  slugRequired: string;
+  slugPattern: string;
+};
 
-export const securitySchema = z
-  .object({
-    currentPassword: z.string().min(8, "Enter your current password"),
-    newPassword: z.string().min(8, "Password must be at least 8 characters"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
+type SecurityValidationMessages = {
+  currentPasswordRequired: string;
+  passwordMin: string;
+  passwordsDoNotMatch: string;
+};
+
+export function createProfileSchema(t: ProfileValidationMessages) {
+  return z.object({
+    name: z.string().min(2, t.nameMin),
+    email: z.email(t.emailInvalid),
+    jobTitle: z.string().optional(),
   });
+}
 
-export type ProfileFormValues = z.infer<typeof profileSchema>;
-export type WorkspaceFormValues = z.infer<typeof workspaceSchema>;
-export type SecurityFormValues = z.infer<typeof securitySchema>;
+export function createWorkspaceSchema(t: WorkspaceValidationMessages) {
+  return z.object({
+    name: z.string().min(2, t.nameRequired),
+    slug: z.string().min(2, t.slugRequired).regex(/^[a-z0-9-]+$/, t.slugPattern),
+  });
+}
+
+export function createSecuritySchema(t: SecurityValidationMessages) {
+  return z
+    .object({
+      currentPassword: z.string().min(8, t.currentPasswordRequired),
+      newPassword: z.string().min(8, t.passwordMin),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: t.passwordsDoNotMatch,
+      path: ["confirmPassword"],
+    });
+}
+
+export type ProfileFormValues = z.infer<ReturnType<typeof createProfileSchema>>;
+export type WorkspaceFormValues = z.infer<ReturnType<typeof createWorkspaceSchema>>;
+export type SecurityFormValues = z.infer<ReturnType<typeof createSecuritySchema>>;

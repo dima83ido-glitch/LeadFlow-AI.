@@ -6,10 +6,11 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { type RegisterFormValues, registerSchema } from "@/lib/validations/auth";
+import { createRegisterSchema, type RegisterFormValues } from "@/lib/validations/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,7 +26,20 @@ import { Input } from "@/components/ui/input";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const t = useTranslations("auth.register");
+  const tv = useTranslations("auth.validation");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const registerSchema = React.useMemo(
+    () =>
+      createRegisterSchema({
+        emailInvalid: tv("emailInvalid"),
+        passwordMin: tv("passwordMin"),
+        nameMin: tv("nameMin"),
+        termsRequired: tv("termsRequired"),
+        passwordsDoNotMatch: tv("passwordsDoNotMatch"),
+      }),
+    [tv],
+  );
   const {
     register,
     handleSubmit,
@@ -46,7 +60,9 @@ export default function RegisterPage() {
     if (!res.ok) {
       const data = await res.json().catch(() => null);
       setIsSubmitting(false);
-      toast.error(data?.error ?? "Could not create account");
+      toast.error(
+        data?.errorCode === "EMAIL_EXISTS" ? t("errorEmailExists") : t("errorGeneric"),
+      );
       return;
     }
 
@@ -58,7 +74,7 @@ export default function RegisterPage() {
     setIsSubmitting(false);
 
     if (!result || result.error) {
-      toast.success("Account created — please log in");
+      toast.success(t("successToast"));
       router.push("/login");
       return;
     }
@@ -70,29 +86,29 @@ export default function RegisterPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl">Create your account</CardTitle>
-        <CardDescription>Start finding leads in minutes.</CardDescription>
+        <CardTitle className="text-xl">{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="name">Full name</FieldLabel>
-              <Input id="name" placeholder="Ada Lovelace" {...register("name")} />
+              <FieldLabel htmlFor="name">{t("nameLabel")}</FieldLabel>
+              <Input id="name" placeholder={t("namePlaceholder")} {...register("name")} />
               <FieldError errors={[errors.name]} />
             </Field>
             <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <FieldLabel htmlFor="email">{t("emailLabel")}</FieldLabel>
               <Input id="email" type="email" placeholder="you@company.com" {...register("email")} />
               <FieldError errors={[errors.email]} />
             </Field>
             <Field>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
+              <FieldLabel htmlFor="password">{t("passwordLabel")}</FieldLabel>
               <Input id="password" type="password" placeholder="••••••••" {...register("password")} />
               <FieldError errors={[errors.password]} />
             </Field>
             <Field>
-              <FieldLabel htmlFor="confirmPassword">Confirm password</FieldLabel>
+              <FieldLabel htmlFor="confirmPassword">{t("confirmPasswordLabel")}</FieldLabel>
               <Input
                 id="confirmPassword"
                 type="password"
@@ -108,7 +124,7 @@ export default function RegisterPage() {
                 onCheckedChange={(checked) => setValue("acceptTerms", checked === true)}
               />
               <FieldLabel htmlFor="acceptTerms" className="text-muted-foreground font-normal">
-                I agree to the Terms of Service and Privacy Policy
+                {t("acceptTerms")}
               </FieldLabel>
             </Field>
             <FieldError errors={[errors.acceptTerms]} />
@@ -117,12 +133,12 @@ export default function RegisterPage() {
         <CardFooter className="flex-col gap-4">
           <Button type="submit" className="w-full" disabled={isSubmitting}>
             {isSubmitting && <Loader2 className="size-4 animate-spin" />}
-            Create account
+            {t("submit")}
           </Button>
           <p className="text-muted-foreground text-center text-sm">
-            Already have an account?{" "}
+            {t("haveAccount")}{" "}
             <Link href="/login" className="text-foreground font-medium underline underline-offset-4">
-              Log in
+              {t("logIn")}
             </Link>
           </p>
         </CardFooter>

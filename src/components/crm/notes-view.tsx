@@ -3,7 +3,10 @@
 import * as React from "react";
 import { formatDistanceToNow } from "date-fns";
 import { NotebookText, Send } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
+import type { Locale } from "@/i18n/config";
+import { getDateFnsLocale } from "@/lib/date-fns-locale";
 import { mockNotes } from "@/lib/mock/crm";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -21,6 +24,8 @@ function initials(name: string) {
 }
 
 export function NotesView() {
+  const t = useTranslations("crm.notes");
+  const locale = useLocale() as Locale;
   const [notes, setNotes] = React.useState(mockNotes);
   const [draft, setDraft] = React.useState("");
 
@@ -43,7 +48,7 @@ export function NotesView() {
       <Card>
         <CardContent className="space-y-3">
           <Textarea
-            placeholder="Write a note..."
+            placeholder={t("placeholder")}
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             rows={3}
@@ -51,7 +56,7 @@ export function NotesView() {
           <div className="flex justify-end">
             <Button onClick={addNote} disabled={!draft.trim()}>
               <Send className="size-4" />
-              Add Note
+              {t("submit")}
             </Button>
           </div>
         </CardContent>
@@ -60,8 +65,8 @@ export function NotesView() {
       {notes.length === 0 ? (
         <EmptyState
           icon={NotebookText}
-          title="No notes yet"
-          description="Notes about your leads, contacts, and deals will show up here."
+          title={t("emptyTitle")}
+          description={t("emptyDescription")}
         />
       ) : (
         <div className="space-y-3">
@@ -75,12 +80,17 @@ export function NotesView() {
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-sm font-medium">{note.authorName}</p>
                     <p className="text-muted-foreground text-xs">
-                      {formatDistanceToNow(new Date(note.createdAt), { addSuffix: true })}
+                      {formatDistanceToNow(new Date(note.createdAt), {
+                        addSuffix: true,
+                        locale: getDateFnsLocale(locale),
+                      })}
                     </p>
                   </div>
                   <p className="text-sm">{note.content}</p>
                   {note.relatedTo && (
-                    <p className="text-muted-foreground text-xs">Re: {note.relatedTo}</p>
+                    <p className="text-muted-foreground text-xs">
+                      {t("relatedTo", { name: note.relatedTo })}
+                    </p>
                   )}
                 </div>
               </CardContent>

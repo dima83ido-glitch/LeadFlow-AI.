@@ -1,0 +1,124 @@
+{
+  "common": {
+    "editNotWired": "Редагування ще не підключене."
+  },
+  "companies": {
+    "pageTitle": "Компанії",
+    "pageDescription": "Організації, з якими ви працюєте.",
+    "emptyTitle": "Поки немає компаній",
+    "emptyDescription": "Компанії, для яких ви додасте контакти або угоди, з'являться тут.",
+    "columns": {
+      "company": "Компанія",
+      "size": "Розмір",
+      "location": "Розташування",
+      "deals": "Угоди",
+      "contacts": "Контакти",
+      "added": "Додано"
+    },
+    "employeesCount": "{size} співробітників",
+    "dealsCount": "Угод: {count}",
+    "contactsCount": "Контактів: {count}",
+    "contactsOnFile": "Контактів у базі: {count}",
+    "addedOn": "Додано {date}",
+    "deleteTitle": "Видалити цю компанію?",
+    "deleteDescription": "Це назавжди видалить {name} та всі пов'язані записи з вашої CRM.",
+    "deleteConfirm": "Видалити компанію",
+    "deletedToast": "{name} видалено."
+  },
+  "contacts": {
+    "pageTitle": "Контакти",
+    "pageDescription": "Люди, з якими ви вибудовуєте стосунки.",
+    "emptyTitle": "Поки немає контактів",
+    "emptyDescription": "Додайте контакт, щоб почати відстежувати спілкування з ним.",
+    "columns": {
+      "contact": "Контакт",
+      "company": "Компанія",
+      "email": "Email",
+      "phone": "Телефон",
+      "added": "Додано"
+    },
+    "deleteTitle": "Видалити цей контакт?",
+    "deleteDescription": "Це назавжди видалить {name} з вашої CRM.",
+    "deleteConfirm": "Видалити контакт",
+    "deletedToast": "{name} видалено.",
+    "addDialog": {
+      "trigger": "Додати контакт",
+      "title": "Додати контакт",
+      "description": "Додайте новий контакт до вашої CRM.",
+      "firstNameLabel": "Ім'я",
+      "lastNameLabel": "Прізвище",
+      "emailLabel": "Email",
+      "jobTitleLabel": "Посада",
+      "firstNameRequired": "Вкажіть ім'я",
+      "submit": "Додати контакт",
+      "successToast": "{name} додано до вашої CRM."
+    }
+  },
+  "meetings": {
+    "pageTitle": "Зустрічі",
+    "pageDescription": "Майбутні дзвінки та зустрічі з лідами та контактами.",
+    "emptyTitle": "Немає запланованих зустрічей",
+    "emptyDescription": "Зустрічі, які ви заплануєте з лідами та контактами, з'являться тут.",
+    "scheduleDialog": {
+      "trigger": "Запланувати зустріч",
+      "title": "Запланувати зустріч",
+      "description": "Додайте нову зустріч до календаря.",
+      "titleLabel": "Назва",
+      "titlePlaceholder": "наприклад, Ознайомчий дзвінок",
+      "titleRequired": "Вкажіть назву",
+      "dateTimeLabel": "Дата й час",
+      "dateTimeRequired": "Вкажіть дату й час",
+      "locationLabel": "Місце",
+      "locationPlaceholder": "наприклад, Google Meet",
+      "submit": "Запланувати зустріч",
+      "successToast": "«{title}» заплановано."
+    }
+  },
+  "notes": {
+    "pageTitle": "Нотатки",
+    "pageDescription": "Спільні нотатки про ваших лідів, контакти та угоди.",
+    "placeholder": "Напишіть нотатку...",
+    "submit": "Додати нотатку",
+    "emptyTitle": "Поки немає нотаток",
+    "emptyDescription": "Нотатки про ваших лідів, контакти та угоди з'являться тут.",
+    "relatedTo": "Щодо: {name}"
+  },
+  "pipeline": {
+    "pageTitle": "Воронка продажів",
+    "pageDescription": "Відстежуйте угоди на шляху до закриття.",
+    "stages": {
+      "stage_1": "Нові",
+      "stage_2": "Зв'язалися",
+      "stage_3": "Надіслано пропозицію",
+      "stage_4": "Переговори",
+      "stage_5": "Закрито"
+    },
+    "stageTotal": "Разом: {amount}",
+    "noDeals": "Немає угод на цьому етапі",
+    "notWiredUp": "Ще не підключено."
+  },
+  "tasks": {
+    "pageTitle": "Завдання",
+    "pageDescription": "Відстежуйте, що потрібно зробити в межах вашої воронки.",
+    "emptyTitle": "Поки немає завдань",
+    "emptyDescription": "Завдання, які ви створите для себе чи команди, з'являться тут.",
+    "priority": {
+      "LOW": "Низький",
+      "MEDIUM": "Середній",
+      "HIGH": "Високий"
+    },
+    "due": "Термін: {when}",
+    "noTasks": "Немає завдань",
+    "addDialog": {
+      "trigger": "Додати завдання",
+      "title": "Додати завдання",
+      "description": "Створіть нове завдання для команди.",
+      "titleLabel": "Назва",
+      "titlePlaceholder": "наприклад, Зв'язатися з Fjord Studio",
+      "titleRequired": "Вкажіть назву",
+      "dueDateLabel": "Термін виконання",
+      "submit": "Додати завдання",
+      "successToast": "«{title}» додано до ваших завдань."
+    }
+  }
+}

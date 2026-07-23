@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { UserPlus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -26,6 +27,7 @@ interface AddContactFormValues {
 }
 
 export function AddContactDialog() {
+  const t = useTranslations("crm.contacts.addDialog");
   const [open, setOpen] = React.useState(false);
   const {
     register,
@@ -35,7 +37,7 @@ export function AddContactDialog() {
   } = useForm<AddContactFormValues>();
 
   function onSubmit(values: AddContactFormValues) {
-    toast.success(`${values.firstName} ${values.lastName} was added to your CRM.`);
+    toast.success(t("successToast", { name: `${values.firstName} ${values.lastName}` }));
     setOpen(false);
     reset();
   }
@@ -44,42 +46,42 @@ export function AddContactDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button />}>
         <UserPlus className="size-4" />
-        Add Contact
+        {t("trigger")}
       </DialogTrigger>
       <DialogContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle>Add Contact</DialogTitle>
-            <DialogDescription>Add a new contact to your CRM.</DialogDescription>
+            <DialogTitle>{t("title")}</DialogTitle>
+            <DialogDescription>{t("description")}</DialogDescription>
           </DialogHeader>
           <div className="py-4">
             <FieldGroup>
               <div className="grid grid-cols-2 gap-4">
                 <Field>
-                  <FieldLabel htmlFor="firstName">First name</FieldLabel>
+                  <FieldLabel htmlFor="firstName">{t("firstNameLabel")}</FieldLabel>
                   <Input
                     id="firstName"
-                    {...register("firstName", { required: "First name is required" })}
+                    {...register("firstName", { required: t("firstNameRequired") })}
                   />
                   <FieldError errors={[errors.firstName]} />
                 </Field>
                 <Field>
-                  <FieldLabel htmlFor="lastName">Last name</FieldLabel>
+                  <FieldLabel htmlFor="lastName">{t("lastNameLabel")}</FieldLabel>
                   <Input id="lastName" {...register("lastName")} />
                 </Field>
               </div>
               <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="email">{t("emailLabel")}</FieldLabel>
                 <Input id="email" type="email" {...register("email")} />
               </Field>
               <Field>
-                <FieldLabel htmlFor="jobTitle">Job title</FieldLabel>
+                <FieldLabel htmlFor="jobTitle">{t("jobTitleLabel")}</FieldLabel>
                 <Input id="jobTitle" {...register("jobTitle")} />
               </Field>
             </FieldGroup>
           </div>
           <DialogFooter>
-            <Button type="submit">Add Contact</Button>
+            <Button type="submit">{t("submit")}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

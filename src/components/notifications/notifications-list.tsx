@@ -4,7 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { Bell, BellOff, CheckCheck } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
+import type { Locale } from "@/i18n/config";
+import { getDateFnsLocale } from "@/lib/date-fns-locale";
 import { mockNotifications } from "@/lib/mock/notifications";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -20,6 +23,8 @@ const toneDot: Record<string, string> = {
 };
 
 export function NotificationsList() {
+  const t = useTranslations("notifications");
+  const locale = useLocale() as Locale;
   const [notifications, setNotifications] = React.useState(mockNotifications);
   const [filter, setFilter] = React.useState<"all" | "unread">("all");
 
@@ -34,26 +39,26 @@ export function NotificationsList() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Tabs value={filter} onValueChange={(value) => setFilter(value as "all" | "unread")}>
           <TabsList>
-            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="all">{t("tabs.all")}</TabsTrigger>
             <TabsTrigger value="unread">
-              Unread {notifications.some((n) => !n.read) && `(${notifications.filter((n) => !n.read).length})`}
+              {t("tabs.unread")} {notifications.some((n) => !n.read) && `(${notifications.filter((n) => !n.read).length})`}
             </TabsTrigger>
           </TabsList>
         </Tabs>
         <Button variant="outline" size="sm" onClick={markAllRead}>
           <CheckCheck className="size-4" />
-          Mark all as read
+          {t("markAllRead")}
         </Button>
       </div>
 
       {visible.length === 0 ? (
         <EmptyState
           icon={filter === "unread" ? BellOff : Bell}
-          title={filter === "unread" ? "You're all caught up" : "No notifications yet"}
+          title={filter === "unread" ? t("empty.unreadTitle") : t("empty.allTitle")}
           description={
             filter === "unread"
-              ? "New notifications will show up here as they arrive."
-              : "Activity across your workspace will appear here."
+              ? t("empty.unreadDescription")
+              : t("empty.allDescription")
           }
         />
       ) : (
@@ -79,12 +84,17 @@ export function NotificationsList() {
                 />
                 <div className="flex-1 space-y-0.5">
                   <p className={cn("text-sm", !notification.read && "font-medium")}>
-                    {notification.title}
+                    {t(`titles.${notification.title}`)}
                   </p>
-                  <p className="text-muted-foreground text-sm">{notification.message}</p>
+                  <p className="text-muted-foreground text-sm">
+                    {t(`messages.${notification.title}`, notification.messageParams)}
+                  </p>
                 </div>
                 <p className="text-muted-foreground shrink-0 text-xs">
-                  {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
+                  {formatDistanceToNow(new Date(notification.createdAt), {
+                    addSuffix: true,
+                    locale: getDateFnsLocale(locale),
+                  })}
                 </p>
               </Link>
             ))}

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,8 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
 export function CreatePromoCodeDialog({ onCreate }: { onCreate: (code: string, discount: number) => void }) {
+  const t = useTranslations("admin.promoCodes.createDialog");
+  const tc = useTranslations("common.actions");
   const [open, setOpen] = React.useState(false);
   const [code, setCode] = React.useState("");
   const [discount, setDiscount] = React.useState("10");
@@ -25,8 +28,9 @@ export function CreatePromoCodeDialog({ onCreate }: { onCreate: (code: string, d
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!code.trim()) return;
-    onCreate(code.trim().toUpperCase(), Number(discount) || 0);
-    toast.success(`Promo code "${code.trim().toUpperCase()}" created.`);
+    const upperCode = code.trim().toUpperCase();
+    onCreate(upperCode, Number(discount) || 0);
+    toast.success(t("createdToast", { code: upperCode }));
     setCode("");
     setDiscount("10");
     setOpen(false);
@@ -36,26 +40,26 @@ export function CreatePromoCodeDialog({ onCreate }: { onCreate: (code: string, d
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button />}>
         <Plus className="size-4" />
-        Create Promo Code
+        {t("trigger")}
       </DialogTrigger>
       <DialogContent>
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Create Promo Code</DialogTitle>
-            <DialogDescription>Add a new discount code for customers to redeem.</DialogDescription>
+            <DialogTitle>{t("title")}</DialogTitle>
+            <DialogDescription>{t("description")}</DialogDescription>
           </DialogHeader>
           <FieldGroup className="py-4">
             <Field>
-              <FieldLabel htmlFor="code">Code</FieldLabel>
+              <FieldLabel htmlFor="code">{t("codeLabel")}</FieldLabel>
               <Input
                 id="code"
-                placeholder="e.g. SUMMER25"
+                placeholder={t("codePlaceholder")}
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
               />
             </Field>
             <Field>
-              <FieldLabel htmlFor="discount">Discount (%)</FieldLabel>
+              <FieldLabel htmlFor="discount">{t("discountLabel")}</FieldLabel>
               <Input
                 id="discount"
                 type="number"
@@ -68,9 +72,9 @@ export function CreatePromoCodeDialog({ onCreate }: { onCreate: (code: string, d
           </FieldGroup>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
-              Cancel
+              {tc("cancel")}
             </Button>
-            <Button type="submit">Create</Button>
+            <Button type="submit">{tc("create")}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

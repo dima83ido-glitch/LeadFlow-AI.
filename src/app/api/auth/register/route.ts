@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
   if (!parsed.success) {
     return NextResponse.json(
-      { error: "Invalid input", issues: parsed.error.flatten() },
+      { errorCode: "INVALID_INPUT", issues: parsed.error.flatten() },
       { status: 400 },
     );
   }
@@ -19,10 +19,7 @@ export async function POST(request: Request) {
 
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) {
-    return NextResponse.json(
-      { error: "An account with this email already exists" },
-      { status: 409 },
-    );
+    return NextResponse.json({ errorCode: "EMAIL_EXISTS" }, { status: 409 });
   }
 
   const passwordHash = await bcrypt.hash(password, 12);

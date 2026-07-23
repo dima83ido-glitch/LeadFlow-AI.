@@ -1,0 +1,37 @@
+{
+  "welcome": "С возвращением, {name}",
+  "subtitle": "Вот что происходит в вашем рабочем пространстве.",
+  "vsLastMonth": "за прошлый месяц",
+  "stats": {
+    "totalLeads": "Всего лидов",
+    "activeCampaigns": "Активные кампании",
+    "replyRate": "Процент ответов",
+    "revenueMtd": "Доход (с начала месяца)"
+  },
+  "quickActions": {
+    "title": "Быстрые действия",
+    "searchLeads": {
+      "title": "Поиск лидов",
+      "description": "Найдите новые компании для рассылки"
+    },
+    "newCampaign": {
+      "title": "Новая кампания",
+      "description": "Запустите новую рассылку"
+    },
+    "aiTools": {
+      "title": "AI-инструменты",
+      "description": "Генерируйте письма, темы писем и не только"
+    },
+    "addContact": {
+      "title": "Добавить контакт",
+      "description": "Добавьте контакт в вашу CRM"
+    }
+  },
+  "recentActivity": {
+    "title": "Последние действия"
+  },
+  "recentCampaigns": {
+    "title": "Последние кампании",
+    "sentOf": "{sent} / {total} отправлено"
+  }
+}

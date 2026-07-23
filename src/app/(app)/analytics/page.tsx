@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { useTranslations } from "next-intl";
 
 import { PageHeader } from "@/components/shared/page-header";
 import { ConversionFunnel } from "@/components/analytics/conversion-funnel";
@@ -10,11 +11,13 @@ import { RevenueByPlanChart } from "@/components/analytics/revenue-by-plan-chart
 export const metadata: Metadata = { title: "Analytics" };
 
 export default function AnalyticsPage() {
+  const t = useTranslations("analytics.page");
+
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Analytics"
-        description="Track outreach performance and revenue across your workspace."
+        title={t("title")}
+        description={t("description")}
       />
       <MetricsRow />
       <EmailPerformanceChart />

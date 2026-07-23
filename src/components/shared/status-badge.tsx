@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -58,10 +60,12 @@ export function StatusBadge({
   status: string;
   className?: string;
 }) {
+  const t = useTranslations("common.statusLabels");
   const tone = statusToneMap[status] ?? "neutral";
+  const label = t.has(status) ? t(status) : toLabel(status);
   return (
     <Badge variant="outline" className={cn(toneClasses[tone], className)}>
-      {toLabel(status)}
+      {label}
     </Badge>
   );
 }

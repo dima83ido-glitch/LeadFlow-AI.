@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Bell } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { mockNotifications } from "@/lib/mock/notifications";
 import { cn } from "@/lib/utils";
@@ -23,13 +24,19 @@ const toneDot: Record<string, string> = {
 };
 
 export function NotificationsPopover() {
+  const t = useTranslations("notifications");
   const unreadCount = mockNotifications.filter((n) => !n.read).length;
 
   return (
     <Popover>
       <PopoverTrigger
         render={
-          <Button variant="ghost" size="icon" className="relative size-8" aria-label="Notifications" />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative size-8"
+            aria-label={t("popover.ariaLabel")}
+          />
         }
       >
         <Bell className="size-4" />
@@ -41,8 +48,10 @@ export function NotificationsPopover() {
       </PopoverTrigger>
       <PopoverContent align="end" className="w-80 p-0">
         <div className="flex items-center justify-between border-b px-4 py-3">
-          <p className="text-sm font-medium">Notifications</p>
-          {unreadCount > 0 && <Badge variant="secondary">{unreadCount} new</Badge>}
+          <p className="text-sm font-medium">{t("popover.title")}</p>
+          {unreadCount > 0 && (
+            <Badge variant="secondary">{t("popover.newBadge", { count: unreadCount })}</Badge>
+          )}
         </div>
         <ScrollArea className="h-80">
           <div className="flex flex-col">
@@ -61,10 +70,10 @@ export function NotificationsPopover() {
                 />
                 <div className="space-y-0.5">
                   <p className={cn("text-sm", !notification.read && "font-medium")}>
-                    {notification.title}
+                    {t(`titles.${notification.title}`)}
                   </p>
                   <p className="text-muted-foreground line-clamp-2 text-xs">
-                    {notification.message}
+                    {t(`messages.${notification.title}`, notification.messageParams)}
                   </p>
                 </div>
               </Link>
@@ -73,7 +82,7 @@ export function NotificationsPopover() {
         </ScrollArea>
         <div className="border-t p-2">
           <Button variant="ghost" size="sm" className="w-full" render={<Link href="/notifications" />}>
-            View all notifications
+            {t("popover.viewAll")}
           </Button>
         </div>
       </PopoverContent>

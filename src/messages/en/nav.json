@@ -1,0 +1,61 @@
+{
+  "groups": {
+    "grow": "Grow",
+    "crm": "CRM",
+    "insights": "Insights",
+    "aiTools": "AI Tools"
+  },
+  "items": {
+    "dashboard": "Dashboard",
+    "searchLeads": "Search Leads",
+    "campaigns": "Campaigns",
+    "templates": "Templates",
+    "pipeline": "Pipeline",
+    "contacts": "Contacts",
+    "companies": "Companies",
+    "meetings": "Meetings",
+    "tasks": "Tasks",
+    "notes": "Notes",
+    "analytics": "Analytics",
+    "websiteAnalyzer": "Website Analyzer",
+    "emailGenerator": "Email Generator",
+    "subjectGenerator": "Subject Generator",
+    "headlineGenerator": "Headline Generator",
+    "ctaGenerator": "CTA Generator",
+    "seoAudit": "SEO Audit",
+    "landingPageAnalyzer": "Landing Page Analyzer",
+    "rewriteEmail": "Rewrite Email",
+    "translateEmail": "Translate Email",
+    "billing": "Billing",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "help": "Help",
+    "aiToolsOverview": "AI Tools"
+  },
+  "admin": {
+    "group": "Admin",
+    "overview": "Overview",
+    "users": "Users",
+    "subscriptions": "Subscriptions",
+    "statistics": "Statistics",
+    "websiteSettings": "Website Settings",
+    "promoCodes": "Promo Codes",
+    "systemLogs": "System Logs"
+  },
+  "settings": {
+    "profile": "Profile",
+    "security": "Security",
+    "workspace": "Workspace",
+    "notifications": "Notifications",
+    "apiKeys": "API Keys",
+    "subscription": "Subscription",
+    "dangerZone": "Danger Zone"
+  },
+  "breadcrumbs": {
+    "new": "New Campaign",
+    "admin": "Admin Panel"
+  },
+  "commandPaletteNavigate": "Navigate",
+  "commandPaletteLeads": "Leads",
+  "commandPalettePlaceholder": "Search pages, leads, companies..."
+}

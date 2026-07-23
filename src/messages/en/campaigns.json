@@ -1,0 +1,46 @@
+{
+  "page": {
+    "title": "Campaigns",
+    "description": "Create and monitor your email outreach campaigns.",
+    "createCampaign": "Create Campaign"
+  },
+  "statusFilterAll": "All",
+  "searchPlaceholder": "Search campaigns...",
+  "emptyTitle": "No campaigns yet",
+  "emptyDescription": "Create your first campaign to start reaching out to leads.",
+  "newCampaign": "New Campaign",
+  "noMatchTitle": "No campaigns match your filters",
+  "noMatchDescription": "Try a different status or search term.",
+  "columns": {
+    "campaign": "Campaign",
+    "noSubjectYet": "No subject yet",
+    "status": "Status",
+    "progress": "Progress",
+    "sentCount": "{sent} / {total} sent",
+    "opensReplies": "Opens / Replies",
+    "lastUpdated": "Last updated",
+    "editCampaign": "Edit campaign",
+    "resume": "Resume",
+    "pause": "Pause",
+    "delete": "Delete"
+  },
+  "newPage": {
+    "title": "Create Campaign",
+    "description": "Set up a new outreach sequence.",
+    "nameLabel": "Campaign name",
+    "namePlaceholder": "e.g. Q3 Data Teams Outreach",
+    "subjectLabel": "Subject line",
+    "subjectPlaceholder": "e.g. A faster way to ship your dashboards",
+    "templateLabel": "Template",
+    "templatePlaceholder": "Start from a template (optional)",
+    "templateDescription": "You can also start from a blank template and write it from scratch.",
+    "scheduleLabel": "Schedule (optional)",
+    "scheduleDescription": "Leave blank to save as a draft.",
+    "submit": "Create Campaign",
+    "createdToast": "\"{name}\" was created as a draft.",
+    "validation": {
+      "nameRequired": "Campaign name is required",
+      "subjectRequired": "Subject line is required"
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Languages, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,6 +33,7 @@ const placeholders: Record<(typeof languages)[number], string> = {
 };
 
 export default function TranslateEmailView() {
+  const t = useTranslations("aiTools.translateEmail");
   const [original, setOriginal] = React.useState("");
   const [language, setLanguage] = React.useState<(typeof languages)[number]>("Spanish");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -51,21 +53,21 @@ export default function TranslateEmailView() {
     <div className="grid gap-6 lg:grid-cols-5">
       <Card className="h-fit lg:col-span-2">
         <CardHeader>
-          <CardTitle className="text-base">Original Email</CardTitle>
+          <CardTitle className="text-base">{t("form.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Field>
-            <FieldLabel htmlFor="original">Paste your email</FieldLabel>
+            <FieldLabel htmlFor="original">{t("form.originalLabel")}</FieldLabel>
             <Textarea
               id="original"
-              placeholder="Paste the email you want to translate..."
+              placeholder={t("form.originalPlaceholder")}
               value={original}
               onChange={(e) => setOriginal(e.target.value)}
               rows={6}
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="language">Target language</FieldLabel>
+            <FieldLabel htmlFor="language">{t("form.languageLabel")}</FieldLabel>
             <Select
               value={language}
               onValueChange={(value) => value && setLanguage(value as (typeof languages)[number])}
@@ -76,7 +78,7 @@ export default function TranslateEmailView() {
               <SelectContent>
                 {languages.map((lang) => (
                   <SelectItem key={lang} value={lang}>
-                    {lang}
+                    {t(`form.languages.${lang}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -84,27 +86,27 @@ export default function TranslateEmailView() {
           </Field>
           <Button className="w-full" onClick={handleTranslate} disabled={isLoading || !original}>
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Languages className="size-4" />}
-            Translate
+            {t("form.submit")}
           </Button>
         </CardContent>
       </Card>
 
       <Card className="lg:col-span-3">
         <CardHeader>
-          <CardTitle className="text-base">Translation</CardTitle>
+          <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={result !== null}
             emptyIcon={Languages}
-            emptyTitle="No translation yet"
-            emptyDescription="Paste an email and pick a language to translate it."
+            emptyTitle={t("result.emptyTitle")}
+            emptyDescription={t("result.emptyDescription")}
           >
             {result && (
               <>
                 <div className="flex justify-end">
-                  <CopyButton value={result} label="Copy" />
+                  <CopyButton value={result} />
                 </div>
                 <p className="text-sm whitespace-pre-line">{result}</p>
               </>

@@ -1,0 +1,61 @@
+{
+  "groups": {
+    "grow": "Рост",
+    "crm": "CRM",
+    "insights": "Аналитика",
+    "aiTools": "AI-инструменты"
+  },
+  "items": {
+    "dashboard": "Дашборд",
+    "searchLeads": "Поиск лидов",
+    "campaigns": "Кампании",
+    "templates": "Шаблоны",
+    "pipeline": "Воронка",
+    "contacts": "Контакты",
+    "companies": "Компании",
+    "meetings": "Встречи",
+    "tasks": "Задачи",
+    "notes": "Заметки",
+    "analytics": "Аналитика",
+    "websiteAnalyzer": "Анализ сайта",
+    "emailGenerator": "Генератор писем",
+    "subjectGenerator": "Генератор тем",
+    "headlineGenerator": "Генератор заголовков",
+    "ctaGenerator": "Генератор CTA",
+    "seoAudit": "SEO-аудит",
+    "landingPageAnalyzer": "Анализ лендинга",
+    "rewriteEmail": "Переписать письмо",
+    "translateEmail": "Перевести письмо",
+    "billing": "Оплата",
+    "settings": "Настройки",
+    "notifications": "Уведомления",
+    "help": "Помощь",
+    "aiToolsOverview": "AI-инструменты"
+  },
+  "admin": {
+    "group": "Админ",
+    "overview": "Обзор",
+    "users": "Пользователи",
+    "subscriptions": "Подписки",
+    "statistics": "Статистика",
+    "websiteSettings": "Настройки сайта",
+    "promoCodes": "Промокоды",
+    "systemLogs": "Системные логи"
+  },
+  "settings": {
+    "profile": "Профиль",
+    "security": "Безопасность",
+    "workspace": "Рабочее пространство",
+    "notifications": "Уведомления",
+    "apiKeys": "API-ключи",
+    "subscription": "Подписка",
+    "dangerZone": "Опасная зона"
+  },
+  "breadcrumbs": {
+    "new": "Новая кампания",
+    "admin": "Админ-панель"
+  },
+  "commandPaletteNavigate": "Навигация",
+  "commandPaletteLeads": "Лиды",
+  "commandPalettePlaceholder": "Поиск по страницам, лидам, компаниям..."
+}

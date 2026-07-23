@@ -1,0 +1,27 @@
+{
+  "page": {
+    "title": "Шаблоны",
+    "description": "Готовые email-шаблоны для ваших кампаний.",
+    "generateWithAi": "Сгенерировать с ИИ"
+  },
+  "allCategories": "Все",
+  "categories": {
+    "Cold Outreach": "Холодный контакт",
+    "Introduction": "Знакомство",
+    "Follow-up": "Напоминание",
+    "Proposal": "Предложение",
+    "Re-engagement": "Реактивация"
+  },
+  "searchPlaceholder": "Поиск шаблонов...",
+  "noResultsTitle": "Шаблоны не найдены",
+  "noResultsDescription": "Попробуйте другую категорию или поисковый запрос.",
+  "aiBadge": "ИИ",
+  "edit": "Изменить",
+  "duplicate": "Дублировать",
+  "delete": "Удалить",
+  "editNotWiredUp": "Редактирование пока не подключено.",
+  "duplicatedToast": "«{name}» продублирован.",
+  "deletedToast": "«{name}» удалён.",
+  "campaignsCount": "кампаний: {count}",
+  "updatedOn": "Обновлён {date}"
+}

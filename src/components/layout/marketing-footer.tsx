@@ -1,34 +1,37 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
-
-const columns = [
-  {
-    title: "Product",
-    links: [
-      { title: "Search Leads", href: "/leads" },
-      { title: "AI Tools", href: "/ai-tools" },
-      { title: "Campaigns", href: "/campaigns" },
-      { title: "Pricing", href: "#pricing" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { title: "Help Center", href: "/help" },
-      { title: "Log in", href: "/login" },
-      { title: "Create account", href: "/register" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { title: "Privacy Policy", href: "#" },
-      { title: "Terms of Service", href: "#" },
-    ],
-  },
-];
+import { useTranslations } from "next-intl";
 
 export function MarketingFooter() {
+  const t = useTranslations("marketing.footer");
+
+  const columns = [
+    {
+      title: t("product"),
+      links: [
+        { title: t("searchLeads"), href: "/leads" },
+        { title: t("aiTools"), href: "/ai-tools" },
+        { title: t("campaigns"), href: "/campaigns" },
+        { title: t("pricing"), href: "#pricing" },
+      ],
+    },
+    {
+      title: t("company"),
+      links: [
+        { title: t("helpCenter"), href: "/help" },
+        { title: t("logIn"), href: "/login" },
+        { title: t("createAccount"), href: "/register" },
+      ],
+    },
+    {
+      title: t("legal"),
+      links: [
+        { title: t("privacyPolicy"), href: "#" },
+        { title: t("termsOfService"), href: "#" },
+      ],
+    },
+  ];
+
   return (
     <footer className="border-t">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-12 md:flex-row md:justify-between">
@@ -39,9 +42,7 @@ export function MarketingFooter() {
             </div>
             <span className="text-sm font-semibold">LeadFlow AI</span>
           </div>
-          <p className="text-muted-foreground text-sm">
-            Find, analyze, and win your next client — powered by AI.
-          </p>
+          <p className="text-muted-foreground text-sm">{t("tagline")}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
@@ -66,7 +67,7 @@ export function MarketingFooter() {
       </div>
       <div className="border-t py-6">
         <p className="text-muted-foreground mx-auto max-w-6xl px-6 text-xs">
-          © {new Date().getFullYear()} LeadFlow AI. All rights reserved.
+          {t("copyright", { year: new Date().getFullYear() })}
         </p>
       </div>
     </footer>

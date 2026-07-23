@@ -1,0 +1,185 @@
+{
+  "hub": {
+    "title": "AI-інструменти",
+    "description": "Генеруйте тексти для розсилок і аналізуйте потенційних клієнтів за допомогою AI."
+  },
+  "copyButton": {
+    "success": "Скопійовано в буфер обміну",
+    "error": "Не вдалося скопіювати"
+  },
+  "websiteAnalyzer": {
+    "cardDescription": "Проаналізуйте сайт потенційного клієнта: технології, SEO та прогалини в позиціонуванні.",
+    "form": {
+      "cardTitle": "Сайт",
+      "urlLabel": "URL сайту",
+      "urlPlaceholder": "наприклад, northwindanalytics.com",
+      "submit": "Аналізувати"
+    },
+    "result": {
+      "cardTitle": "Аналіз",
+      "emptyTitle": "Поки що немає аналізу",
+      "emptyDescription": "Вкажіть URL сайту та натисніть «Аналізувати», щоб побачити звіт.",
+      "overallScore": "Загальна оцінка"
+    }
+  },
+  "emailGenerator": {
+    "cardDescription": "Складіть персоналізований лист на основі профілю ліда.",
+    "form": {
+      "cardTitle": "Деталі",
+      "recipientLabel": "Отримувач / компанія",
+      "recipientPlaceholder": "наприклад, Northwind Analytics",
+      "toneLabel": "Тон",
+      "tones": {
+        "Formal": "Формальний",
+        "Friendly": "Дружній",
+        "Direct": "Прямий"
+      },
+      "keyPointsLabel": "Ключові тези",
+      "keyPointsPlaceholder": "Що має бути в листі?",
+      "submit": "Згенерувати"
+    },
+    "result": {
+      "cardTitle": "Згенерований лист",
+      "emptyTitle": "Лист ще не згенеровано",
+      "emptyDescription": "Заповніть деталі та натисніть «Згенерувати», щоб скласти персоналізований лист.",
+      "subject": "Тема",
+      "body": "Текст",
+      "copySubject": "Копіювати тему",
+      "copyBody": "Копіювати текст"
+    }
+  },
+  "subjectGenerator": {
+    "cardDescription": "Згенеруйте варіанти тем листа з високою відкриваністю.",
+    "form": {
+      "cardTitle": "Контекст",
+      "contextLabel": "Про що лист?",
+      "contextPlaceholder": "наприклад, нагадування про демо нашої аналітичної платформи",
+      "toneLabel": "Тон",
+      "tones": {
+        "Curious": "Інтригуючий",
+        "Direct": "Прямий",
+        "Playful": "Грайливий",
+        "Formal": "Формальний"
+      },
+      "submit": "Згенерувати"
+    },
+    "result": {
+      "cardTitle": "Варіанти теми листа",
+      "emptyTitle": "Поки що немає варіантів теми",
+      "emptyDescription": "Опишіть лист і натисніть «Згенерувати», щоб побачити варіанти теми.",
+      "openRate": "~{rate}% прогнозована відкриваність"
+    }
+  },
+  "headlineGenerator": {
+    "cardDescription": "Створіть варіанти заголовків для лендингу та реклами.",
+    "form": {
+      "cardTitle": "Інформація про продукт",
+      "productLabel": "Назва продукту / компанії",
+      "productPlaceholder": "наприклад, LeadFlow AI",
+      "valuePropLabel": "Ціннісна пропозиція",
+      "valuePropPlaceholder": "наприклад, знаходити й закривати нових клієнтів швидше",
+      "submit": "Згенерувати"
+    },
+    "result": {
+      "cardTitle": "Варіанти заголовків",
+      "emptyTitle": "Поки що немає заголовків",
+      "emptyDescription": "Опишіть продукт і натисніть «Згенерувати», щоб побачити варіанти заголовків."
+    }
+  },
+  "ctaGenerator": {
+    "cardDescription": "Згенеруйте текст заклику до дії під цілі кампанії.",
+    "form": {
+      "cardTitle": "Мета кампанії",
+      "goalLabel": "Мета",
+      "goals": {
+        "Book a call": "Записатися на дзвінок",
+        "Start free trial": "Почати безкоштовний пробний період",
+        "Reply to email": "Відповісти на лист",
+        "Download resource": "Завантажити матеріал"
+      },
+      "contextLabel": "Контекст (необов'язково)",
+      "contextPlaceholder": "наприклад, гайд з тарифів",
+      "submit": "Згенерувати"
+    },
+    "result": {
+      "cardTitle": "Варіанти CTA",
+      "emptyTitle": "Поки що немає варіантів CTA",
+      "emptyDescription": "Оберіть мету й натисніть «Згенерувати», щоб побачити варіанти заклику до дії."
+    }
+  },
+  "seoAudit": {
+    "cardDescription": "Запустіть автоматичну перевірку SEO для будь-якого домену.",
+    "form": {
+      "cardTitle": "Сайт",
+      "urlLabel": "URL сайту",
+      "urlPlaceholder": "наприклад, berlinbrew.de",
+      "submit": "Запустити перевірку"
+    },
+    "result": {
+      "cardTitle": "SEO-звіт",
+      "emptyTitle": "Поки що немає перевірки",
+      "emptyDescription": "Вкажіть URL сайту та натисніть «Запустити перевірку», щоб побачити звіт про стан SEO.",
+      "score": "SEO-оцінка"
+    }
+  },
+  "landingPageAnalyzer": {
+    "cardDescription": "Оцініть структуру лендингу та сигнали конверсії.",
+    "form": {
+      "cardTitle": "Сторінка лендингу",
+      "urlLabel": "URL сторінки",
+      "urlPlaceholder": "наприклад, copperheadoutfitters.com/spring-sale",
+      "submit": "Аналізувати"
+    },
+    "result": {
+      "cardTitle": "Звіт про конверсію",
+      "emptyTitle": "Поки що немає аналізу",
+      "emptyDescription": "Вкажіть URL лендингу та натисніть «Аналізувати», щоб побачити сигнали конверсії.",
+      "score": "Готовність до конверсії"
+    }
+  },
+  "rewriteEmail": {
+    "cardDescription": "Перепишіть лист в іншому тоні або з іншою довжиною.",
+    "form": {
+      "cardTitle": "Вихідний лист",
+      "originalLabel": "Вставте лист",
+      "originalPlaceholder": "Вставте лист, який потрібно переписати...",
+      "toneLabel": "Переписати як",
+      "tones": {
+        "More formal": "Більш формально",
+        "More friendly": "Більш дружньо",
+        "More concise": "Більш стисло",
+        "More persuasive": "Більш переконливо"
+      },
+      "submit": "Переписати"
+    },
+    "result": {
+      "cardTitle": "Результат",
+      "emptyTitle": "Поки що немає переписаного тексту",
+      "emptyDescription": "Вставте лист і натисніть «Переписати», щоб побачити нову версію.",
+      "rewrittenTab": "Переписане",
+      "originalTab": "Вихідне"
+    }
+  },
+  "translateEmail": {
+    "cardDescription": "Перекладіть текст розсилки, зберігаючи тон і сенс.",
+    "form": {
+      "cardTitle": "Вихідний лист",
+      "originalLabel": "Вставте лист",
+      "originalPlaceholder": "Вставте лист, який потрібно перекласти...",
+      "languageLabel": "Мова перекладу",
+      "languages": {
+        "Spanish": "Іспанська",
+        "French": "Французька",
+        "German": "Німецька",
+        "Japanese": "Японська",
+        "Portuguese": "Португальська"
+      },
+      "submit": "Перекласти"
+    },
+    "result": {
+      "cardTitle": "Переклад",
+      "emptyTitle": "Поки що немає перекладу",
+      "emptyDescription": "Вставте лист і оберіть мову, щоб перекласти його."
+    }
+  }
+}

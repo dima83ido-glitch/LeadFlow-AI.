@@ -1,0 +1,47 @@
+{
+  "page": {
+    "title": "Notifications",
+    "description": "Stay on top of what's happening in your workspace."
+  },
+  "tabs": {
+    "all": "All",
+    "unread": "Unread"
+  },
+  "markAllRead": "Mark all as read",
+  "empty": {
+    "unreadTitle": "You're all caught up",
+    "unreadDescription": "New notifications will show up here as they arrive.",
+    "allTitle": "No notifications yet",
+    "allDescription": "Activity across your workspace will appear here."
+  },
+  "titles": {
+    "campaignSent": "Campaign sent",
+    "newLeadAdded": "New lead added",
+    "campaignPaused": "Campaign paused",
+    "meetingReminder": "Meeting reminder",
+    "dealWon": "Deal won",
+    "paymentFailed": "Payment failed"
+  },
+  "activity": {
+    "sentCampaign": "sent campaign",
+    "addedLead": "added lead",
+    "movedDealToNegotiation": "moved deal to Negotiation",
+    "generatedEmailWithAi": "generated email with AI",
+    "closedDeal": "closed deal",
+    "createdTemplate": "created template"
+  },
+  "messages": {
+    "campaignSent": "{campaign} was delivered to {count} recipients.",
+    "newLeadAdded": "{lead} was added from Google Maps search.",
+    "campaignPaused": "{campaign} was paused due to a low open rate.",
+    "meetingReminder": "Discovery call with {person} starts in 1 hour.",
+    "dealWon": "{deal} moved to Won ({amount}).",
+    "paymentFailed": "Your card ending in {digits} could not be charged."
+  },
+  "popover": {
+    "ariaLabel": "Notifications",
+    "title": "Notifications",
+    "newBadge": "{count} new",
+    "viewAll": "View all notifications"
+  }
+}

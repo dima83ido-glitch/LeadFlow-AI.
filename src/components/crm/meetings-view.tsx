@@ -1,6 +1,7 @@
 "use client";
 
 import { CalendarClock, MapPin } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { mockMeetings } from "@/lib/mock/crm";
 import { Avatar, AvatarFallback, AvatarGroup } from "@/components/ui/avatar";
@@ -16,26 +17,29 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-function formatRange(start: string, end: string) {
+function formatRange(start: string, end: string, locale: string) {
   const startDate = new Date(start);
   const endDate = new Date(end);
-  const dateLabel = startDate.toLocaleDateString("en-US", {
+  const dateLabel = startDate.toLocaleDateString(locale, {
     weekday: "short",
     month: "short",
     day: "numeric",
   });
-  const startLabel = startDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-  const endLabel = endDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  const startLabel = startDate.toLocaleTimeString(locale, { hour: "numeric", minute: "2-digit" });
+  const endLabel = endDate.toLocaleTimeString(locale, { hour: "numeric", minute: "2-digit" });
   return `${dateLabel} · ${startLabel} – ${endLabel}`;
 }
 
 export function MeetingsView() {
+  const t = useTranslations("crm.meetings");
+  const locale = useLocale();
+
   if (mockMeetings.length === 0) {
     return (
       <EmptyState
         icon={CalendarClock}
-        title="No meetings scheduled"
-        description="Meetings you schedule with leads and contacts will show up here."
+        title={t("emptyTitle")}
+        description={t("emptyDescription")}
       />
     );
   }
@@ -58,7 +62,7 @@ export function MeetingsView() {
               <div className="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
                 <span className="flex items-center gap-1.5">
                   <CalendarClock className="size-3.5" />
-                  {formatRange(meeting.startTime, meeting.endTime)}
+                  {formatRange(meeting.startTime, meeting.endTime, locale)}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <MapPin className="size-3.5" />

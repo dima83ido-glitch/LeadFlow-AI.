@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { settingsNav } from "@/lib/nav-config";
 import { cn } from "@/lib/utils";
 
 export function SettingsNav() {
   const pathname = usePathname();
+  const t = useTranslations();
 
   return (
     <nav className="flex gap-1 overflow-x-auto lg:flex-col lg:overflow-visible">
@@ -25,7 +27,7 @@ export function SettingsNav() {
             )}
           >
             <item.icon className="size-4" />
-            {item.title}
+            {t(item.titleKey)}
           </Link>
         );
       })}

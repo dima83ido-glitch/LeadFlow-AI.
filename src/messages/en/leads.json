@@ -1,0 +1,69 @@
+{
+  "page": {
+    "title": "Search Leads",
+    "description": "Find potential clients by country, industry, keywords, and more."
+  },
+  "filterBar": {
+    "countryLabel": "Country",
+    "anyCountry": "Any country",
+    "cityLabel": "City",
+    "cityPlaceholder": "e.g. Austin",
+    "industryLabel": "Industry",
+    "anyIndustry": "Any industry",
+    "keywordsLabel": "Keywords",
+    "keywordsPlaceholder": "e.g. analytics, logistics",
+    "hasWebsite": "Has website",
+    "hasEmail": "Has email",
+    "hasPhone": "Has phone",
+    "minRating": "Min. rating",
+    "any": "Any",
+    "reset": "Reset",
+    "search": "Search Leads"
+  },
+  "columns": {
+    "company": "Company",
+    "contact": "Contact",
+    "location": "Location",
+    "channels": "Reachable via",
+    "rating": "Rating",
+    "status": "Status"
+  },
+  "searchView": {
+    "noResultsTitle": "No leads match these filters",
+    "noResultsDescription": "Try widening your search — remove a filter or broaden the keywords.",
+    "startTitle": "Search for leads to get started",
+    "startDescription": "Set your filters above and click Search Leads to discover companies to reach out to."
+  },
+  "detail": {
+    "analyze": "Analyze",
+    "generateEmail": "Generate Email",
+    "save": "Save",
+    "delete": "Delete",
+    "deleteDialogTitle": "Delete this lead?",
+    "deleteDialogDescription": "This will permanently remove {company} from your workspace. This action cannot be undone.",
+    "deleteConfirmLabel": "Delete lead",
+    "deletedToast": "{company} was deleted.",
+    "savedToast": "{company} was saved to your CRM.",
+    "tabs": {
+      "overview": "Overview",
+      "activity": "Activity",
+      "campaigns": "Campaign History"
+    },
+    "details": {
+      "title": "Lead details",
+      "source": "Source",
+      "employees": "Employees",
+      "addedOn": "Added on",
+      "lastUpdated": "Last updated"
+    },
+    "noActivityTitle": "No activity yet",
+    "noActivityDescription": "Actions like emails sent and calls logged will show up here.",
+    "noCampaignsTitle": "Not part of any campaign yet",
+    "noCampaignsDescription": "Add this lead to a campaign to start tracking outreach.",
+    "browseCampaigns": "Browse campaigns",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  }
+}

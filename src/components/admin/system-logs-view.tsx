@@ -1,24 +1,37 @@
 "use client";
 
 import * as React from "react";
+import { useLocale, useTranslations } from "next-intl";
 
+import type { Locale } from "@/i18n/config";
 import { mockSystemLogs } from "@/lib/mock/admin";
 import type { SystemLogLevel } from "@/types/admin";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/components/shared/data-table";
-import { systemLogsColumns } from "@/components/admin/system-logs-columns";
-
-const levelFilters: { label: string; value: SystemLogLevel | "all" }[] = [
-  { label: "All", value: "all" },
-  { label: "Info", value: "INFO" },
-  { label: "Warn", value: "WARN" },
-  { label: "Error", value: "ERROR" },
-];
+import { getSystemLogsColumns } from "@/components/admin/system-logs-columns";
 
 export function SystemLogsView() {
+  const t = useTranslations("admin.systemLogs");
+  const locale = useLocale() as Locale;
   const [level, setLevel] = React.useState<SystemLogLevel | "all">("all");
 
+  const levelFilters: { label: string; value: SystemLogLevel | "all" }[] = [
+    { label: t("filters.all"), value: "all" },
+    { label: t("filters.info"), value: "INFO" },
+    { label: t("filters.warn"), value: "WARN" },
+    { label: t("filters.error"), value: "ERROR" },
+  ];
+
   const filtered = mockSystemLogs.filter((log) => level === "all" || log.level === level);
+  const columns = getSystemLogsColumns(
+    {
+      level: t("columns.level"),
+      message: t("columns.message"),
+      source: t("columns.source"),
+      time: t("columns.time"),
+    },
+    locale,
+  );
 
   return (
     <div className="space-y-4">
@@ -31,7 +44,7 @@ export function SystemLogsView() {
           ))}
         </TabsList>
       </Tabs>
-      <DataTable columns={systemLogsColumns} data={filtered} />
+      <DataTable columns={columns} data={filtered} />
     </div>
   );
 }

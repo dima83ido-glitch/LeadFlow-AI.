@@ -1,0 +1,124 @@
+{
+  "common": {
+    "editNotWired": "Редактирование пока не подключено."
+  },
+  "companies": {
+    "pageTitle": "Компании",
+    "pageDescription": "Организации, с которыми вы работаете.",
+    "emptyTitle": "Пока нет компаний",
+    "emptyDescription": "Компании, для которых вы добавите контакты или сделки, появятся здесь.",
+    "columns": {
+      "company": "Компания",
+      "size": "Размер",
+      "location": "Местоположение",
+      "deals": "Сделки",
+      "contacts": "Контакты",
+      "added": "Добавлена"
+    },
+    "employeesCount": "{size} сотрудников",
+    "dealsCount": "Сделок: {count}",
+    "contactsCount": "Контактов: {count}",
+    "contactsOnFile": "Контактов в базе: {count}",
+    "addedOn": "Добавлена {date}",
+    "deleteTitle": "Удалить эту компанию?",
+    "deleteDescription": "Это навсегда удалит {name} и все связанные записи из вашей CRM.",
+    "deleteConfirm": "Удалить компанию",
+    "deletedToast": "{name} удалена."
+  },
+  "contacts": {
+    "pageTitle": "Контакты",
+    "pageDescription": "Люди, с которыми вы выстраиваете отношения.",
+    "emptyTitle": "Пока нет контактов",
+    "emptyDescription": "Добавьте контакт, чтобы начать отслеживать общение с ним.",
+    "columns": {
+      "contact": "Контакт",
+      "company": "Компания",
+      "email": "Email",
+      "phone": "Телефон",
+      "added": "Добавлен"
+    },
+    "deleteTitle": "Удалить этот контакт?",
+    "deleteDescription": "Это навсегда удалит {name} из вашей CRM.",
+    "deleteConfirm": "Удалить контакт",
+    "deletedToast": "{name} удалён.",
+    "addDialog": {
+      "trigger": "Добавить контакт",
+      "title": "Добавить контакт",
+      "description": "Добавьте новый контакт в вашу CRM.",
+      "firstNameLabel": "Имя",
+      "lastNameLabel": "Фамилия",
+      "emailLabel": "Email",
+      "jobTitleLabel": "Должность",
+      "firstNameRequired": "Укажите имя",
+      "submit": "Добавить контакт",
+      "successToast": "{name} добавлен в вашу CRM."
+    }
+  },
+  "meetings": {
+    "pageTitle": "Встречи",
+    "pageDescription": "Предстоящие звонки и встречи с лидами и контактами.",
+    "emptyTitle": "Нет запланированных встреч",
+    "emptyDescription": "Встречи, которые вы запланируете с лидами и контактами, появятся здесь.",
+    "scheduleDialog": {
+      "trigger": "Запланировать встречу",
+      "title": "Запланировать встречу",
+      "description": "Добавьте новую встречу в календарь.",
+      "titleLabel": "Название",
+      "titlePlaceholder": "например, Ознакомительный звонок",
+      "titleRequired": "Укажите название",
+      "dateTimeLabel": "Дата и время",
+      "dateTimeRequired": "Укажите дату и время",
+      "locationLabel": "Место",
+      "locationPlaceholder": "например, Google Meet",
+      "submit": "Запланировать встречу",
+      "successToast": "«{title}» запланирована."
+    }
+  },
+  "notes": {
+    "pageTitle": "Заметки",
+    "pageDescription": "Общие заметки о ваших лидах, контактах и сделках.",
+    "placeholder": "Напишите заметку...",
+    "submit": "Добавить заметку",
+    "emptyTitle": "Пока нет заметок",
+    "emptyDescription": "Заметки о ваших лидах, контактах и сделках появятся здесь.",
+    "relatedTo": "По теме: {name}"
+  },
+  "pipeline": {
+    "pageTitle": "Воронка продаж",
+    "pageDescription": "Отслеживайте сделки на пути к закрытию.",
+    "stages": {
+      "stage_1": "Новые",
+      "stage_2": "Связались",
+      "stage_3": "Отправлено предложение",
+      "stage_4": "Переговоры",
+      "stage_5": "Закрыты"
+    },
+    "stageTotal": "Итого: {amount}",
+    "noDeals": "Нет сделок на этом этапе",
+    "notWiredUp": "Пока не подключено."
+  },
+  "tasks": {
+    "pageTitle": "Задачи",
+    "pageDescription": "Отслеживайте, что нужно сделать в рамках вашей воронки.",
+    "emptyTitle": "Пока нет задач",
+    "emptyDescription": "Задачи, которые вы создадите для себя или команды, появятся здесь.",
+    "priority": {
+      "LOW": "Низкий",
+      "MEDIUM": "Средний",
+      "HIGH": "Высокий"
+    },
+    "due": "Срок: {when}",
+    "noTasks": "Нет задач",
+    "addDialog": {
+      "trigger": "Добавить задачу",
+      "title": "Добавить задачу",
+      "description": "Создайте новую задачу для команды.",
+      "titleLabel": "Название",
+      "titlePlaceholder": "например, Связаться с Fjord Studio",
+      "titleRequired": "Укажите название",
+      "dueDateLabel": "Срок выполнения",
+      "submit": "Добавить задачу",
+      "successToast": "«{title}» добавлена в ваши задачи."
+    }
+  }
+}

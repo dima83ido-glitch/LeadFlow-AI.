@@ -35,98 +35,98 @@ import type { NavGroup, NavItem } from "@/types/nav";
 
 export const mainNav: NavGroup[] = [
   {
-    items: [{ title: "Dashboard", href: "/dashboard", icon: LayoutDashboard }],
+    items: [{ titleKey: "nav.items.dashboard", href: "/dashboard", icon: LayoutDashboard }],
   },
   {
-    title: "Grow",
+    titleKey: "nav.groups.grow",
     items: [
-      { title: "Search Leads", href: "/leads", icon: Search },
-      { title: "Campaigns", href: "/campaigns", icon: Megaphone },
-      { title: "Templates", href: "/templates", icon: FileText },
+      { titleKey: "nav.items.searchLeads", href: "/leads", icon: Search },
+      { titleKey: "nav.items.campaigns", href: "/campaigns", icon: Megaphone },
+      { titleKey: "nav.items.templates", href: "/templates", icon: FileText },
     ],
   },
   {
-    title: "CRM",
+    titleKey: "nav.groups.crm",
     items: [
-      { title: "Pipeline", href: "/crm/pipeline", icon: Kanban },
-      { title: "Contacts", href: "/crm/contacts", icon: Users },
-      { title: "Companies", href: "/crm/companies", icon: Building2 },
-      { title: "Meetings", href: "/crm/meetings", icon: CalendarClock },
-      { title: "Tasks", href: "/crm/tasks", icon: ScrollText },
-      { title: "Notes", href: "/crm/notes", icon: Notebook },
+      { titleKey: "nav.items.pipeline", href: "/crm/pipeline", icon: Kanban },
+      { titleKey: "nav.items.contacts", href: "/crm/contacts", icon: Users },
+      { titleKey: "nav.items.companies", href: "/crm/companies", icon: Building2 },
+      { titleKey: "nav.items.meetings", href: "/crm/meetings", icon: CalendarClock },
+      { titleKey: "nav.items.tasks", href: "/crm/tasks", icon: ScrollText },
+      { titleKey: "nav.items.notes", href: "/crm/notes", icon: Notebook },
     ],
   },
   {
-    title: "Insights",
-    items: [{ title: "Analytics", href: "/analytics", icon: BarChart3 }],
+    titleKey: "nav.groups.insights",
+    items: [{ titleKey: "nav.items.analytics", href: "/analytics", icon: BarChart3 }],
   },
   {
-    title: "AI Tools",
+    titleKey: "nav.groups.aiTools",
     items: [
-      { title: "Website Analyzer", href: "/ai-tools/website-analyzer", icon: Globe },
-      { title: "Email Generator", href: "/ai-tools/email-generator", icon: Mail },
-      { title: "Subject Generator", href: "/ai-tools/subject-generator", icon: Mails },
-      { title: "Headline Generator", href: "/ai-tools/headline-generator", icon: Lightbulb },
-      { title: "CTA Generator", href: "/ai-tools/cta-generator", icon: MousePointerClick },
-      { title: "SEO Audit", href: "/ai-tools/seo-audit", icon: Gauge },
-      { title: "Landing Page Analyzer", href: "/ai-tools/landing-page-analyzer", icon: FileCode2 },
-      { title: "Rewrite Email", href: "/ai-tools/rewrite-email", icon: Wand2 },
-      { title: "Translate Email", href: "/ai-tools/translate-email", icon: Languages },
+      { titleKey: "nav.items.websiteAnalyzer", href: "/ai-tools/website-analyzer", icon: Globe },
+      { titleKey: "nav.items.emailGenerator", href: "/ai-tools/email-generator", icon: Mail },
+      { titleKey: "nav.items.subjectGenerator", href: "/ai-tools/subject-generator", icon: Mails },
+      { titleKey: "nav.items.headlineGenerator", href: "/ai-tools/headline-generator", icon: Lightbulb },
+      { titleKey: "nav.items.ctaGenerator", href: "/ai-tools/cta-generator", icon: MousePointerClick },
+      { titleKey: "nav.items.seoAudit", href: "/ai-tools/seo-audit", icon: Gauge },
+      { titleKey: "nav.items.landingPageAnalyzer", href: "/ai-tools/landing-page-analyzer", icon: FileCode2 },
+      { titleKey: "nav.items.rewriteEmail", href: "/ai-tools/rewrite-email", icon: Wand2 },
+      { titleKey: "nav.items.translateEmail", href: "/ai-tools/translate-email", icon: Languages },
     ],
   },
   {
     items: [
-      { title: "Billing", href: "/billing", icon: CreditCard },
-      { title: "Settings", href: "/settings/profile", icon: Settings },
+      { titleKey: "nav.items.billing", href: "/billing", icon: CreditCard },
+      { titleKey: "nav.items.settings", href: "/settings/profile", icon: Settings },
     ],
   },
 ];
 
 export const aiToolsOverviewLink: NavItem = {
-  title: "AI Tools",
+  titleKey: "nav.items.aiToolsOverview",
   href: "/ai-tools",
   icon: Sparkles,
 };
 
 export const adminNav: NavGroup[] = [
   {
-    title: "Admin",
+    titleKey: "nav.admin.group",
     items: [
-      { title: "Overview", href: "/admin", icon: Shield },
-      { title: "Users", href: "/admin/users", icon: Users2 },
-      { title: "Subscriptions", href: "/admin/subscriptions", icon: CreditCard },
-      { title: "Statistics", href: "/admin/statistics", icon: BarChart3 },
-      { title: "Website Settings", href: "/admin/website-settings", icon: Globe },
-      { title: "Promo Codes", href: "/admin/promo-codes", icon: Ticket },
-      { title: "System Logs", href: "/admin/system-logs", icon: ScrollText },
+      { titleKey: "nav.admin.overview", href: "/admin", icon: Shield },
+      { titleKey: "nav.admin.users", href: "/admin/users", icon: Users2 },
+      { titleKey: "nav.admin.subscriptions", href: "/admin/subscriptions", icon: CreditCard },
+      { titleKey: "nav.admin.statistics", href: "/admin/statistics", icon: BarChart3 },
+      { titleKey: "nav.admin.websiteSettings", href: "/admin/website-settings", icon: Globe },
+      { titleKey: "nav.admin.promoCodes", href: "/admin/promo-codes", icon: Ticket },
+      { titleKey: "nav.admin.systemLogs", href: "/admin/system-logs", icon: ScrollText },
     ],
   },
 ];
 
 export const settingsNav: NavItem[] = [
-  { title: "Profile", href: "/settings/profile", icon: Users },
-  { title: "Security", href: "/settings/security", icon: Shield },
-  { title: "Workspace", href: "/settings/workspace", icon: Building2 },
-  { title: "Notifications", href: "/settings/notifications", icon: MessagesSquare },
-  { title: "API Keys", href: "/settings/api-keys", icon: KeyRound },
-  { title: "Subscription", href: "/settings/subscription", icon: Percent },
-  { title: "Danger Zone", href: "/settings/danger-zone", icon: ShieldAlert },
+  { titleKey: "nav.settings.profile", href: "/settings/profile", icon: Users },
+  { titleKey: "nav.settings.security", href: "/settings/security", icon: Shield },
+  { titleKey: "nav.settings.workspace", href: "/settings/workspace", icon: Building2 },
+  { titleKey: "nav.settings.notifications", href: "/settings/notifications", icon: MessagesSquare },
+  { titleKey: "nav.settings.apiKeys", href: "/settings/api-keys", icon: KeyRound },
+  { titleKey: "nav.settings.subscription", href: "/settings/subscription", icon: Percent },
+  { titleKey: "nav.settings.dangerZone", href: "/settings/danger-zone", icon: ShieldAlert },
 ];
 
-export const aiToolsNav: (NavItem & { description: string })[] = [
-  { title: "Website Analyzer", href: "/ai-tools/website-analyzer", icon: Globe, description: "Scan a prospect's site for tech stack, SEO health, and messaging gaps." },
-  { title: "Email Generator", href: "/ai-tools/email-generator", icon: Mail, description: "Draft a personalized outreach email from a lead's profile." },
-  { title: "Subject Generator", href: "/ai-tools/subject-generator", icon: Mails, description: "Generate high-open-rate subject line variants." },
-  { title: "Headline Generator", href: "/ai-tools/headline-generator", icon: Lightbulb, description: "Produce landing page and ad headline options." },
-  { title: "CTA Generator", href: "/ai-tools/cta-generator", icon: MousePointerClick, description: "Generate call-to-action copy tuned to campaign goals." },
-  { title: "SEO Audit", href: "/ai-tools/seo-audit", icon: Gauge, description: "Run an automated SEO health check on any domain." },
-  { title: "Landing Page Analyzer", href: "/ai-tools/landing-page-analyzer", icon: FileCode2, description: "Evaluate a landing page's structure and conversion signals." },
-  { title: "Rewrite Email", href: "/ai-tools/rewrite-email", icon: Wand2, description: "Rewrite an existing email in a different tone or length." },
-  { title: "Translate Email", href: "/ai-tools/translate-email", icon: Languages, description: "Translate outreach copy while preserving tone and intent." },
+export const aiToolsNav: (NavItem & { descriptionKey: string })[] = [
+  { titleKey: "nav.items.websiteAnalyzer", href: "/ai-tools/website-analyzer", icon: Globe, descriptionKey: "aiTools.websiteAnalyzer.cardDescription" },
+  { titleKey: "nav.items.emailGenerator", href: "/ai-tools/email-generator", icon: Mail, descriptionKey: "aiTools.emailGenerator.cardDescription" },
+  { titleKey: "nav.items.subjectGenerator", href: "/ai-tools/subject-generator", icon: Mails, descriptionKey: "aiTools.subjectGenerator.cardDescription" },
+  { titleKey: "nav.items.headlineGenerator", href: "/ai-tools/headline-generator", icon: Lightbulb, descriptionKey: "aiTools.headlineGenerator.cardDescription" },
+  { titleKey: "nav.items.ctaGenerator", href: "/ai-tools/cta-generator", icon: MousePointerClick, descriptionKey: "aiTools.ctaGenerator.cardDescription" },
+  { titleKey: "nav.items.seoAudit", href: "/ai-tools/seo-audit", icon: Gauge, descriptionKey: "aiTools.seoAudit.cardDescription" },
+  { titleKey: "nav.items.landingPageAnalyzer", href: "/ai-tools/landing-page-analyzer", icon: FileCode2, descriptionKey: "aiTools.landingPageAnalyzer.cardDescription" },
+  { titleKey: "nav.items.rewriteEmail", href: "/ai-tools/rewrite-email", icon: Wand2, descriptionKey: "aiTools.rewriteEmail.cardDescription" },
+  { titleKey: "nav.items.translateEmail", href: "/ai-tools/translate-email", icon: Languages, descriptionKey: "aiTools.translateEmail.cardDescription" },
 ];
 
 export const commandPaletteNav: NavItem[] = [
   ...mainNav.flatMap((group) => group.items),
   aiToolsOverviewLink,
-  { title: "Help", href: "/help", icon: Bot },
+  { titleKey: "nav.items.help", href: "/help", icon: Bot },
 ];

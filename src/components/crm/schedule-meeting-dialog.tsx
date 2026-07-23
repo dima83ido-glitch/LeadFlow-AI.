@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { CalendarPlus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -25,6 +26,7 @@ interface ScheduleMeetingFormValues {
 }
 
 export function ScheduleMeetingDialog() {
+  const t = useTranslations("crm.meetings.scheduleDialog");
   const [open, setOpen] = React.useState(false);
   const {
     register,
@@ -34,7 +36,7 @@ export function ScheduleMeetingDialog() {
   } = useForm<ScheduleMeetingFormValues>();
 
   function onSubmit(values: ScheduleMeetingFormValues) {
-    toast.success(`"${values.title}" was scheduled.`);
+    toast.success(t("successToast", { title: values.title }));
     setOpen(false);
     reset();
   }
@@ -43,42 +45,42 @@ export function ScheduleMeetingDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button />}>
         <CalendarPlus className="size-4" />
-        Schedule Meeting
+        {t("trigger")}
       </DialogTrigger>
       <DialogContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle>Schedule Meeting</DialogTitle>
-            <DialogDescription>Add a new meeting to your calendar.</DialogDescription>
+            <DialogTitle>{t("title")}</DialogTitle>
+            <DialogDescription>{t("description")}</DialogDescription>
           </DialogHeader>
           <div className="py-4">
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="title">Title</FieldLabel>
+                <FieldLabel htmlFor="title">{t("titleLabel")}</FieldLabel>
                 <Input
                   id="title"
-                  placeholder="e.g. Discovery Call"
-                  {...register("title", { required: "Title is required" })}
+                  placeholder={t("titlePlaceholder")}
+                  {...register("title", { required: t("titleRequired") })}
                 />
                 <FieldError errors={[errors.title]} />
               </Field>
               <Field>
-                <FieldLabel htmlFor="startTime">Date &amp; time</FieldLabel>
+                <FieldLabel htmlFor="startTime">{t("dateTimeLabel")}</FieldLabel>
                 <Input
                   id="startTime"
                   type="datetime-local"
-                  {...register("startTime", { required: "Date and time are required" })}
+                  {...register("startTime", { required: t("dateTimeRequired") })}
                 />
                 <FieldError errors={[errors.startTime]} />
               </Field>
               <Field>
-                <FieldLabel htmlFor="location">Location</FieldLabel>
-                <Input id="location" placeholder="e.g. Google Meet" {...register("location")} />
+                <FieldLabel htmlFor="location">{t("locationLabel")}</FieldLabel>
+                <Input id="location" placeholder={t("locationPlaceholder")} {...register("location")} />
               </Field>
             </FieldGroup>
           </div>
           <DialogFooter>
-            <Button type="submit">Schedule Meeting</Button>
+            <Button type="submit">{t("submit")}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

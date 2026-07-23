@@ -1,20 +1,26 @@
-import { Activity, CreditCard, TrendingUp, Users } from "lucide-react";
+"use client";
 
+import { Activity, CreditCard, TrendingUp, Users } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+
+import type { Locale } from "@/i18n/config";
 import { mockAdminSubscriptions, mockAdminUsers } from "@/lib/mock/admin";
 import { formatCurrency } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 
 export function AdminStatCards() {
+  const t = useTranslations("admin.dashboard.stats");
+  const locale = useLocale() as Locale;
   const totalUsers = mockAdminUsers.length;
   const activeUsers = mockAdminUsers.filter((u) => u.status === "ACTIVE").length;
   const mrr = mockAdminSubscriptions.reduce((sum, sub) => sum + sub.mrr, 0);
   const activeSubs = mockAdminSubscriptions.filter((s) => s.status === "ACTIVE").length;
 
   const stats = [
-    { label: "Total Users", value: totalUsers.toString(), icon: Users },
-    { label: "Active Users", value: activeUsers.toString(), icon: Activity },
-    { label: "Monthly Recurring Revenue", value: formatCurrency(mrr), icon: TrendingUp },
-    { label: "Active Subscriptions", value: activeSubs.toString(), icon: CreditCard },
+    { label: t("totalUsers"), value: totalUsers.toString(), icon: Users },
+    { label: t("activeUsers"), value: activeUsers.toString(), icon: Activity },
+    { label: t("mrr"), value: formatCurrency(mrr, undefined, locale), icon: TrendingUp },
+    { label: t("activeSubscriptions"), value: activeSubs.toString(), icon: CreditCard },
   ];
 
   return (

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Loader2, MousePointerClick, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -55,6 +56,7 @@ const templates: Record<(typeof goals)[number], (context: string) => string[]> =
 };
 
 export default function CtaGeneratorView() {
+  const t = useTranslations("aiTools.ctaGenerator");
   const [goal, setGoal] = React.useState<(typeof goals)[number]>("Book a call");
   const [context, setContext] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -73,11 +75,11 @@ export default function CtaGeneratorView() {
     <div className="grid gap-6 lg:grid-cols-5">
       <Card className="h-fit lg:col-span-2">
         <CardHeader>
-          <CardTitle className="text-base">Campaign Goal</CardTitle>
+          <CardTitle className="text-base">{t("form.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Field>
-            <FieldLabel htmlFor="goal">Goal</FieldLabel>
+            <FieldLabel htmlFor="goal">{t("form.goalLabel")}</FieldLabel>
             <Select value={goal} onValueChange={(value) => value && setGoal(value as (typeof goals)[number])}>
               <SelectTrigger id="goal" className="w-full">
                 <SelectValue />
@@ -85,46 +87,46 @@ export default function CtaGeneratorView() {
               <SelectContent>
                 {goals.map((g) => (
                   <SelectItem key={g} value={g}>
-                    {g}
+                    {t(`form.goals.${g}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </Field>
           <Field>
-            <FieldLabel htmlFor="context">Context (optional)</FieldLabel>
+            <FieldLabel htmlFor="context">{t("form.contextLabel")}</FieldLabel>
             <Input
               id="context"
-              placeholder="e.g. the pricing guide"
+              placeholder={t("form.contextPlaceholder")}
               value={context}
               onChange={(e) => setContext(e.target.value)}
             />
           </Field>
           <Button className="w-full" onClick={handleGenerate} disabled={isLoading}>
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
-            Generate
+            {t("form.submit")}
           </Button>
         </CardContent>
       </Card>
 
       <Card className="lg:col-span-3">
         <CardHeader>
-          <CardTitle className="text-base">CTA Variants</CardTitle>
+          <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={results !== null}
             emptyIcon={MousePointerClick}
-            emptyTitle="No CTAs yet"
-            emptyDescription="Pick a goal and click Generate to see call-to-action variants."
+            emptyTitle={t("result.emptyTitle")}
+            emptyDescription={t("result.emptyDescription")}
           >
             {results && (
               <div className="grid gap-2 sm:grid-cols-2">
                 {results.map((cta) => (
                   <div key={cta} className="flex items-center justify-between gap-2 rounded-lg border p-3">
                     <p className="text-sm font-medium">{cta}</p>
-                    <CopyButton value={cta} label="Copy" />
+                    <CopyButton value={cta} />
                   </div>
                 ))}
               </div>

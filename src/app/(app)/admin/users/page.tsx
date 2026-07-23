@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-import { mockAdminUsers } from "@/lib/mock/admin";
 import { PageHeader } from "@/components/shared/page-header";
-import { DataTable } from "@/components/shared/data-table";
-import { adminUsersColumns } from "@/components/admin/admin-users-columns";
+import { AdminUsersView } from "@/components/admin/admin-users-view";
 
 export const metadata: Metadata = { title: "Users" };
 
-export default function AdminUsersPage() {
+export default async function AdminUsersPage() {
+  const t = await getTranslations("admin.users");
   return (
     <div className="space-y-6">
-      <PageHeader title="Users" description="Every user across all workspaces on LeadFlow AI." />
-      <DataTable columns={adminUsersColumns} data={mockAdminUsers} />
+      <PageHeader title={t("title")} description={t("description")} />
+      <AdminUsersView />
     </div>
   );
 }

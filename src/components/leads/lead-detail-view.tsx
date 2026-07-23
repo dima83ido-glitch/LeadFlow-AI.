@@ -14,8 +14,10 @@ import {
   Star,
   Trash2,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 
+import type { Locale } from "@/i18n/config";
 import type { Lead } from "@/types/lead";
 import { formatDate } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -45,14 +47,16 @@ function initials(name: string) {
 
 export function LeadDetailView({ lead }: { lead: Lead }) {
   const router = useRouter();
+  const t = useTranslations("leads.detail");
+  const locale = useLocale() as Locale;
 
   function handleDelete() {
-    toast.success(`${lead.companyName} was deleted.`);
+    toast.success(t("deletedToast", { company: lead.companyName }));
     router.push("/leads");
   }
 
   function handleSave() {
-    toast.success(`${lead.companyName} was saved to your CRM.`);
+    toast.success(t("savedToast", { company: lead.companyName }));
   }
 
   return (
@@ -67,26 +71,26 @@ export function LeadDetailView({ lead }: { lead: Lead }) {
               render={<a href={`/ai-tools/website-analyzer?lead=${lead.id}`} />}
             >
               <Sparkles className="size-4" />
-              Analyze
+              {t("analyze")}
             </Button>
             <Button variant="outline" render={<a href={`/ai-tools/email-generator?lead=${lead.id}`} />}>
               <Bot className="size-4" />
-              Generate Email
+              {t("generateEmail")}
             </Button>
             <Button variant="outline" onClick={handleSave}>
               <Save className="size-4" />
-              Save
+              {t("save")}
             </Button>
             <ConfirmDialog
               trigger={
                 <Button variant="outline" className="text-destructive hover:text-destructive">
                   <Trash2 className="size-4" />
-                  Delete
+                  {t("delete")}
                 </Button>
               }
-              title="Delete this lead?"
-              description={`This will permanently remove ${lead.companyName} from your workspace. This action cannot be undone.`}
-              confirmLabel="Delete lead"
+              title={t("deleteDialogTitle")}
+              description={t("deleteDialogDescription", { company: lead.companyName })}
+              confirmLabel={t("deleteConfirmLabel")}
               onConfirm={handleDelete}
             />
           </>
@@ -166,7 +170,7 @@ export function LeadDetailView({ lead }: { lead: Lead }) {
                       size="sm"
                       render={<a href={`https://${lead.socials.linkedin}`} target="_blank" rel="noreferrer" />}
                     >
-                      LinkedIn
+                      {t("linkedin")}
                       <ExternalLink className="size-3.5" />
                     </Button>
                   )}
@@ -178,7 +182,7 @@ export function LeadDetailView({ lead }: { lead: Lead }) {
                         <a href={`https://twitter.com/${lead.socials.twitter}`} target="_blank" rel="noreferrer" />
                       }
                     >
-                      Twitter
+                      {t("twitter")}
                       <ExternalLink className="size-3.5" />
                     </Button>
                   )}
@@ -190,7 +194,7 @@ export function LeadDetailView({ lead }: { lead: Lead }) {
                         <a href={`https://instagram.com/${lead.socials.instagram}`} target="_blank" rel="noreferrer" />
                       }
                     >
-                      Instagram
+                      {t("instagram")}
                       <ExternalLink className="size-3.5" />
                     </Button>
                   )}
@@ -202,7 +206,7 @@ export function LeadDetailView({ lead }: { lead: Lead }) {
                         <a href={`https://facebook.com/${lead.socials.facebook}`} target="_blank" rel="noreferrer" />
                       }
                     >
-                      Facebook
+                      {t("facebook")}
                       <ExternalLink className="size-3.5" />
                     </Button>
                   )}
@@ -215,33 +219,33 @@ export function LeadDetailView({ lead }: { lead: Lead }) {
         <div className="lg:col-span-2">
           <Tabs defaultValue="overview">
             <TabsList>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="activity">Activity</TabsTrigger>
-              <TabsTrigger value="campaigns">Campaign History</TabsTrigger>
+              <TabsTrigger value="overview">{t("tabs.overview")}</TabsTrigger>
+              <TabsTrigger value="activity">{t("tabs.activity")}</TabsTrigger>
+              <TabsTrigger value="campaigns">{t("tabs.campaigns")}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base">Lead details</CardTitle>
+                  <CardTitle className="text-base">{t("details.title")}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <dl className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <dt className="text-muted-foreground text-xs">Source</dt>
+                      <dt className="text-muted-foreground text-xs">{t("details.source")}</dt>
                       <dd className="text-sm font-medium">{lead.source ?? "—"}</dd>
                     </div>
                     <div>
-                      <dt className="text-muted-foreground text-xs">Employees</dt>
+                      <dt className="text-muted-foreground text-xs">{t("details.employees")}</dt>
                       <dd className="text-sm font-medium">{lead.employeeCount ?? "—"}</dd>
                     </div>
                     <div>
-                      <dt className="text-muted-foreground text-xs">Added on</dt>
-                      <dd className="text-sm font-medium">{formatDate(lead.createdAt)}</dd>
+                      <dt className="text-muted-foreground text-xs">{t("details.addedOn")}</dt>
+                      <dd className="text-sm font-medium">{formatDate(lead.createdAt, locale)}</dd>
                     </div>
                     <div>
-                      <dt className="text-muted-foreground text-xs">Last updated</dt>
-                      <dd className="text-sm font-medium">{formatDate(lead.updatedAt)}</dd>
+                      <dt className="text-muted-foreground text-xs">{t("details.lastUpdated")}</dt>
+                      <dd className="text-sm font-medium">{formatDate(lead.updatedAt, locale)}</dd>
                     </div>
                   </dl>
                   {lead.notes && (
@@ -259,8 +263,8 @@ export function LeadDetailView({ lead }: { lead: Lead }) {
                 <CardContent>
                   <EmptyState
                     icon={Sparkles}
-                    title="No activity yet"
-                    description="Actions like emails sent and calls logged will show up here."
+                    title={t("noActivityTitle")}
+                    description={t("noActivityDescription")}
                   />
                 </CardContent>
               </Card>
@@ -271,11 +275,11 @@ export function LeadDetailView({ lead }: { lead: Lead }) {
                 <CardContent>
                   <EmptyState
                     icon={Mail}
-                    title="Not part of any campaign yet"
-                    description="Add this lead to a campaign to start tracking outreach."
+                    title={t("noCampaignsTitle")}
+                    description={t("noCampaignsDescription")}
                     action={
                       <Button variant="outline" render={<a href="/campaigns" />}>
-                        Browse campaigns
+                        {t("browseCampaigns")}
                       </Button>
                     }
                   />

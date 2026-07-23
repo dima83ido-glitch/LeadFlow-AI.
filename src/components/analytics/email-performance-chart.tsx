@@ -1,6 +1,8 @@
 "use client";
 
+import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { useTranslations } from "next-intl";
 
 import { mockEmailPerformance } from "@/lib/mock/analytics";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,21 +15,27 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const chartConfig = {
-  sent: { label: "Sent", color: "var(--chart-1)" },
-  opened: { label: "Opened", color: "var(--chart-2)" },
-  replied: { label: "Replied", color: "var(--chart-3)" },
-} satisfies ChartConfig;
-
 export function EmailPerformanceChart() {
+  const t = useTranslations("analytics.emailPerformance");
+  const tm = useTranslations("common.monthsShort");
+  const chartConfig = {
+    sent: { label: t("sent"), color: "var(--chart-1)" },
+    opened: { label: t("opened"), color: "var(--chart-2)" },
+    replied: { label: t("replied"), color: "var(--chart-3)" },
+  } satisfies ChartConfig;
+  const data = React.useMemo(
+    () => mockEmailPerformance.map((point) => ({ ...point, month: tm(point.month) })),
+    [tm],
+  );
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Email Performance</CardTitle>
+        <CardTitle className="text-base">{t("title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-72 w-full">
-          <AreaChart data={mockEmailPerformance} margin={{ left: 0, right: 12 }}>
+          <AreaChart data={data} margin={{ left: 0, right: 12 }}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"

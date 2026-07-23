@@ -4,7 +4,7 @@ export interface AppNotification {
   id: string;
   type: NotificationType;
   title: string;
-  message: string;
+  messageParams: Record<string, string | number>;
   read: boolean;
   createdAt: string;
   href?: string;

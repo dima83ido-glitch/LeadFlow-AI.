@@ -1,0 +1,122 @@
+{
+  "dashboard": {
+    "title": "Admin Overview",
+    "description": "Workspace, billing, and platform health at a glance.",
+    "stats": {
+      "totalUsers": "Total Users",
+      "activeUsers": "Active Users",
+      "mrr": "Monthly Recurring Revenue",
+      "activeSubscriptions": "Active Subscriptions"
+    },
+    "recentSignups": {
+      "title": "Recent Signups"
+    }
+  },
+  "statistics": {
+    "title": "Statistics",
+    "description": "Platform-wide growth and revenue trends.",
+    "growthChart": {
+      "title": "Growth",
+      "usersLabel": "Users",
+      "mrrLabel": "MRR ($)"
+    },
+    "planDistributionChart": {
+      "title": "Plan Distribution",
+      "workspacesLabel": "Workspaces"
+    }
+  },
+  "subscriptions": {
+    "title": "Subscriptions",
+    "description": "All active and past workspace subscriptions.",
+    "columns": {
+      "workspace": "Workspace",
+      "plan": "Plan",
+      "status": "Status",
+      "mrr": "MRR",
+      "renews": "Renews"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "description": "Every user across all workspaces on LeadFlow AI.",
+    "columns": {
+      "user": "User",
+      "role": "Role",
+      "plan": "Plan",
+      "status": "Status",
+      "joined": "Joined",
+      "lastActive": "Last active"
+    },
+    "roleAdmin": "Admin",
+    "roleUser": "User",
+    "actions": {
+      "activate": "Activate",
+      "suspend": "Suspend",
+      "deleteUser": "Delete user",
+      "activatedToast": "{name} was reactivated.",
+      "suspendedToast": "{name} was suspended.",
+      "deletedToast": "{name} was deleted."
+    }
+  },
+  "systemLogs": {
+    "title": "System Logs",
+    "description": "Recent events emitted across LeadFlow AI services.",
+    "filters": {
+      "all": "All",
+      "info": "Info",
+      "warn": "Warn",
+      "error": "Error"
+    },
+    "columns": {
+      "level": "Level",
+      "message": "Message",
+      "source": "Source",
+      "time": "Time"
+    }
+  },
+  "promoCodes": {
+    "title": "Promo Codes",
+    "description": "Create and manage discount codes for LeadFlow AI plans.",
+    "columns": {
+      "code": "Code",
+      "discount": "Discount",
+      "redemptions": "Redemptions",
+      "expires": "Expires",
+      "active": "Active",
+      "never": "Never"
+    },
+    "createDialog": {
+      "trigger": "Create Promo Code",
+      "title": "Create Promo Code",
+      "description": "Add a new discount code for customers to redeem.",
+      "codeLabel": "Code",
+      "codePlaceholder": "e.g. SUMMER25",
+      "discountLabel": "Discount (%)",
+      "createdToast": "Promo code \"{code}\" created."
+    },
+    "deleteDialog": {
+      "title": "Delete this promo code?",
+      "description": "\"{code}\" will be permanently deleted and can no longer be redeemed.",
+      "confirmLabel": "Delete code"
+    },
+    "deletedToast": "\"{code}\" was deleted."
+  },
+  "websiteSettings": {
+    "title": "Website Settings",
+    "description": "Global settings for the LeadFlow AI marketing site and app.",
+    "general": {
+      "title": "General",
+      "siteNameLabel": "Site name",
+      "supportEmailLabel": "Support email",
+      "maintenanceModeLabel": "Maintenance mode",
+      "maintenanceModeDescription": "Show a maintenance banner and block new sign-ups."
+    },
+    "seo": {
+      "title": "SEO",
+      "metaTitleLabel": "Meta title",
+      "metaDescriptionLabel": "Meta description"
+    },
+    "saveChanges": "Save changes",
+    "savedToast": "Website settings saved."
+  }
+}

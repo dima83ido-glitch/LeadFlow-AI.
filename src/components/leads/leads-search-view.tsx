@@ -2,13 +2,14 @@
 
 import * as React from "react";
 import { Search, SearchX } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { mockLeads } from "@/lib/mock/leads";
 import type { Lead, LeadSearchFilters } from "@/types/lead";
 import { DataTable } from "@/components/shared/data-table";
 import { EmptyState } from "@/components/shared/empty-state";
 import { TableSkeleton } from "@/components/shared/page-skeleton";
-import { leadsColumns } from "@/components/leads/leads-columns";
+import { getLeadsColumns } from "@/components/leads/leads-columns";
 import { LeadsFilterBar } from "@/components/leads/leads-filter-bar";
 
 function matchesFilters(lead: Lead, filters: LeadSearchFilters) {
@@ -27,6 +28,8 @@ function matchesFilters(lead: Lead, filters: LeadSearchFilters) {
 }
 
 export function LeadsSearchView() {
+  const t = useTranslations("leads");
+  const leadsColumns = React.useMemo(() => getLeadsColumns(t), [t]);
   const [filters, setFilters] = React.useState<LeadSearchFilters>({});
   const [isSearching, setIsSearching] = React.useState(false);
   const [hasSearched, setHasSearched] = React.useState(false);
@@ -65,15 +68,15 @@ export function LeadsSearchView() {
         ) : (
           <EmptyState
             icon={SearchX}
-            title="No leads match these filters"
-            description="Try widening your search — remove a filter or broaden the keywords."
+            title={t("searchView.noResultsTitle")}
+            description={t("searchView.noResultsDescription")}
           />
         )
       ) : (
         <EmptyState
           icon={Search}
-          title="Search for leads to get started"
-          description="Set your filters above and click Search Leads to discover companies to reach out to."
+          title={t("searchView.startTitle")}
+          description={t("searchView.startDescription")}
         />
       )}
     </div>

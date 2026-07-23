@@ -1,0 +1,46 @@
+{
+  "page": {
+    "title": "Кампанії",
+    "description": "Створюйте та відстежуйте свої email-кампанії.",
+    "createCampaign": "Створити кампанію"
+  },
+  "statusFilterAll": "Усі",
+  "searchPlaceholder": "Пошук кампаній...",
+  "emptyTitle": "Поки що немає кампаній",
+  "emptyDescription": "Створіть першу кампанію, щоб почати взаємодію з лідами.",
+  "newCampaign": "Нова кампанія",
+  "noMatchTitle": "Немає кампаній, що відповідають фільтрам",
+  "noMatchDescription": "Спробуйте інший статус або пошуковий запит.",
+  "columns": {
+    "campaign": "Кампанія",
+    "noSubjectYet": "Тему ще не задано",
+    "status": "Статус",
+    "progress": "Прогрес",
+    "sentCount": "Надіслано {sent} / {total}",
+    "opensReplies": "Відкриття / Відповіді",
+    "lastUpdated": "Оновлено",
+    "editCampaign": "Редагувати кампанію",
+    "resume": "Відновити",
+    "pause": "Призупинити",
+    "delete": "Видалити"
+  },
+  "newPage": {
+    "title": "Створити кампанію",
+    "description": "Налаштуйте новий ланцюжок розсилок.",
+    "nameLabel": "Назва кампанії",
+    "namePlaceholder": "наприклад, Q3 Data Teams Outreach",
+    "subjectLabel": "Тема листа",
+    "subjectPlaceholder": "наприклад, Швидший спосіб доставки дашбордів",
+    "templateLabel": "Шаблон",
+    "templatePlaceholder": "Почати з шаблону (необов'язково)",
+    "templateDescription": "Ви також можете почати з чистого аркуша та написати текст самостійно.",
+    "scheduleLabel": "Розклад (необов'язково)",
+    "scheduleDescription": "Залиште порожнім, щоб зберегти як чернетку.",
+    "submit": "Створити кампанію",
+    "createdToast": "«{name}» збережено як чернетку.",
+    "validation": {
+      "nameRequired": "Вкажіть назву кампанії",
+      "subjectRequired": "Вкажіть тему листа"
+    }
+  }
+}

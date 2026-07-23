@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronRight, HelpCircle, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { adminNav, mainNav } from "@/lib/nav-config";
 import { cn } from "@/lib/utils";
@@ -24,6 +25,7 @@ import {
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const t = useTranslations();
   const isAdmin = pathname.startsWith("/admin");
   const groups = isAdmin ? adminNav : mainNav;
 
@@ -45,21 +47,22 @@ export function AppSidebar() {
 
       <SidebarContent>
         {groups.map((group, index) => {
-          const isCollapsibleGroup = Boolean(group.title) && group.items.length > 3;
+          const groupTitle = group.titleKey ? t(group.titleKey) : undefined;
+          const isCollapsibleGroup = Boolean(groupTitle) && group.items.length > 3;
           const hasActiveChild = group.items.some(
             (item) => pathname === item.href || pathname.startsWith(`${item.href}/`),
           );
 
           if (isCollapsibleGroup) {
             return (
-              <Collapsible key={group.title ?? index} defaultOpen={hasActiveChild} className="group/collapsible">
+              <Collapsible key={group.titleKey ?? index} defaultOpen={hasActiveChild} className="group/collapsible">
                 <SidebarGroup>
                   <CollapsibleTrigger
                     render={
                       <SidebarGroupLabel className="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground flex cursor-pointer items-center justify-between rounded-md" />
                     }
                   >
-                    {group.title}
+                    {groupTitle}
                     <ChevronRight className="size-3.5 transition-transform group-data-[state=open]/collapsible:rotate-90" />
                   </CollapsibleTrigger>
                   <CollapsibleContent>
@@ -73,8 +76,8 @@ export function AppSidebar() {
           }
 
           return (
-            <SidebarGroup key={group.title ?? index}>
-              {group.title && <SidebarGroupLabel>{group.title}</SidebarGroupLabel>}
+            <SidebarGroup key={group.titleKey ?? index}>
+              {groupTitle && <SidebarGroupLabel>{groupTitle}</SidebarGroupLabel>}
               <SidebarGroupContent>
                 <NavItems items={group.items} pathname={pathname} />
               </SidebarGroupContent>
@@ -89,10 +92,10 @@ export function AppSidebar() {
             <SidebarMenuButton
               render={<Link href="/help" />}
               isActive={pathname === "/help"}
-              tooltip="Help"
+              tooltip={t("nav.items.help")}
             >
               <HelpCircle />
-              <span>Help</span>
+              <span>{t("nav.items.help")}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -106,22 +109,24 @@ function NavItems({
   items,
   pathname,
 }: {
-  items: { title: string; href: string; icon: React.ElementType }[];
+  items: { titleKey: string; href: string; icon: React.ElementType }[];
   pathname: string;
 }) {
+  const t = useTranslations();
   return (
     <SidebarMenu>
       {items.map((item) => {
         const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+        const title = t(item.titleKey);
         return (
           <SidebarMenuItem key={item.href}>
             <SidebarMenuButton
               render={<Link href={item.href} className={cn(isActive && "font-medium")} />}
               isActive={isActive}
-              tooltip={item.title}
+              tooltip={title}
             >
               <item.icon />
-              <span>{item.title}</span>
+              <span>{title}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         );

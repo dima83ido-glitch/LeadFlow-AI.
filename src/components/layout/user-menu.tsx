@@ -10,6 +10,7 @@ import {
   User,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -25,8 +26,10 @@ import {
 
 export function UserMenu() {
   const { data: session } = useSession();
+  const t = useTranslations();
+  const tc = useTranslations("common");
 
-  const name = session?.user?.name ?? "Account";
+  const name = session?.user?.name ?? tc("account");
   const email = session?.user?.email ?? "";
   const initials = name.charAt(0).toUpperCase();
   const isAdmin = session?.user?.role === "ADMIN";
@@ -49,31 +52,31 @@ export function UserMenu() {
         <DropdownMenuGroup>
           <DropdownMenuItem render={<Link href="/settings/profile" />}>
             <User />
-            Profile
+            {t("nav.settings.profile")}
           </DropdownMenuItem>
           <DropdownMenuItem render={<Link href="/settings/workspace" />}>
             <Settings />
-            Settings
+            {t("nav.items.settings")}
           </DropdownMenuItem>
           <DropdownMenuItem render={<Link href="/billing" />}>
             <CreditCard />
-            Billing
+            {t("nav.items.billing")}
           </DropdownMenuItem>
           {isAdmin && (
             <DropdownMenuItem render={<Link href="/admin" />}>
               <Shield />
-              Admin Panel
+              {t("nav.breadcrumbs.admin")}
             </DropdownMenuItem>
           )}
           <DropdownMenuItem render={<Link href="/help" />}>
             <LifeBuoy />
-            Help
+            {t("nav.items.help")}
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>
           <LogOut />
-          Log out
+          {tc("actions.logOut")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

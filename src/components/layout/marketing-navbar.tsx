@@ -1,15 +1,18 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-
-const links = [
-  { title: "Product", href: "#product" },
-  { title: "Pricing", href: "#pricing" },
-  { title: "FAQ", href: "#faq" },
-];
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
 export function MarketingNavbar() {
+  const t = useTranslations("marketing.navbar");
+  const links = [
+    { title: t("product"), href: "#product" },
+    { title: t("pricing"), href: "#pricing" },
+    { title: t("faq"), href: "#faq" },
+  ];
+
   return (
     <header className="bg-background/80 sticky top-0 z-40 border-b backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
@@ -33,11 +36,12 @@ export function MarketingNavbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <LanguageSwitcher />
           <Button variant="ghost" size="sm" render={<Link href="/login" />}>
-            Log in
+            {t("logIn")}
           </Button>
           <Button size="sm" render={<Link href="/register" />}>
-            Start free trial
+            {t("startTrial")}
           </Button>
         </div>
       </div>

@@ -1,6 +1,8 @@
 "use client";
 
+import * as React from "react";
 import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { useTranslations } from "next-intl";
 
 import { mockUserGrowth } from "@/lib/mock/admin";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,20 +15,26 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const chartConfig = {
-  users: { label: "Users", color: "var(--chart-1)" },
-  mrr: { label: "MRR ($)", color: "var(--chart-2)" },
-} satisfies ChartConfig;
-
 export function UserGrowthChart() {
+  const t = useTranslations("admin.statistics.growthChart");
+  const tm = useTranslations("common.monthsShort");
+  const chartConfig = {
+    users: { label: t("usersLabel"), color: "var(--chart-1)" },
+    mrr: { label: t("mrrLabel"), color: "var(--chart-2)" },
+  } satisfies ChartConfig;
+  const data = React.useMemo(
+    () => mockUserGrowth.map((point) => ({ ...point, month: tm(point.month) })),
+    [tm],
+  );
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Growth</CardTitle>
+        <CardTitle className="text-base">{t("title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-72 w-full">
-          <LineChart data={mockUserGrowth} margin={{ left: 0, right: 12 }}>
+          <LineChart data={data} margin={{ left: 0, right: 12 }}>
             <CartesianGrid vertical={false} />
             <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={8} />
             <YAxis tickLine={false} axisLine={false} width={40} />

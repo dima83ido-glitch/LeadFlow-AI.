@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Loader2, Mail, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -51,6 +52,7 @@ Dmitry`,
 }
 
 export default function EmailGeneratorView() {
+  const t = useTranslations("aiTools.emailGenerator");
   const [company, setCompany] = React.useState("");
   const [tone, setTone] = React.useState<string>("Friendly");
   const [keyPoints, setKeyPoints] = React.useState("");
@@ -70,38 +72,38 @@ export default function EmailGeneratorView() {
     <div className="grid gap-6 lg:grid-cols-5">
       <Card className="h-fit lg:col-span-2">
         <CardHeader>
-          <CardTitle className="text-base">Details</CardTitle>
+          <CardTitle className="text-base">{t("form.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Field>
-            <FieldLabel htmlFor="company">Recipient / Company</FieldLabel>
+            <FieldLabel htmlFor="company">{t("form.recipientLabel")}</FieldLabel>
             <Input
               id="company"
-              placeholder="e.g. Northwind Analytics"
+              placeholder={t("form.recipientPlaceholder")}
               value={company}
               onChange={(e) => setCompany(e.target.value)}
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="tone">Tone</FieldLabel>
+            <FieldLabel htmlFor="tone">{t("form.toneLabel")}</FieldLabel>
             <Select value={tone} onValueChange={(value) => value && setTone(value)}>
               <SelectTrigger id="tone" className="w-full">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {tones.map((t) => (
-                  <SelectItem key={t} value={t}>
-                    {t}
+                {tones.map((toneOption) => (
+                  <SelectItem key={toneOption} value={toneOption}>
+                    {t(`form.tones.${toneOption}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </Field>
           <Field>
-            <FieldLabel htmlFor="keyPoints">Key points</FieldLabel>
+            <FieldLabel htmlFor="keyPoints">{t("form.keyPointsLabel")}</FieldLabel>
             <Textarea
               id="keyPoints"
-              placeholder="What should the email mention?"
+              placeholder={t("form.keyPointsPlaceholder")}
               value={keyPoints}
               onChange={(e) => setKeyPoints(e.target.value)}
               rows={4}
@@ -109,37 +111,37 @@ export default function EmailGeneratorView() {
           </Field>
           <Button className="w-full" onClick={handleGenerate} disabled={isLoading}>
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
-            Generate
+            {t("form.submit")}
           </Button>
         </CardContent>
       </Card>
 
       <Card className="lg:col-span-3">
         <CardHeader>
-          <CardTitle className="text-base">Generated Email</CardTitle>
+          <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={result !== null}
             emptyIcon={Mail}
-            emptyTitle="No email generated yet"
-            emptyDescription="Fill in the details and click Generate to draft a personalized email."
+            emptyTitle={t("result.emptyTitle")}
+            emptyDescription={t("result.emptyDescription")}
           >
             {result && (
               <>
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-1">
-                    <p className="text-muted-foreground text-xs">Subject</p>
+                    <p className="text-muted-foreground text-xs">{t("result.subject")}</p>
                     <p className="font-medium">{result.subject}</p>
                   </div>
-                  <CopyButton value={result.subject} label="Copy subject" />
+                  <CopyButton value={result.subject} label={t("result.copySubject")} />
                 </div>
                 <Separator />
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <p className="text-muted-foreground text-xs">Body</p>
-                    <CopyButton value={result.body} label="Copy body" />
+                    <p className="text-muted-foreground text-xs">{t("result.body")}</p>
+                    <CopyButton value={result.body} label={t("result.copyBody")} />
                   </div>
                   <p className="text-sm whitespace-pre-line">{result.body}</p>
                 </div>

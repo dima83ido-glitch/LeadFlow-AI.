@@ -3,7 +3,10 @@
 import * as React from "react";
 import { formatDistanceToNow } from "date-fns";
 import { ClipboardList } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
+import type { Locale } from "@/i18n/config";
+import { getDateFnsLocale } from "@/lib/date-fns-locale";
 import { mockTasks } from "@/lib/mock/crm";
 import type { CrmTask, TaskStatus } from "@/types/crm";
 import { cn } from "@/lib/utils";
@@ -19,11 +22,7 @@ import {
 } from "@/components/ui/select";
 import { EmptyState } from "@/components/shared/empty-state";
 
-const columns: { status: TaskStatus; label: string }[] = [
-  { status: "TODO", label: "To Do" },
-  { status: "IN_PROGRESS", label: "In Progress" },
-  { status: "DONE", label: "Done" },
-];
+const statuses: TaskStatus[] = ["TODO", "IN_PROGRESS", "DONE"];
 
 const priorityClasses: Record<CrmTask["priority"], string> = {
   LOW: "bg-muted text-muted-foreground border-transparent",
@@ -41,14 +40,17 @@ function initials(name: string) {
 }
 
 export function TasksView() {
+  const t = useTranslations("crm.tasks");
+  const tStatus = useTranslations("common.statusLabels");
+  const locale = useLocale() as Locale;
   const [tasks, setTasks] = React.useState(mockTasks);
 
   if (tasks.length === 0) {
     return (
       <EmptyState
         icon={ClipboardList}
-        title="No tasks yet"
-        description="Tasks you create for yourself or your team will show up here."
+        title={t("emptyTitle")}
+        description={t("emptyDescription")}
       />
     );
   }
@@ -59,12 +61,12 @@ export function TasksView() {
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
-      {columns.map((column) => {
-        const columnTasks = tasks.filter((task) => task.status === column.status);
+      {statuses.map((status) => {
+        const columnTasks = tasks.filter((task) => task.status === status);
         return (
-          <div key={column.status} className="space-y-3">
+          <div key={status} className="space-y-3">
             <div className="flex items-center gap-2 px-1">
-              <p className="text-sm font-medium">{column.label}</p>
+              <p className="text-sm font-medium">{tStatus(status)}</p>
               <Badge variant="secondary">{columnTasks.length}</Badge>
             </div>
             <div className="space-y-2">
@@ -74,7 +76,7 @@ export function TasksView() {
                     <div className="flex items-start justify-between gap-2">
                       <p className="text-sm font-medium">{task.title}</p>
                       <Badge variant="outline" className={cn("shrink-0", priorityClasses[task.priority])}>
-                        {task.priority}
+                        {t(`priority.${task.priority}`)}
                       </Badge>
                     </div>
                     {task.relatedTo && (
@@ -91,7 +93,12 @@ export function TasksView() {
                       </div>
                       {task.dueDate && (
                         <span className="text-muted-foreground text-xs">
-                          Due {formatDistanceToNow(new Date(task.dueDate), { addSuffix: true })}
+                          {t("due", {
+                            when: formatDistanceToNow(new Date(task.dueDate), {
+                              addSuffix: true,
+                              locale: getDateFnsLocale(locale),
+                            }),
+                          })}
                         </span>
                       )}
                     </div>
@@ -106,9 +113,9 @@ export function TasksView() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        {columns.map((col) => (
-                          <SelectItem key={col.status} value={col.status}>
-                            {col.label}
+                        {statuses.map((s) => (
+                          <SelectItem key={s} value={s}>
+                            {tStatus(s)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -118,7 +125,7 @@ export function TasksView() {
               ))}
               {columnTasks.length === 0 && (
                 <div className="text-muted-foreground rounded-lg border border-dashed py-6 text-center text-xs">
-                  No tasks
+                  {t("noTasks")}
                 </div>
               )}
             </div>

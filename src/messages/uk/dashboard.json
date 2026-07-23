@@ -1,0 +1,37 @@
+{
+  "welcome": "З поверненням, {name}",
+  "subtitle": "Ось що відбувається у вашому робочому просторі.",
+  "vsLastMonth": "за минулий місяць",
+  "stats": {
+    "totalLeads": "Усього лідів",
+    "activeCampaigns": "Активні кампанії",
+    "replyRate": "Відсоток відповідей",
+    "revenueMtd": "Дохід (з початку місяця)"
+  },
+  "quickActions": {
+    "title": "Швидкі дії",
+    "searchLeads": {
+      "title": "Пошук лідів",
+      "description": "Знайдіть нові компанії для розсилки"
+    },
+    "newCampaign": {
+      "title": "Нова кампанія",
+      "description": "Запустіть нову розсилку"
+    },
+    "aiTools": {
+      "title": "AI-інструменти",
+      "description": "Генеруйте листи, теми листів і не тільки"
+    },
+    "addContact": {
+      "title": "Додати контакт",
+      "description": "Додайте контакт у вашу CRM"
+    }
+  },
+  "recentActivity": {
+    "title": "Останні дії"
+  },
+  "recentCampaigns": {
+    "title": "Останні кампанії",
+    "sentOf": "{sent} / {total} надіслано"
+  }
+}

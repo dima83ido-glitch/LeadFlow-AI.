@@ -1,6 +1,7 @@
 "use client";
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { useTranslations } from "next-intl";
 
 import { mockPlanDistribution } from "@/lib/mock/admin";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,15 +12,16 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const chartConfig = {
-  count: { label: "Workspaces", color: "var(--chart-3)" },
-} satisfies ChartConfig;
-
 export function PlanDistributionChart() {
+  const t = useTranslations("admin.statistics.planDistributionChart");
+  const chartConfig = {
+    count: { label: t("workspacesLabel"), color: "var(--chart-3)" },
+  } satisfies ChartConfig;
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Plan Distribution</CardTitle>
+        <CardTitle className="text-base">{t("title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-64 w-full">

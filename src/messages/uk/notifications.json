@@ -1,0 +1,47 @@
+{
+  "page": {
+    "title": "Сповіщення",
+    "description": "Будьте в курсі подій у вашому робочому просторі."
+  },
+  "tabs": {
+    "all": "Усі",
+    "unread": "Непрочитані"
+  },
+  "markAllRead": "Позначити всі як прочитані",
+  "empty": {
+    "unreadTitle": "Усе прочитано",
+    "unreadDescription": "Нові сповіщення з'являтимуться тут.",
+    "allTitle": "Поки немає сповіщень",
+    "allDescription": "Тут відображатимуться події вашого робочого простору."
+  },
+  "titles": {
+    "campaignSent": "Кампанію надіслано",
+    "newLeadAdded": "Додано новий лід",
+    "campaignPaused": "Кампанію призупинено",
+    "meetingReminder": "Нагадування про зустріч",
+    "dealWon": "Угоду виграно",
+    "paymentFailed": "Помилка оплати"
+  },
+  "activity": {
+    "sentCampaign": "надіслав(ла) кампанію",
+    "addedLead": "додав(ла) лід",
+    "movedDealToNegotiation": "перевів(ла) угоду у статус «Переговори»",
+    "generatedEmailWithAi": "згенерував(ла) лист за допомогою AI",
+    "closedDeal": "закрив(ла) угоду",
+    "createdTemplate": "створив(ла) шаблон"
+  },
+  "messages": {
+    "campaignSent": "«{campaign}» доставлено {count} отримувачам.",
+    "newLeadAdded": "«{lead}» додано через пошук у Google Maps.",
+    "campaignPaused": "«{campaign}» призупинено через низький відсоток відкриттів.",
+    "meetingReminder": "Ознайомчий дзвінок з {person} почнеться за 1 годину.",
+    "dealWon": "«{deal}» переведено у статус «Виграно» ({amount}).",
+    "paymentFailed": "Не вдалося списати кошти з картки, що закінчується на {digits}."
+  },
+  "popover": {
+    "ariaLabel": "Сповіщення",
+    "title": "Сповіщення",
+    "newBadge": "нових: {count}",
+    "viewAll": "Усі сповіщення"
+  }
+}

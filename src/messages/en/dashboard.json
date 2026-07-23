@@ -1,0 +1,37 @@
+{
+  "welcome": "Welcome back, {name}",
+  "subtitle": "Here's what's happening across your workspace.",
+  "vsLastMonth": "vs last month",
+  "stats": {
+    "totalLeads": "Total Leads",
+    "activeCampaigns": "Active Campaigns",
+    "replyRate": "Reply Rate",
+    "revenueMtd": "Revenue (MTD)"
+  },
+  "quickActions": {
+    "title": "Quick Actions",
+    "searchLeads": {
+      "title": "Search Leads",
+      "description": "Find new companies to reach out to"
+    },
+    "newCampaign": {
+      "title": "New Campaign",
+      "description": "Launch a new outreach sequence"
+    },
+    "aiTools": {
+      "title": "AI Tools",
+      "description": "Generate emails, subject lines & more"
+    },
+    "addContact": {
+      "title": "Add Contact",
+      "description": "Add a contact to your CRM"
+    }
+  },
+  "recentActivity": {
+    "title": "Recent Activity"
+  },
+  "recentCampaigns": {
+    "title": "Recent Campaigns",
+    "sentOf": "{sent} / {total} sent"
+  }
+}

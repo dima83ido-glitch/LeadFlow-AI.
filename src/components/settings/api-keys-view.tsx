@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import { KeyRound, Trash2 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 
+import type { Locale } from "@/i18n/config";
 import { mockApiKeys } from "@/lib/mock/api-keys";
 import type { ApiKeyItem } from "@/types/admin";
 import { formatDate } from "@/lib/utils";
@@ -21,6 +23,8 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { CreateApiKeyDialog } from "@/components/settings/create-api-key-dialog";
 
 export function ApiKeysView() {
+  const t = useTranslations("settings.apiKeys");
+  const locale = useLocale() as Locale;
   const [keys, setKeys] = React.useState<ApiKeyItem[]>(mockApiKeys);
 
   function handleCreate(name: string) {
@@ -33,7 +37,7 @@ export function ApiKeysView() {
   function handleRevoke(id: string) {
     const key = keys.find((k) => k.id === id);
     setKeys((prev) => prev.filter((k) => k.id !== id));
-    if (key) toast.success(`"${key.name}" was revoked.`);
+    if (key) toast.success(t("revokedToast", { name: key.name }));
   }
 
   return (
@@ -43,21 +47,17 @@ export function ApiKeysView() {
       </div>
 
       {keys.length === 0 ? (
-        <EmptyState
-          icon={KeyRound}
-          title="No API keys yet"
-          description="Create a key to authenticate requests to the LeadFlow AI API."
-        />
+        <EmptyState icon={KeyRound} title={t("emptyTitle")} description={t("emptyDescription")} />
       ) : (
         <div className="overflow-hidden rounded-xl border">
           <Table>
             <TableHeader className="bg-muted/40">
               <TableRow className="hover:bg-transparent">
-                <TableHead>Name</TableHead>
-                <TableHead>Key</TableHead>
-                <TableHead>Created</TableHead>
-                <TableHead>Last used</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+                <TableHead>{t("columnName")}</TableHead>
+                <TableHead>{t("columnKey")}</TableHead>
+                <TableHead>{t("columnCreated")}</TableHead>
+                <TableHead>{t("columnLastUsed")}</TableHead>
+                <TableHead className="text-right">{t("columnActions")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -65,9 +65,9 @@ export function ApiKeysView() {
                 <TableRow key={key.id}>
                   <TableCell className="font-medium">{key.name}</TableCell>
                   <TableCell className="font-mono text-sm">{key.keyPrefix}</TableCell>
-                  <TableCell className="text-muted-foreground">{formatDate(key.createdAt)}</TableCell>
+                  <TableCell className="text-muted-foreground">{formatDate(key.createdAt, locale)}</TableCell>
                   <TableCell className="text-muted-foreground">
-                    {key.lastUsedAt ? formatDate(key.lastUsedAt) : "Never"}
+                    {key.lastUsedAt ? formatDate(key.lastUsedAt, locale) : t("never")}
                   </TableCell>
                   <TableCell className="text-right">
                     <ConfirmDialog
@@ -76,9 +76,9 @@ export function ApiKeysView() {
                           <Trash2 className="size-4" />
                         </Button>
                       }
-                      title="Revoke this API key?"
-                      description={`"${key.name}" will stop working immediately. This action cannot be undone.`}
-                      confirmLabel="Revoke key"
+                      title={t("revokeTitle")}
+                      description={t("revokeDescription", { name: key.name })}
+                      confirmLabel={t("revokeConfirm")}
                       onConfirm={() => handleRevoke(key.id)}
                     />
                   </TableCell>

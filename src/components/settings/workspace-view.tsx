@@ -3,11 +3,12 @@
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { mockAdminUsers } from "@/lib/mock/admin";
-import { type WorkspaceFormValues, workspaceSchema } from "@/lib/validations/settings";
+import { createWorkspaceSchema, type WorkspaceFormValues } from "@/lib/validations/settings";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,18 @@ function initials(name: string) {
 }
 
 export function WorkspaceView() {
+  const t = useTranslations("settings.workspace");
+  const tv = useTranslations("settings.validation");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const workspaceSchema = React.useMemo(
+    () =>
+      createWorkspaceSchema({
+        nameRequired: tv("workspaceNameRequired"),
+        slugRequired: tv("slugRequired"),
+        slugPattern: tv("slugPattern"),
+      }),
+    [tv],
+  );
   const {
     register,
     handleSubmit,
@@ -40,7 +52,7 @@ export function WorkspaceView() {
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      toast.success("Workspace updated.");
+      toast.success(t("successToast"));
     }, 700);
   }
 
@@ -48,18 +60,18 @@ export function WorkspaceView() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Workspace details</CardTitle>
+          <CardTitle className="text-base">{t("detailsTitle")}</CardTitle>
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <CardContent>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="name">Workspace name</FieldLabel>
+                <FieldLabel htmlFor="name">{t("workspaceName")}</FieldLabel>
                 <Input id="name" {...register("name")} />
                 <FieldError errors={[errors.name]} />
               </Field>
               <Field>
-                <FieldLabel htmlFor="slug">Workspace slug</FieldLabel>
+                <FieldLabel htmlFor="slug">{t("workspaceSlug")}</FieldLabel>
                 <Input id="slug" {...register("slug")} />
                 <FieldError errors={[errors.slug]} />
               </Field>
@@ -68,7 +80,7 @@ export function WorkspaceView() {
           <CardFooter className="justify-end">
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="size-4 animate-spin" />}
-              Save changes
+              {t("saveChanges")}
             </Button>
           </CardFooter>
         </form>
@@ -76,7 +88,7 @@ export function WorkspaceView() {
 
       <Card>
         <CardHeader className="flex-row items-center justify-between">
-          <CardTitle className="text-base">Members</CardTitle>
+          <CardTitle className="text-base">{t("membersTitle")}</CardTitle>
           <InviteMemberDialog />
         </CardHeader>
         <CardContent className="divide-y p-0">
@@ -90,7 +102,7 @@ export function WorkspaceView() {
                 <p className="text-muted-foreground text-xs">{user.email}</p>
               </div>
               <Badge variant={user.role === "ADMIN" ? "default" : "secondary"}>
-                {user.role === "ADMIN" ? "Admin" : "Member"}
+                {user.role === "ADMIN" ? t("roleAdmin") : t("roleMember")}
               </Badge>
             </div>
           ))}

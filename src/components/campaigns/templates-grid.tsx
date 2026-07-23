@@ -2,6 +2,9 @@
 
 import * as React from "react";
 import { Copy, FileText, MoreHorizontal, Pencil, Sparkles, Trash2 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+
+import type { Locale } from "@/i18n/config";
 import { toast } from "sonner";
 
 import { mockTemplates } from "@/lib/mock/campaigns";
@@ -31,6 +34,9 @@ const categories: (TemplateCategory | "All")[] = [
 ];
 
 export function TemplatesGrid() {
+  const t = useTranslations("templates");
+  const tCategory = useTranslations("templates.categories");
+  const locale = useLocale() as Locale;
   const [category, setCategory] = React.useState<TemplateCategory | "All">("All");
   const [search, setSearch] = React.useState("");
 
@@ -47,13 +53,13 @@ export function TemplatesGrid() {
           <TabsList>
             {categories.map((cat) => (
               <TabsTrigger key={cat} value={cat}>
-                {cat}
+                {cat === "All" ? t("allCategories") : tCategory(cat)}
               </TabsTrigger>
             ))}
           </TabsList>
         </Tabs>
         <Input
-          placeholder="Search templates..."
+          placeholder={t("searchPlaceholder")}
           className="w-full sm:w-64"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -63,8 +69,8 @@ export function TemplatesGrid() {
       {filtered.length === 0 ? (
         <EmptyState
           icon={FileText}
-          title="No templates found"
-          description="Try a different category or search term."
+          title={t("noResultsTitle")}
+          description={t("noResultsDescription")}
         />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -73,11 +79,11 @@ export function TemplatesGrid() {
               <CardHeader className="flex-row items-start justify-between gap-2">
                 <div className="space-y-1.5">
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <Badge variant="secondary">{template.category}</Badge>
+                    <Badge variant="secondary">{tCategory(template.category)}</Badge>
                     {template.isAiGenerated && (
                       <Badge variant="outline" className="gap-1">
                         <Sparkles className="size-3" />
-                        AI
+                        {t("aiBadge")}
                       </Badge>
                     )}
                   </div>
@@ -88,18 +94,18 @@ export function TemplatesGrid() {
                     <MoreHorizontal className="size-4" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => toast.info("Editing isn't wired up yet.")}>
+                    <DropdownMenuItem onClick={() => toast.info(t("editNotWiredUp"))}>
                       <Pencil />
-                      Edit
+                      {t("edit")}
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => toast.success(`Duplicated "${template.name}".`)}>
+                    <DropdownMenuItem onClick={() => toast.success(t("duplicatedToast", { name: template.name }))}>
                       <Copy />
-                      Duplicate
+                      {t("duplicate")}
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem variant="destructive" onClick={() => toast.success(`Deleted "${template.name}".`)}>
+                    <DropdownMenuItem variant="destructive" onClick={() => toast.success(t("deletedToast", { name: template.name }))}>
                       <Trash2 />
-                      Delete
+                      {t("delete")}
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -108,8 +114,8 @@ export function TemplatesGrid() {
                 <p className="text-sm font-medium">{template.subject}</p>
                 <p className="text-muted-foreground line-clamp-3 text-sm">{template.preview}</p>
                 <div className="text-muted-foreground flex items-center justify-between text-xs">
-                  <span>{template.usageCount} campaigns</span>
-                  <span>Updated {formatDate(template.updatedAt)}</span>
+                  <span>{t("campaignsCount", { count: template.usageCount })}</span>
+                  <span>{t("updatedOn", { date: formatDate(template.updatedAt, locale) })}</span>
                 </div>
               </CardContent>
             </Card>

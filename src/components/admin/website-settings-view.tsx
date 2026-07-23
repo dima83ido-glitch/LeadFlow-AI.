@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -12,33 +13,34 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
 export function WebsiteSettingsView() {
+  const t = useTranslations("admin.websiteSettings");
   const [maintenanceMode, setMaintenanceMode] = React.useState(false);
 
   function handleSave() {
-    toast.success("Website settings saved.");
+    toast.success(t("savedToast"));
   }
 
   return (
     <div className="max-w-2xl space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">General</CardTitle>
+          <CardTitle className="text-base">{t("general.title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="siteName">Site name</FieldLabel>
+              <FieldLabel htmlFor="siteName">{t("general.siteNameLabel")}</FieldLabel>
               <Input id="siteName" defaultValue="LeadFlow AI" />
             </Field>
             <Field>
-              <FieldLabel htmlFor="supportEmail">Support email</FieldLabel>
+              <FieldLabel htmlFor="supportEmail">{t("general.supportEmailLabel")}</FieldLabel>
               <Input id="supportEmail" type="email" defaultValue="support@leadflow.ai" />
             </Field>
             <Field orientation="horizontal">
               <div className="flex-1">
-                <FieldLabel htmlFor="maintenanceMode">Maintenance mode</FieldLabel>
+                <FieldLabel htmlFor="maintenanceMode">{t("general.maintenanceModeLabel")}</FieldLabel>
                 <FieldDescription>
-                  Show a maintenance banner and block new sign-ups.
+                  {t("general.maintenanceModeDescription")}
                 </FieldDescription>
               </div>
               <Switch
@@ -53,16 +55,16 @@ export function WebsiteSettingsView() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">SEO</CardTitle>
+          <CardTitle className="text-base">{t("seo.title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="metaTitle">Meta title</FieldLabel>
+              <FieldLabel htmlFor="metaTitle">{t("seo.metaTitleLabel")}</FieldLabel>
               <Input id="metaTitle" defaultValue="LeadFlow AI — Find, analyze, and win your next client" />
             </Field>
             <Field>
-              <FieldLabel htmlFor="metaDescription">Meta description</FieldLabel>
+              <FieldLabel htmlFor="metaDescription">{t("seo.metaDescriptionLabel")}</FieldLabel>
               <Textarea
                 id="metaDescription"
                 rows={3}
@@ -73,7 +75,7 @@ export function WebsiteSettingsView() {
         </CardContent>
         <Separator />
         <CardFooter className="justify-end pt-4">
-          <Button onClick={handleSave}>Save changes</Button>
+          <Button onClick={handleSave}>{t("saveChanges")}</Button>
         </CardFooter>
       </Card>
     </div>

@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
+import { useTranslations } from "next-intl";
 
 import {
   Breadcrumb,
@@ -15,47 +16,47 @@ import {
 } from "@/components/ui/breadcrumb";
 import { getLeadById } from "@/lib/mock/leads";
 
-const LABELS: Record<string, string> = {
-  dashboard: "Dashboard",
-  leads: "Search Leads",
-  campaigns: "Campaigns",
-  new: "New Campaign",
-  templates: "Templates",
-  crm: "CRM",
-  pipeline: "Pipeline",
-  contacts: "Contacts",
-  companies: "Companies",
-  meetings: "Meetings",
-  tasks: "Tasks",
-  notes: "Notes",
-  analytics: "Analytics",
-  "ai-tools": "AI Tools",
-  "website-analyzer": "Website Analyzer",
-  "email-generator": "Email Generator",
-  "subject-generator": "Subject Generator",
-  "headline-generator": "Headline Generator",
-  "cta-generator": "CTA Generator",
-  "seo-audit": "SEO Audit",
-  "landing-page-analyzer": "Landing Page Analyzer",
-  "rewrite-email": "Rewrite Email",
-  "translate-email": "Translate Email",
-  notifications: "Notifications",
-  billing: "Billing",
-  settings: "Settings",
-  profile: "Profile",
-  security: "Security",
-  workspace: "Workspace",
-  "api-keys": "API Keys",
-  subscription: "Subscription",
-  "danger-zone": "Danger Zone",
-  help: "Help",
-  admin: "Admin Panel",
-  users: "Users",
-  subscriptions: "Subscriptions",
-  statistics: "Statistics",
-  "website-settings": "Website Settings",
-  "promo-codes": "Promo Codes",
-  "system-logs": "System Logs",
+const SEGMENT_KEYS: Record<string, string> = {
+  dashboard: "nav.items.dashboard",
+  leads: "nav.items.searchLeads",
+  campaigns: "nav.items.campaigns",
+  new: "nav.breadcrumbs.new",
+  templates: "nav.items.templates",
+  crm: "nav.groups.crm",
+  pipeline: "nav.items.pipeline",
+  contacts: "nav.items.contacts",
+  companies: "nav.items.companies",
+  meetings: "nav.items.meetings",
+  tasks: "nav.items.tasks",
+  notes: "nav.items.notes",
+  analytics: "nav.items.analytics",
+  "ai-tools": "nav.items.aiToolsOverview",
+  "website-analyzer": "nav.items.websiteAnalyzer",
+  "email-generator": "nav.items.emailGenerator",
+  "subject-generator": "nav.items.subjectGenerator",
+  "headline-generator": "nav.items.headlineGenerator",
+  "cta-generator": "nav.items.ctaGenerator",
+  "seo-audit": "nav.items.seoAudit",
+  "landing-page-analyzer": "nav.items.landingPageAnalyzer",
+  "rewrite-email": "nav.items.rewriteEmail",
+  "translate-email": "nav.items.translateEmail",
+  notifications: "nav.items.notifications",
+  billing: "nav.items.billing",
+  settings: "nav.items.settings",
+  profile: "nav.settings.profile",
+  security: "nav.settings.security",
+  workspace: "nav.settings.workspace",
+  "api-keys": "nav.settings.apiKeys",
+  subscription: "nav.settings.subscription",
+  "danger-zone": "nav.settings.dangerZone",
+  help: "nav.items.help",
+  admin: "nav.breadcrumbs.admin",
+  users: "nav.admin.users",
+  subscriptions: "nav.admin.subscriptions",
+  statistics: "nav.admin.statistics",
+  "website-settings": "nav.admin.websiteSettings",
+  "promo-codes": "nav.admin.promoCodes",
+  "system-logs": "nav.admin.systemLogs",
 };
 
 export interface BreadcrumbOverride {
@@ -68,6 +69,7 @@ const NON_NAVIGABLE_SEGMENTS = new Set(["crm", "settings"]);
 
 export function Breadcrumbs() {
   const pathname = usePathname();
+  const t = useTranslations();
   const segments = pathname.split("/").filter(Boolean);
 
   if (segments.length === 0) return null;
@@ -78,8 +80,8 @@ export function Breadcrumbs() {
   const crumbs = segments.map((segment, index) => {
     const href = `/${segments.slice(0, index + 1).join("/")}`;
     const isLast = index === segments.length - 1;
-    const label =
-      isLast && leadLabel ? leadLabel : (LABELS[segment] ?? humanize(segment));
+    const key = SEGMENT_KEYS[segment];
+    const label = isLast && leadLabel ? leadLabel : key ? t(key) : humanize(segment);
     const navigable = !NON_NAVIGABLE_SEGMENTS.has(segment);
     return { href, label, isLast, navigable };
   });

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -9,48 +10,57 @@ import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 
-const initialPreferences = [
-  { id: "emailDigest", label: "Weekly summary email", description: "A digest of activity across your workspace.", checked: true },
-  { id: "campaignAlerts", label: "Campaign alerts", description: "Get notified when a campaign is sent, paused, or completed.", checked: true },
-  { id: "leadAlerts", label: "New lead alerts", description: "Get notified when new leads match your saved searches.", checked: false },
-  { id: "dealAlerts", label: "Deal updates", description: "Get notified when a deal moves stage in your pipeline.", checked: true },
-  { id: "productUpdates", label: "Product updates", description: "Occasional emails about new features and improvements.", checked: false },
-];
+const preferenceIds = [
+  "emailDigest",
+  "campaignAlerts",
+  "leadAlerts",
+  "dealAlerts",
+  "productUpdates",
+] as const;
+
+const initialChecked: Record<(typeof preferenceIds)[number], boolean> = {
+  emailDigest: true,
+  campaignAlerts: true,
+  leadAlerts: false,
+  dealAlerts: true,
+  productUpdates: false,
+};
 
 export function NotificationPreferencesView() {
-  const [preferences, setPreferences] = React.useState(initialPreferences);
+  const t = useTranslations("settings.notifications");
+  const [checkedState, setCheckedState] = React.useState(initialChecked);
 
-  function toggle(id: string, checked: boolean) {
-    setPreferences((prev) => prev.map((p) => (p.id === id ? { ...p, checked } : p)));
+  function toggle(id: keyof typeof checkedState, checked: boolean) {
+    setCheckedState((prev) => ({ ...prev, [id]: checked }));
   }
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Notification preferences</CardTitle>
+        <CardTitle className="text-base">{t("title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <FieldGroup>
-          {preferences.map((pref, index) => (
-            <React.Fragment key={pref.id}>
+          {preferenceIds.map((id, index) => (
+            <React.Fragment key={id}>
               <Field orientation="horizontal">
                 <div className="flex-1">
-                  <FieldLabel htmlFor={pref.id}>{pref.label}</FieldLabel>
-                  <FieldDescription>{pref.description}</FieldDescription>
+                  <FieldLabel htmlFor={id}>{t(`${id}.label`)}</FieldLabel>
+                  <FieldDescription>{t(`${id}.description`)}</FieldDescription>
                 </div>
                 <Switch
-                  id={pref.id}
-                  checked={pref.checked}
-                  onCheckedChange={(checked) => toggle(pref.id, checked)}
+                  id={id}
+                  checked={checkedState[id]}
+                  onCheckedChange={(checked) => toggle(id, checked)}
                 />
               </Field>
-              {index < preferences.length - 1 && <Separator />}
+              {index < preferenceIds.length - 1 && <Separator />}
             </React.Fragment>
           ))}
         </FieldGroup>
       </CardContent>
       <CardFooter className="justify-end">
-        <Button onClick={() => toast.success("Notification preferences saved.")}>Save preferences</Button>
+        <Button onClick={() => toast.success(t("successToast"))}>{t("savePreferences")}</Button>
       </CardFooter>
     </Card>
   );

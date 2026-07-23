@@ -1,0 +1,117 @@
+{
+  "page": {
+    "title": "Настройки",
+    "description": "Управляйте аккаунтом, рабочим пространством и настройками платформы."
+  },
+  "profile": {
+    "title": "Профиль",
+    "changeAvatar": "Изменить аватар",
+    "avatarToast": "Загрузка аватара пока не подключена.",
+    "fullName": "Полное имя",
+    "email": "Email",
+    "jobTitle": "Должность",
+    "jobTitlePlaceholder": "например, руководитель отдела продаж",
+    "saveChanges": "Сохранить изменения",
+    "successToast": "Профиль обновлён."
+  },
+  "security": {
+    "changePasswordTitle": "Смена пароля",
+    "currentPassword": "Текущий пароль",
+    "newPassword": "Новый пароль",
+    "confirmNewPassword": "Подтвердите новый пароль",
+    "updatePassword": "Обновить пароль",
+    "successToast": "Пароль обновлён.",
+    "twoFactorTitle": "Двухфакторная аутентификация",
+    "twoFactorLabel": "Запрашивать код при входе",
+    "twoFactorDescription": "Добавляет дополнительный уровень защиты с помощью приложения-аутентификатора.",
+    "twoFactorEnabledToast": "Двухфакторная аутентификация пока не подключена.",
+    "twoFactorDisabledToast": "Двухфакторная аутентификация отключена."
+  },
+  "workspace": {
+    "detailsTitle": "Данные рабочего пространства",
+    "workspaceName": "Название рабочего пространства",
+    "workspaceSlug": "Слаг рабочего пространства",
+    "saveChanges": "Сохранить изменения",
+    "successToast": "Рабочее пространство обновлено.",
+    "membersTitle": "Участники",
+    "roleAdmin": "Администратор",
+    "roleMember": "Участник",
+    "inviteMember": "Пригласить участника",
+    "inviteDialogTitle": "Пригласить коллегу",
+    "inviteDialogDescription": "Он получит приглашение на email для присоединения к рабочему пространству.",
+    "emailAddress": "Email адрес",
+    "emailPlaceholder": "coworker@company.com",
+    "sendInvite": "Отправить приглашение",
+    "inviteSuccessToast": "Приглашение отправлено на {email}."
+  },
+  "notifications": {
+    "title": "Настройки уведомлений",
+    "savePreferences": "Сохранить настройки",
+    "successToast": "Настройки уведомлений сохранены.",
+    "emailDigest": { "label": "Еженедельная сводка на email", "description": "Дайджест активности в вашем рабочем пространстве." },
+    "campaignAlerts": { "label": "Оповещения о кампаниях", "description": "Уведомления об отправке, паузе или завершении кампании." },
+    "leadAlerts": { "label": "Оповещения о новых лидах", "description": "Уведомления о новых лидах по сохранённым поискам." },
+    "dealAlerts": { "label": "Обновления по сделкам", "description": "Уведомления при переходе сделки на другой этап воронки." },
+    "productUpdates": { "label": "Обновления продукта", "description": "Периодические письма о новых функциях и улучшениях." }
+  },
+  "apiKeys": {
+    "emptyTitle": "Пока нет API-ключей",
+    "emptyDescription": "Создайте ключ для аутентификации запросов к API LeadFlow AI.",
+    "columnName": "Название",
+    "columnKey": "Ключ",
+    "columnCreated": "Создан",
+    "columnLastUsed": "Последнее использование",
+    "columnActions": "Действия",
+    "never": "Никогда",
+    "revokeTitle": "Отозвать этот API-ключ?",
+    "revokeDescription": "«{name}» немедленно перестанет работать. Это действие нельзя отменить.",
+    "revokeConfirm": "Отозвать ключ",
+    "revokedToast": "«{name}» отозван.",
+    "createButton": "Создать API-ключ",
+    "createDialogTitle": "Создать API-ключ",
+    "createDialogDescription": "Дайте ключу имя, чтобы понимать, где он используется.",
+    "nameLabel": "Название",
+    "namePlaceholder": "например, продакшн-интеграция",
+    "generateKey": "Сгенерировать ключ",
+    "createdTitle": "API-ключ создан",
+    "createdDescription": "Скопируйте ключ сейчас — из соображений безопасности он больше не будет показан.",
+    "copiedToast": "API-ключ скопирован в буфер обмена.",
+    "keyWontShowTitle": "Этот ключ больше не будет показан",
+    "keyWontShowDescription": "Сохраните его в надёжном месте, например в менеджере паролей.",
+    "done": "Готово"
+  },
+  "dangerZone": {
+    "title": "Опасная зона",
+    "transferOwnership": {
+      "title": "Передать права владельца",
+      "description": "Передайте это рабочее пространство другому участнику. Вы потеряете доступ владельца.",
+      "confirmLabel": "Передать права владельца",
+      "successToast": "Запрос на передачу прав владельца отправлен."
+    },
+    "exportData": {
+      "title": "Экспортировать данные рабочего пространства",
+      "description": "Скачайте все ваши лиды, контакты и данные кампаний в виде ZIP-архива.",
+      "confirmLabel": "Экспортировать данные",
+      "successToast": "Ваш экспорт готовится — мы пришлём ссылку на email."
+    },
+    "deleteWorkspace": {
+      "title": "Удалить рабочее пространство",
+      "description": "Безвозвратно удалить это рабочее пространство и все его данные. Это действие нельзя отменить.",
+      "confirmLabel": "Удалить рабочее пространство",
+      "successToast": "Рабочее пространство удалено."
+    }
+  },
+  "subscription": {
+    "seeInvoiceHistory": "Смотреть историю счетов"
+  },
+  "validation": {
+    "nameMin": "Имя должно содержать не менее 2 символов",
+    "emailInvalid": "Введите корректный email адрес",
+    "workspaceNameRequired": "Название рабочего пространства обязательно",
+    "slugRequired": "Слаг обязателен",
+    "slugPattern": "Только строчные латинские буквы, цифры и дефисы",
+    "currentPasswordRequired": "Введите текущий пароль",
+    "passwordMin": "Пароль должен содержать не менее 8 символов",
+    "passwordsDoNotMatch": "Пароли не совпадают"
+  }
+}

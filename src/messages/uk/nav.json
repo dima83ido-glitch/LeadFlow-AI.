@@ -1,0 +1,61 @@
+{
+  "groups": {
+    "grow": "Зростання",
+    "crm": "CRM",
+    "insights": "Аналітика",
+    "aiTools": "AI-інструменти"
+  },
+  "items": {
+    "dashboard": "Дашборд",
+    "searchLeads": "Пошук лідів",
+    "campaigns": "Кампанії",
+    "templates": "Шаблони",
+    "pipeline": "Воронка",
+    "contacts": "Контакти",
+    "companies": "Компанії",
+    "meetings": "Зустрічі",
+    "tasks": "Завдання",
+    "notes": "Нотатки",
+    "analytics": "Аналітика",
+    "websiteAnalyzer": "Аналіз сайту",
+    "emailGenerator": "Генератор листів",
+    "subjectGenerator": "Генератор тем",
+    "headlineGenerator": "Генератор заголовків",
+    "ctaGenerator": "Генератор CTA",
+    "seoAudit": "SEO-аудит",
+    "landingPageAnalyzer": "Аналіз лендингу",
+    "rewriteEmail": "Переписати лист",
+    "translateEmail": "Перекласти лист",
+    "billing": "Оплата",
+    "settings": "Налаштування",
+    "notifications": "Сповіщення",
+    "help": "Допомога",
+    "aiToolsOverview": "AI-інструменти"
+  },
+  "admin": {
+    "group": "Адмін",
+    "overview": "Огляд",
+    "users": "Користувачі",
+    "subscriptions": "Підписки",
+    "statistics": "Статистика",
+    "websiteSettings": "Налаштування сайту",
+    "promoCodes": "Промокоди",
+    "systemLogs": "Системні логи"
+  },
+  "settings": {
+    "profile": "Профіль",
+    "security": "Безпека",
+    "workspace": "Робочий простір",
+    "notifications": "Сповіщення",
+    "apiKeys": "API-ключі",
+    "subscription": "Підписка",
+    "dangerZone": "Небезпечна зона"
+  },
+  "breadcrumbs": {
+    "new": "Нова кампанія",
+    "admin": "Адмін-панель"
+  },
+  "commandPaletteNavigate": "Навігація",
+  "commandPaletteLeads": "Ліди",
+  "commandPalettePlaceholder": "Пошук сторінок, лідів, компаній..."
+}

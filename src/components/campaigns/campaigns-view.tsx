@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import { Megaphone, Search } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
+import type { Locale } from "@/i18n/config";
 import { mockCampaigns } from "@/lib/mock/campaigns";
 import type { CampaignStatus } from "@/types/campaign";
 import { Button } from "@/components/ui/button";
@@ -10,18 +12,22 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/components/shared/data-table";
 import { EmptyState } from "@/components/shared/empty-state";
-import { campaignsColumns } from "@/components/campaigns/campaigns-columns";
+import { getCampaignsColumns } from "@/components/campaigns/campaigns-columns";
 
-const statusFilters: { label: string; value: CampaignStatus | "all" }[] = [
-  { label: "All", value: "all" },
-  { label: "Active", value: "ACTIVE" },
-  { label: "Scheduled", value: "SCHEDULED" },
-  { label: "Paused", value: "PAUSED" },
-  { label: "Draft", value: "DRAFT" },
-  { label: "Completed", value: "COMPLETED" },
+const statusFilterValues: (CampaignStatus | "all")[] = [
+  "all",
+  "ACTIVE",
+  "SCHEDULED",
+  "PAUSED",
+  "DRAFT",
+  "COMPLETED",
 ];
 
 export function CampaignsView() {
+  const t = useTranslations("campaigns");
+  const tCommon = useTranslations("common.statusLabels");
+  const locale = useLocale() as Locale;
+  const campaignsColumns = React.useMemo(() => getCampaignsColumns(t, locale), [t, locale]);
   const [status, setStatus] = React.useState<CampaignStatus | "all">("all");
   const [search, setSearch] = React.useState("");
 
@@ -36,9 +42,9 @@ export function CampaignsView() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Tabs value={status} onValueChange={(value) => setStatus(value as CampaignStatus | "all")}>
           <TabsList>
-            {statusFilters.map((filter) => (
-              <TabsTrigger key={filter.value} value={filter.value}>
-                {filter.label}
+            {statusFilterValues.map((value) => (
+              <TabsTrigger key={value} value={value}>
+                {value === "all" ? t("statusFilterAll") : tCommon(value)}
               </TabsTrigger>
             ))}
           </TabsList>
@@ -46,7 +52,7 @@ export function CampaignsView() {
         <div className="relative w-full sm:w-64">
           <Search className="text-muted-foreground absolute top-1/2 left-2.5 size-4 -translate-y-1/2" />
           <Input
-            placeholder="Search campaigns..."
+            placeholder={t("searchPlaceholder")}
             className="pl-8"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -57,10 +63,10 @@ export function CampaignsView() {
       {mockCampaigns.length === 0 ? (
         <EmptyState
           icon={Megaphone}
-          title="No campaigns yet"
-          description="Create your first campaign to start reaching out to leads."
+          title={t("emptyTitle")}
+          description={t("emptyDescription")}
           action={
-            <Button render={<a href="/campaigns/new" />}>New Campaign</Button>
+            <Button render={<a href="/campaigns/new" />}>{t("newCampaign")}</Button>
           }
         />
       ) : (
@@ -70,8 +76,8 @@ export function CampaignsView() {
           emptyState={
             <EmptyState
               icon={Search}
-              title="No campaigns match your filters"
-              description="Try a different status or search term."
+              title={t("noMatchTitle")}
+              description={t("noMatchDescription")}
               className="border-none py-8"
             />
           }

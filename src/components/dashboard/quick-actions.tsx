@@ -1,20 +1,22 @@
 import Link from "next/link";
 import { Bot, Megaphone, Search, UserPlus } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const actions = [
-  { title: "Search Leads", description: "Find new companies to reach out to", href: "/leads", icon: Search },
-  { title: "New Campaign", description: "Launch a new outreach sequence", href: "/campaigns/new", icon: Megaphone },
-  { title: "AI Tools", description: "Generate emails, subject lines & more", href: "/ai-tools", icon: Bot },
-  { title: "Add Contact", description: "Add a contact to your CRM", href: "/crm/contacts", icon: UserPlus },
-];
+  { key: "searchLeads", href: "/leads", icon: Search },
+  { key: "newCampaign", href: "/campaigns/new", icon: Megaphone },
+  { key: "aiTools", href: "/ai-tools", icon: Bot },
+  { key: "addContact", href: "/crm/contacts", icon: UserPlus },
+] as const;
 
 export function QuickActions() {
+  const t = useTranslations("dashboard.quickActions");
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Quick Actions</CardTitle>
+        <CardTitle className="text-base">{t("title")}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-3 sm:grid-cols-2">
         {actions.map((action) => (
@@ -27,8 +29,8 @@ export function QuickActions() {
               <action.icon className="size-4.5" />
             </div>
             <div>
-              <p className="text-sm font-medium">{action.title}</p>
-              <p className="text-muted-foreground text-xs">{action.description}</p>
+              <p className="text-sm font-medium">{t(`${action.key}.title`)}</p>
+              <p className="text-muted-foreground text-xs">{t(`${action.key}.description`)}</p>
             </div>
           </Link>
         ))}

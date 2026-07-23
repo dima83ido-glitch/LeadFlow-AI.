@@ -6,10 +6,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { type LoginFormValues, loginSchema } from "@/lib/validations/auth";
+import { createLoginSchema, type LoginFormValues } from "@/lib/validations/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -33,7 +34,20 @@ export default function LoginPage() {
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const t = useTranslations("auth.login");
+  const tv = useTranslations("auth.validation");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const loginSchema = React.useMemo(
+    () =>
+      createLoginSchema({
+        emailInvalid: tv("emailInvalid"),
+        passwordMin: tv("passwordMin"),
+        nameMin: tv("nameMin"),
+        termsRequired: tv("termsRequired"),
+        passwordsDoNotMatch: tv("passwordsDoNotMatch"),
+      }),
+    [tv],
+  );
   const {
     register,
     handleSubmit,
@@ -50,7 +64,7 @@ function LoginForm() {
     setIsSubmitting(false);
 
     if (!result || result.error) {
-      toast.error("Invalid email or password");
+      toast.error(t("errorInvalidCredentials"));
       return;
     }
 
@@ -62,25 +76,25 @@ function LoginForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl">Welcome back</CardTitle>
-        <CardDescription>Log in to your LeadFlow AI workspace.</CardDescription>
+        <CardTitle className="text-xl">{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <FieldLabel htmlFor="email">{t("emailLabel")}</FieldLabel>
               <Input id="email" type="email" placeholder="you@company.com" {...register("email")} />
               <FieldError errors={[errors.email]} />
             </Field>
             <Field>
               <div className="flex items-center justify-between">
-                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <FieldLabel htmlFor="password">{t("passwordLabel")}</FieldLabel>
                 <Link
                   href="/forgot-password"
                   className="text-muted-foreground hover:text-foreground text-xs"
                 >
-                  Forgot password?
+                  {t("forgotPassword")}
                 </Link>
               </div>
               <Input id="password" type="password" placeholder="••••••••" {...register("password")} />
@@ -91,12 +105,12 @@ function LoginForm() {
         <CardFooter className="flex-col gap-4">
           <Button type="submit" className="w-full" disabled={isSubmitting}>
             {isSubmitting && <Loader2 className="size-4 animate-spin" />}
-            Log in
+            {t("submit")}
           </Button>
           <p className="text-muted-foreground text-center text-sm">
-            Don&apos;t have an account?{" "}
+            {t("noAccount")}{" "}
             <Link href="/register" className="text-foreground font-medium underline underline-offset-4">
-              Sign up
+              {t("signUp")}
             </Link>
           </p>
         </CardFooter>

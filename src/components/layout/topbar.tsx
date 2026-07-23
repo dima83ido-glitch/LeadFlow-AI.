@@ -2,6 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { CommandPalette } from "@/components/layout/command-palette";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { NotificationsPopover } from "@/components/layout/notifications-popover";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { UserMenu } from "@/components/layout/user-menu";
@@ -14,6 +15,7 @@ export function Topbar() {
       <Breadcrumbs />
       <div className="ml-auto flex items-center gap-2">
         <CommandPalette />
+        <LanguageSwitcher />
         <ThemeToggle />
         <NotificationsPopover />
         <Separator orientation="vertical" className="mx-1 h-6" />

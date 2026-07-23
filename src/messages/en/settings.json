@@ -1,0 +1,117 @@
+{
+  "page": {
+    "title": "Settings",
+    "description": "Manage your account, workspace, and platform preferences."
+  },
+  "profile": {
+    "title": "Profile",
+    "changeAvatar": "Change avatar",
+    "avatarToast": "Avatar upload isn't wired up yet.",
+    "fullName": "Full name",
+    "email": "Email",
+    "jobTitle": "Job title",
+    "jobTitlePlaceholder": "e.g. Head of Sales",
+    "saveChanges": "Save changes",
+    "successToast": "Profile updated."
+  },
+  "security": {
+    "changePasswordTitle": "Change password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "updatePassword": "Update password",
+    "successToast": "Password updated.",
+    "twoFactorTitle": "Two-factor authentication",
+    "twoFactorLabel": "Require a code at sign-in",
+    "twoFactorDescription": "Adds an extra layer of security using an authenticator app.",
+    "twoFactorEnabledToast": "Two-factor authentication isn't wired up yet.",
+    "twoFactorDisabledToast": "Two-factor authentication disabled."
+  },
+  "workspace": {
+    "detailsTitle": "Workspace details",
+    "workspaceName": "Workspace name",
+    "workspaceSlug": "Workspace slug",
+    "saveChanges": "Save changes",
+    "successToast": "Workspace updated.",
+    "membersTitle": "Members",
+    "roleAdmin": "Admin",
+    "roleMember": "Member",
+    "inviteMember": "Invite member",
+    "inviteDialogTitle": "Invite a teammate",
+    "inviteDialogDescription": "They'll receive an email invite to join this workspace.",
+    "emailAddress": "Email address",
+    "emailPlaceholder": "teammate@company.com",
+    "sendInvite": "Send invite",
+    "inviteSuccessToast": "Invite sent to {email}."
+  },
+  "notifications": {
+    "title": "Notification preferences",
+    "savePreferences": "Save preferences",
+    "successToast": "Notification preferences saved.",
+    "emailDigest": { "label": "Weekly summary email", "description": "A digest of activity across your workspace." },
+    "campaignAlerts": { "label": "Campaign alerts", "description": "Get notified when a campaign is sent, paused, or completed." },
+    "leadAlerts": { "label": "New lead alerts", "description": "Get notified when new leads match your saved searches." },
+    "dealAlerts": { "label": "Deal updates", "description": "Get notified when a deal moves stage in your pipeline." },
+    "productUpdates": { "label": "Product updates", "description": "Occasional emails about new features and improvements." }
+  },
+  "apiKeys": {
+    "emptyTitle": "No API keys yet",
+    "emptyDescription": "Create a key to authenticate requests to the LeadFlow AI API.",
+    "columnName": "Name",
+    "columnKey": "Key",
+    "columnCreated": "Created",
+    "columnLastUsed": "Last used",
+    "columnActions": "Actions",
+    "never": "Never",
+    "revokeTitle": "Revoke this API key?",
+    "revokeDescription": "\"{name}\" will stop working immediately. This action cannot be undone.",
+    "revokeConfirm": "Revoke key",
+    "revokedToast": "\"{name}\" was revoked.",
+    "createButton": "Create API Key",
+    "createDialogTitle": "Create API Key",
+    "createDialogDescription": "Give your key a name to identify where it's used.",
+    "nameLabel": "Name",
+    "namePlaceholder": "e.g. Production integration",
+    "generateKey": "Generate key",
+    "createdTitle": "API key created",
+    "createdDescription": "Copy this key now — for security, it won't be shown again.",
+    "copiedToast": "API key copied to clipboard.",
+    "keyWontShowTitle": "This key won't be shown again",
+    "keyWontShowDescription": "Store it somewhere safe, like a password manager.",
+    "done": "Done"
+  },
+  "dangerZone": {
+    "title": "Danger Zone",
+    "transferOwnership": {
+      "title": "Transfer ownership",
+      "description": "Transfer this workspace to another member. You will lose owner access.",
+      "confirmLabel": "Transfer ownership",
+      "successToast": "Ownership transfer request sent."
+    },
+    "exportData": {
+      "title": "Export workspace data",
+      "description": "Download all your leads, contacts, and campaign data as a ZIP archive.",
+      "confirmLabel": "Export data",
+      "successToast": "Your export is being prepared — we'll email you a link."
+    },
+    "deleteWorkspace": {
+      "title": "Delete workspace",
+      "description": "Permanently delete this workspace and all of its data. This cannot be undone.",
+      "confirmLabel": "Delete workspace",
+      "successToast": "Workspace deleted."
+    }
+  },
+  "subscription": {
+    "seeInvoiceHistory": "See invoice history"
+  },
+  "validation": {
+    "nameMin": "Name must be at least 2 characters",
+    "emailInvalid": "Enter a valid email address",
+    "workspaceNameRequired": "Workspace name is required",
+    "slugRequired": "Slug is required",
+    "slugPattern": "Lowercase letters, numbers, and hyphens only",
+    "currentPasswordRequired": "Enter your current password",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordsDoNotMatch": "Passwords do not match"
+  }
+}

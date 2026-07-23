@@ -1,6 +1,7 @@
 "use client";
 
 import { Loader2, RotateCcw, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import type { LeadSearchFilters } from "@/types/lead";
 import { countries, industries } from "@/lib/mock/leads";
@@ -33,6 +34,8 @@ export function LeadsFilterBar({
   onReset,
   isSearching,
 }: LeadsFilterBarProps) {
+  const t = useTranslations("leads.filterBar");
+
   function update<K extends keyof LeadSearchFilters>(key: K, value: LeadSearchFilters[K]) {
     onChange({ ...filters, [key]: value });
   }
@@ -42,16 +45,16 @@ export function LeadsFilterBar({
       <CardContent className="space-y-5">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Field>
-            <FieldLabel htmlFor="country">Country</FieldLabel>
+            <FieldLabel htmlFor="country">{t("countryLabel")}</FieldLabel>
             <Select
               value={filters.country ?? "any"}
               onValueChange={(value) => update("country", !value || value === "any" ? undefined : value)}
             >
               <SelectTrigger id="country" className="w-full">
-                <SelectValue placeholder="Any country" />
+                <SelectValue placeholder={t("anyCountry")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="any">Any country</SelectItem>
+                <SelectItem value="any">{t("anyCountry")}</SelectItem>
                 {countries.map((country) => (
                   <SelectItem key={country} value={country}>
                     {country}
@@ -62,26 +65,26 @@ export function LeadsFilterBar({
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="city">City</FieldLabel>
+            <FieldLabel htmlFor="city">{t("cityLabel")}</FieldLabel>
             <Input
               id="city"
-              placeholder="e.g. Austin"
+              placeholder={t("cityPlaceholder")}
               value={filters.city ?? ""}
               onChange={(e) => update("city", e.target.value || undefined)}
             />
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="industry">Industry</FieldLabel>
+            <FieldLabel htmlFor="industry">{t("industryLabel")}</FieldLabel>
             <Select
               value={filters.industry ?? "any"}
               onValueChange={(value) => update("industry", !value || value === "any" ? undefined : value)}
             >
               <SelectTrigger id="industry" className="w-full">
-                <SelectValue placeholder="Any industry" />
+                <SelectValue placeholder={t("anyIndustry")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="any">Any industry</SelectItem>
+                <SelectItem value="any">{t("anyIndustry")}</SelectItem>
                 {industries.map((industry) => (
                   <SelectItem key={industry} value={industry}>
                     {industry}
@@ -92,10 +95,10 @@ export function LeadsFilterBar({
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="keywords">Keywords</FieldLabel>
+            <FieldLabel htmlFor="keywords">{t("keywordsLabel")}</FieldLabel>
             <Input
               id="keywords"
-              placeholder="e.g. analytics, logistics"
+              placeholder={t("keywordsPlaceholder")}
               value={filters.keywords ?? ""}
               onChange={(e) => update("keywords", e.target.value || undefined)}
             />
@@ -111,7 +114,7 @@ export function LeadsFilterBar({
                 onCheckedChange={(checked) => update("hasWebsite", checked === true ? true : undefined)}
               />
               <Label htmlFor="hasWebsite" className="text-muted-foreground font-normal">
-                Has website
+                {t("hasWebsite")}
               </Label>
             </div>
             <div className="flex items-center gap-2">
@@ -121,7 +124,7 @@ export function LeadsFilterBar({
                 onCheckedChange={(checked) => update("hasEmail", checked === true ? true : undefined)}
               />
               <Label htmlFor="hasEmail" className="text-muted-foreground font-normal">
-                Has email
+                {t("hasEmail")}
               </Label>
             </div>
             <div className="flex items-center gap-2">
@@ -131,12 +134,12 @@ export function LeadsFilterBar({
                 onCheckedChange={(checked) => update("hasPhone", checked === true ? true : undefined)}
               />
               <Label htmlFor="hasPhone" className="text-muted-foreground font-normal">
-                Has phone
+                {t("hasPhone")}
               </Label>
             </div>
             <div className="flex items-center gap-2">
               <Label htmlFor="minRating" className="text-muted-foreground font-normal">
-                Min. rating
+                {t("minRating")}
               </Label>
               <Select
                 value={filters.minRating?.toString() ?? "any"}
@@ -145,10 +148,10 @@ export function LeadsFilterBar({
                 }
               >
                 <SelectTrigger id="minRating" className="w-28">
-                  <SelectValue placeholder="Any" />
+                  <SelectValue placeholder={t("any")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="any">Any</SelectItem>
+                  <SelectItem value="any">{t("any")}</SelectItem>
                   <SelectItem value="3">3.0+</SelectItem>
                   <SelectItem value="4">4.0+</SelectItem>
                   <SelectItem value="4.5">4.5+</SelectItem>
@@ -160,7 +163,7 @@ export function LeadsFilterBar({
           <div className="flex items-center gap-2">
             <Button type="button" variant="ghost" onClick={onReset} disabled={isSearching}>
               <RotateCcw className="size-4" />
-              Reset
+              {t("reset")}
             </Button>
             <Button type="button" onClick={onSearch} disabled={isSearching}>
               {isSearching ? (
@@ -168,7 +171,7 @@ export function LeadsFilterBar({
               ) : (
                 <Search className="size-4" />
               )}
-              Search Leads
+              {t("search")}
             </Button>
           </div>
         </div>

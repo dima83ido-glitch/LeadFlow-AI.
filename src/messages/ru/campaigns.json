@@ -1,0 +1,46 @@
+{
+  "page": {
+    "title": "Кампании",
+    "description": "Создавайте и отслеживайте свои email-кампании.",
+    "createCampaign": "Создать кампанию"
+  },
+  "statusFilterAll": "Все",
+  "searchPlaceholder": "Поиск кампаний...",
+  "emptyTitle": "Пока нет кампаний",
+  "emptyDescription": "Создайте первую кампанию, чтобы начать взаимодействие с лидами.",
+  "newCampaign": "Новая кампания",
+  "noMatchTitle": "Нет кампаний, соответствующих фильтрам",
+  "noMatchDescription": "Попробуйте другой статус или поисковый запрос.",
+  "columns": {
+    "campaign": "Кампания",
+    "noSubjectYet": "Тема ещё не задана",
+    "status": "Статус",
+    "progress": "Прогресс",
+    "sentCount": "Отправлено {sent} / {total}",
+    "opensReplies": "Открытия / Ответы",
+    "lastUpdated": "Обновлено",
+    "editCampaign": "Редактировать кампанию",
+    "resume": "Возобновить",
+    "pause": "Приостановить",
+    "delete": "Удалить"
+  },
+  "newPage": {
+    "title": "Создать кампанию",
+    "description": "Настройте новую цепочку рассылок.",
+    "nameLabel": "Название кампании",
+    "namePlaceholder": "например, Q3 Data Teams Outreach",
+    "subjectLabel": "Тема письма",
+    "subjectPlaceholder": "например, Более быстрый способ доставки дашбордов",
+    "templateLabel": "Шаблон",
+    "templatePlaceholder": "Начать с шаблона (опционально)",
+    "templateDescription": "Вы также можете начать с чистого листа и написать текст самостоятельно.",
+    "scheduleLabel": "Расписание (опционально)",
+    "scheduleDescription": "Оставьте пустым, чтобы сохранить как черновик.",
+    "submit": "Создать кампанию",
+    "createdToast": "«{name}» сохранена как черновик.",
+    "validation": {
+      "nameRequired": "Укажите название кампании",
+      "subjectRequired": "Укажите тему письма"
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "dashboard": {
+    "title": "Обзор администратора",
+    "description": "Рабочие пространства, биллинг и состояние платформы в одном месте.",
+    "stats": {
+      "totalUsers": "Всего пользователей",
+      "activeUsers": "Активные пользователи",
+      "mrr": "Регулярный доход в месяц",
+      "activeSubscriptions": "Активные подписки"
+    },
+    "recentSignups": {
+      "title": "Недавние регистрации"
+    }
+  },
+  "statistics": {
+    "title": "Статистика",
+    "description": "Тренды роста и выручки по всей платформе.",
+    "growthChart": {
+      "title": "Рост",
+      "usersLabel": "Пользователи",
+      "mrrLabel": "MRR ($)"
+    },
+    "planDistributionChart": {
+      "title": "Распределение по тарифам",
+      "workspacesLabel": "Рабочие пространства"
+    }
+  },
+  "subscriptions": {
+    "title": "Подписки",
+    "description": "Все активные и прошлые подписки рабочих пространств.",
+    "columns": {
+      "workspace": "Рабочее пространство",
+      "plan": "Тариф",
+      "status": "Статус",
+      "mrr": "MRR",
+      "renews": "Продление"
+    }
+  },
+  "users": {
+    "title": "Пользователи",
+    "description": "Все пользователи всех рабочих пространств LeadFlow AI.",
+    "columns": {
+      "user": "Пользователь",
+      "role": "Роль",
+      "plan": "Тариф",
+      "status": "Статус",
+      "joined": "Регистрация",
+      "lastActive": "Последняя активность"
+    },
+    "roleAdmin": "Админ",
+    "roleUser": "Пользователь",
+    "actions": {
+      "activate": "Активировать",
+      "suspend": "Заблокировать",
+      "deleteUser": "Удалить пользователя",
+      "activatedToast": "{name} снова активирован(а).",
+      "suspendedToast": "{name} заблокирован(а).",
+      "deletedToast": "{name} удалён(а)."
+    }
+  },
+  "systemLogs": {
+    "title": "Системные логи",
+    "description": "Недавние события во всех сервисах LeadFlow AI.",
+    "filters": {
+      "all": "Все",
+      "info": "Инфо",
+      "warn": "Предупреждения",
+      "error": "Ошибки"
+    },
+    "columns": {
+      "level": "Уровень",
+      "message": "Сообщение",
+      "source": "Источник",
+      "time": "Время"
+    }
+  },
+  "promoCodes": {
+    "title": "Промокоды",
+    "description": "Создавайте и управляйте скидочными кодами для тарифов LeadFlow AI.",
+    "columns": {
+      "code": "Код",
+      "discount": "Скидка",
+      "redemptions": "Использований",
+      "expires": "Истекает",
+      "active": "Активен",
+      "never": "Никогда"
+    },
+    "createDialog": {
+      "trigger": "Создать промокод",
+      "title": "Создать промокод",
+      "description": "Добавьте новый скидочный код для клиентов.",
+      "codeLabel": "Код",
+      "codePlaceholder": "например, SUMMER25",
+      "discountLabel": "Скидка (%)",
+      "createdToast": "Промокод «{code}» создан."
+    },
+    "deleteDialog": {
+      "title": "Удалить этот промокод?",
+      "description": "«{code}» будет удалён без возможности восстановления и станет недоступен для использования.",
+      "confirmLabel": "Удалить код"
+    },
+    "deletedToast": "«{code}» удалён."
+  },
+  "websiteSettings": {
+    "title": "Настройки сайта",
+    "description": "Глобальные настройки маркетингового сайта и приложения LeadFlow AI.",
+    "general": {
+      "title": "Общее",
+      "siteNameLabel": "Название сайта",
+      "supportEmailLabel": "Email поддержки",
+      "maintenanceModeLabel": "Режим обслуживания",
+      "maintenanceModeDescription": "Показывать баннер обслуживания и блокировать новые регистрации."
+    },
+    "seo": {
+      "title": "SEO",
+      "metaTitleLabel": "Meta title",
+      "metaDescriptionLabel": "Meta description"
+    },
+    "saveChanges": "Сохранить изменения",
+    "savedToast": "Настройки сайта сохранены."
+  }
+}

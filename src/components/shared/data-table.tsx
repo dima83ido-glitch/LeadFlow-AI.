@@ -11,6 +11,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +38,7 @@ export function DataTable<TData, TValue>({
   pageSize = 10,
   onRowClick,
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations("common");
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
@@ -91,7 +93,7 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow className="hover:bg-transparent">
                 <TableCell colSpan={columns.length} className="h-48 text-center">
-                  {emptyState ?? "No results found."}
+                  {emptyState ?? t("noResults")}
                 </TableCell>
               </TableRow>
             )}
@@ -102,8 +104,11 @@ export function DataTable<TData, TValue>({
       {rows.length > 0 && (
         <div className="flex items-center justify-between px-1">
           <p className="text-muted-foreground text-sm">
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
-            {Math.max(table.getPageCount(), 1)} &middot; {data.length} total
+            {t("table.pageOf", {
+              page: table.getState().pagination.pageIndex + 1,
+              pages: Math.max(table.getPageCount(), 1),
+            })}{" "}
+            &middot; {t("table.totalItems", { count: data.length })}
           </p>
           <div className="flex items-center gap-2">
             <Button
@@ -113,7 +118,7 @@ export function DataTable<TData, TValue>({
               disabled={!table.getCanPreviousPage()}
             >
               <ChevronLeft className="size-4" />
-              Previous
+              {t("actions.previous")}
             </Button>
             <Button
               variant="outline"
@@ -121,7 +126,7 @@ export function DataTable<TData, TValue>({
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              Next
+              {t("actions.next")}
               <ChevronRight className="size-4" />
             </Button>
           </div>

@@ -1,3 +1,8 @@
+"use client";
+
+import { useLocale, useTranslations } from "next-intl";
+
+import type { Locale } from "@/i18n/config";
 import { mockAdminUsers } from "@/lib/mock/admin";
 import { formatDate } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -14,6 +19,8 @@ function initials(name: string) {
 }
 
 export function RecentSignups() {
+  const t = useTranslations("admin.dashboard.recentSignups");
+  const locale = useLocale() as Locale;
   const recent = [...mockAdminUsers]
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 5);
@@ -21,7 +28,7 @@ export function RecentSignups() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Recent Signups</CardTitle>
+        <CardTitle className="text-base">{t("title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <ul className="space-y-4">
@@ -36,7 +43,7 @@ export function RecentSignups() {
               </div>
               <div className="flex flex-col items-end gap-1">
                 <StatusBadge status={user.status} />
-                <p className="text-muted-foreground text-xs">{formatDate(user.createdAt)}</p>
+                <p className="text-muted-foreground text-xs">{formatDate(user.createdAt, locale)}</p>
               </div>
             </li>
           ))}

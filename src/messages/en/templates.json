@@ -1,0 +1,27 @@
+{
+  "page": {
+    "title": "Templates",
+    "description": "Reusable email templates for your outreach campaigns.",
+    "generateWithAi": "Generate with AI"
+  },
+  "allCategories": "All",
+  "categories": {
+    "Cold Outreach": "Cold Outreach",
+    "Introduction": "Introduction",
+    "Follow-up": "Follow-up",
+    "Proposal": "Proposal",
+    "Re-engagement": "Re-engagement"
+  },
+  "searchPlaceholder": "Search templates...",
+  "noResultsTitle": "No templates found",
+  "noResultsDescription": "Try a different category or search term.",
+  "aiBadge": "AI",
+  "edit": "Edit",
+  "duplicate": "Duplicate",
+  "delete": "Delete",
+  "editNotWiredUp": "Editing isn't wired up yet.",
+  "duplicatedToast": "Duplicated \"{name}\".",
+  "deletedToast": "Deleted \"{name}\".",
+  "campaignsCount": "{count} campaigns",
+  "updatedOn": "Updated {date}"
+}

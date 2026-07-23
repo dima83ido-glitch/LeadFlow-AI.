@@ -1,0 +1,185 @@
+{
+  "hub": {
+    "title": "AI-инструменты",
+    "description": "Генерируйте тексты для рассылок и анализируйте потенциальных клиентов с помощью AI."
+  },
+  "copyButton": {
+    "success": "Скопировано в буфер обмена",
+    "error": "Не удалось скопировать"
+  },
+  "websiteAnalyzer": {
+    "cardDescription": "Проанализируйте сайт потенциального клиента: технологии, SEO и пробелы в позиционировании.",
+    "form": {
+      "cardTitle": "Сайт",
+      "urlLabel": "URL сайта",
+      "urlPlaceholder": "например, northwindanalytics.com",
+      "submit": "Анализировать"
+    },
+    "result": {
+      "cardTitle": "Анализ",
+      "emptyTitle": "Пока нет анализа",
+      "emptyDescription": "Укажите URL сайта и нажмите «Анализировать», чтобы увидеть отчёт.",
+      "overallScore": "Общая оценка"
+    }
+  },
+  "emailGenerator": {
+    "cardDescription": "Составьте персонализированное письмо на основе профиля лида.",
+    "form": {
+      "cardTitle": "Детали",
+      "recipientLabel": "Получатель / компания",
+      "recipientPlaceholder": "например, Northwind Analytics",
+      "toneLabel": "Тон",
+      "tones": {
+        "Formal": "Формальный",
+        "Friendly": "Дружелюбный",
+        "Direct": "Прямой"
+      },
+      "keyPointsLabel": "Ключевые тезисы",
+      "keyPointsPlaceholder": "Что должно быть в письме?",
+      "submit": "Сгенерировать"
+    },
+    "result": {
+      "cardTitle": "Сгенерированное письмо",
+      "emptyTitle": "Письмо ещё не сгенерировано",
+      "emptyDescription": "Заполните детали и нажмите «Сгенерировать», чтобы составить персонализированное письмо.",
+      "subject": "Тема",
+      "body": "Текст",
+      "copySubject": "Копировать тему",
+      "copyBody": "Копировать текст"
+    }
+  },
+  "subjectGenerator": {
+    "cardDescription": "Сгенерируйте варианты тем письма с высокой открываемостью.",
+    "form": {
+      "cardTitle": "Контекст",
+      "contextLabel": "О чём письмо?",
+      "contextPlaceholder": "например, напоминание о демо нашей аналитической платформы",
+      "toneLabel": "Тон",
+      "tones": {
+        "Curious": "Интригующий",
+        "Direct": "Прямой",
+        "Playful": "Игривый",
+        "Formal": "Формальный"
+      },
+      "submit": "Сгенерировать"
+    },
+    "result": {
+      "cardTitle": "Варианты темы письма",
+      "emptyTitle": "Пока нет вариантов темы",
+      "emptyDescription": "Опишите письмо и нажмите «Сгенерировать», чтобы увидеть варианты темы.",
+      "openRate": "~{rate}% прогнозируемая открываемость"
+    }
+  },
+  "headlineGenerator": {
+    "cardDescription": "Создайте варианты заголовков для лендинга и рекламы.",
+    "form": {
+      "cardTitle": "Информация о продукте",
+      "productLabel": "Название продукта / компании",
+      "productPlaceholder": "например, LeadFlow AI",
+      "valuePropLabel": "Ценностное предложение",
+      "valuePropPlaceholder": "например, находить и закрывать новых клиентов быстрее",
+      "submit": "Сгенерировать"
+    },
+    "result": {
+      "cardTitle": "Варианты заголовков",
+      "emptyTitle": "Пока нет заголовков",
+      "emptyDescription": "Опишите продукт и нажмите «Сгенерировать», чтобы увидеть варианты заголовков."
+    }
+  },
+  "ctaGenerator": {
+    "cardDescription": "Сгенерируйте текст призыва к действию под цели кампании.",
+    "form": {
+      "cardTitle": "Цель кампании",
+      "goalLabel": "Цель",
+      "goals": {
+        "Book a call": "Записаться на звонок",
+        "Start free trial": "Начать бесплатный пробный период",
+        "Reply to email": "Ответить на письмо",
+        "Download resource": "Скачать материал"
+      },
+      "contextLabel": "Контекст (необязательно)",
+      "contextPlaceholder": "например, гайд по тарифам",
+      "submit": "Сгенерировать"
+    },
+    "result": {
+      "cardTitle": "Варианты CTA",
+      "emptyTitle": "Пока нет вариантов CTA",
+      "emptyDescription": "Выберите цель и нажмите «Сгенерировать», чтобы увидеть варианты призыва к действию."
+    }
+  },
+  "seoAudit": {
+    "cardDescription": "Запустите автоматическую проверку SEO для любого домена.",
+    "form": {
+      "cardTitle": "Сайт",
+      "urlLabel": "URL сайта",
+      "urlPlaceholder": "например, berlinbrew.de",
+      "submit": "Запустить проверку"
+    },
+    "result": {
+      "cardTitle": "SEO-отчёт",
+      "emptyTitle": "Пока нет проверки",
+      "emptyDescription": "Укажите URL сайта и нажмите «Запустить проверку», чтобы увидеть отчёт о состоянии SEO.",
+      "score": "SEO-оценка"
+    }
+  },
+  "landingPageAnalyzer": {
+    "cardDescription": "Оцените структуру лендинга и сигналы конверсии.",
+    "form": {
+      "cardTitle": "Страница лендинга",
+      "urlLabel": "URL страницы",
+      "urlPlaceholder": "например, copperheadoutfitters.com/spring-sale",
+      "submit": "Анализировать"
+    },
+    "result": {
+      "cardTitle": "Отчёт о конверсии",
+      "emptyTitle": "Пока нет анализа",
+      "emptyDescription": "Укажите URL лендинга и нажмите «Анализировать», чтобы увидеть сигналы конверсии.",
+      "score": "Готовность к конверсии"
+    }
+  },
+  "rewriteEmail": {
+    "cardDescription": "Перепишите письмо в другом тоне или с другой длиной.",
+    "form": {
+      "cardTitle": "Исходное письмо",
+      "originalLabel": "Вставьте письмо",
+      "originalPlaceholder": "Вставьте письмо, которое нужно переписать...",
+      "toneLabel": "Переписать как",
+      "tones": {
+        "More formal": "Более формально",
+        "More friendly": "Более дружелюбно",
+        "More concise": "Более кратко",
+        "More persuasive": "Более убедительно"
+      },
+      "submit": "Переписать"
+    },
+    "result": {
+      "cardTitle": "Результат",
+      "emptyTitle": "Пока нет переписанного текста",
+      "emptyDescription": "Вставьте письмо и нажмите «Переписать», чтобы увидеть новую версию.",
+      "rewrittenTab": "Переписанное",
+      "originalTab": "Исходное"
+    }
+  },
+  "translateEmail": {
+    "cardDescription": "Переведите текст рассылки, сохранив тон и смысл.",
+    "form": {
+      "cardTitle": "Исходное письмо",
+      "originalLabel": "Вставьте письмо",
+      "originalPlaceholder": "Вставьте письмо, которое нужно перевести...",
+      "languageLabel": "Язык перевода",
+      "languages": {
+        "Spanish": "Испанский",
+        "French": "Французский",
+        "German": "Немецкий",
+        "Japanese": "Японский",
+        "Portuguese": "Португальский"
+      },
+      "submit": "Перевести"
+    },
+    "result": {
+      "cardTitle": "Перевод",
+      "emptyTitle": "Пока нет перевода",
+      "emptyDescription": "Вставьте письмо и выберите язык, чтобы перевести его."
+    }
+  }
+}

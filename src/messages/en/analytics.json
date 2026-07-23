@@ -1,0 +1,50 @@
+{
+  "page": {
+    "title": "Analytics",
+    "description": "Track outreach performance and revenue across your workspace."
+  },
+  "vsLastMonth": "vs last month",
+  "metrics": {
+    "openRate": "Open Rate",
+    "replyRate": "Reply Rate",
+    "conversionRate": "Conversion Rate",
+    "revenue": "Revenue"
+  },
+  "emailPerformance": {
+    "title": "Email Performance",
+    "sent": "Sent",
+    "opened": "Opened",
+    "replied": "Replied"
+  },
+  "leadsBySource": {
+    "title": "Leads by Source",
+    "value": "Leads",
+    "sources": {
+      "googleMaps": "Google Maps",
+      "linkedIn": "LinkedIn",
+      "referral": "Referral",
+      "website": "Website",
+      "manualImport": "Manual Import"
+    }
+  },
+  "revenueByPlan": {
+    "title": "Revenue by Plan",
+    "value": "Revenue",
+    "plans": {
+      "free": "Free",
+      "starter": "Starter",
+      "pro": "Pro",
+      "enterprise": "Enterprise"
+    }
+  },
+  "conversionFunnel": {
+    "title": "Conversion Funnel",
+    "stages": {
+      "leadsFound": "Leads Found",
+      "contacted": "Contacted",
+      "qualified": "Qualified",
+      "proposalSent": "Proposal Sent",
+      "won": "Won"
+    }
+  }
+}

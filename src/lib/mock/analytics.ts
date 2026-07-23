@@ -1,15 +1,15 @@
 export interface AnalyticsMetric {
-  label: string;
+  labelKey: "openRate" | "replyRate" | "conversionRate" | "revenue";
   value: string;
   delta: number;
   trend: "up" | "down";
 }
 
 export const mockAnalyticsMetrics: AnalyticsMetric[] = [
-  { label: "Open Rate", value: "58.2%", delta: 4.1, trend: "up" },
-  { label: "Reply Rate", value: "12.6%", delta: 1.8, trend: "up" },
-  { label: "Conversion Rate", value: "6.4%", delta: -0.6, trend: "down" },
-  { label: "Revenue", value: "$42,180", delta: 9.2, trend: "up" },
+  { labelKey: "openRate", value: "58.2%", delta: 4.1, trend: "up" },
+  { labelKey: "replyRate", value: "12.6%", delta: 1.8, trend: "up" },
+  { labelKey: "conversionRate", value: "6.4%", delta: -0.6, trend: "down" },
+  { labelKey: "revenue", value: "$42,180", delta: 9.2, trend: "up" },
 ];
 
 export const mockEmailPerformance = [
@@ -22,24 +22,24 @@ export const mockEmailPerformance = [
 ];
 
 export const mockRevenueByPlan = [
-  { plan: "Free", revenue: 0 },
-  { plan: "Starter", revenue: 6370 },
-  { plan: "Pro", revenue: 24170 },
-  { plan: "Enterprise", revenue: 11640 },
+  { planKey: "free", revenue: 0 },
+  { planKey: "starter", revenue: 6370 },
+  { planKey: "pro", revenue: 24170 },
+  { planKey: "enterprise", revenue: 11640 },
 ];
 
 export const mockLeadsBySource = [
-  { source: "Google Maps", value: 342 },
-  { source: "LinkedIn", value: 218 },
-  { source: "Referral", value: 96 },
-  { source: "Website", value: 154 },
-  { source: "Manual Import", value: 61 },
+  { sourceKey: "googleMaps", value: 342 },
+  { sourceKey: "linkedIn", value: 218 },
+  { sourceKey: "referral", value: 96 },
+  { sourceKey: "website", value: 154 },
+  { sourceKey: "manualImport", value: 61 },
 ];
 
 export const mockConversionFunnel = [
-  { stage: "Leads Found", count: 1240 },
-  { stage: "Contacted", count: 812 },
-  { stage: "Qualified", count: 430 },
-  { stage: "Proposal Sent", count: 218 },
-  { stage: "Won", count: 96 },
+  { stageKey: "leadsFound", count: 1240 },
+  { stageKey: "contacted", count: 812 },
+  { stageKey: "qualified", count: 430 },
+  { stageKey: "proposalSent", count: 218 },
+  { stageKey: "won", count: 96 },
 ];

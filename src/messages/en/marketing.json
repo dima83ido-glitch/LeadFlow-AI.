@@ -1,0 +1,93 @@
+{
+  "navbar": {
+    "product": "Product",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "logIn": "Log in",
+    "startTrial": "Start free trial"
+  },
+  "footer": {
+    "tagline": "Find, analyze, and win your next client — powered by AI.",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "searchLeads": "Search Leads",
+    "aiTools": "AI Tools",
+    "campaigns": "Campaigns",
+    "pricing": "Pricing",
+    "helpCenter": "Help Center",
+    "logIn": "Log in",
+    "createAccount": "Create account",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "copyright": "© {year} LeadFlow AI. All rights reserved."
+  },
+  "hero": {
+    "badge": "Now with AI-generated outreach",
+    "title": "Find your next client. Let AI write the pitch.",
+    "description": "LeadFlow AI helps agencies and sales teams discover companies, analyze their websites, and generate personalized proposals — then track every deal in one clean CRM.",
+    "startTrial": "Start free trial",
+    "logIn": "Log in",
+    "noCreditCard": "No credit card required · Free plan available"
+  },
+  "features": {
+    "title": "Everything you need to close more deals",
+    "description": "One platform from prospecting to signed contract.",
+    "items": [
+      {
+        "title": "Find leads in seconds",
+        "description": "Filter by country, city, industry, rating, and more to build a targeted list of companies worth reaching out to."
+      },
+      {
+        "title": "AI-powered outreach",
+        "description": "Generate personalized emails, subject lines, and CTAs tuned to each lead's website and industry."
+      },
+      {
+        "title": "Full CRM & pipeline",
+        "description": "Track deals, contacts, tasks, and meetings from first contact to closed-won without leaving LeadFlow AI."
+      },
+      {
+        "title": "Email campaigns",
+        "description": "Schedule and monitor multi-step outreach sequences with open, reply, and click tracking built in."
+      },
+      {
+        "title": "Actionable analytics",
+        "description": "See open rate, reply rate, conversion rate, and revenue trends at a glance with clean, exportable reports."
+      },
+      {
+        "title": "Built for teams",
+        "description": "Workspaces, roles, and shared templates keep your whole sales team aligned as you scale."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Simple, transparent pricing",
+    "description": "Start free. Upgrade when your outreach starts scaling."
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "question": "Do I need my own list of leads to get started?",
+        "answer": "No. Use Search Leads to discover companies by country, industry, and keywords, then import the ones you want to work."
+      },
+      {
+        "question": "Can I bring my own email provider?",
+        "answer": "Yes. Campaigns are designed to work with a transactional email provider you connect from Settings once you're ready to send."
+      },
+      {
+        "question": "Is there a free plan?",
+        "answer": "Yes, the Free plan includes limited lead searches and one active campaign so you can try the full workflow before upgrading."
+      },
+      {
+        "question": "Can I cancel anytime?",
+        "answer": "Subscriptions are month-to-month and can be canceled from Settings → Subscription at any time."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to fill your pipeline?",
+    "description": "Start finding leads and generating outreach today — no credit card required.",
+    "button": "Start free trial"
+  }
+}
