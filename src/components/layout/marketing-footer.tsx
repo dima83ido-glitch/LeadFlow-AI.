@@ -19,6 +19,7 @@ export function MarketingFooter() {
       title: t("company"),
       links: [
         { title: t("helpCenter"), href: "/help" },
+        { title: t("contactUs"), href: "/contact" },
         { title: t("logIn"), href: "/login" },
         { title: t("createAccount"), href: "/register" },
       ],

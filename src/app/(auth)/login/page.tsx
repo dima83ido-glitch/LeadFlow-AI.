@@ -20,6 +20,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
@@ -37,6 +38,7 @@ function LoginForm() {
   const t = useTranslations("auth.login");
   const tv = useTranslations("auth.validation");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [rememberMe, setRememberMe] = React.useState(true);
   const loginSchema = React.useMemo(
     () =>
       createLoginSchema({
@@ -59,6 +61,7 @@ function LoginForm() {
     const result = await signIn("credentials", {
       email: values.email,
       password: values.password,
+      remember: rememberMe ? "true" : "false",
       redirect: false,
     });
     setIsSubmitting(false);
@@ -99,6 +102,16 @@ function LoginForm() {
               </div>
               <Input id="password" type="password" placeholder="••••••••" {...register("password")} />
               <FieldError errors={[errors.password]} />
+            </Field>
+            <Field orientation="horizontal">
+              <Checkbox
+                id="rememberMe"
+                checked={rememberMe}
+                onCheckedChange={(checked) => setRememberMe(checked === true)}
+              />
+              <FieldLabel htmlFor="rememberMe" className="text-muted-foreground font-normal">
+                {t("rememberMe")}
+              </FieldLabel>
             </Field>
           </FieldGroup>
         </CardContent>

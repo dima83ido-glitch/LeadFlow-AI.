@@ -16,6 +16,7 @@
     "campaigns": "Campaigns",
     "pricing": "Pricing",
     "helpCenter": "Help Center",
+    "contactUs": "Contact Us",
     "logIn": "Log in",
     "createAccount": "Create account",
     "privacyPolicy": "Privacy Policy",
@@ -59,6 +60,77 @@
         "description": "Workspaces, roles, and shared templates keep your whole sales team aligned as you scale."
       }
     ]
+  },
+  "howItWorks": {
+    "title": "From cold prospect to closed deal",
+    "description": "Four steps, one platform — no spreadsheets or copy-pasting between tools.",
+    "steps": [
+      {
+        "title": "Find your leads",
+        "description": "Search by country, city, industry, and rating to build a targeted list of real companies in minutes."
+      },
+      {
+        "title": "Let AI write the pitch",
+        "description": "Generate a personalized email, subject line, and CTA tuned to each lead's website and industry."
+      },
+      {
+        "title": "Send & track automatically",
+        "description": "Launch a multi-step campaign and watch opens, replies, and clicks roll in without lifting a finger."
+      },
+      {
+        "title": "Close it in one CRM",
+        "description": "Move the deal through your pipeline, log meetings, and keep every contact and note in one place."
+      }
+    ]
+  },
+  "showcase": {
+    "title": "Built for the whole outreach workflow",
+    "description": "A closer look at the tools that do the heavy lifting.",
+    "campaigns": {
+      "badge": "Automation",
+      "title": "Outreach that runs itself",
+      "description": "Set up a multi-step sequence once, and LeadFlow AI handles the rest — sending, waiting, following up, and stopping automatically the moment someone replies.",
+      "points": [
+        "Schedule multi-step sequences with custom delays between steps",
+        "Automatic pause when a lead replies, so nobody gets a follow-up after they've already said yes",
+        "Built-in open, reply, and click tracking on every message you send"
+      ]
+    },
+    "crm": {
+      "badge": "CRM & pipeline",
+      "title": "Every deal, contact, and conversation in one place",
+      "description": "Stop losing context in your inbox. Track companies, contacts, meetings, tasks, and notes alongside the deal itself, from first reply to signed contract.",
+      "points": [
+        "A visual pipeline board you can drag deals through stage by stage",
+        "Contacts and companies linked automatically to the leads you've already found",
+        "Meetings, tasks, and notes tied to every deal — nothing falls through the cracks"
+      ]
+    },
+    "aiTools": {
+      "badge": "AI Tools",
+      "title": "A full AI toolkit for outreach that converts",
+      "description": "Nine purpose-built AI tools handle the writing so you don't have to — from analyzing a prospect's website to drafting the email, the subject line, and the follow-up.",
+      "points": [
+        "Website and landing page analyzers surface tech stack, SEO gaps, and messaging issues in seconds",
+        "Email, subject line, headline, and CTA generators tuned to each lead's industry",
+        "Rewrite and translate existing copy instead of starting from a blank page"
+      ]
+    },
+    "analytics": {
+      "badge": "Analytics",
+      "title": "Know exactly what's working",
+      "description": "Open rate, reply rate, conversion rate, and revenue trends — all in one clean dashboard, so you know which campaigns to double down on and which to cut.",
+      "points": [
+        "Real-time campaign performance, from first send to signed deal",
+        "Clean, exportable reports you can share with your team or clients",
+        "Revenue-by-plan and lead-source breakdowns to spot your best channels"
+      ]
+    }
+  },
+  "team": {
+    "badge": "Who's behind LeadFlow AI",
+    "title": "Built by people who were tired of juggling five tools",
+    "description": "LeadFlow AI started as an internal tool for a small outbound team stitching together a spreadsheet, a generic CRM, and a few different AI writing apps just to send one campaign. We built the platform we wished we had — and now we're building it for you. We're a small, product-obsessed team, and we read every piece of feedback ourselves."
   },
   "pricing": {
     "title": "Simple, transparent pricing",

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import * as React from "react";
+import Link from "next/link";
 import { BookOpen, LifeBuoy, MessageCircle, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -11,6 +13,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { PageHeader } from "@/components/shared/page-header";
+import { GettingStartedCard } from "@/components/onboarding/getting-started-card";
 
 export const metadata: Metadata = { title: "Help" };
 
@@ -19,7 +22,7 @@ const faqKeys = ["findLeads", "aiEmailGenerator", "inviteTeammates", "cancelSubs
 const resources = [
   { icon: BookOpen, key: "documentation" },
   { icon: MessageCircle, key: "community" },
-  { icon: LifeBuoy, key: "contactSupport" },
+  { icon: LifeBuoy, key: "contactSupport", href: "/contact" },
 ] as const;
 
 export default function HelpPage() {
@@ -34,16 +37,27 @@ export default function HelpPage() {
         <Input placeholder={t("searchPlaceholder")} className="h-11 pl-9" />
       </div>
 
+      <GettingStartedCard />
+
       <div className="grid gap-4 sm:grid-cols-3">
-        {resources.map((resource) => (
-          <Card key={resource.key} className="hover:border-primary/40 cursor-pointer transition-colors">
-            <CardContent className="space-y-2">
-              <resource.icon className="text-primary size-5" />
-              <p className="text-sm font-medium">{t(`resources.${resource.key}.title`)}</p>
-              <p className="text-muted-foreground text-xs">{t(`resources.${resource.key}.description`)}</p>
-            </CardContent>
-          </Card>
-        ))}
+        {resources.map((resource) => {
+          const card = (
+            <Card className="hover:border-primary/40 h-full cursor-pointer transition-colors">
+              <CardContent className="space-y-2">
+                <resource.icon className="text-primary size-5" />
+                <p className="text-sm font-medium">{t(`resources.${resource.key}.title`)}</p>
+                <p className="text-muted-foreground text-xs">{t(`resources.${resource.key}.description`)}</p>
+              </CardContent>
+            </Card>
+          );
+          return "href" in resource ? (
+            <Link key={resource.key} href={resource.href}>
+              {card}
+            </Link>
+          ) : (
+            <React.Fragment key={resource.key}>{card}</React.Fragment>
+          );
+        })}
       </div>
 
       <Card>

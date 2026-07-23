@@ -10,6 +10,7 @@ declare module "next-auth" {
 
   interface User {
     role: "USER" | "ADMIN";
+    remember?: boolean;
   }
 }
 
@@ -17,5 +18,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     role: "USER" | "ADMIN";
+    remember?: boolean;
+    loginAt?: number;
   }
 }

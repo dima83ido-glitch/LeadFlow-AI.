@@ -4,10 +4,15 @@ import {
   BarChart3,
   Bot,
   Building2,
+  Check,
   Kanban,
+  LineChart,
   Mail,
+  Megaphone,
   Search,
   Sparkles,
+  Users,
+  Wand2,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -24,6 +29,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 const featureIcons = [Search, Bot, Kanban, Mail, BarChart3, Building2];
+const showcaseIcons = [Megaphone, Kanban, Wand2, LineChart];
 
 export default function LandingPage() {
   const t = useTranslations("marketing");
@@ -31,6 +37,8 @@ export default function LandingPage() {
 
   const features = t.raw("features.items") as { title: string; description: string }[];
   const faqs = t.raw("faq.items") as { question: string; answer: string }[];
+  const steps = t.raw("howItWorks.steps") as { title: string; description: string }[];
+  const showcaseKeys = ["campaigns", "crm", "aiTools", "analytics"] as const;
 
   return (
     <>
@@ -66,6 +74,24 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-6 py-20">
+        <div className="mb-12 space-y-2 text-center">
+          <h2 className="text-3xl font-semibold tracking-tight">{t("howItWorks.title")}</h2>
+          <p className="text-muted-foreground">{t("howItWorks.description")}</p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step, index) => (
+            <div key={step.title} className="space-y-3">
+              <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-full text-sm font-semibold">
+                {index + 1}
+              </div>
+              <p className="font-medium">{step.title}</p>
+              <p className="text-muted-foreground text-sm">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section id="product" className="mx-auto max-w-6xl px-6 py-20">
         <div className="mb-12 space-y-2 text-center">
           <h2 className="text-3xl font-semibold tracking-tight">{t("features.title")}</h2>
@@ -86,6 +112,51 @@ export default function LandingPage() {
                   </div>
                 </CardHeader>
               </Card>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-20">
+        <div className="mb-12 space-y-2 text-center">
+          <h2 className="text-3xl font-semibold tracking-tight">{t("showcase.title")}</h2>
+          <p className="text-muted-foreground">{t("showcase.description")}</p>
+        </div>
+        <div className="space-y-16">
+          {showcaseKeys.map((key, index) => {
+            const Icon = showcaseIcons[index] ?? Sparkles;
+            const points = t.raw(`showcase.${key}.points`) as string[];
+            return (
+              <div
+                key={key}
+                className={cn(
+                  "grid items-center gap-8 lg:grid-cols-2",
+                  index % 2 === 1 && "lg:[&>*:first-child]:order-2",
+                )}
+              >
+                <div className="space-y-4">
+                  <Badge variant="secondary">{t(`showcase.${key}.badge`)}</Badge>
+                  <h3 className="text-2xl font-semibold tracking-tight">
+                    {t(`showcase.${key}.title`)}
+                  </h3>
+                  <p className="text-muted-foreground">{t(`showcase.${key}.description`)}</p>
+                  <ul className="space-y-2 text-sm">
+                    {points.map((point) => (
+                      <li key={point} className="flex items-start gap-2">
+                        <Check className="text-primary mt-0.5 size-4 shrink-0" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Card className="border-border/60">
+                  <CardContent className="flex aspect-video items-center justify-center">
+                    <div className="bg-primary/10 flex size-20 items-center justify-center rounded-2xl">
+                      <Icon className="text-primary size-10" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             );
           })}
         </div>
@@ -135,6 +206,21 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
+        <div className="mb-6 flex justify-center">
+          <div className="bg-primary/10 flex size-14 items-center justify-center rounded-2xl">
+            <Users className="text-primary size-7" />
+          </div>
+        </div>
+        <Badge variant="secondary" className="mb-4">
+          {t("team.badge")}
+        </Badge>
+        <h2 className="text-3xl font-semibold tracking-tight">{t("team.title")}</h2>
+        <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-balance">
+          {t("team.description")}
+        </p>
       </section>
 
       <section id="faq" className="mx-auto max-w-3xl px-6 py-20">

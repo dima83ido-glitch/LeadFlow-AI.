@@ -1,0 +1,45 @@
+{
+  "button": "Support",
+  "page": {
+    "badge": "We're here to help",
+    "title": "Contact our team",
+    "description": "Questions about your account, billing, or how to get the most out of LeadFlow AI? Reach out — a real person on our team will get back to you."
+  },
+  "methods": {
+    "email": {
+      "title": "Email",
+      "description": "Best for account, billing, or detailed questions."
+    },
+    "telegram": {
+      "title": "Telegram",
+      "description": "Best for quick questions and fast replies."
+    }
+  },
+  "expectations": {
+    "title": "What to expect",
+    "description": "We're a small team, so replies come from a real person, not a ticket queue. Email is typically answered within 1 business day; Telegram messages are often answered within a few hours during the day (Mon–Fri)."
+  },
+  "faq": {
+    "title": "Support FAQ",
+    "responseTime": {
+      "question": "How quickly will I get a response?",
+      "answer": "Most emails are answered within 1 business day. Telegram is usually faster, often within a few hours during business hours (Monday–Friday). Messages sent over the weekend are answered the next business day."
+    },
+    "whatToInclude": {
+      "question": "What should I include when I reach out?",
+      "answer": "Let us know the email address on your account, what you were trying to do, and any error message you saw. A screenshot helps a lot if you're reporting something visual or unexpected."
+    },
+    "billingQuestions": {
+      "question": "Can support help with billing and subscription questions?",
+      "answer": "Yes. We can help with plan changes, invoices, and cancellations. For self-service, Settings → Subscription and Billing let you manage most of this yourself at any time."
+    },
+    "phoneSupport": {
+      "question": "Is phone support available?",
+      "answer": "Not currently — as a small team, email and Telegram let us give every message proper attention and keep responses fast and personal."
+    },
+    "languages": {
+      "question": "What languages can I contact support in?",
+      "answer": "Feel free to write in Russian, English, or Ukrainian — our team is comfortable replying in all three."
+    }
+  }
+}

@@ -22,6 +22,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { SupportButton } from "@/components/shared/support-button";
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -86,7 +87,7 @@ export function AppSidebar() {
         })}
       </SidebarContent>
 
-      <SidebarFooter>
+      <SidebarFooter className="gap-2">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
@@ -99,6 +100,9 @@ export function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
+        <div className="group-data-[collapsible=icon]:hidden">
+          <SupportButton variant="ghost" className="w-full justify-start" />
+        </div>
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 
 import { mockDashboardStats } from "@/lib/mock/dashboard";
 import { PageHeader } from "@/components/shared/page-header";
+import { SupportButton } from "@/components/shared/support-button";
 import { QuickActions } from "@/components/dashboard/quick-actions";
 import { RecentActivity } from "@/components/dashboard/recent-activity";
 import { RecentCampaigns } from "@/components/dashboard/recent-campaigns";
@@ -18,6 +19,7 @@ export default function DashboardPage() {
       <PageHeader
         title={t("welcome", { name: "Dmitry" })}
         description={t("subtitle")}
+        actions={<SupportButton />}
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

@@ -37,4 +37,6 @@ export const namespaces = [
   "admin",
   "settings",
   "errors",
+  "onboarding",
+  "support",
 ] as const;

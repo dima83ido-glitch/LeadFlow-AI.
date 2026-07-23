@@ -1,0 +1,79 @@
+{
+  "progressLabel": "Step {current} of {total}",
+  "limitsLabel": "Plan limits",
+  "next": "Next",
+  "previous": "Previous",
+  "skip": "Skip",
+  "finish": "Finish",
+  "gettingStarted": {
+    "title": "Getting Started",
+    "description": "Replay the welcome tour to see what each part of LeadFlow AI does.",
+    "button": "Restart tour"
+  },
+  "steps": {
+    "welcome": {
+      "title": "Welcome to LeadFlow AI",
+      "description": "Let's take a quick 2-minute tour so you know exactly where everything lives before you dive in."
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Your home base — a live snapshot of leads, campaigns, and recent activity across your whole workspace.",
+      "limits": "Available on every plan, including Free.",
+      "tip": "Check back here each morning to see what happened overnight."
+    },
+    "crm": {
+      "title": "CRM",
+      "description": "Track every contact, company, deal, meeting, task, and note in one pipeline — from first contact to closed-won.",
+      "limits": "Full CRM & pipeline management is included from the Pro plan; Free and Starter can still manage contacts and companies.",
+      "tip": "Drag deals across pipeline stages as conversations progress."
+    },
+    "leads": {
+      "title": "Leads",
+      "description": "Search for companies by country, industry, city, and keywords to build a targeted list of prospects worth reaching out to.",
+      "limits": "Free includes 50 lead searches / month, Starter 1,000, Pro 10,000, and Enterprise unlimited.",
+      "tip": "Start narrow — a tight filter like industry + city usually beats a broad search."
+    },
+    "campaigns": {
+      "title": "Campaigns",
+      "description": "Schedule and monitor multi-step email outreach sequences, with open, reply, and click tracking built in.",
+      "limits": "Free allows 1 active campaign, Starter 5, and Pro & Enterprise unlimited.",
+      "tip": "Start with a 2–3 step sequence — you can always add more steps later."
+    },
+    "templates": {
+      "title": "Templates",
+      "description": "Save your best-performing emails as reusable templates so your whole team can send on-brand outreach fast.",
+      "limits": "Available on every plan.",
+      "tip": "Duplicate a template before editing it, so the original stays intact."
+    },
+    "aiTools": {
+      "title": "AI Tools",
+      "description": "Generate outreach copy in seconds — emails, subject lines, headlines, and CTAs, tuned to each lead's website and industry.",
+      "limits": "AI email generation starts on the Starter plan; the full AI Tools suite unlocks on Pro.",
+      "tip": "Give the AI a specific goal, like \"book a 15-minute call\", for sharper copy."
+    },
+    "analytics": {
+      "title": "Analytics",
+      "description": "See open rate, reply rate, conversion rate, and revenue trends at a glance with clean, exportable reports.",
+      "limits": "Available on every plan; exportable and revenue-by-plan reports are part of Pro and Enterprise.",
+      "tip": "Compare campaigns side by side to see which subject lines actually get replies."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Get notified the moment a campaign sends, a lead replies, a deal changes stage, or a payment needs attention.",
+      "limits": "Available on every plan.",
+      "tip": "Click any notification to jump straight to the related lead, deal, or invoice."
+    },
+    "billing": {
+      "title": "Billing",
+      "description": "Manage your subscription, payment method, and invoices, and see exactly what's included in your current plan.",
+      "limits": "Free is $0/month, Starter $49/month, Pro $149/month, and Enterprise $499/month with custom limits.",
+      "tip": "You can upgrade or downgrade anytime from Settings → Subscription."
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Manage your profile, security, workspace members, notification preferences, and API keys.",
+      "limits": "Available on every plan; the number of workspace members you can invite depends on your plan's seats.",
+      "tip": "Turn on strong security and invite your team here before you start sending campaigns."
+    }
+  }
+}

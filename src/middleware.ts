@@ -5,7 +5,7 @@ import { authConfig } from "@/lib/auth.config";
 
 const { auth } = NextAuth(authConfig);
 
-const PUBLIC_PATHS = new Set(["/", "/login", "/register", "/forgot-password"]);
+const PUBLIC_PATHS = new Set(["/", "/login", "/register", "/forgot-password", "/contact"]);
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
