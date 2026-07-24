@@ -24,8 +24,42 @@
       "linkedIn": "LinkedIn",
       "referral": "Referral",
       "website": "Website",
-      "manualImport": "Manual Import"
+      "manualImport": "Manual Import",
+      "unknown": "Unknown"
     }
+  },
+  "leadTrends": {
+    "title": "Lead Trends",
+    "value": "Leads"
+  },
+  "meetingStats": {
+    "title": "Meeting Statistics",
+    "scheduled": "Scheduled",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "upcoming": "Upcoming"
+  },
+  "taskStats": {
+    "title": "Task Statistics",
+    "todo": "To do",
+    "inProgress": "In progress",
+    "done": "Done",
+    "overdue": "Overdue"
+  },
+  "salesFunnel": {
+    "title": "Sales Funnel"
+  },
+  "dealSuccessRate": {
+    "title": "Deal Success Rate",
+    "won": "Won",
+    "lost": "Lost",
+    "open": "Open",
+    "successRate": "Success rate"
+  },
+  "timeBasedPerformance": {
+    "title": "Performance Over Time",
+    "leads": "Leads",
+    "dealValue": "Won Deal Value"
   },
   "revenueByPlan": {
     "title": "Revenue by Plan",

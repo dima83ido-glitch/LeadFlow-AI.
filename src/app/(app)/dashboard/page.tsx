@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-import { mockDashboardStats } from "@/lib/mock/dashboard";
+import { prisma } from "@/lib/db";
+import { getCurrentWorkspaceId, requireSession } from "@/lib/workspace";
+import { getDashboardStats, getRecentActivity, getRecentCampaigns } from "@/lib/dashboard/queries";
 import { PageHeader } from "@/components/shared/page-header";
 import { SupportButton } from "@/components/shared/support-button";
 import { QuickActions } from "@/components/dashboard/quick-actions";
@@ -11,19 +13,28 @@ import { StatCard } from "@/components/dashboard/stat-card";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
-export default function DashboardPage() {
-  const t = useTranslations("dashboard");
+export default async function DashboardPage() {
+  const t = await getTranslations("dashboard");
+  const session = await requireSession();
+  const workspaceId = await getCurrentWorkspaceId();
+  const user = await prisma.user.findUnique({ where: { id: session.user.id as string }, select: { name: true } });
+
+  const [stats, activity, campaigns] = await Promise.all([
+    getDashboardStats(workspaceId),
+    getRecentActivity(workspaceId),
+    getRecentCampaigns(workspaceId),
+  ]);
 
   return (
     <div className="space-y-6">
       <PageHeader
-        title={t("welcome", { name: "Dmitry" })}
+        title={t("welcome", { name: user?.name ?? "" })}
         description={t("subtitle")}
         actions={<SupportButton />}
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {mockDashboardStats.map((stat) => (
+        {stats.map((stat) => (
           <StatCard key={stat.labelKey} stat={stat} />
         ))}
       </div>
@@ -32,10 +43,10 @@ export default function DashboardPage() {
         <div className="lg:col-span-2">
           <QuickActions />
         </div>
-        <RecentActivity />
+        <RecentActivity items={activity} />
       </div>
 
-      <RecentCampaigns />
+      <RecentCampaigns campaigns={campaigns} />
     </div>
   );
 }

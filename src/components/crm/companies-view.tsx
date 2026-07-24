@@ -5,21 +5,20 @@ import { Building2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/config";
-import { mockCompanies } from "@/lib/mock/companies";
 import type { Company } from "@/types/company";
 import { DataTable } from "@/components/shared/data-table";
 import { EmptyState } from "@/components/shared/empty-state";
 import { getCompaniesColumns } from "@/components/crm/companies-columns";
 import { CompanyDetailSheet } from "@/components/crm/company-detail-sheet";
 
-export function CompaniesView() {
+export function CompaniesView({ companies }: { companies: Company[] }) {
   const t = useTranslations();
   const locale = useLocale() as Locale;
   const [selected, setSelected] = React.useState<Company | null>(null);
   const [open, setOpen] = React.useState(false);
   const columns = React.useMemo(() => getCompaniesColumns(t, locale), [t, locale]);
 
-  if (mockCompanies.length === 0) {
+  if (companies.length === 0) {
     return (
       <EmptyState
         icon={Building2}
@@ -33,7 +32,7 @@ export function CompaniesView() {
     <>
       <DataTable
         columns={columns}
-        data={mockCompanies}
+        data={companies}
         onRowClick={(company) => {
           setSelected(company);
           setOpen(true);

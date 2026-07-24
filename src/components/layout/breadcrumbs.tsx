@@ -14,7 +14,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { getLeadById } from "@/lib/mock/leads";
 
 const SEGMENT_KEYS: Record<string, string> = {
   dashboard: "nav.items.dashboard",
@@ -72,10 +71,28 @@ export function Breadcrumbs() {
   const t = useTranslations();
   const segments = pathname.split("/").filter(Boolean);
 
-  if (segments.length === 0) return null;
-
   const isLeadDetail = segments[0] === "leads" && segments.length === 2;
-  const leadLabel = isLeadDetail ? getLeadById(segments[1])?.companyName : undefined;
+  const leadId = isLeadDetail ? segments[1] : undefined;
+  const [leadLabel, setLeadLabel] = React.useState<string | undefined>(undefined);
+
+  React.useEffect(() => {
+    if (!leadId) {
+      setLeadLabel(undefined);
+      return;
+    }
+    let cancelled = false;
+    fetch(`/api/leads/${leadId}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!cancelled && data?.companyName) setLeadLabel(data.companyName);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [leadId]);
+
+  if (segments.length === 0) return null;
 
   const crumbs = segments.map((segment, index) => {
     const href = `/${segments.slice(0, index + 1).join("/")}`;

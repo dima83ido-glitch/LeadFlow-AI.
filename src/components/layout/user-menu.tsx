@@ -12,7 +12,7 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,7 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function UserMenu() {
+export function UserMenu({ avatarUrl }: { avatarUrl?: string | null }) {
   const { data: session } = useSession();
   const t = useTranslations();
   const tc = useTranslations("common");
@@ -38,16 +38,19 @@ export function UserMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant="ghost" className="h-8 gap-2 px-1.5" />}>
         <Avatar className="size-6">
+          {avatarUrl && <AvatarImage src={avatarUrl} alt={name} />}
           <AvatarFallback className="text-xs">{initials}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-64">
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-0.5">
-            <p className="text-sm font-medium">{name}</p>
-            <p className="text-muted-foreground text-xs">{email}</p>
-          </div>
-        </DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="font-normal">
+            <div className="flex flex-col space-y-0.5">
+              <p className="text-sm font-medium">{name}</p>
+              <p className="text-muted-foreground text-xs">{email}</p>
+            </div>
+          </DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem render={<Link href="/settings/profile" />}>

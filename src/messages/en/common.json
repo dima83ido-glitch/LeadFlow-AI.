@@ -77,6 +77,13 @@
     "CANCELED": "Canceled",
     "SUSPENDED": "Suspended",
     "INVITED": "Invited",
+    "CANCELLED": "Cancelled",
+    "WON": "Won",
+    "LOST": "Lost",
+    "SUCCEEDED": "Succeeded",
+    "FAILED": "Failed",
+    "REFUNDED": "Refunded",
+    "PENDING": "Pending",
     "INFO": "Info",
     "WARN": "Warning",
     "ERROR": "Error"
@@ -104,6 +111,7 @@
     "description": "There's no data to show here yet."
   },
   "loading": "Loading...",
+  "genericErrorToast": "Something went wrong. Please try again.",
   "saving": "Saving...",
   "search": "Search...",
   "noResults": "No results found",

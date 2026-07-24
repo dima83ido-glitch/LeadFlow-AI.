@@ -6,13 +6,19 @@
   "profile": {
     "title": "Профіль",
     "changeAvatar": "Змінити аватар",
-    "avatarToast": "Завантаження аватара поки не підключене.",
+    "removeAvatar": "Видалити аватар",
+    "avatarUpdatedToast": "Аватар оновлено.",
+    "avatarRemovedToast": "Аватар видалено.",
+    "avatarTooLargeToast": "Зображення завелике — виберіть файл до 2 МБ.",
+    "avatarInvalidTypeToast": "Будь ласка, виберіть файл зображення.",
     "fullName": "Повне ім'я",
     "email": "Email",
+    "emailReadOnlyHint": "Щоб змінити email, зверніться в підтримку.",
     "jobTitle": "Посада",
     "jobTitlePlaceholder": "наприклад, керівник відділу продажів",
     "saveChanges": "Зберегти зміни",
-    "successToast": "Профіль оновлено."
+    "successToast": "Профіль оновлено.",
+    "errorToast": "Не вдалося зберегти профіль. Спробуйте ще раз."
   },
   "security": {
     "changePasswordTitle": "Зміна пароля",

@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 
 import { prisma } from "@/lib/db";
 import { registerSchema } from "@/lib/validations/auth";
+import { ensureWorkspaceForUser } from "@/lib/workspace";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -32,6 +33,8 @@ export async function POST(request: Request) {
     },
     select: { id: true, name: true, email: true, role: true },
   });
+
+  await ensureWorkspaceForUser(user.id);
 
   return NextResponse.json({ user }, { status: 201 });
 }

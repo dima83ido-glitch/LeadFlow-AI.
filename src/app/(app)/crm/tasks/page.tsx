@@ -1,14 +1,35 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
+import { prisma } from "@/lib/db";
+import { getCurrentWorkspaceId } from "@/lib/workspace";
+import type { CrmTask } from "@/types/crm";
 import { PageHeader } from "@/components/shared/page-header";
 import { AddTaskDialog } from "@/components/crm/add-task-dialog";
 import { TasksView } from "@/components/crm/tasks-view";
 
 export const metadata: Metadata = { title: "Tasks" };
 
-export default function TasksPage() {
-  const t = useTranslations("crm.tasks");
+export default async function TasksPage() {
+  const t = await getTranslations("crm.tasks");
+  const workspaceId = await getCurrentWorkspaceId();
+
+  const rows = await prisma.task.findMany({
+    where: { workspaceId },
+    include: { assignee: true, relatedLead: true },
+    orderBy: { createdAt: "desc" },
+  });
+
+  const tasks: CrmTask[] = rows.map((row) => ({
+    id: row.id,
+    title: row.title,
+    description: row.description ?? undefined,
+    status: row.status,
+    priority: row.priority,
+    dueDate: row.dueDate?.toISOString(),
+    assigneeName: row.assignee?.name ?? row.assignee?.email ?? "Unassigned",
+    relatedTo: row.relatedLead?.companyName,
+  }));
 
   return (
     <div className="space-y-6">
@@ -17,7 +38,7 @@ export default function TasksPage() {
         description={t("pageDescription")}
         actions={<AddTaskDialog />}
       />
-      <TasksView />
+      <TasksView tasks={tasks} />
     </div>
   );
 }

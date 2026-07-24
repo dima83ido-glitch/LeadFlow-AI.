@@ -1,31 +1,31 @@
-"use client";
-
 import { Activity, CreditCard, TrendingUp, Users } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/config";
-import { mockAdminSubscriptions, mockAdminUsers } from "@/lib/mock/admin";
 import { formatCurrency } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 
-export function AdminStatCards() {
+export interface AdminStatsSummary {
+  totalUsers: number;
+  activeUsers: number;
+  mrr: number;
+  activeSubscriptions: number;
+}
+
+export function AdminStatCards({ stats }: { stats: AdminStatsSummary }) {
   const t = useTranslations("admin.dashboard.stats");
   const locale = useLocale() as Locale;
-  const totalUsers = mockAdminUsers.length;
-  const activeUsers = mockAdminUsers.filter((u) => u.status === "ACTIVE").length;
-  const mrr = mockAdminSubscriptions.reduce((sum, sub) => sum + sub.mrr, 0);
-  const activeSubs = mockAdminSubscriptions.filter((s) => s.status === "ACTIVE").length;
 
-  const stats = [
-    { label: t("totalUsers"), value: totalUsers.toString(), icon: Users },
-    { label: t("activeUsers"), value: activeUsers.toString(), icon: Activity },
-    { label: t("mrr"), value: formatCurrency(mrr, undefined, locale), icon: TrendingUp },
-    { label: t("activeSubscriptions"), value: activeSubs.toString(), icon: CreditCard },
+  const items = [
+    { label: t("totalUsers"), value: stats.totalUsers.toString(), icon: Users },
+    { label: t("activeUsers"), value: stats.activeUsers.toString(), icon: Activity },
+    { label: t("mrr"), value: formatCurrency(stats.mrr, undefined, locale), icon: TrendingUp },
+    { label: t("activeSubscriptions"), value: stats.activeSubscriptions.toString(), icon: CreditCard },
   ];
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {stats.map((stat) => (
+      {items.map((stat) => (
         <Card key={stat.label}>
           <CardContent className="flex items-start justify-between gap-4">
             <div className="space-y-1">

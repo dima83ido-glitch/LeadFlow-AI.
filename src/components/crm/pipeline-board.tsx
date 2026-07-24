@@ -5,20 +5,20 @@ import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import type { Locale } from "@/i18n/config";
-import { mockDeals, mockPipelineStages } from "@/lib/mock/crm";
+import type { Deal, PipelineStage } from "@/types/crm";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export function PipelineBoard() {
+export function PipelineBoard({ stages, deals }: { stages: PipelineStage[]; deals: Deal[] }) {
   const t = useTranslations("crm.pipeline");
   const locale = useLocale() as Locale;
   return (
     <div className="flex gap-4 overflow-x-auto pb-2">
-      {mockPipelineStages.map((stage) => {
-        const deals = mockDeals.filter((deal) => deal.stageId === stage.id);
-        const total = deals.reduce((sum, deal) => sum + deal.value, 0);
+      {stages.map((stage) => {
+        const stageDeals = deals.filter((deal) => deal.stageId === stage.id);
+        const total = stageDeals.reduce((sum, deal) => sum + deal.value, 0);
 
         return (
           <div key={stage.id} className="w-72 shrink-0 space-y-3">
@@ -28,10 +28,8 @@ export function PipelineBoard() {
                   className="size-2 shrink-0 rounded-full"
                   style={{ backgroundColor: stage.color }}
                 />
-                <p className="text-sm font-medium">
-                  {t.has(`stages.${stage.id}`) ? t(`stages.${stage.id}`) : stage.name}
-                </p>
-                <Badge variant="secondary">{deals.length}</Badge>
+                <p className="text-sm font-medium">{stage.name}</p>
+                <Badge variant="secondary">{stageDeals.length}</Badge>
               </div>
               <Button
                 variant="ghost"
@@ -47,7 +45,7 @@ export function PipelineBoard() {
             </p>
 
             <div className="space-y-2">
-              {deals.map((deal) => (
+              {stageDeals.map((deal) => (
                 <Card key={deal.id} className="gap-3 py-4">
                   <CardContent className="space-y-2 px-4">
                     <p className="text-sm font-medium">{deal.title}</p>
@@ -68,7 +66,7 @@ export function PipelineBoard() {
                   </CardContent>
                 </Card>
               ))}
-              {deals.length === 0 && (
+              {stageDeals.length === 0 && (
                 <div className="text-muted-foreground rounded-lg border border-dashed py-6 text-center text-xs">
                   {t("noDeals")}
                 </div>

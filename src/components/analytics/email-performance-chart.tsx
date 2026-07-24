@@ -4,7 +4,6 @@ import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { useTranslations } from "next-intl";
 
-import { mockEmailPerformance } from "@/lib/mock/analytics";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   type ChartConfig,
@@ -15,7 +14,14 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export function EmailPerformanceChart() {
+export interface EmailPerformancePoint {
+  month: string;
+  sent: number;
+  opened: number;
+  replied: number;
+}
+
+export function EmailPerformanceChart({ data: points }: { data: EmailPerformancePoint[] }) {
   const t = useTranslations("analytics.emailPerformance");
   const tm = useTranslations("common.monthsShort");
   const chartConfig = {
@@ -24,8 +30,8 @@ export function EmailPerformanceChart() {
     replied: { label: t("replied"), color: "var(--chart-3)" },
   } satisfies ChartConfig;
   const data = React.useMemo(
-    () => mockEmailPerformance.map((point) => ({ ...point, month: tm(point.month) })),
-    [tm],
+    () => points.map((point) => ({ ...point, month: tm(point.month) })),
+    [points, tm],
   );
 
   return (

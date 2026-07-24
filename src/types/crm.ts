@@ -32,6 +32,8 @@ export interface CrmTask {
   relatedTo?: string;
 }
 
+export type MeetingStatus = "SCHEDULED" | "COMPLETED" | "CANCELLED";
+
 export interface Meeting {
   id: string;
   title: string;
@@ -41,6 +43,7 @@ export interface Meeting {
   endTime: string;
   location: string;
   attendees: string[];
+  status: MeetingStatus;
 }
 
 export interface Note {

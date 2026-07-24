@@ -6,13 +6,19 @@
   "profile": {
     "title": "Profile",
     "changeAvatar": "Change avatar",
-    "avatarToast": "Avatar upload isn't wired up yet.",
+    "removeAvatar": "Remove avatar",
+    "avatarUpdatedToast": "Avatar updated.",
+    "avatarRemovedToast": "Avatar removed.",
+    "avatarTooLargeToast": "Image is too large — please choose a file under 2 MB.",
+    "avatarInvalidTypeToast": "Please choose an image file.",
     "fullName": "Full name",
     "email": "Email",
+    "emailReadOnlyHint": "Contact support to change your email address.",
     "jobTitle": "Job title",
     "jobTitlePlaceholder": "e.g. Head of Sales",
     "saveChanges": "Save changes",
-    "successToast": "Profile updated."
+    "successToast": "Profile updated.",
+    "errorToast": "Couldn't save your profile. Please try again."
   },
   "security": {
     "changePasswordTitle": "Change password",

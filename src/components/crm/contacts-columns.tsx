@@ -3,7 +3,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import type { useTranslations } from "next-intl";
-import { toast } from "sonner";
 
 import type { Locale } from "@/i18n/config";
 import type { Contact } from "@/types/company";
@@ -25,6 +24,7 @@ function initials(firstName: string, lastName?: string) {
 export function getContactsColumns(
   t: ReturnType<typeof useTranslations>,
   locale: Locale,
+  handlers: { onEdit: (contact: Contact) => void; onDelete: (contact: Contact) => void },
 ): ColumnDef<Contact>[] {
   return [
     {
@@ -72,6 +72,23 @@ export function getContactsColumns(
       cell: ({ row }) => <span className="text-sm">{row.original.phone ?? "—"}</span>,
     },
     {
+      accessorKey: "telegramUsername",
+      header: t("crm.contacts.columns.telegram"),
+      cell: ({ row }) =>
+        row.original.telegramUsername ? (
+          <a
+            href={`https://t.me/${row.original.telegramUsername}`}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm hover:underline"
+          >
+            @{row.original.telegramUsername}
+          </a>
+        ) : (
+          <span className="text-muted-foreground text-sm">—</span>
+        ),
+    },
+    {
       accessorKey: "createdAt",
       header: t("crm.contacts.columns.added"),
       cell: ({ row }) => (
@@ -91,7 +108,7 @@ export function getContactsColumns(
                 <MoreHorizontal className="size-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => toast.info(t("crm.common.editNotWired"))}>
+                <DropdownMenuItem onClick={() => handlers.onEdit(contact)}>
                   <Pencil />
                   {t("common.actions.edit")}
                 </DropdownMenuItem>
@@ -110,7 +127,7 @@ export function getContactsColumns(
               title={t("crm.contacts.deleteTitle")}
               description={t("crm.contacts.deleteDescription", { name: fullName })}
               confirmLabel={t("crm.contacts.deleteConfirm")}
-              onConfirm={() => toast.success(t("crm.contacts.deletedToast", { name: contact.firstName }))}
+              onConfirm={() => handlers.onDelete(contact)}
             />
           </div>
         );

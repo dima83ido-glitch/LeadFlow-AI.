@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
+import { getAppSettings } from "@/lib/app-settings";
 import { PageHeader } from "@/components/shared/page-header";
 import { WebsiteSettingsView } from "@/components/admin/website-settings-view";
 
@@ -8,10 +9,12 @@ export const metadata: Metadata = { title: "Website Settings" };
 
 export default async function WebsiteSettingsPage() {
   const t = await getTranslations("admin.websiteSettings");
+  const settings = await getAppSettings();
+
   return (
     <div className="space-y-6">
       <PageHeader title={t("title")} description={t("description")} />
-      <WebsiteSettingsView />
+      <WebsiteSettingsView settings={settings} />
     </div>
   );
 }

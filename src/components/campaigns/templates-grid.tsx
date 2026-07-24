@@ -7,8 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import type { Locale } from "@/i18n/config";
 import { toast } from "sonner";
 
-import { mockTemplates } from "@/lib/mock/campaigns";
-import type { TemplateCategory } from "@/types/campaign";
+import type { Template, TemplateCategory } from "@/types/campaign";
 import { formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -33,14 +32,14 @@ const categories: (TemplateCategory | "All")[] = [
   "Re-engagement",
 ];
 
-export function TemplatesGrid() {
+export function TemplatesGrid({ templates }: { templates: Template[] }) {
   const t = useTranslations("templates");
   const tCategory = useTranslations("templates.categories");
   const locale = useLocale() as Locale;
   const [category, setCategory] = React.useState<TemplateCategory | "All">("All");
   const [search, setSearch] = React.useState("");
 
-  const filtered = mockTemplates.filter((template) => {
+  const filtered = templates.filter((template) => {
     if (category !== "All" && template.category !== category) return false;
     if (search && !template.name.toLowerCase().includes(search.toLowerCase())) return false;
     return true;
@@ -79,7 +78,9 @@ export function TemplatesGrid() {
               <CardHeader className="flex-row items-start justify-between gap-2">
                 <div className="space-y-1.5">
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <Badge variant="secondary">{tCategory(template.category)}</Badge>
+                    <Badge variant="secondary">
+                      {tCategory.has(template.category) ? tCategory(template.category) : template.category}
+                    </Badge>
                     {template.isAiGenerated && (
                       <Badge variant="outline" className="gap-1">
                         <Sparkles className="size-3" />

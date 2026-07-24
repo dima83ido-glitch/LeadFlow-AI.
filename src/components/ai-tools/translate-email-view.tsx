@@ -4,49 +4,37 @@ import * as React from "react";
 import { Languages, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { translateEmail } from "@/lib/actions/ai-translate-email";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { CopyButton } from "@/components/ai-tools/copy-button";
+import { LanguageCombobox } from "@/components/ai-tools/language-combobox";
 import { ToolResultPanel } from "@/components/ai-tools/tool-result-panel";
-
-const languages = ["Spanish", "French", "German", "Japanese", "Portuguese"] as const;
-
-const placeholders: Record<(typeof languages)[number], string> = {
-  Spanish:
-    "Hola, quería hacer un seguimiento de la propuesta que enviamos la semana pasada. Avísame si tienes alguna pregunta.",
-  French:
-    "Bonjour, je voulais faire un suivi concernant la proposition envoyée la semaine dernière. N'hésitez pas si vous avez des questions.",
-  German:
-    "Hallo, ich wollte kurz zu unserem Angebot von letzter Woche nachfragen. Lassen Sie mich wissen, falls Sie Fragen haben.",
-  Japanese: "こんにちは、先週お送りした提案について確認のご連絡です。ご質問があればお知らせください。",
-  Portuguese:
-    "Olá, gostaria de dar um retorno sobre a proposta enviada na semana passada. Me avise se tiver alguma dúvida.",
-};
 
 export default function TranslateEmailView() {
   const t = useTranslations("aiTools.translateEmail");
+  const tErr = useTranslations("aiTools.errors");
   const [original, setOriginal] = React.useState("");
-  const [language, setLanguage] = React.useState<(typeof languages)[number]>("Spanish");
+  const [languageCode, setLanguageCode] = React.useState("es");
   const [isLoading, setIsLoading] = React.useState(false);
   const [result, setResult] = React.useState<string | null>(null);
+  const [errorCode, setErrorCode] = React.useState<string | null>(null);
 
-  function handleTranslate() {
+  async function handleTranslate() {
     if (!original) return;
     setIsLoading(true);
     setResult(null);
-    setTimeout(() => {
-      setResult(placeholders[language]);
-      setIsLoading(false);
-    }, 1000);
+    setErrorCode(null);
+    const response = await translateEmail(original, languageCode);
+    setIsLoading(false);
+    if (response.ok) {
+      setResult(response.data.translatedText);
+    } else {
+      setErrorCode(response.errorCode);
+    }
   }
 
   return (
@@ -67,22 +55,13 @@ export default function TranslateEmailView() {
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="language">{t("form.languageLabel")}</FieldLabel>
-            <Select
-              value={language}
-              onValueChange={(value) => value && setLanguage(value as (typeof languages)[number])}
-            >
-              <SelectTrigger id="language" className="w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {languages.map((lang) => (
-                  <SelectItem key={lang} value={lang}>
-                    {t(`form.languages.${lang}`)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <FieldLabel>{t("form.languageLabel")}</FieldLabel>
+            <LanguageCombobox
+              value={languageCode}
+              onChange={setLanguageCode}
+              placeholder={t("form.languageSearchPlaceholder")}
+              emptyText={t("form.languageEmptyText")}
+            />
           </Field>
           <Button className="w-full" onClick={handleTranslate} disabled={isLoading || !original}>
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Languages className="size-4" />}
@@ -96,6 +75,12 @@ export default function TranslateEmailView() {
           <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
+          {errorCode && !isLoading && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertTitle>{tErr("title")}</AlertTitle>
+              <AlertDescription>{tErr.has(errorCode) ? tErr(errorCode) : tErr("generic")}</AlertDescription>
+            </Alert>
+          )}
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={result !== null}

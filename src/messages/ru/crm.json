@@ -35,22 +35,29 @@
       "company": "Компания",
       "email": "Email",
       "phone": "Телефон",
+      "telegram": "Telegram",
       "added": "Добавлен"
     },
     "deleteTitle": "Удалить этот контакт?",
     "deleteDescription": "Это навсегда удалит {name} из вашей CRM.",
     "deleteConfirm": "Удалить контакт",
     "deletedToast": "{name} удалён.",
+    "updatedToast": "{name} обновлён.",
     "addDialog": {
       "trigger": "Добавить контакт",
       "title": "Добавить контакт",
+      "editTitle": "Редактировать контакт",
+      "editDescription": "Обновите данные контакта.",
       "description": "Добавьте новый контакт в вашу CRM.",
       "firstNameLabel": "Имя",
       "lastNameLabel": "Фамилия",
       "emailLabel": "Email",
       "jobTitleLabel": "Должность",
+      "telegramLabel": "Telegram (username)",
+      "telegramPlaceholder": "например, johndoe",
       "firstNameRequired": "Укажите имя",
       "submit": "Добавить контакт",
+      "editSubmit": "Сохранить контакт",
       "successToast": "{name} добавлен в вашу CRM."
     }
   },
@@ -59,9 +66,16 @@
     "pageDescription": "Предстоящие звонки и встречи с лидами и контактами.",
     "emptyTitle": "Нет запланированных встреч",
     "emptyDescription": "Встречи, которые вы запланируете с лидами и контактами, появятся здесь.",
+    "deleteTitle": "Удалить эту встречу?",
+    "deleteDescription": "Это навсегда удалит «{title}» из вашего календаря.",
+    "deleteConfirm": "Удалить встречу",
+    "deletedToast": "«{title}» удалена.",
+    "updatedToast": "«{title}» обновлена.",
     "scheduleDialog": {
       "trigger": "Запланировать встречу",
       "title": "Запланировать встречу",
+      "editTitle": "Редактировать встречу",
+      "editDescription": "Обновите данные встречи.",
       "description": "Добавьте новую встречу в календарь.",
       "titleLabel": "Название",
       "titlePlaceholder": "например, Ознакомительный звонок",
@@ -71,6 +85,7 @@
       "locationLabel": "Место",
       "locationPlaceholder": "например, Google Meet",
       "submit": "Запланировать встречу",
+      "editSubmit": "Сохранить встречу",
       "successToast": "«{title}» запланирована."
     }
   },
@@ -81,7 +96,13 @@
     "submit": "Добавить заметку",
     "emptyTitle": "Пока нет заметок",
     "emptyDescription": "Заметки о ваших лидах, контактах и сделках появятся здесь.",
-    "relatedTo": "По теме: {name}"
+    "relatedTo": "По теме: {name}",
+    "deleteTitle": "Удалить эту заметку?",
+    "deleteDescription": "Это навсегда удалит заметку.",
+    "deleteConfirm": "Удалить заметку",
+    "deletedToast": "Заметка удалена.",
+    "updatedToast": "Заметка обновлена.",
+    "editSave": "Сохранить"
   },
   "pipeline": {
     "pageTitle": "Воронка продаж",
@@ -109,15 +130,26 @@
     },
     "due": "Срок: {when}",
     "noTasks": "Нет задач",
+    "deleteTitle": "Удалить эту задачу?",
+    "deleteDescription": "Это навсегда удалит «{title}» из ваших задач.",
+    "deleteConfirm": "Удалить задачу",
+    "deletedToast": "«{title}» удалена.",
+    "updatedToast": "«{title}» обновлена.",
     "addDialog": {
       "trigger": "Добавить задачу",
       "title": "Добавить задачу",
+      "editTitle": "Редактировать задачу",
+      "editDescription": "Обновите данные задачи.",
       "description": "Создайте новую задачу для команды.",
       "titleLabel": "Название",
       "titlePlaceholder": "например, Связаться с Fjord Studio",
       "titleRequired": "Укажите название",
+      "descriptionLabel": "Описание (необязательно)",
+      "descriptionPlaceholder": "Добавьте подробности об этой задаче...",
+      "priorityLabel": "Приоритет",
       "dueDateLabel": "Срок выполнения",
       "submit": "Добавить задачу",
+      "editSubmit": "Сохранить задачу",
       "successToast": "«{title}» добавлена в ваши задачи."
     }
   }

@@ -1,10 +1,12 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
+import { createPromoCode } from "@/lib/actions/admin-promo-codes";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,22 +20,32 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
-export function CreatePromoCodeDialog({ onCreate }: { onCreate: (code: string, discount: number) => void }) {
+export function CreatePromoCodeDialog() {
   const t = useTranslations("admin.promoCodes.createDialog");
   const tc = useTranslations("common.actions");
+  const te = useTranslations("admin.promoCodes");
+  const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [code, setCode] = React.useState("");
   const [discount, setDiscount] = React.useState("10");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!code.trim()) return;
-    const upperCode = code.trim().toUpperCase();
-    onCreate(upperCode, Number(discount) || 0);
-    toast.success(t("createdToast", { code: upperCode }));
-    setCode("");
-    setDiscount("10");
-    setOpen(false);
+    setIsSubmitting(true);
+    const result = await createPromoCode(code, Number(discount) || 0);
+    setIsSubmitting(false);
+
+    if (result.ok) {
+      toast.success(t("createdToast", { code: code.trim().toUpperCase() }));
+      setCode("");
+      setDiscount("10");
+      setOpen(false);
+      router.refresh();
+    } else {
+      toast.error(te("errorToast"));
+    }
   }
 
   return (
@@ -74,7 +86,9 @@ export function CreatePromoCodeDialog({ onCreate }: { onCreate: (code: string, d
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
               {tc("cancel")}
             </Button>
-            <Button type="submit">{tc("create")}</Button>
+            <Button type="submit" disabled={isSubmitting}>
+              {tc("create")}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

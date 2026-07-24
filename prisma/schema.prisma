@@ -81,11 +81,18 @@ model Workspace {
   notifications  Notification[]
   apiKeys        ApiKey[]
   subscription   Subscription?
+  payments       Payment[]
 }
 
 enum UserRole {
   USER
   ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  INVITED
 }
 
 model User {
@@ -96,6 +103,9 @@ model User {
   image         String?
   password      String?
   role          UserRole  @default(USER)
+  jobTitle      String?
+  lastLoginAt   DateTime?
+  status        UserStatus @default(ACTIVE)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -183,11 +193,12 @@ model Contact {
   companyId String?
   company   Company? @relation(fields: [companyId], references: [id])
 
-  firstName String
-  lastName  String?
-  email     String?
-  phone     String?
-  jobTitle  String?
+  firstName        String
+  lastName         String?
+  email            String?
+  phone            String?
+  jobTitle         String?
+  telegramUsername String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -282,6 +293,12 @@ model PipelineStage {
   deals Deal[]
 }
 
+enum DealStatus {
+  OPEN
+  WON
+  LOST
+}
+
 model Deal {
   id          String    @id @default(cuid())
   workspaceId String
@@ -297,11 +314,18 @@ model Deal {
 
   title     String
   value     Float?
-  currency  String    @default("USD")
+  currency  String     @default("USD")
+  status    DealStatus @default(OPEN)
   closeDate DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum MeetingStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
 }
 
 model Meeting {
@@ -317,8 +341,10 @@ model Meeting {
   endTime   DateTime
   location  String?
   notes     String?
+  status    MeetingStatus @default(SCHEDULED)
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum TaskStatus {
@@ -442,6 +468,8 @@ model Subscription {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  payments Payment[]
 }
 
 model PromoCode {
@@ -450,9 +478,60 @@ model PromoCode {
   discountPercent Int
   maxRedemptions  Int?
   redemptions     Int       @default(0)
+  active          Boolean   @default(true)
   expiresAt       DateTime?
 
   createdAt DateTime @default(now())
+}
+
+enum PaymentStatus {
+  SUCCEEDED
+  FAILED
+  REFUNDED
+  PENDING
+}
+
+model Payment {
+  id             String        @id @default(cuid())
+  workspaceId    String
+  workspace      Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  subscriptionId String?
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
+
+  amount      Int
+  currency    String        @default("USD")
+  status      PaymentStatus @default(SUCCEEDED)
+  description String?
+
+  createdAt DateTime @default(now())
+}
+
+model PlanConfig {
+  id              String           @id @default(cuid())
+  plan            SubscriptionPlan @unique
+  priceCents      Int
+  leadSearchLimit Int?
+  campaignLimit   Int?
+  aiToolLimit     Int?
+  seatsLimit      Int?
+  isActive        Boolean          @default(true)
+  updatedAt       DateTime         @updatedAt
+}
+
+model FeatureFlag {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  label       String
+  description String?
+  enabled     Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+}
+
+model AppSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
 }
 
 enum SystemLogLevel {

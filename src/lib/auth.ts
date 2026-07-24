@@ -23,9 +23,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const { email, password } = parsed.data;
         const user = await prisma.user.findUnique({ where: { email } });
         if (!user?.password) return null;
+        if (user.status === "SUSPENDED") return null;
 
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) return null;
+
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { lastLoginAt: new Date() },
+        });
 
         return {
           id: user.id,

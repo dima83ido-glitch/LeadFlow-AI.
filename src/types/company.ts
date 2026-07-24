@@ -26,6 +26,7 @@ export interface Contact {
   email?: string;
   phone?: string;
   jobTitle?: string;
+  telegramUsername?: string;
   companyId?: string;
   companyName?: string;
   avatarUrl?: string;

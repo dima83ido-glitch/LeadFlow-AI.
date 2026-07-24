@@ -1,11 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, ShieldOff, Trash2, UserCheck } from "lucide-react";
 import { toast } from "sonner";
 
 import type { Locale } from "@/i18n/config";
 import type { AdminUser } from "@/types/admin";
+import { deleteUser, setUserStatus } from "@/lib/actions/admin-users";
 import { formatDate } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -14,9 +16,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { StatusBadge } from "@/components/shared/status-badge";
 
 function initials(name: string) {
@@ -43,6 +45,66 @@ interface AdminUsersColumnsMessages {
   activatedToast: (name: string) => string;
   suspendedToast: (name: string) => string;
   deletedToast: (name: string) => string;
+  errorToast: string;
+}
+
+function RowActions({ user, t }: { user: AdminUser; t: AdminUsersColumnsMessages }) {
+  const router = useRouter();
+
+  async function handleToggleStatus() {
+    const nextStatus = user.status === "SUSPENDED" ? "ACTIVE" : "SUSPENDED";
+    const result = await setUserStatus(user.id, nextStatus);
+    if (result.ok) {
+      toast.success(nextStatus === "ACTIVE" ? t.activatedToast(user.name) : t.suspendedToast(user.name));
+      router.refresh();
+    } else {
+      toast.error(t.errorToast);
+    }
+  }
+
+  async function handleDelete() {
+    const result = await deleteUser(user.id);
+    if (result.ok) {
+      toast.success(t.deletedToast(user.name));
+      router.refresh();
+    } else {
+      toast.error(t.errorToast);
+    }
+  }
+
+  return (
+    <div className="flex items-center justify-end gap-1">
+      <DropdownMenu>
+        <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" />}>
+          <MoreHorizontal className="size-4" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          {user.status === "SUSPENDED" ? (
+            <DropdownMenuItem onClick={handleToggleStatus}>
+              <UserCheck />
+              {t.activate}
+            </DropdownMenuItem>
+          ) : (
+            <DropdownMenuItem onClick={handleToggleStatus}>
+              <ShieldOff />
+              {t.suspend}
+            </DropdownMenuItem>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <ConfirmDialog
+        trigger={
+          <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive size-8">
+            <Trash2 className="size-4" />
+          </Button>
+        }
+        title={t.deleteUser}
+        description={t.deletedToast(user.name)}
+        confirmLabel={t.deleteUser}
+        onConfirm={handleDelete}
+      />
+    </div>
+  );
 }
 
 export function getAdminUsersColumns(
@@ -105,37 +167,7 @@ export function getAdminUsersColumns(
     {
       id: "actions",
       header: "",
-      cell: ({ row }) => {
-        const user = row.original;
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" />}>
-              <MoreHorizontal className="size-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {user.status === "SUSPENDED" ? (
-                <DropdownMenuItem onClick={() => toast.success(t.activatedToast(user.name))}>
-                  <UserCheck />
-                  {t.activate}
-                </DropdownMenuItem>
-              ) : (
-                <DropdownMenuItem onClick={() => toast.success(t.suspendedToast(user.name))}>
-                  <ShieldOff />
-                  {t.suspend}
-                </DropdownMenuItem>
-              )}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                variant="destructive"
-                onClick={() => toast.success(t.deletedToast(user.name))}
-              >
-                <Trash2 />
-                {t.deleteUser}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      },
+      cell: ({ row }) => <RowActions user={row.original} t={t} />,
     },
   ];
 }

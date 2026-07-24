@@ -4,7 +4,6 @@ import { Loader2, RotateCcw, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import type { LeadSearchFilters } from "@/types/lead";
-import { countries, industries } from "@/lib/mock/leads";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -25,6 +24,8 @@ interface LeadsFilterBarProps {
   onSearch: () => void;
   onReset: () => void;
   isSearching: boolean;
+  countries: string[];
+  industries: string[];
 }
 
 export function LeadsFilterBar({
@@ -33,6 +34,8 @@ export function LeadsFilterBar({
   onSearch,
   onReset,
   isSearching,
+  countries,
+  industries,
 }: LeadsFilterBarProps) {
   const t = useTranslations("leads.filterBar");
 

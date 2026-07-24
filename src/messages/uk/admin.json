@@ -1,4 +1,15 @@
 {
+  "viewAs": {
+    "trigger": "Дивитися як",
+    "plans": {
+      "FREE": "Free",
+      "STARTER": "Starter",
+      "PRO": "Pro",
+      "ENTERPRISE": "Enterprise"
+    },
+    "viewingAs": "Режим перегляду: {plan}",
+    "returnToAdmin": "Повернутися в адмінку"
+  },
   "dashboard": {
     "title": "Огляд адміністратора",
     "description": "Робочі простори, білінг і стан платформи в одному місці.",
@@ -23,6 +34,17 @@
     "planDistributionChart": {
       "title": "Розподіл за тарифами",
       "workspacesLabel": "Робочі простори"
+    },
+    "extraStats": {
+      "newRegistrations": "Нові реєстрації (30 дн.)",
+      "arr": "Річний регулярний дохід",
+      "paidConversionRate": "Конверсія у платних"
+    },
+    "featureUsage": {
+      "title": "Найпопулярніші функції",
+      "usesLabel": "Використань",
+      "emptyTitle": "Поки немає даних про використання",
+      "emptyDescription": "Тут з'явиться використання AI-інструментів та інших функцій."
     }
   },
   "subscriptions": {
@@ -34,6 +56,14 @@
       "status": "Статус",
       "mrr": "MRR",
       "renews": "Поновлення"
+    },
+    "actions": {
+      "activate": "Активувати",
+      "disable": "Вимкнути",
+      "extend": "Продовжити на 30 днів",
+      "grantFreeAccess": "Надати безкоштовний доступ",
+      "updatedToast": "Підписку оновлено.",
+      "errorToast": "Щось пішло не так. Спробуйте ще раз."
     }
   },
   "users": {
@@ -55,7 +85,22 @@
       "deleteUser": "Видалити користувача",
       "activatedToast": "{name} знову активовано.",
       "suspendedToast": "{name} заблоковано.",
-      "deletedToast": "{name} видалено."
+      "deletedToast": "{name} видалено.",
+      "errorToast": "Щось пішло не так. Спробуйте ще раз."
+    }
+  },
+  "payments": {
+    "title": "Платежі",
+    "description": "Усі платежі в усіх робочих просторах LeadFlow AI.",
+    "filters": {
+      "all": "Усі"
+    },
+    "columns": {
+      "workspace": "Робочий простір",
+      "amount": "Сума",
+      "status": "Статус",
+      "description": "Опис",
+      "date": "Дата"
     }
   },
   "systemLogs": {
@@ -99,7 +144,34 @@
       "description": "«{code}» буде остаточно видалено і його більше не можна буде використати.",
       "confirmLabel": "Видалити код"
     },
-    "deletedToast": "«{code}» видалено."
+    "deletedToast": "«{code}» видалено.",
+    "errorToast": "Щось пішло не так. Спробуйте ще раз."
+  },
+  "systemManagement": {
+    "title": "Керування системою",
+    "description": "Тарифи, ліміти, перемикачі функцій та стан системи.",
+    "planConfig": {
+      "priceLabel": "Ціна ($/місяць)",
+      "leadSearchLimitLabel": "Ліміт пошуку лідів",
+      "campaignLimitLabel": "Ліміт кампаній",
+      "aiToolLimitLabel": "Ліміт AI-інструментів",
+      "seatsLimitLabel": "Ліміт місць",
+      "unlimited": "Без обмежень",
+      "savedToast": "Налаштування тарифу «{plan}» збережено."
+    },
+    "featureFlags": {
+      "title": "Перемикачі функцій"
+    },
+    "systemInfo": {
+      "title": "Інформація про систему",
+      "appVersion": "Версія застосунку",
+      "environment": "Середовище",
+      "nodeVersion": "Версія Node",
+      "uptime": "Час роботи",
+      "databaseStatus": "Статус бази даних",
+      "healthy": "У порядку",
+      "unhealthy": "Несправно"
+    }
   },
   "websiteSettings": {
     "title": "Налаштування сайту",

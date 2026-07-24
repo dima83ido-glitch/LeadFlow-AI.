@@ -4,7 +4,6 @@ import * as React from "react";
 import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { useTranslations } from "next-intl";
 
-import { mockUserGrowth } from "@/lib/mock/admin";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   type ChartConfig,
@@ -15,7 +14,13 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export function UserGrowthChart() {
+export interface UserGrowthPoint {
+  month: string;
+  users: number;
+  mrr: number;
+}
+
+export function UserGrowthChart({ data: points }: { data: UserGrowthPoint[] }) {
   const t = useTranslations("admin.statistics.growthChart");
   const tm = useTranslations("common.monthsShort");
   const chartConfig = {
@@ -23,8 +28,8 @@ export function UserGrowthChart() {
     mrr: { label: t("mrrLabel"), color: "var(--chart-2)" },
   } satisfies ChartConfig;
   const data = React.useMemo(
-    () => mockUserGrowth.map((point) => ({ ...point, month: tm(point.month) })),
-    [tm],
+    () => points.map((point) => ({ ...point, month: tm(point.month) })),
+    [points, tm],
   );
 
   return (

@@ -4,44 +4,36 @@ import * as React from "react";
 import { FileCode2, Loader2, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { analyzeLandingPage } from "@/lib/actions/ai-landing-page-analyzer";
+import type { LandingPageAnalysisResult } from "@/lib/ai/schemas";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { FindingItem, type FindingStatus, ToolResultPanel } from "@/components/ai-tools/tool-result-panel";
-
-interface LandingPageResult {
-  score: number;
-  findings: { status: FindingStatus; label: string; detail: string }[];
-}
-
-function buildResult(): LandingPageResult {
-  return {
-    score: 71,
-    findings: [
-      { status: "good", label: "Headline clarity", detail: "The hero headline clearly states who the product is for and what it does." },
-      { status: "warning", label: "CTA visibility", detail: "Primary CTA button contrast is low against the background." },
-      { status: "bad", label: "Social proof", detail: "No testimonials, logos, or reviews found above the fold." },
-      { status: "good", label: "Page length", detail: "Page length is appropriate for the offer — not too short or overwhelming." },
-    ],
-  };
-}
+import { FindingItem, ToolResultPanel } from "@/components/ai-tools/tool-result-panel";
 
 export default function LandingPageAnalyzerView() {
   const t = useTranslations("aiTools.landingPageAnalyzer");
+  const tErr = useTranslations("aiTools.errors");
   const [url, setUrl] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const [result, setResult] = React.useState<LandingPageResult | null>(null);
+  const [result, setResult] = React.useState<LandingPageAnalysisResult | null>(null);
+  const [errorCode, setErrorCode] = React.useState<string | null>(null);
 
-  function handleAnalyze() {
+  async function handleAnalyze() {
     if (!url) return;
     setIsLoading(true);
     setResult(null);
-    setTimeout(() => {
-      setResult(buildResult());
-      setIsLoading(false);
-    }, 1100);
+    setErrorCode(null);
+    const response = await analyzeLandingPage(url);
+    setIsLoading(false);
+    if (response.ok) {
+      setResult(response.data);
+    } else {
+      setErrorCode(response.errorCode);
+    }
   }
 
   return (
@@ -72,6 +64,12 @@ export default function LandingPageAnalyzerView() {
           <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
+          {errorCode && !isLoading && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertTitle>{tErr("title")}</AlertTitle>
+              <AlertDescription>{tErr.has(errorCode) ? tErr(errorCode) : tErr("generic")}</AlertDescription>
+            </Alert>
+          )}
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={result !== null}
@@ -89,8 +87,8 @@ export default function LandingPageAnalyzerView() {
                   <Progress value={result.score} className="h-2" />
                 </div>
                 <div className="space-y-2">
-                  {result.findings.map((finding) => (
-                    <FindingItem key={finding.label} {...finding} />
+                  {result.findings.map((finding, i) => (
+                    <FindingItem key={i} {...finding} />
                   ))}
                 </div>
               </>

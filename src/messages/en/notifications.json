@@ -28,7 +28,11 @@
     "movedDealToNegotiation": "moved deal to Negotiation",
     "generatedEmailWithAi": "generated email with AI",
     "closedDeal": "closed deal",
-    "createdTemplate": "created template"
+    "createdTemplate": "created template",
+    "createdTask": "created task",
+    "scheduledMeeting": "scheduled meeting",
+    "addedNote": "added note",
+    "addedContact": "added contact"
   },
   "messages": {
     "campaignSent": "{campaign} was delivered to {count} recipients.",

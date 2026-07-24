@@ -1,21 +1,43 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { Users } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 import type { Locale } from "@/i18n/config";
-import { mockContacts } from "@/lib/mock/companies";
+import { deleteContact } from "@/lib/actions/contacts";
+import type { Contact } from "@/types/company";
 import { DataTable } from "@/components/shared/data-table";
 import { EmptyState } from "@/components/shared/empty-state";
 import { getContactsColumns } from "@/components/crm/contacts-columns";
+import { ContactFormDialog } from "@/components/crm/contact-form-dialog";
 
-export function ContactsView() {
+export function ContactsView({ contacts }: { contacts: Contact[] }) {
   const t = useTranslations();
+  const tc = useTranslations("common");
   const locale = useLocale() as Locale;
-  const columns = React.useMemo(() => getContactsColumns(t, locale), [t, locale]);
+  const router = useRouter();
+  const [editingContact, setEditingContact] = React.useState<Contact | null>(null);
 
-  if (mockContacts.length === 0) {
+  async function handleDelete(contact: Contact) {
+    const result = await deleteContact(contact.id);
+    if (result.ok) {
+      toast.success(t("crm.contacts.deletedToast", { name: contact.firstName }));
+      router.refresh();
+    } else {
+      toast.error(tc("genericErrorToast"));
+    }
+  }
+
+  const columns = React.useMemo(
+    () => getContactsColumns(t, locale, { onEdit: setEditingContact, onDelete: handleDelete }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [t, locale],
+  );
+
+  if (contacts.length === 0) {
     return (
       <EmptyState
         icon={Users}
@@ -25,5 +47,14 @@ export function ContactsView() {
     );
   }
 
-  return <DataTable columns={columns} data={mockContacts} />;
+  return (
+    <>
+      <DataTable columns={columns} data={contacts} />
+      <ContactFormDialog
+        open={Boolean(editingContact)}
+        onOpenChange={(open) => !open && setEditingContact(null)}
+        contact={editingContact ?? undefined}
+      />
+    </>
+  );
 }

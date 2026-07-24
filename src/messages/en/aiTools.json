@@ -7,6 +7,21 @@
     "success": "Copied to clipboard",
     "error": "Couldn't copy to clipboard"
   },
+  "errors": {
+    "title": "Something went wrong",
+    "generic": "Couldn't complete this request. Please try again.",
+    "MISSING_API_KEY": "AI features aren't configured yet — an OPENAI_API_KEY is required.",
+    "URL_REQUIRED": "Enter a URL first.",
+    "TEXT_REQUIRED": "Enter some text first.",
+    "INVALID_URL": "That doesn't look like a valid URL.",
+    "BLOCKED_HOST": "This URL can't be analyzed for security reasons.",
+    "DNS_ERROR": "Couldn't resolve that domain.",
+    "FETCH_FAILED": "Couldn't reach that page — check the URL and try again.",
+    "AI_EMPTY_RESPONSE": "The AI didn't return a response. Please try again.",
+    "AI_INVALID_RESPONSE": "The AI response couldn't be understood. Please try again.",
+    "AI_ERROR": "The AI request failed. Please try again.",
+    "INVALID_LANGUAGE": "Choose a target language."
+  },
   "websiteAnalyzer": {
     "cardDescription": "Scan a prospect's site for tech stack, SEO health, and messaging gaps.",
     "form": {
@@ -19,7 +34,23 @@
       "cardTitle": "Analysis",
       "emptyTitle": "No analysis yet",
       "emptyDescription": "Enter a website URL and click Analyze to see a report.",
-      "overallScore": "Overall score"
+      "overallScore": "Overall score",
+      "recommendations": "Recommendations"
+    },
+    "categories": {
+      "seo": "SEO",
+      "speed": "Speed",
+      "performance": "Performance",
+      "security": "Security",
+      "ux": "UX",
+      "ui": "UI",
+      "responsiveness": "Responsiveness",
+      "accessibility": "Accessibility",
+      "structure": "Structure",
+      "content": "Content",
+      "cta": "Call to Action",
+      "conversion": "Conversion",
+      "errors": "Errors"
     }
   },
   "emailGenerator": {
@@ -167,19 +198,75 @@
       "originalLabel": "Paste your email",
       "originalPlaceholder": "Paste the email you want to translate...",
       "languageLabel": "Target language",
-      "languages": {
-        "Spanish": "Spanish",
-        "French": "French",
-        "German": "German",
-        "Japanese": "Japanese",
-        "Portuguese": "Portuguese"
-      },
+      "languageSearchPlaceholder": "Search languages...",
+      "languageEmptyText": "No language found.",
       "submit": "Translate"
     },
     "result": {
       "cardTitle": "Translation",
       "emptyTitle": "No translation yet",
       "emptyDescription": "Paste an email and pick a language to translate it."
+    }
+  },
+  "outreachHub": {
+    "title": "AI Outreach Hub",
+    "description": "Connect every channel and data source you use to find and reach prospects — all in one place.",
+    "cardDescription": "Connect every outreach channel and data source in one hub (Enterprise).",
+    "upsell": {
+      "title": "AI Outreach Hub is an Enterprise feature",
+      "description": "Upgrade to the Enterprise plan to unlock integrations across social, marketplaces, business data, and more.",
+      "upgradeCta": "View plans"
+    },
+    "integrations": {
+      "comingSoon": "Coming Soon",
+      "email": { "description": "Send and track outreach directly from your inbox." },
+      "linkedin": { "description": "Find and message prospects on LinkedIn." },
+      "telegram": { "description": "Reach contacts and channels on Telegram." },
+      "instagram": { "description": "Discover and message leads on Instagram." },
+      "facebook": { "description": "Connect with pages and groups on Facebook." },
+      "whatsapp": { "description": "Send outreach messages over WhatsApp." },
+      "x": { "description": "Find and engage prospects on X (Twitter)." },
+      "reddit": { "description": "Discover leads across relevant subreddits." },
+      "discord": { "description": "Reach communities and members on Discord." },
+      "youtube": { "description": "Find creators and channels to partner with." },
+      "tiktok": { "description": "Discover creators and brands on TikTok." },
+      "googleMaps": { "description": "Find local businesses via Google Maps." },
+      "googleSearch": { "description": "Discover leads from Google search results." },
+      "bingMaps": { "description": "Find local businesses via Bing Maps." },
+      "appleMaps": { "description": "Find local businesses via Apple Maps." },
+      "yelp": { "description": "Discover and reach businesses listed on Yelp." },
+      "yellowPages": { "description": "Find businesses listed in Yellow Pages." },
+      "clutch": { "description": "Discover agencies and vendors listed on Clutch." },
+      "upwork": { "description": "Find clients and freelancers on Upwork." },
+      "fiverr": { "description": "Discover gigs and sellers on Fiverr." },
+      "freelancer": { "description": "Find projects and freelancers on Freelancer." },
+      "indeed": { "description": "Discover companies hiring via Indeed." },
+      "glassdoor": { "description": "Research companies listed on Glassdoor." },
+      "crunchbase": { "description": "Find funded companies via Crunchbase." },
+      "wellfound": { "description": "Discover startups on Wellfound (AngelList)." },
+      "productHunt": { "description": "Find new products and makers on Product Hunt." },
+      "github": { "description": "Discover developers and projects on GitHub." },
+      "behance": { "description": "Find designers and agencies on Behance." },
+      "dribbble": { "description": "Discover designers and studios on Dribbble." },
+      "pinterest": { "description": "Find leads and trends on Pinterest." },
+      "medium": { "description": "Discover writers and publications on Medium." },
+      "quora": { "description": "Find questions and prospects on Quora." },
+      "threads": { "description": "Reach audiences on Threads." },
+      "vk": { "description": "Find contacts and groups on VK." },
+      "odnoklassniki": { "description": "Reach contacts on Odnoklassniki." },
+      "avito": { "description": "Find local sellers and listings on Avito." },
+      "olx": { "description": "Discover listings and sellers on OLX." },
+      "promUa": { "description": "Find sellers and products on Prom.ua." },
+      "rozetka": { "description": "Discover sellers on Rozetka Marketplace." },
+      "etsy": { "description": "Find sellers and shops on Etsy." },
+      "amazonSellers": { "description": "Discover sellers and brands on Amazon." },
+      "shopifyStores": { "description": "Find merchants running Shopify stores." },
+      "openCorporates": { "description": "Look up company records via OpenCorporates." },
+      "governmentRegistries": { "description": "Search official government company registries." },
+      "websiteScanner": { "description": "Scan any website for contact details and tech stack." },
+      "googleBusinessProfile": { "description": "Find businesses via Google Business Profile." },
+      "spreadsheetsAndCrm": { "description": "Import and sync leads from CSV, Excel, Sheets, Notion, or your CRM." },
+      "thirdPartyApi": { "description": "Connect additional data sources via custom API integrations." }
     }
   }
 }

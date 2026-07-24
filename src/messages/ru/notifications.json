@@ -28,7 +28,11 @@
     "movedDealToNegotiation": "перевёл(а) сделку в статус «Переговоры»",
     "generatedEmailWithAi": "сгенерировал(а) письмо с помощью AI",
     "closedDeal": "закрыл(а) сделку",
-    "createdTemplate": "создал(а) шаблон"
+    "createdTemplate": "создал(а) шаблон",
+    "createdTask": "создал(а) задачу",
+    "scheduledMeeting": "запланировал(а) встречу",
+    "addedNote": "добавил(а) заметку",
+    "addedContact": "добавил(а) контакт"
   },
   "messages": {
     "campaignSent": "«{campaign}» доставлена {count} получателям.",

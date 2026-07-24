@@ -4,13 +4,12 @@ import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/config";
-import { mockSystemLogs } from "@/lib/mock/admin";
-import type { SystemLogLevel } from "@/types/admin";
+import type { SystemLog, SystemLogLevel } from "@/types/admin";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/components/shared/data-table";
 import { getSystemLogsColumns } from "@/components/admin/system-logs-columns";
 
-export function SystemLogsView() {
+export function SystemLogsView({ logs }: { logs: SystemLog[] }) {
   const t = useTranslations("admin.systemLogs");
   const locale = useLocale() as Locale;
   const [level, setLevel] = React.useState<SystemLogLevel | "all">("all");
@@ -22,7 +21,7 @@ export function SystemLogsView() {
     { label: t("filters.error"), value: "ERROR" },
   ];
 
-  const filtered = mockSystemLogs.filter((log) => level === "all" || log.level === level);
+  const filtered = logs.filter((log) => level === "all" || log.level === level);
   const columns = getSystemLogsColumns(
     {
       level: t("columns.level"),

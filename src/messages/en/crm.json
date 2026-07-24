@@ -35,22 +35,29 @@
       "company": "Company",
       "email": "Email",
       "phone": "Phone",
+      "telegram": "Telegram",
       "added": "Added"
     },
     "deleteTitle": "Delete this contact?",
     "deleteDescription": "This will permanently remove {name} from your CRM.",
     "deleteConfirm": "Delete contact",
     "deletedToast": "{name} was deleted.",
+    "updatedToast": "{name} was updated.",
     "addDialog": {
       "trigger": "Add Contact",
       "title": "Add Contact",
+      "editTitle": "Edit Contact",
+      "editDescription": "Update this contact's details.",
       "description": "Add a new contact to your CRM.",
       "firstNameLabel": "First name",
       "lastNameLabel": "Last name",
       "emailLabel": "Email",
       "jobTitleLabel": "Job title",
+      "telegramLabel": "Telegram username",
+      "telegramPlaceholder": "e.g. johndoe",
       "firstNameRequired": "First name is required",
       "submit": "Add Contact",
+      "editSubmit": "Save Contact",
       "successToast": "{name} was added to your CRM."
     }
   },
@@ -59,9 +66,16 @@
     "pageDescription": "Upcoming calls and meetings with your leads and contacts.",
     "emptyTitle": "No meetings scheduled",
     "emptyDescription": "Meetings you schedule with leads and contacts will show up here.",
+    "deleteTitle": "Delete this meeting?",
+    "deleteDescription": "This will permanently remove \"{title}\" from your calendar.",
+    "deleteConfirm": "Delete meeting",
+    "deletedToast": "\"{title}\" was deleted.",
+    "updatedToast": "\"{title}\" was updated.",
     "scheduleDialog": {
       "trigger": "Schedule Meeting",
       "title": "Schedule Meeting",
+      "editTitle": "Edit Meeting",
+      "editDescription": "Update this meeting's details.",
       "description": "Add a new meeting to your calendar.",
       "titleLabel": "Title",
       "titlePlaceholder": "e.g. Discovery Call",
@@ -71,6 +85,7 @@
       "locationLabel": "Location",
       "locationPlaceholder": "e.g. Google Meet",
       "submit": "Schedule Meeting",
+      "editSubmit": "Save Meeting",
       "successToast": "\"{title}\" was scheduled."
     }
   },
@@ -81,7 +96,13 @@
     "submit": "Add Note",
     "emptyTitle": "No notes yet",
     "emptyDescription": "Notes about your leads, contacts, and deals will show up here.",
-    "relatedTo": "Re: {name}"
+    "relatedTo": "Re: {name}",
+    "deleteTitle": "Delete this note?",
+    "deleteDescription": "This will permanently remove this note.",
+    "deleteConfirm": "Delete note",
+    "deletedToast": "Note was deleted.",
+    "updatedToast": "Note was updated.",
+    "editSave": "Save"
   },
   "pipeline": {
     "pageTitle": "Pipeline",
@@ -109,15 +130,26 @@
     },
     "due": "Due {when}",
     "noTasks": "No tasks",
+    "deleteTitle": "Delete this task?",
+    "deleteDescription": "This will permanently remove \"{title}\" from your tasks.",
+    "deleteConfirm": "Delete task",
+    "deletedToast": "\"{title}\" was deleted.",
+    "updatedToast": "\"{title}\" was updated.",
     "addDialog": {
       "trigger": "Add Task",
       "title": "Add Task",
+      "editTitle": "Edit Task",
+      "editDescription": "Update this task's details.",
       "description": "Create a new task for your team.",
       "titleLabel": "Title",
       "titlePlaceholder": "e.g. Follow up with Fjord Studio",
       "titleRequired": "Title is required",
+      "descriptionLabel": "Description (optional)",
+      "descriptionPlaceholder": "Add more detail about this task...",
+      "priorityLabel": "Priority",
       "dueDateLabel": "Due date",
       "submit": "Add Task",
+      "editSubmit": "Save Task",
       "successToast": "\"{title}\" was added to your tasks."
     }
   }

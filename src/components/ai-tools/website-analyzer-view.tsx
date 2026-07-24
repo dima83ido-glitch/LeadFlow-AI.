@@ -4,6 +4,10 @@ import * as React from "react";
 import { Globe, Loader2, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { analyzeWebsite } from "@/lib/actions/ai-website-analyzer";
+import type { WebsiteAnalysisResult } from "@/lib/ai/schemas";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
@@ -11,38 +15,27 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { FindingItem, ToolResultPanel } from "@/components/ai-tools/tool-result-panel";
 
-interface AnalysisResult {
-  score: number;
-  findings: { status: "good" | "warning" | "bad"; label: string; detail: string }[];
-}
-
-function buildResult(url: string): AnalysisResult {
-  return {
-    score: 78,
-    findings: [
-      { status: "good", label: "Tech stack detected", detail: `${url || "This site"} runs on a modern JS framework with HTTPS enabled.` },
-      { status: "warning", label: "Page speed", detail: "Largest Contentful Paint is 3.2s — consider optimizing hero images." },
-      { status: "good", label: "Mobile-friendly", detail: "Layout adapts well across common breakpoints." },
-      { status: "bad", label: "Messaging clarity", detail: "Homepage headline doesn't clearly state the value proposition." },
-      { status: "warning", label: "Call-to-action visibility", detail: "Primary CTA is below the fold on first viewport." },
-    ],
-  };
-}
-
 export default function WebsiteAnalyzerView() {
   const t = useTranslations("aiTools.websiteAnalyzer");
+  const tCat = useTranslations("aiTools.websiteAnalyzer.categories");
+  const tErr = useTranslations("aiTools.errors");
   const [url, setUrl] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const [result, setResult] = React.useState<AnalysisResult | null>(null);
+  const [result, setResult] = React.useState<WebsiteAnalysisResult | null>(null);
+  const [errorCode, setErrorCode] = React.useState<string | null>(null);
 
-  function handleAnalyze() {
+  async function handleAnalyze() {
     if (!url) return;
     setIsLoading(true);
     setResult(null);
-    setTimeout(() => {
-      setResult(buildResult(url));
-      setIsLoading(false);
-    }, 1100);
+    setErrorCode(null);
+    const response = await analyzeWebsite(url);
+    setIsLoading(false);
+    if (response.ok) {
+      setResult(response.data);
+    } else {
+      setErrorCode(response.errorCode);
+    }
   }
 
   return (
@@ -73,6 +66,12 @@ export default function WebsiteAnalyzerView() {
           <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
+          {errorCode && !isLoading && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertTitle>{tErr("title")}</AlertTitle>
+              <AlertDescription>{tErr.has(errorCode) ? tErr(errorCode) : tErr("generic")}</AlertDescription>
+            </Alert>
+          )}
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={result !== null}
@@ -85,14 +84,34 @@ export default function WebsiteAnalyzerView() {
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-sm">
                     <span className="font-medium">{t("result.overallScore")}</span>
-                    <span className="text-muted-foreground">{result.score} / 100</span>
+                    <span className="text-muted-foreground">{result.overallScore} / 100</span>
                   </div>
-                  <Progress value={result.score} className="h-2" />
+                  <Progress value={result.overallScore} className="h-2" />
                 </div>
-                <div className="space-y-2">
-                  {result.findings.map((finding) => (
-                    <FindingItem key={finding.label} {...finding} />
-                  ))}
+
+                {result.categories.map((category) => (
+                  <div key={category.key} className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-sm font-semibold">
+                        {tCat.has(category.key) ? tCat(category.key) : category.key}
+                      </h4>
+                      <Badge variant="outline">{category.score}/100</Badge>
+                    </div>
+                    <div className="space-y-2">
+                      {category.findings.map((finding, i) => (
+                        <FindingItem key={`${category.key}-${i}`} {...finding} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+
+                <div className="space-y-2 rounded-lg border p-3">
+                  <h4 className="text-sm font-semibold">{t("result.recommendations")}</h4>
+                  <ul className="list-disc space-y-1 pl-4 text-sm">
+                    {result.recommendations.map((rec, i) => (
+                      <li key={i}>{rec}</li>
+                    ))}
+                  </ul>
                 </div>
               </>
             )}

@@ -24,8 +24,42 @@
       "linkedIn": "LinkedIn",
       "referral": "Рекомендації",
       "website": "Сайт",
-      "manualImport": "Ручний імпорт"
+      "manualImport": "Ручний імпорт",
+      "unknown": "Невідомо"
     }
+  },
+  "leadTrends": {
+    "title": "Динаміка лідів",
+    "value": "Ліди"
+  },
+  "meetingStats": {
+    "title": "Статистика зустрічей",
+    "scheduled": "Заплановано",
+    "completed": "Завершено",
+    "cancelled": "Скасовано",
+    "upcoming": "Майбутні"
+  },
+  "taskStats": {
+    "title": "Статистика завдань",
+    "todo": "До виконання",
+    "inProgress": "У процесі",
+    "done": "Готово",
+    "overdue": "Прострочено"
+  },
+  "salesFunnel": {
+    "title": "Воронка продажів"
+  },
+  "dealSuccessRate": {
+    "title": "Успішність угод",
+    "won": "Виграно",
+    "lost": "Програно",
+    "open": "Відкрито",
+    "successRate": "Відсоток успіху"
+  },
+  "timeBasedPerformance": {
+    "title": "Динаміка за часом",
+    "leads": "Ліди",
+    "dealValue": "Сума виграних угод"
   },
   "revenueByPlan": {
     "title": "Дохід за тарифами",

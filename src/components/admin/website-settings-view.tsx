@@ -4,6 +4,8 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
+import { updateAppSettings } from "@/lib/actions/admin-app-settings";
+import type { AppSettingsMap } from "@/lib/app-settings";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
@@ -12,12 +14,25 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
-export function WebsiteSettingsView() {
+export function WebsiteSettingsView({ settings }: { settings: AppSettingsMap }) {
   const t = useTranslations("admin.websiteSettings");
-  const [maintenanceMode, setMaintenanceMode] = React.useState(false);
+  const tc = useTranslations("common");
+  const [siteName, setSiteName] = React.useState<string>(settings["site.name"]);
+  const [supportEmail, setSupportEmail] = React.useState<string>(settings["site.supportEmail"]);
+  const [maintenanceMode, setMaintenanceMode] = React.useState<boolean>(settings["site.maintenanceMode"] === "true");
+  const [metaTitle, setMetaTitle] = React.useState<string>(settings["seo.metaTitle"]);
+  const [metaDescription, setMetaDescription] = React.useState<string>(settings["seo.metaDescription"]);
+  const [isSaving, setIsSaving] = React.useState(false);
 
-  function handleSave() {
-    toast.success(t("savedToast"));
+  async function handleSave() {
+    setIsSaving(true);
+    const result = await updateAppSettings({ siteName, supportEmail, maintenanceMode, metaTitle, metaDescription });
+    setIsSaving(false);
+    if (result.ok) {
+      toast.success(t("savedToast"));
+    } else {
+      toast.error(tc("genericErrorToast"));
+    }
   }
 
   return (
@@ -30,11 +45,16 @@ export function WebsiteSettingsView() {
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="siteName">{t("general.siteNameLabel")}</FieldLabel>
-              <Input id="siteName" defaultValue="LeadFlow AI" />
+              <Input id="siteName" value={siteName} onChange={(e) => setSiteName(e.target.value)} />
             </Field>
             <Field>
               <FieldLabel htmlFor="supportEmail">{t("general.supportEmailLabel")}</FieldLabel>
-              <Input id="supportEmail" type="email" defaultValue="support@leadflow.ai" />
+              <Input
+                id="supportEmail"
+                type="email"
+                value={supportEmail}
+                onChange={(e) => setSupportEmail(e.target.value)}
+              />
             </Field>
             <Field orientation="horizontal">
               <div className="flex-1">
@@ -61,21 +81,22 @@ export function WebsiteSettingsView() {
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="metaTitle">{t("seo.metaTitleLabel")}</FieldLabel>
-              <Input id="metaTitle" defaultValue="LeadFlow AI — Find, analyze, and win your next client" />
+              <Input id="metaTitle" value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} />
             </Field>
             <Field>
               <FieldLabel htmlFor="metaDescription">{t("seo.metaDescriptionLabel")}</FieldLabel>
               <Textarea
                 id="metaDescription"
                 rows={3}
-                defaultValue="LeadFlow AI helps agencies and sales teams discover companies, analyze their websites, and generate personalized proposals."
+                value={metaDescription}
+                onChange={(e) => setMetaDescription(e.target.value)}
               />
             </Field>
           </FieldGroup>
         </CardContent>
         <Separator />
         <CardFooter className="justify-end pt-4">
-          <Button onClick={handleSave}>{t("saveChanges")}</Button>
+          <Button onClick={handleSave} disabled={isSaving}>{t("saveChanges")}</Button>
         </CardFooter>
       </Card>
     </div>

@@ -28,7 +28,11 @@
     "movedDealToNegotiation": "перевів(ла) угоду у статус «Переговори»",
     "generatedEmailWithAi": "згенерував(ла) лист за допомогою AI",
     "closedDeal": "закрив(ла) угоду",
-    "createdTemplate": "створив(ла) шаблон"
+    "createdTemplate": "створив(ла) шаблон",
+    "createdTask": "створив(ла) завдання",
+    "scheduledMeeting": "запланував(ла) зустріч",
+    "addedNote": "додав(ла) нотатку",
+    "addedContact": "додав(ла) контакт"
   },
   "messages": {
     "campaignSent": "«{campaign}» доставлено {count} отримувачам.",

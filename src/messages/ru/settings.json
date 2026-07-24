@@ -6,13 +6,19 @@
   "profile": {
     "title": "Профиль",
     "changeAvatar": "Изменить аватар",
-    "avatarToast": "Загрузка аватара пока не подключена.",
+    "removeAvatar": "Удалить аватар",
+    "avatarUpdatedToast": "Аватар обновлён.",
+    "avatarRemovedToast": "Аватар удалён.",
+    "avatarTooLargeToast": "Изображение слишком большое — выберите файл до 2 МБ.",
+    "avatarInvalidTypeToast": "Пожалуйста, выберите файл изображения.",
     "fullName": "Полное имя",
     "email": "Email",
+    "emailReadOnlyHint": "Чтобы изменить email, обратитесь в поддержку.",
     "jobTitle": "Должность",
     "jobTitlePlaceholder": "например, руководитель отдела продаж",
     "saveChanges": "Сохранить изменения",
-    "successToast": "Профиль обновлён."
+    "successToast": "Профиль обновлён.",
+    "errorToast": "Не удалось сохранить профиль. Попробуйте ещё раз."
   },
   "security": {
     "changePasswordTitle": "Смена пароля",

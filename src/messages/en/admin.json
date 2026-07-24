@@ -1,4 +1,15 @@
 {
+  "viewAs": {
+    "trigger": "View as",
+    "plans": {
+      "FREE": "Free",
+      "STARTER": "Starter",
+      "PRO": "Pro",
+      "ENTERPRISE": "Enterprise"
+    },
+    "viewingAs": "Viewing as {plan}",
+    "returnToAdmin": "Return to Admin"
+  },
   "dashboard": {
     "title": "Admin Overview",
     "description": "Workspace, billing, and platform health at a glance.",
@@ -23,6 +34,17 @@
     "planDistributionChart": {
       "title": "Plan Distribution",
       "workspacesLabel": "Workspaces"
+    },
+    "extraStats": {
+      "newRegistrations": "New Registrations (30d)",
+      "arr": "Annual Recurring Revenue",
+      "paidConversionRate": "Paid Conversion Rate"
+    },
+    "featureUsage": {
+      "title": "Most Popular Features",
+      "usesLabel": "Uses",
+      "emptyTitle": "No feature usage yet",
+      "emptyDescription": "Usage of AI tools and other features will show up here."
     }
   },
   "subscriptions": {
@@ -34,6 +56,14 @@
       "status": "Status",
       "mrr": "MRR",
       "renews": "Renews"
+    },
+    "actions": {
+      "activate": "Activate",
+      "disable": "Disable",
+      "extend": "Extend 30 days",
+      "grantFreeAccess": "Grant free access",
+      "updatedToast": "Subscription updated.",
+      "errorToast": "Something went wrong. Please try again."
     }
   },
   "users": {
@@ -55,7 +85,22 @@
       "deleteUser": "Delete user",
       "activatedToast": "{name} was reactivated.",
       "suspendedToast": "{name} was suspended.",
-      "deletedToast": "{name} was deleted."
+      "deletedToast": "{name} was deleted.",
+      "errorToast": "Something went wrong. Please try again."
+    }
+  },
+  "payments": {
+    "title": "Payments",
+    "description": "All payments across every workspace on LeadFlow AI.",
+    "filters": {
+      "all": "All"
+    },
+    "columns": {
+      "workspace": "Workspace",
+      "amount": "Amount",
+      "status": "Status",
+      "description": "Description",
+      "date": "Date"
     }
   },
   "systemLogs": {
@@ -99,7 +144,34 @@
       "description": "\"{code}\" will be permanently deleted and can no longer be redeemed.",
       "confirmLabel": "Delete code"
     },
-    "deletedToast": "\"{code}\" was deleted."
+    "deletedToast": "\"{code}\" was deleted.",
+    "errorToast": "Something went wrong. Please try again."
+  },
+  "systemManagement": {
+    "title": "System Management",
+    "description": "Pricing, limits, feature toggles, and system health.",
+    "planConfig": {
+      "priceLabel": "Price ($/month)",
+      "leadSearchLimitLabel": "Lead search limit",
+      "campaignLimitLabel": "Campaign limit",
+      "aiToolLimitLabel": "AI tool limit",
+      "seatsLimitLabel": "Seats limit",
+      "unlimited": "Unlimited",
+      "savedToast": "{plan} plan settings saved."
+    },
+    "featureFlags": {
+      "title": "Feature Flags"
+    },
+    "systemInfo": {
+      "title": "System Information",
+      "appVersion": "App version",
+      "environment": "Environment",
+      "nodeVersion": "Node version",
+      "uptime": "Uptime",
+      "databaseStatus": "Database status",
+      "healthy": "Healthy",
+      "unhealthy": "Unhealthy"
+    }
   },
   "websiteSettings": {
     "title": "Website Settings",

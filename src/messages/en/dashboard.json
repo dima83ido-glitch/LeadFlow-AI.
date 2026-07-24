@@ -28,7 +28,9 @@
     }
   },
   "recentActivity": {
-    "title": "Recent Activity"
+    "title": "Recent Activity",
+    "emptyTitle": "No activity yet",
+    "emptyDescription": "Actions across your workspace will show up here."
   },
   "recentCampaigns": {
     "title": "Recent Campaigns",

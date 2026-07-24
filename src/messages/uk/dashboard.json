@@ -28,7 +28,9 @@
     }
   },
   "recentActivity": {
-    "title": "Останні дії"
+    "title": "Останні дії",
+    "emptyTitle": "Поки немає активності",
+    "emptyDescription": "Дії у вашому робочому просторі з'являться тут."
   },
   "recentCampaigns": {
     "title": "Останні кампанії",

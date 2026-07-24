@@ -20,9 +20,12 @@ import {
   MousePointerClick,
   Notebook,
   Percent,
+  Receipt,
+  Rocket,
   ScrollText,
   Search,
   Settings,
+  Settings2,
   Shield,
   ShieldAlert,
   Sparkles,
@@ -72,6 +75,7 @@ export const mainNav: NavGroup[] = [
       { titleKey: "nav.items.landingPageAnalyzer", href: "/ai-tools/landing-page-analyzer", icon: FileCode2 },
       { titleKey: "nav.items.rewriteEmail", href: "/ai-tools/rewrite-email", icon: Wand2 },
       { titleKey: "nav.items.translateEmail", href: "/ai-tools/translate-email", icon: Languages },
+      { titleKey: "nav.items.outreachHub", href: "/ai-outreach-hub", icon: Rocket },
     ],
   },
   {
@@ -95,7 +99,9 @@ export const adminNav: NavGroup[] = [
       { titleKey: "nav.admin.overview", href: "/admin", icon: Shield },
       { titleKey: "nav.admin.users", href: "/admin/users", icon: Users2 },
       { titleKey: "nav.admin.subscriptions", href: "/admin/subscriptions", icon: CreditCard },
+      { titleKey: "nav.admin.payments", href: "/admin/payments", icon: Receipt },
       { titleKey: "nav.admin.statistics", href: "/admin/statistics", icon: BarChart3 },
+      { titleKey: "nav.admin.systemManagement", href: "/admin/system-management", icon: Settings2 },
       { titleKey: "nav.admin.websiteSettings", href: "/admin/website-settings", icon: Globe },
       { titleKey: "nav.admin.promoCodes", href: "/admin/promo-codes", icon: Ticket },
       { titleKey: "nav.admin.systemLogs", href: "/admin/system-logs", icon: ScrollText },
@@ -123,6 +129,7 @@ export const aiToolsNav: (NavItem & { descriptionKey: string })[] = [
   { titleKey: "nav.items.landingPageAnalyzer", href: "/ai-tools/landing-page-analyzer", icon: FileCode2, descriptionKey: "aiTools.landingPageAnalyzer.cardDescription" },
   { titleKey: "nav.items.rewriteEmail", href: "/ai-tools/rewrite-email", icon: Wand2, descriptionKey: "aiTools.rewriteEmail.cardDescription" },
   { titleKey: "nav.items.translateEmail", href: "/ai-tools/translate-email", icon: Languages, descriptionKey: "aiTools.translateEmail.cardDescription" },
+  { titleKey: "nav.items.outreachHub", href: "/ai-outreach-hub", icon: Rocket, descriptionKey: "aiTools.outreachHub.cardDescription" },
 ];
 
 export const commandPaletteNav: NavItem[] = [

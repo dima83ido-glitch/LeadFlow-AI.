@@ -24,8 +24,42 @@
       "linkedIn": "LinkedIn",
       "referral": "Рекомендации",
       "website": "Сайт",
-      "manualImport": "Ручной импорт"
+      "manualImport": "Ручной импорт",
+      "unknown": "Неизвестно"
     }
+  },
+  "leadTrends": {
+    "title": "Динамика лидов",
+    "value": "Лиды"
+  },
+  "meetingStats": {
+    "title": "Статистика встреч",
+    "scheduled": "Запланировано",
+    "completed": "Завершено",
+    "cancelled": "Отменено",
+    "upcoming": "Предстоящие"
+  },
+  "taskStats": {
+    "title": "Статистика задач",
+    "todo": "К выполнению",
+    "inProgress": "В процессе",
+    "done": "Готово",
+    "overdue": "Просрочено"
+  },
+  "salesFunnel": {
+    "title": "Воронка продаж"
+  },
+  "dealSuccessRate": {
+    "title": "Успешность сделок",
+    "won": "Выиграно",
+    "lost": "Проиграно",
+    "open": "Открыто",
+    "successRate": "Процент успеха"
+  },
+  "timeBasedPerformance": {
+    "title": "Динамика по времени",
+    "leads": "Лиды",
+    "dealValue": "Сумма выигранных сделок"
   },
   "revenueByPlan": {
     "title": "Доход по тарифам",

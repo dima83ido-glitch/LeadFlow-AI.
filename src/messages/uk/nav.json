@@ -26,6 +26,7 @@
     "landingPageAnalyzer": "Аналіз лендингу",
     "rewriteEmail": "Переписати лист",
     "translateEmail": "Перекласти лист",
+    "outreachHub": "AI Outreach Hub",
     "billing": "Оплата",
     "settings": "Налаштування",
     "notifications": "Сповіщення",
@@ -37,7 +38,9 @@
     "overview": "Огляд",
     "users": "Користувачі",
     "subscriptions": "Підписки",
+    "payments": "Платежі",
     "statistics": "Статистика",
+    "systemManagement": "Керування системою",
     "websiteSettings": "Налаштування сайту",
     "promoCodes": "Промокоди",
     "systemLogs": "Системні логи"
@@ -57,5 +60,12 @@
   },
   "commandPaletteNavigate": "Навігація",
   "commandPaletteLeads": "Ліди",
+  "commandPaletteContacts": "Контакти",
+  "commandPaletteCompanies": "Компанії",
+  "commandPaletteMeetings": "Зустрічі",
+  "commandPaletteTasks": "Завдання",
+  "commandPaletteNotes": "Нотатки",
+  "commandPaletteTemplates": "Шаблони",
+  "commandPaletteCampaigns": "Розсилки",
   "commandPalettePlaceholder": "Пошук сторінок, лідів, компаній..."
 }

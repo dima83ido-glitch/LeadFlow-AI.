@@ -7,6 +7,21 @@
     "success": "Скопійовано в буфер обміну",
     "error": "Не вдалося скопіювати"
   },
+  "errors": {
+    "title": "Щось пішло не так",
+    "generic": "Не вдалося виконати запит. Спробуйте ще раз.",
+    "MISSING_API_KEY": "AI-функції ще не налаштовані — потрібен OPENAI_API_KEY.",
+    "URL_REQUIRED": "Спочатку вкажіть URL.",
+    "TEXT_REQUIRED": "Спочатку введіть текст.",
+    "INVALID_URL": "Схоже, це некоректний URL.",
+    "BLOCKED_HOST": "Цей URL не можна проаналізувати з міркувань безпеки.",
+    "DNS_ERROR": "Не вдалося визначити цей домен.",
+    "FETCH_FAILED": "Не вдалося завантажити сторінку — перевірте URL і спробуйте ще раз.",
+    "AI_EMPTY_RESPONSE": "AI не повернув відповідь. Спробуйте ще раз.",
+    "AI_INVALID_RESPONSE": "Не вдалося розпізнати відповідь AI. Спробуйте ще раз.",
+    "AI_ERROR": "Запит до AI не виконано. Спробуйте ще раз.",
+    "INVALID_LANGUAGE": "Оберіть мову перекладу."
+  },
   "websiteAnalyzer": {
     "cardDescription": "Проаналізуйте сайт потенційного клієнта: технології, SEO та прогалини в позиціонуванні.",
     "form": {
@@ -19,7 +34,23 @@
       "cardTitle": "Аналіз",
       "emptyTitle": "Поки що немає аналізу",
       "emptyDescription": "Вкажіть URL сайту та натисніть «Аналізувати», щоб побачити звіт.",
-      "overallScore": "Загальна оцінка"
+      "overallScore": "Загальна оцінка",
+      "recommendations": "Рекомендації"
+    },
+    "categories": {
+      "seo": "SEO",
+      "speed": "Швидкість",
+      "performance": "Продуктивність",
+      "security": "Безпека",
+      "ux": "UX",
+      "ui": "UI",
+      "responsiveness": "Адаптивність",
+      "accessibility": "Доступність",
+      "structure": "Структура",
+      "content": "Контент",
+      "cta": "Заклик до дії",
+      "conversion": "Конверсія",
+      "errors": "Помилки"
     }
   },
   "emailGenerator": {
@@ -167,19 +198,75 @@
       "originalLabel": "Вставте лист",
       "originalPlaceholder": "Вставте лист, який потрібно перекласти...",
       "languageLabel": "Мова перекладу",
-      "languages": {
-        "Spanish": "Іспанська",
-        "French": "Французька",
-        "German": "Німецька",
-        "Japanese": "Японська",
-        "Portuguese": "Португальська"
-      },
+      "languageSearchPlaceholder": "Пошук мови...",
+      "languageEmptyText": "Мову не знайдено.",
       "submit": "Перекласти"
     },
     "result": {
       "cardTitle": "Переклад",
       "emptyTitle": "Поки що немає перекладу",
       "emptyDescription": "Вставте лист і оберіть мову, щоб перекласти його."
+    }
+  },
+  "outreachHub": {
+    "title": "AI Outreach Hub",
+    "description": "Підключіть усі канали та джерела даних для пошуку й охоплення клієнтів — в одному місці.",
+    "cardDescription": "Усі канали для аутричу та джерела даних в одному хабі (Enterprise).",
+    "upsell": {
+      "title": "AI Outreach Hub доступний на тарифі Enterprise",
+      "description": "Перейдіть на тариф Enterprise, щоб розблокувати інтеграції із соцмережами, маркетплейсами, базами компаній та іншими джерелами.",
+      "upgradeCta": "Переглянути тарифи"
+    },
+    "integrations": {
+      "comingSoon": "Незабаром",
+      "email": { "description": "Надсилайте та відстежуйте розсилки прямо з пошти." },
+      "linkedin": { "description": "Знаходьте та пишіть потенційним клієнтам у LinkedIn." },
+      "telegram": { "description": "Зв'язуйтеся з контактами та каналами в Telegram." },
+      "instagram": { "description": "Знаходьте та пишіть лідам в Instagram." },
+      "facebook": { "description": "Зв'язуйтеся зі сторінками та групами у Facebook." },
+      "whatsapp": { "description": "Надсилайте повідомлення через WhatsApp." },
+      "x": { "description": "Знаходьте та залучайте клієнтів у X (Twitter)." },
+      "reddit": { "description": "Знаходьте лідів у тематичних сабредітах." },
+      "discord": { "description": "Зв'язуйтеся зі спільнотами в Discord." },
+      "youtube": { "description": "Знаходьте авторів і канали для партнерства." },
+      "tiktok": { "description": "Знаходьте авторів і бренди в TikTok." },
+      "googleMaps": { "description": "Знаходьте локальний бізнес через Google Карти." },
+      "googleSearch": { "description": "Знаходьте лідів через результати пошуку Google." },
+      "bingMaps": { "description": "Знаходьте локальний бізнес через Bing Карти." },
+      "appleMaps": { "description": "Знаходьте локальний бізнес через Apple Карти." },
+      "yelp": { "description": "Знаходьте компанії з каталогу Yelp." },
+      "yellowPages": { "description": "Знаходьте компанії з довідника Yellow Pages." },
+      "clutch": { "description": "Знаходьте агенції та підрядників на Clutch." },
+      "upwork": { "description": "Знаходьте клієнтів і фрилансерів на Upwork." },
+      "fiverr": { "description": "Знаходьте замовлення та виконавців на Fiverr." },
+      "freelancer": { "description": "Знаходьте проєкти та фрилансерів на Freelancer." },
+      "indeed": { "description": "Знаходьте компанії, які наймають, через Indeed." },
+      "glassdoor": { "description": "Досліджуйте компанії на Glassdoor." },
+      "crunchbase": { "description": "Знаходьте компанії з інвестиціями через Crunchbase." },
+      "wellfound": { "description": "Знаходьте стартапи на Wellfound (AngelList)." },
+      "productHunt": { "description": "Знаходьте нові продукти та авторів на Product Hunt." },
+      "github": { "description": "Знаходьте розробників і проєкти на GitHub." },
+      "behance": { "description": "Знаходьте дизайнерів і агенції на Behance." },
+      "dribbble": { "description": "Знаходьте дизайнерів і студії на Dribbble." },
+      "pinterest": { "description": "Знаходьте лідів і тренди на Pinterest." },
+      "medium": { "description": "Знаходьте авторів і видання на Medium." },
+      "quora": { "description": "Знаходьте питання та клієнтів на Quora." },
+      "threads": { "description": "Охоплюйте аудиторію в Threads." },
+      "vk": { "description": "Знаходьте контакти й групи у ВКонтакті." },
+      "odnoklassniki": { "description": "Зв'язуйтеся з контактами в Однокласниках." },
+      "avito": { "description": "Знаходьте локальних продавців та оголошення на Avito." },
+      "olx": { "description": "Знаходьте оголошення та продавців на OLX." },
+      "promUa": { "description": "Знаходьте продавців і товари на Prom.ua." },
+      "rozetka": { "description": "Знаходьте продавців на маркетплейсі Rozetka." },
+      "etsy": { "description": "Знаходьте продавців і магазини на Etsy." },
+      "amazonSellers": { "description": "Знаходьте продавців і бренди на Amazon." },
+      "shopifyStores": { "description": "Знаходьте магазини на платформі Shopify." },
+      "openCorporates": { "description": "Шукайте дані про компанії через OpenCorporates." },
+      "governmentRegistries": { "description": "Шукайте дані в офіційних державних реєстрах компаній." },
+      "websiteScanner": { "description": "Скануйте будь-який сайт на контакти та технології." },
+      "googleBusinessProfile": { "description": "Знаходьте компанії через Google Business Profile." },
+      "spreadsheetsAndCrm": { "description": "Імпортуйте та синхронізуйте лідів із CSV, Excel, Sheets, Notion або вашої CRM." },
+      "thirdPartyApi": { "description": "Підключайте інші джерела даних через власні API-інтеграції." }
     }
   }
 }

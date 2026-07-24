@@ -12,11 +12,12 @@ export interface AdminUser {
 
 export interface AdminSubscription {
   id: string;
+  workspaceId: string;
   workspaceName: string;
   plan: string;
   status: string;
   mrr: number;
-  renewsAt: string;
+  renewsAt: string | null;
 }
 
 export interface PromoCode {
@@ -45,4 +46,14 @@ export interface ApiKeyItem {
   keyPrefix: string;
   createdAt: string;
   lastUsedAt?: string;
+}
+
+export interface AdminPayment {
+  id: string;
+  workspaceName: string;
+  amount: number;
+  currency: string;
+  status: "SUCCEEDED" | "FAILED" | "REFUNDED" | "PENDING";
+  description?: string;
+  createdAt: string;
 }

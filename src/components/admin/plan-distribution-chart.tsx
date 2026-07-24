@@ -3,7 +3,6 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { useTranslations } from "next-intl";
 
-import { mockPlanDistribution } from "@/lib/mock/admin";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   type ChartConfig,
@@ -12,7 +11,12 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export function PlanDistributionChart() {
+export interface PlanDistributionPoint {
+  plan: string;
+  count: number;
+}
+
+export function PlanDistributionChart({ data }: { data: PlanDistributionPoint[] }) {
   const t = useTranslations("admin.statistics.planDistributionChart");
   const chartConfig = {
     count: { label: t("workspacesLabel"), color: "var(--chart-3)" },
@@ -25,7 +29,7 @@ export function PlanDistributionChart() {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-64 w-full">
-          <BarChart data={mockPlanDistribution} margin={{ left: 0, right: 12 }}>
+          <BarChart data={data} margin={{ left: 0, right: 12 }}>
             <CartesianGrid vertical={false} />
             <XAxis dataKey="plan" tickLine={false} axisLine={false} tickMargin={8} />
             <YAxis tickLine={false} axisLine={false} width={40} />

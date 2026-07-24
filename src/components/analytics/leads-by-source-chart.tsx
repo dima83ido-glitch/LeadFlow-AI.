@@ -3,7 +3,6 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { useTranslations } from "next-intl";
 
-import { mockLeadsBySource } from "@/lib/mock/analytics";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   type ChartConfig,
@@ -12,12 +11,17 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export function LeadsBySourceChart() {
+export interface LeadsBySourcePoint {
+  sourceKey: string;
+  value: number;
+}
+
+export function LeadsBySourceChart({ data }: { data: LeadsBySourcePoint[] }) {
   const t = useTranslations("analytics.leadsBySource");
   const chartConfig = {
     value: { label: t("value"), color: "var(--chart-1)" },
   } satisfies ChartConfig;
-  const sourceLabel = (key: string) => t(`sources.${key}`);
+  const sourceLabel = (key: string) => (t.has(`sources.${key}`) ? t(`sources.${key}`) : key);
 
   return (
     <Card>
@@ -26,7 +30,7 @@ export function LeadsBySourceChart() {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-64 w-full">
-          <BarChart data={mockLeadsBySource} layout="vertical" margin={{ left: 12 }}>
+          <BarChart data={data} layout="vertical" margin={{ left: 12 }}>
             <CartesianGrid horizontal={false} />
             <XAxis type="number" hide />
             <YAxis

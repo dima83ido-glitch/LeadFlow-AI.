@@ -3,11 +3,11 @@
 import { useLocale, useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/config";
-import { mockAdminUsers } from "@/lib/mock/admin";
+import type { AdminUser } from "@/types/admin";
 import { DataTable } from "@/components/shared/data-table";
 import { getAdminUsersColumns } from "@/components/admin/admin-users-columns";
 
-export function AdminUsersView() {
+export function AdminUsersView({ users }: { users: AdminUser[] }) {
   const t = useTranslations("admin.users");
   const locale = useLocale() as Locale;
   const columns = getAdminUsersColumns(
@@ -26,9 +26,10 @@ export function AdminUsersView() {
       activatedToast: (name: string) => t("actions.activatedToast", { name }),
       suspendedToast: (name: string) => t("actions.suspendedToast", { name }),
       deletedToast: (name: string) => t("actions.deletedToast", { name }),
+      errorToast: t("actions.errorToast"),
     },
     locale,
   );
 
-  return <DataTable columns={columns} data={mockAdminUsers} />;
+  return <DataTable columns={columns} data={users} />;
 }

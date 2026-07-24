@@ -1,4 +1,15 @@
 {
+  "viewAs": {
+    "trigger": "Смотреть как",
+    "plans": {
+      "FREE": "Free",
+      "STARTER": "Starter",
+      "PRO": "Pro",
+      "ENTERPRISE": "Enterprise"
+    },
+    "viewingAs": "Режим просмотра: {plan}",
+    "returnToAdmin": "Вернуться в админку"
+  },
   "dashboard": {
     "title": "Обзор администратора",
     "description": "Рабочие пространства, биллинг и состояние платформы в одном месте.",
@@ -23,6 +34,17 @@
     "planDistributionChart": {
       "title": "Распределение по тарифам",
       "workspacesLabel": "Рабочие пространства"
+    },
+    "extraStats": {
+      "newRegistrations": "Новые регистрации (30 дн.)",
+      "arr": "Годовой регулярный доход",
+      "paidConversionRate": "Конверсия в платных"
+    },
+    "featureUsage": {
+      "title": "Самые популярные функции",
+      "usesLabel": "Использований",
+      "emptyTitle": "Пока нет данных об использовании",
+      "emptyDescription": "Здесь появится использование AI-инструментов и других функций."
     }
   },
   "subscriptions": {
@@ -34,6 +56,14 @@
       "status": "Статус",
       "mrr": "MRR",
       "renews": "Продление"
+    },
+    "actions": {
+      "activate": "Активировать",
+      "disable": "Отключить",
+      "extend": "Продлить на 30 дней",
+      "grantFreeAccess": "Предоставить бесплатный доступ",
+      "updatedToast": "Подписка обновлена.",
+      "errorToast": "Что-то пошло не так. Попробуйте ещё раз."
     }
   },
   "users": {
@@ -55,7 +85,22 @@
       "deleteUser": "Удалить пользователя",
       "activatedToast": "{name} снова активирован(а).",
       "suspendedToast": "{name} заблокирован(а).",
-      "deletedToast": "{name} удалён(а)."
+      "deletedToast": "{name} удалён(а).",
+      "errorToast": "Что-то пошло не так. Попробуйте ещё раз."
+    }
+  },
+  "payments": {
+    "title": "Платежи",
+    "description": "Все платежи по всем рабочим пространствам LeadFlow AI.",
+    "filters": {
+      "all": "Все"
+    },
+    "columns": {
+      "workspace": "Рабочее пространство",
+      "amount": "Сумма",
+      "status": "Статус",
+      "description": "Описание",
+      "date": "Дата"
     }
   },
   "systemLogs": {
@@ -99,7 +144,34 @@
       "description": "«{code}» будет удалён без возможности восстановления и станет недоступен для использования.",
       "confirmLabel": "Удалить код"
     },
-    "deletedToast": "«{code}» удалён."
+    "deletedToast": "«{code}» удалён.",
+    "errorToast": "Что-то пошло не так. Попробуйте ещё раз."
+  },
+  "systemManagement": {
+    "title": "Управление системой",
+    "description": "Тарифы, лимиты, переключатели функций и состояние системы.",
+    "planConfig": {
+      "priceLabel": "Цена ($/месяц)",
+      "leadSearchLimitLabel": "Лимит поиска лидов",
+      "campaignLimitLabel": "Лимит кампаний",
+      "aiToolLimitLabel": "Лимит AI-инструментов",
+      "seatsLimitLabel": "Лимит мест",
+      "unlimited": "Без ограничений",
+      "savedToast": "Настройки тарифа «{plan}» сохранены."
+    },
+    "featureFlags": {
+      "title": "Переключатели функций"
+    },
+    "systemInfo": {
+      "title": "Информация о системе",
+      "appVersion": "Версия приложения",
+      "environment": "Окружение",
+      "nodeVersion": "Версия Node",
+      "uptime": "Время работы",
+      "databaseStatus": "Статус базы данных",
+      "healthy": "В порядке",
+      "unhealthy": "Неисправно"
+    }
   },
   "websiteSettings": {
     "title": "Настройки сайта",

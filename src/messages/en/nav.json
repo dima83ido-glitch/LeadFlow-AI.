@@ -26,6 +26,7 @@
     "landingPageAnalyzer": "Landing Page Analyzer",
     "rewriteEmail": "Rewrite Email",
     "translateEmail": "Translate Email",
+    "outreachHub": "AI Outreach Hub",
     "billing": "Billing",
     "settings": "Settings",
     "notifications": "Notifications",
@@ -37,7 +38,9 @@
     "overview": "Overview",
     "users": "Users",
     "subscriptions": "Subscriptions",
+    "payments": "Payments",
     "statistics": "Statistics",
+    "systemManagement": "System Management",
     "websiteSettings": "Website Settings",
     "promoCodes": "Promo Codes",
     "systemLogs": "System Logs"
@@ -57,5 +60,12 @@
   },
   "commandPaletteNavigate": "Navigate",
   "commandPaletteLeads": "Leads",
+  "commandPaletteContacts": "Contacts",
+  "commandPaletteCompanies": "Companies",
+  "commandPaletteMeetings": "Meetings",
+  "commandPaletteTasks": "Tasks",
+  "commandPaletteNotes": "Notes",
+  "commandPaletteTemplates": "Templates",
+  "commandPaletteCampaigns": "Emails",
   "commandPalettePlaceholder": "Search pages, leads, companies..."
 }

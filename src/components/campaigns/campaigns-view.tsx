@@ -5,8 +5,7 @@ import { Megaphone, Search } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/config";
-import { mockCampaigns } from "@/lib/mock/campaigns";
-import type { CampaignStatus } from "@/types/campaign";
+import type { Campaign, CampaignStatus } from "@/types/campaign";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -23,7 +22,7 @@ const statusFilterValues: (CampaignStatus | "all")[] = [
   "COMPLETED",
 ];
 
-export function CampaignsView() {
+export function CampaignsView({ campaigns }: { campaigns: Campaign[] }) {
   const t = useTranslations("campaigns");
   const tCommon = useTranslations("common.statusLabels");
   const locale = useLocale() as Locale;
@@ -31,7 +30,7 @@ export function CampaignsView() {
   const [status, setStatus] = React.useState<CampaignStatus | "all">("all");
   const [search, setSearch] = React.useState("");
 
-  const filtered = mockCampaigns.filter((campaign) => {
+  const filtered = campaigns.filter((campaign) => {
     if (status !== "all" && campaign.status !== status) return false;
     if (search && !campaign.name.toLowerCase().includes(search.toLowerCase())) return false;
     return true;
@@ -60,7 +59,7 @@ export function CampaignsView() {
         </div>
       </div>
 
-      {mockCampaigns.length === 0 ? (
+      {campaigns.length === 0 ? (
         <EmptyState
           icon={Megaphone}
           title={t("emptyTitle")}
