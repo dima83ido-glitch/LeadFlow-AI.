@@ -20,6 +20,7 @@ export function formatDate(date: string | Date, locale: string = "en") {
     year: "numeric",
     month: "short",
     day: "numeric",
+    timeZone: "UTC",
   })
 }
 
