@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Eye } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -21,11 +20,12 @@ const PLANS: SubscriptionPlan[] = ["FREE", "STARTER", "PRO", "ENTERPRISE"];
 
 export function ViewAsMenu() {
   const t = useTranslations("admin.viewAs");
-  const router = useRouter();
 
   async function handleSelect(plan: SubscriptionPlan) {
     await setViewAsPlan(plan);
-    router.refresh();
+    // router.refresh() can race the cookie Set-Cookie from this action and
+    // re-render with the pre-override plan; a full reload always sees it.
+    window.location.reload();
   }
 
   return (

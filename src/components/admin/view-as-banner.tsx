@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Eye } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -10,11 +9,12 @@ import { Button } from "@/components/ui/button";
 
 export function ViewAsBanner({ plan }: { plan: SubscriptionPlan }) {
   const t = useTranslations("admin.viewAs");
-  const router = useRouter();
 
   async function handleReturn() {
     await setViewAsPlan(null);
-    router.refresh();
+    // router.refresh() can race the cookie clear from this action and
+    // re-render with the override still applied; a full reload always sees it.
+    window.location.reload();
   }
 
   return (
