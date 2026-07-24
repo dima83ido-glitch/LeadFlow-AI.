@@ -7,12 +7,8 @@ import { requireAdmin } from "@/lib/workspace";
 import { VIEW_AS_COOKIE } from "@/lib/view-as-constants";
 import type { SubscriptionPlan } from "@/generated/prisma/enums";
 
-export async function setViewAsPlan(plan: SubscriptionPlan | null): Promise<{ ok: true } | { ok: false }> {
-  try {
-    await requireAdmin();
-  } catch {
-    return { ok: false };
-  }
+export async function setViewAsPlan(plan: SubscriptionPlan | null): Promise<{ ok: true }> {
+  await requireAdmin();
 
   const cookieStore = await cookies();
   if (plan) {
