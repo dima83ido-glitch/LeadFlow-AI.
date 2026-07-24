@@ -2,13 +2,11 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { formatDistanceToNow } from "date-fns";
 import { NotebookText, Pencil, Send, Trash2, X, Check } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import type { Locale } from "@/i18n/config";
-import { getDateFnsLocale } from "@/lib/date-fns-locale";
 import { createNote, deleteNote, updateNote } from "@/lib/actions/notes";
 import type { Note } from "@/types/crm";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -17,6 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { EmptyState } from "@/components/shared/empty-state";
+import { RelativeTime } from "@/components/shared/relative-time";
 
 function initials(name: string) {
   return name
@@ -70,10 +69,7 @@ function NoteCard({ note, locale }: { note: Note; locale: Locale }) {
             <p className="text-sm font-medium">{note.authorName}</p>
             <div className="flex items-center gap-1">
               <p className="text-muted-foreground text-xs">
-                {formatDistanceToNow(new Date(note.createdAt), {
-                  addSuffix: true,
-                  locale: getDateFnsLocale(locale),
-                })}
+                <RelativeTime date={note.createdAt} locale={locale} />
               </p>
               {!isEditing && (
                 <>

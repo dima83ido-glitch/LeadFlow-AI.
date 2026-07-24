@@ -2,13 +2,11 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { formatDistanceToNow } from "date-fns";
 import { ClipboardList, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import type { Locale } from "@/i18n/config";
-import { getDateFnsLocale } from "@/lib/date-fns-locale";
 import { deleteTask, updateTaskStatus } from "@/lib/actions/tasks";
 import type { CrmTask, TaskStatus } from "@/types/crm";
 import { cn } from "@/lib/utils";
@@ -16,6 +14,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { RelativeTime } from "@/components/shared/relative-time";
 import {
   Select,
   SelectContent,
@@ -152,11 +151,8 @@ export function TasksView({ tasks }: { tasks: CrmTask[] }) {
                         </div>
                         {task.dueDate && (
                           <span className="text-muted-foreground text-xs">
-                            {t("due", {
-                              when: formatDistanceToNow(new Date(task.dueDate), {
-                                addSuffix: true,
-                                locale: getDateFnsLocale(locale),
-                              }),
+                            {t.rich("due", {
+                              when: () => <RelativeTime date={task.dueDate as string} locale={locale} />,
                             })}
                           </span>
                         )}

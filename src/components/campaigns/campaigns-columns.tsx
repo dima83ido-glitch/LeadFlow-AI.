@@ -1,12 +1,10 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { formatDistanceToNow } from "date-fns";
 import { MoreHorizontal, Pause, Pencil, Play, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/config";
-import { getDateFnsLocale } from "@/lib/date-fns-locale";
 import type { Campaign } from "@/types/campaign";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Progress } from "@/components/ui/progress";
+import { RelativeTime } from "@/components/shared/relative-time";
 import { StatusBadge } from "@/components/shared/status-badge";
 
 export function getCampaignsColumns(
@@ -80,10 +79,7 @@ export function getCampaignsColumns(
       header: t("columns.lastUpdated"),
       cell: ({ row }) => (
         <span className="text-muted-foreground text-sm">
-          {formatDistanceToNow(new Date(row.original.updatedAt), {
-            addSuffix: true,
-            locale: getDateFnsLocale(locale),
-          })}
+          <RelativeTime date={row.original.updatedAt} locale={locale} />
         </span>
       ),
     },

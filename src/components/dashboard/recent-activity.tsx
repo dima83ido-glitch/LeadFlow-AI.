@@ -1,12 +1,11 @@
-import { formatDistanceToNow } from "date-fns";
 import { useLocale, useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/config";
-import { getDateFnsLocale } from "@/lib/date-fns-locale";
 import type { RecentActivityItem } from "@/lib/dashboard/queries";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/shared/empty-state";
+import { RelativeTime } from "@/components/shared/relative-time";
 import { Activity } from "lucide-react";
 
 export function RecentActivity({ items }: { items: RecentActivityItem[] }) {
@@ -40,10 +39,7 @@ export function RecentActivity({ items }: { items: RecentActivityItem[] }) {
                     <span className="font-medium">{activity.target}</span>
                   </p>
                   <p className="text-muted-foreground text-xs">
-                    {formatDistanceToNow(new Date(activity.createdAt), {
-                      addSuffix: true,
-                      locale: getDateFnsLocale(locale),
-                    })}
+                    <RelativeTime date={activity.createdAt} locale={locale} />
                   </p>
                 </div>
               </li>

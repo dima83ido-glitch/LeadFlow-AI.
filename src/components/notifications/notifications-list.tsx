@@ -2,18 +2,17 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
 import { Bell, BellOff, CheckCheck } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/config";
-import { getDateFnsLocale } from "@/lib/date-fns-locale";
 import { mockNotifications } from "@/lib/mock/notifications";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EmptyState } from "@/components/shared/empty-state";
+import { RelativeTime } from "@/components/shared/relative-time";
 
 const toneDot: Record<string, string> = {
   INFO: "bg-blue-500",
@@ -91,10 +90,7 @@ export function NotificationsList() {
                   </p>
                 </div>
                 <p className="text-muted-foreground shrink-0 text-xs">
-                  {formatDistanceToNow(new Date(notification.createdAt), {
-                    addSuffix: true,
-                    locale: getDateFnsLocale(locale),
-                  })}
+                  <RelativeTime date={notification.createdAt} locale={locale} />
                 </p>
               </Link>
             ))}

@@ -1,11 +1,10 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { formatDistanceToNow } from "date-fns";
 
 import type { Locale } from "@/i18n/config";
-import { getDateFnsLocale } from "@/lib/date-fns-locale";
 import type { SystemLog } from "@/types/admin";
+import { RelativeTime } from "@/components/shared/relative-time";
 import { StatusBadge } from "@/components/shared/status-badge";
 
 interface SystemLogsColumnsMessages {
@@ -40,10 +39,7 @@ export function getSystemLogsColumns(
       header: t.time,
       cell: ({ row }) => (
         <span className="text-muted-foreground text-sm">
-          {formatDistanceToNow(new Date(row.original.createdAt), {
-            addSuffix: true,
-            locale: getDateFnsLocale(locale),
-          })}
+          <RelativeTime date={row.original.createdAt} locale={locale} />
         </span>
       ),
     },
