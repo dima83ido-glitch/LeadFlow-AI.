@@ -116,6 +116,26 @@ export const payments = [
   { amount: 4900, currency: "USD", status: "SUCCEEDED", description: "Starter plan — monthly subscription", daysAgo: 91 },
   { amount: 14900, currency: "USD", status: "FAILED", description: "Pro plan — monthly subscription (card declined)", daysAgo: 92 },
   { amount: 14900, currency: "USD", status: "REFUNDED", description: "Pro plan — refunded after downgrade", daysAgo: 95 },
+  {
+    amount: 14900,
+    currency: "USD",
+    status: "PENDING",
+    description: "Pro plan — monthly subscription (crypto)",
+    method: "CRYPTO",
+    cryptoAsset: "USDT-TRC20",
+    cryptoTxHash: "0x8f3a2c9e1b7d4f60a5c8e2d9b1f4a7c3e6d9b2f5a8c1e4d7b0a3f6c9e2d5b8a1",
+    daysAgo: 0,
+  },
+  {
+    amount: 4900,
+    currency: "USD",
+    status: "SUCCEEDED",
+    description: "Starter plan — monthly subscription (crypto)",
+    method: "CRYPTO",
+    cryptoAsset: "BTC",
+    cryptoTxHash: "3b1e7a9c5d2f8046b1c4e7a0d3f6b9c2e5a8d1f4b7c0e3a6d9f2b5c8e1a4d7f0",
+    daysAgo: 15,
+  },
 ];
 
 export const planConfigs = [

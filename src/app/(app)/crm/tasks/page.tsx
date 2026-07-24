@@ -27,7 +27,9 @@ export default async function TasksPage() {
     status: row.status,
     priority: row.priority,
     dueDate: row.dueDate?.toISOString(),
-    assigneeName: row.assignee?.name ?? row.assignee?.email ?? "Unassigned",
+    createdAt: row.createdAt.toISOString(),
+    assigneeId: row.assigneeId ?? undefined,
+    assigneeName: row.assignee?.name ?? row.assignee?.email ?? t("unassigned"),
     relatedTo: row.relatedLead?.companyName,
   }));
 

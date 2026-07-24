@@ -237,6 +237,9 @@ async function seedAdminSubscriptionAndPayments(workspaceId: string) {
         currency: p.currency,
         status: p.status as never,
         description: p.description,
+        method: ("method" in p ? p.method : "CARD") as never,
+        cryptoAsset: "cryptoAsset" in p ? p.cryptoAsset : undefined,
+        cryptoTxHash: "cryptoTxHash" in p ? p.cryptoTxHash : undefined,
         createdAt: daysAgo(p.daysAgo),
       },
     });

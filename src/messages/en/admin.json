@@ -47,6 +47,31 @@
       "emptyDescription": "Usage of AI tools and other features will show up here."
     }
   },
+  "aiUsage": {
+    "title": "AI Usage",
+    "description": "How your team is using LeadFlow AI's AI-powered tools.",
+    "stats": {
+      "totalCalls": "Total AI Calls (30d)",
+      "activeTools": "Active Tools",
+      "topTool": "Most Used Tool"
+    },
+    "dailyChart": {
+      "title": "Daily AI Calls (14d)",
+      "callsLabel": "Calls"
+    },
+    "byToolChart": {
+      "title": "Usage by Tool",
+      "callsLabel": "Calls",
+      "emptyTitle": "No AI usage yet",
+      "emptyDescription": "AI tool activity will show up here as your team generates reports and content."
+    },
+    "toolLabels": {
+      "websiteAnalyzer": "Website Analyzer",
+      "landingPageAnalyzer": "Landing Page Analyzer",
+      "emailTranslation": "Translate Email",
+      "marketingPlanGenerator": "Marketing Plan Generator"
+    }
+  },
   "subscriptions": {
     "title": "Subscriptions",
     "description": "All active and past workspace subscriptions.",
@@ -100,8 +125,19 @@
       "amount": "Amount",
       "status": "Status",
       "description": "Description",
-      "date": "Date"
-    }
+      "date": "Date",
+      "method": "Method",
+      "txHash": "Tx hash",
+      "actions": "Actions"
+    },
+    "method": {
+      "CARD": "Card",
+      "CRYPTO": "Crypto"
+    },
+    "confirmCrypto": "Confirm",
+    "confirmedToast": "Payment confirmed.",
+    "confirmedBy": "Confirmed by {name}",
+    "noTxHash": "No tx hash provided"
   },
   "systemLogs": {
     "title": "System Logs",
@@ -171,6 +207,19 @@
       "databaseStatus": "Database status",
       "healthy": "Healthy",
       "unhealthy": "Unhealthy"
+    },
+    "dbStats": {
+      "title": "Database & Platform Health",
+      "memoryUsage": "Memory usage (heap)",
+      "errorsLast24h": "Errors (24h)",
+      "rowLabels": {
+        "users": "Users",
+        "workspaces": "Workspaces",
+        "leads": "Leads",
+        "tasks": "Tasks",
+        "payments": "Payments",
+        "systemLogs": "System logs"
+      }
     }
   },
   "websiteSettings": {

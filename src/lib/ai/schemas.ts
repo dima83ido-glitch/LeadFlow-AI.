@@ -48,3 +48,110 @@ export const translationResultSchema = z.object({
 });
 
 export type TranslationResult = z.infer<typeof translationResultSchema>;
+
+// ---------------------------------------------------------------------------
+// AI Marketing Plan Generator
+// ---------------------------------------------------------------------------
+
+export interface MarketingPlanInput {
+  businessName: string;
+  industry: string;
+  targetAudience: string;
+  products: string;
+  services: string;
+  marketingGoals: string;
+  monthlyBudget: string;
+  timeline: string;
+  socialNetworks: string;
+  hasEmailList: boolean;
+  emailListSize?: string;
+  currentMarketingActivities: string;
+  biggestChallenge: string;
+  uniqueSellingProposition: string;
+  existingAssets?: string;
+  resources?: string;
+  offers?: string;
+  personas?: string;
+}
+
+const personaSchema = z.object({
+  name: z.string(),
+  summary: z.string(),
+  demographics: z.string(),
+  painPoints: z.array(z.string()).min(1).max(6),
+  goals: z.array(z.string()).min(1).max(6),
+});
+
+const swotSchema = z.object({
+  strengths: z.array(z.string()).min(1).max(6),
+  weaknesses: z.array(z.string()).min(1).max(6),
+  opportunities: z.array(z.string()).min(1).max(6),
+  threats: z.array(z.string()).min(1).max(6),
+});
+
+const marketingFunnelSchema = z.object({
+  awareness: z.string(),
+  consideration: z.string(),
+  conversion: z.string(),
+  retention: z.string(),
+});
+
+const socialChannelsSchema = z.object({
+  linkedin: z.string(),
+  facebook: z.string(),
+  instagram: z.string(),
+  tiktok: z.string(),
+  youtube: z.string(),
+});
+
+const roadmapPhaseSchema = z.object({
+  phase: z.string(),
+  timeframe: z.string(),
+  focus: z.string(),
+  tasks: z.array(z.string()).min(1).max(6),
+});
+
+const kpiSchema = z.object({
+  name: z.string(),
+  target: z.string(),
+});
+
+const budgetItemSchema = z.object({
+  category: z.string(),
+  percent: z.number().min(0).max(100),
+});
+
+const riskSchema = z.object({
+  risk: z.string(),
+  mitigation: z.string(),
+});
+
+export const marketingPlanResultSchema = z.object({
+  executiveSummary: z.string(),
+  idealCustomerPersona: personaSchema,
+  brandPositioning: z.string(),
+  swot: swotSchema,
+  marketingFunnel: marketingFunnelSchema,
+  leadGenerationStrategy: z.string(),
+  coldOutreachStrategy: z.string(),
+  emailCampaignStrategy: z.string(),
+  seoStrategy: z.string(),
+  contentStrategy: z.string(),
+  socialMediaOverview: z.string(),
+  socialChannels: socialChannelsSchema,
+  paidAdvertisingStrategy: z.string(),
+  partnershipStrategy: z.string(),
+  referralStrategy: z.string(),
+  monthlyActionPlan: z.array(z.string()).min(3).max(10),
+  weeklyActionPlan: z.array(z.string()).min(3).max(10),
+  dailyActionPlan: z.array(z.string()).min(3).max(10),
+  ninetyDayRoadmap: z.array(roadmapPhaseSchema).min(2).max(4),
+  kpis: z.array(kpiSchema).min(3).max(8),
+  budgetAllocation: z.array(budgetItemSchema).min(3).max(8),
+  expectedResults: z.array(z.string()).min(2).max(6),
+  risks: z.array(riskSchema).min(2).max(6),
+  recommendations: z.array(z.string()).min(3).max(8),
+  bonusOpportunities: z.array(z.string()).min(2).max(6),
+});
+
+export type MarketingPlanResult = z.infer<typeof marketingPlanResultSchema>;

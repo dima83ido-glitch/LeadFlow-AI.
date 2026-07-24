@@ -27,6 +27,8 @@ export interface CrmTask {
   status: TaskStatus;
   priority: TaskPriority;
   dueDate?: string;
+  createdAt: string;
+  assigneeId?: string;
   assigneeName: string;
   assigneeAvatarUrl?: string;
   relatedTo?: string;

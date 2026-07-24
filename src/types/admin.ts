@@ -55,5 +55,10 @@ export interface AdminPayment {
   currency: string;
   status: "SUCCEEDED" | "FAILED" | "REFUNDED" | "PENDING";
   description?: string;
+  method: "CARD" | "CRYPTO";
+  cryptoAsset?: string;
+  cryptoTxHash?: string;
+  confirmedAt?: string;
+  confirmedByName?: string;
   createdAt: string;
 }

@@ -20,7 +20,8 @@
     "AI_EMPTY_RESPONSE": "The AI didn't return a response. Please try again.",
     "AI_INVALID_RESPONSE": "The AI response couldn't be understood. Please try again.",
     "AI_ERROR": "The AI request failed. Please try again.",
-    "INVALID_LANGUAGE": "Choose a target language."
+    "INVALID_LANGUAGE": "Choose a target language.",
+    "REQUIRED_FIELDS_MISSING": "Fill in all required fields first."
   },
   "websiteAnalyzer": {
     "cardDescription": "Scan a prospect's site for tech stack, SEO health, and messaging gaps.",
@@ -51,6 +52,127 @@
       "cta": "Call to Action",
       "conversion": "Conversion",
       "errors": "Errors"
+    }
+  },
+  "marketingPlanGenerator": {
+    "cardDescription": "Generate a complete, budget-aware marketing strategy for your business.",
+    "form": {
+      "cardTitle": "Tell us about your business",
+      "cardDescription": "The more detail you give, the more tailored your strategy will be.",
+      "requiredError": "This field is required.",
+      "sections": {
+        "business": "Business Basics",
+        "offering": "What You Offer",
+        "goals": "Goals & Budget",
+        "channels": "Channels & Audience"
+      },
+      "businessNameLabel": "Business Name",
+      "businessNamePlaceholder": "e.g. Northwind Analytics",
+      "industryLabel": "Industry",
+      "industryPlaceholder": "e.g. B2B SaaS, e-commerce, healthcare",
+      "targetAudienceLabel": "Target Audience",
+      "targetAudiencePlaceholder": "Who are you trying to reach?",
+      "uspLabel": "Unique Selling Proposition",
+      "uspPlaceholder": "What makes you different from competitors?",
+      "productsLabel": "Products",
+      "productsPlaceholder": "Products you sell",
+      "servicesLabel": "Services",
+      "servicesPlaceholder": "Services you offer",
+      "existingAssetsLabel": "Existing Assets",
+      "existingAssetsPlaceholder": "Website, brand assets, case studies, testimonials...",
+      "offersLabel": "Offers",
+      "offersPlaceholder": "Current promotions, discounts, bundles...",
+      "marketingGoalsLabel": "Marketing Goals",
+      "marketingGoalsPlaceholder": "What do you want to achieve?",
+      "monthlyBudgetLabel": "Monthly Budget",
+      "monthlyBudgetPlaceholder": "e.g. $2,000/month",
+      "timelineLabel": "Timeline",
+      "timelinePlaceholder": "e.g. 3 months, 6 months",
+      "biggestChallengeLabel": "Biggest Marketing Challenge",
+      "biggestChallengePlaceholder": "What's holding your marketing back right now?",
+      "socialNetworksLabel": "Social Networks",
+      "socialNetworksPlaceholder": "e.g. Instagram, LinkedIn, TikTok",
+      "currentActivitiesLabel": "Current Marketing Activities",
+      "currentActivitiesPlaceholder": "What are you doing today?",
+      "hasEmailListLabel": "I have an email list",
+      "emailListSizeLabel": "Email List Size",
+      "emailListSizePlaceholder": "e.g. 2,500 subscribers",
+      "resourcesLabel": "Resources",
+      "resourcesPlaceholder": "Team, tools, budget for freelancers...",
+      "personasLabel": "Personas",
+      "personasPlaceholder": "Any existing customer personas you already use...",
+      "submit": "Generate Marketing Plan"
+    },
+    "result": {
+      "emptyTitle": "No plan yet",
+      "emptyDescription": "Fill in the form above and generate your complete marketing strategy.",
+      "summaryTitle": "Executive Summary",
+      "summaryTitleFor": "Executive Summary — {name}",
+      "tabs": {
+        "overview": "Overview",
+        "strategy": "Strategy",
+        "plan": "Action Plan",
+        "metrics": "Metrics & Budget"
+      },
+      "persona": {
+        "title": "Ideal Customer Persona",
+        "painPoints": "Pain Points",
+        "goals": "Goals"
+      },
+      "positioning": {
+        "title": "Brand Positioning"
+      },
+      "swot": {
+        "strengths": "Strengths",
+        "weaknesses": "Weaknesses",
+        "opportunities": "Opportunities",
+        "threats": "Threats"
+      },
+      "funnel": {
+        "title": "Marketing Funnel",
+        "awareness": "Awareness",
+        "consideration": "Consideration",
+        "conversion": "Conversion",
+        "retention": "Retention"
+      },
+      "strategy": {
+        "leadGeneration": "Lead Generation Strategy",
+        "coldOutreach": "Cold Outreach Strategy",
+        "emailCampaign": "Email Campaign Strategy",
+        "seo": "SEO Strategy",
+        "content": "Content Strategy",
+        "socialMedia": "Social Media Strategy",
+        "paidAdvertising": "Paid Advertising Strategy",
+        "partnership": "Partnership Strategy",
+        "referral": "Referral Strategy"
+      },
+      "actionPlan": {
+        "monthly": "Monthly Action Plan",
+        "weekly": "Weekly Action Plan",
+        "daily": "Daily Action Plan"
+      },
+      "roadmap": {
+        "title": "90-Day Roadmap"
+      },
+      "kpis": {
+        "title": "KPIs"
+      },
+      "budget": {
+        "title": "Budget Allocation"
+      },
+      "budgetLabel": "Allocation (%)",
+      "expectedResults": {
+        "title": "Expected Results"
+      },
+      "risks": {
+        "title": "Risks"
+      },
+      "recommendations": {
+        "title": "Recommendations"
+      },
+      "bonus": {
+        "title": "Bonus Growth Opportunities"
+      }
     }
   },
   "emailGenerator": {

@@ -29,6 +29,7 @@ import {
   Shield,
   ShieldAlert,
   Sparkles,
+  Target,
   Ticket,
   Users,
   Users2,
@@ -67,6 +68,7 @@ export const mainNav: NavGroup[] = [
     titleKey: "nav.groups.aiTools",
     items: [
       { titleKey: "nav.items.websiteAnalyzer", href: "/ai-tools/website-analyzer", icon: Globe },
+      { titleKey: "nav.items.marketingPlanGenerator", href: "/ai-tools/marketing-plan-generator", icon: Target },
       { titleKey: "nav.items.emailGenerator", href: "/ai-tools/email-generator", icon: Mail },
       { titleKey: "nav.items.subjectGenerator", href: "/ai-tools/subject-generator", icon: Mails },
       { titleKey: "nav.items.headlineGenerator", href: "/ai-tools/headline-generator", icon: Lightbulb },
@@ -101,6 +103,7 @@ export const adminNav: NavGroup[] = [
       { titleKey: "nav.admin.subscriptions", href: "/admin/subscriptions", icon: CreditCard },
       { titleKey: "nav.admin.payments", href: "/admin/payments", icon: Receipt },
       { titleKey: "nav.admin.statistics", href: "/admin/statistics", icon: BarChart3 },
+      { titleKey: "nav.admin.aiUsage", href: "/admin/ai-usage", icon: Bot },
       { titleKey: "nav.admin.systemManagement", href: "/admin/system-management", icon: Settings2 },
       { titleKey: "nav.admin.websiteSettings", href: "/admin/website-settings", icon: Globe },
       { titleKey: "nav.admin.promoCodes", href: "/admin/promo-codes", icon: Ticket },
@@ -121,6 +124,7 @@ export const settingsNav: NavItem[] = [
 
 export const aiToolsNav: (NavItem & { descriptionKey: string })[] = [
   { titleKey: "nav.items.websiteAnalyzer", href: "/ai-tools/website-analyzer", icon: Globe, descriptionKey: "aiTools.websiteAnalyzer.cardDescription" },
+  { titleKey: "nav.items.marketingPlanGenerator", href: "/ai-tools/marketing-plan-generator", icon: Target, descriptionKey: "aiTools.marketingPlanGenerator.cardDescription" },
   { titleKey: "nav.items.emailGenerator", href: "/ai-tools/email-generator", icon: Mail, descriptionKey: "aiTools.emailGenerator.cardDescription" },
   { titleKey: "nav.items.subjectGenerator", href: "/ai-tools/subject-generator", icon: Mails, descriptionKey: "aiTools.subjectGenerator.cardDescription" },
   { titleKey: "nav.items.headlineGenerator", href: "/ai-tools/headline-generator", icon: Lightbulb, descriptionKey: "aiTools.headlineGenerator.cardDescription" },

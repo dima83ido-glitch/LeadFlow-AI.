@@ -47,6 +47,31 @@
       "emptyDescription": "Здесь появится использование AI-инструментов и других функций."
     }
   },
+  "aiUsage": {
+    "title": "Использование ИИ",
+    "description": "Как ваша команда использует AI-инструменты LeadFlow AI.",
+    "stats": {
+      "totalCalls": "Вызовов ИИ (30 дн.)",
+      "activeTools": "Активных инструментов",
+      "topTool": "Самый популярный инструмент"
+    },
+    "dailyChart": {
+      "title": "Вызовы ИИ по дням (14 дн.)",
+      "callsLabel": "Вызовы"
+    },
+    "byToolChart": {
+      "title": "Использование по инструментам",
+      "callsLabel": "Вызовы",
+      "emptyTitle": "Пока нет использования ИИ",
+      "emptyDescription": "Здесь появится активность AI-инструментов по мере того, как команда будет создавать отчёты и контент."
+    },
+    "toolLabels": {
+      "websiteAnalyzer": "Анализатор сайта",
+      "landingPageAnalyzer": "Анализатор лендингов",
+      "emailTranslation": "Перевод письма",
+      "marketingPlanGenerator": "Генератор маркетингового плана"
+    }
+  },
   "subscriptions": {
     "title": "Подписки",
     "description": "Все активные и прошлые подписки рабочих пространств.",
@@ -100,8 +125,19 @@
       "amount": "Сумма",
       "status": "Статус",
       "description": "Описание",
-      "date": "Дата"
-    }
+      "date": "Дата",
+      "method": "Способ",
+      "txHash": "Хеш транзакции",
+      "actions": "Действия"
+    },
+    "method": {
+      "CARD": "Карта",
+      "CRYPTO": "Крипто"
+    },
+    "confirmCrypto": "Подтвердить",
+    "confirmedToast": "Платёж подтверждён.",
+    "confirmedBy": "Подтвердил(а) {name}",
+    "noTxHash": "Хеш транзакции не указан"
   },
   "systemLogs": {
     "title": "Системные логи",
@@ -171,6 +207,19 @@
       "databaseStatus": "Статус базы данных",
       "healthy": "В порядке",
       "unhealthy": "Неисправно"
+    },
+    "dbStats": {
+      "title": "База данных и здоровье платформы",
+      "memoryUsage": "Использование памяти (heap)",
+      "errorsLast24h": "Ошибки (24 ч.)",
+      "rowLabels": {
+        "users": "Пользователи",
+        "workspaces": "Рабочие пространства",
+        "leads": "Лиды",
+        "tasks": "Задачи",
+        "payments": "Платежи",
+        "systemLogs": "Системные логи"
+      }
     }
   },
   "websiteSettings": {

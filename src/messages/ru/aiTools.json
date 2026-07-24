@@ -20,7 +20,8 @@
     "AI_EMPTY_RESPONSE": "AI не вернул ответ. Попробуйте ещё раз.",
     "AI_INVALID_RESPONSE": "Не удалось распознать ответ AI. Попробуйте ещё раз.",
     "AI_ERROR": "Запрос к AI не выполнен. Попробуйте ещё раз.",
-    "INVALID_LANGUAGE": "Выберите язык перевода."
+    "INVALID_LANGUAGE": "Выберите язык перевода.",
+    "REQUIRED_FIELDS_MISSING": "Сначала заполните все обязательные поля."
   },
   "websiteAnalyzer": {
     "cardDescription": "Проанализируйте сайт потенциального клиента: технологии, SEO и пробелы в позиционировании.",
@@ -51,6 +52,127 @@
       "cta": "Призыв к действию",
       "conversion": "Конверсия",
       "errors": "Ошибки"
+    }
+  },
+  "marketingPlanGenerator": {
+    "cardDescription": "Сгенерируйте полную маркетинговую стратегию для вашего бизнеса с учётом бюджета.",
+    "form": {
+      "cardTitle": "Расскажите о вашем бизнесе",
+      "cardDescription": "Чем больше деталей вы укажете, тем точнее будет стратегия.",
+      "requiredError": "Это поле обязательно.",
+      "sections": {
+        "business": "Основы бизнеса",
+        "offering": "Что вы предлагаете",
+        "goals": "Цели и бюджет",
+        "channels": "Каналы и аудитория"
+      },
+      "businessNameLabel": "Название бизнеса",
+      "businessNamePlaceholder": "например, Northwind Analytics",
+      "industryLabel": "Отрасль",
+      "industryPlaceholder": "например, B2B SaaS, e-commerce, медицина",
+      "targetAudienceLabel": "Целевая аудитория",
+      "targetAudiencePlaceholder": "Кого вы хотите привлечь?",
+      "uspLabel": "Уникальное торговое предложение",
+      "uspPlaceholder": "Чем вы отличаетесь от конкурентов?",
+      "productsLabel": "Продукты",
+      "productsPlaceholder": "Продукты, которые вы продаёте",
+      "servicesLabel": "Услуги",
+      "servicesPlaceholder": "Услуги, которые вы предлагаете",
+      "existingAssetsLabel": "Существующие активы",
+      "existingAssetsPlaceholder": "Сайт, брендовые материалы, кейсы, отзывы...",
+      "offersLabel": "Предложения",
+      "offersPlaceholder": "Текущие акции, скидки, пакеты...",
+      "marketingGoalsLabel": "Маркетинговые цели",
+      "marketingGoalsPlaceholder": "Чего вы хотите достичь?",
+      "monthlyBudgetLabel": "Месячный бюджет",
+      "monthlyBudgetPlaceholder": "например, $2000/месяц",
+      "timelineLabel": "Сроки",
+      "timelinePlaceholder": "например, 3 месяца, 6 месяцев",
+      "biggestChallengeLabel": "Главная маркетинговая проблема",
+      "biggestChallengePlaceholder": "Что сейчас мешает вашему маркетингу?",
+      "socialNetworksLabel": "Социальные сети",
+      "socialNetworksPlaceholder": "например, Instagram, LinkedIn, TikTok",
+      "currentActivitiesLabel": "Текущая маркетинговая активность",
+      "currentActivitiesPlaceholder": "Что вы делаете сейчас?",
+      "hasEmailListLabel": "У меня есть email-рассылка",
+      "emailListSizeLabel": "Размер email-базы",
+      "emailListSizePlaceholder": "например, 2500 подписчиков",
+      "resourcesLabel": "Ресурсы",
+      "resourcesPlaceholder": "Команда, инструменты, бюджет на фрилансеров...",
+      "personasLabel": "Персоны",
+      "personasPlaceholder": "Существующие портреты клиентов, если есть...",
+      "submit": "Сгенерировать маркетинговый план"
+    },
+    "result": {
+      "emptyTitle": "Пока нет плана",
+      "emptyDescription": "Заполните форму выше и сгенерируйте полную маркетинговую стратегию.",
+      "summaryTitle": "Краткое резюме",
+      "summaryTitleFor": "Краткое резюме — {name}",
+      "tabs": {
+        "overview": "Обзор",
+        "strategy": "Стратегия",
+        "plan": "План действий",
+        "metrics": "Метрики и бюджет"
+      },
+      "persona": {
+        "title": "Портрет идеального клиента",
+        "painPoints": "Боли",
+        "goals": "Цели"
+      },
+      "positioning": {
+        "title": "Позиционирование бренда"
+      },
+      "swot": {
+        "strengths": "Сильные стороны",
+        "weaknesses": "Слабые стороны",
+        "opportunities": "Возможности",
+        "threats": "Угрозы"
+      },
+      "funnel": {
+        "title": "Маркетинговая воронка",
+        "awareness": "Осведомлённость",
+        "consideration": "Рассмотрение",
+        "conversion": "Конверсия",
+        "retention": "Удержание"
+      },
+      "strategy": {
+        "leadGeneration": "Стратегия генерации лидов",
+        "coldOutreach": "Стратегия холодных обращений",
+        "emailCampaign": "Стратегия email-кампаний",
+        "seo": "SEO-стратегия",
+        "content": "Контент-стратегия",
+        "socialMedia": "Стратегия в соцсетях",
+        "paidAdvertising": "Стратегия платной рекламы",
+        "partnership": "Партнёрская стратегия",
+        "referral": "Реферальная стратегия"
+      },
+      "actionPlan": {
+        "monthly": "Ежемесячный план",
+        "weekly": "Еженедельный план",
+        "daily": "Ежедневный план"
+      },
+      "roadmap": {
+        "title": "План на 90 дней"
+      },
+      "kpis": {
+        "title": "KPI"
+      },
+      "budget": {
+        "title": "Распределение бюджета"
+      },
+      "budgetLabel": "Доля (%)",
+      "expectedResults": {
+        "title": "Ожидаемые результаты"
+      },
+      "risks": {
+        "title": "Риски"
+      },
+      "recommendations": {
+        "title": "Рекомендации"
+      },
+      "bonus": {
+        "title": "Дополнительные возможности роста"
+      }
     }
   },
   "emailGenerator": {

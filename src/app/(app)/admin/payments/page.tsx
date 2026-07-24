@@ -12,7 +12,7 @@ export default async function AdminPaymentsPage() {
   const t = await getTranslations("admin.payments");
 
   const rows = await prisma.payment.findMany({
-    include: { workspace: true },
+    include: { workspace: true, confirmedBy: true },
     orderBy: { createdAt: "desc" },
   });
 
@@ -23,6 +23,11 @@ export default async function AdminPaymentsPage() {
     currency: row.currency,
     status: row.status,
     description: row.description ?? undefined,
+    method: row.method,
+    cryptoAsset: row.cryptoAsset ?? undefined,
+    cryptoTxHash: row.cryptoTxHash ?? undefined,
+    confirmedAt: row.confirmedAt?.toISOString(),
+    confirmedByName: row.confirmedBy?.name ?? row.confirmedBy?.email ?? undefined,
     createdAt: row.createdAt.toISOString(),
   }));
 

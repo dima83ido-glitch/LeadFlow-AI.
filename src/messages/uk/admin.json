@@ -47,6 +47,31 @@
       "emptyDescription": "Тут з'явиться використання AI-інструментів та інших функцій."
     }
   },
+  "aiUsage": {
+    "title": "Використання ШІ",
+    "description": "Як ваша команда використовує AI-інструменти LeadFlow AI.",
+    "stats": {
+      "totalCalls": "Викликів ШІ (30 дн.)",
+      "activeTools": "Активних інструментів",
+      "topTool": "Найпопулярніший інструмент"
+    },
+    "dailyChart": {
+      "title": "Виклики ШІ за днями (14 дн.)",
+      "callsLabel": "Виклики"
+    },
+    "byToolChart": {
+      "title": "Використання за інструментами",
+      "callsLabel": "Виклики",
+      "emptyTitle": "Поки немає використання ШІ",
+      "emptyDescription": "Тут з'явиться активність AI-інструментів у міру того, як команда створюватиме звіти та контент."
+    },
+    "toolLabels": {
+      "websiteAnalyzer": "Аналізатор сайту",
+      "landingPageAnalyzer": "Аналізатор лендингів",
+      "emailTranslation": "Переклад листа",
+      "marketingPlanGenerator": "Генератор маркетингового плану"
+    }
+  },
   "subscriptions": {
     "title": "Підписки",
     "description": "Усі активні та минулі підписки робочих просторів.",
@@ -100,8 +125,19 @@
       "amount": "Сума",
       "status": "Статус",
       "description": "Опис",
-      "date": "Дата"
-    }
+      "date": "Дата",
+      "method": "Спосіб",
+      "txHash": "Хеш транзакції",
+      "actions": "Дії"
+    },
+    "method": {
+      "CARD": "Картка",
+      "CRYPTO": "Крипто"
+    },
+    "confirmCrypto": "Підтвердити",
+    "confirmedToast": "Платіж підтверджено.",
+    "confirmedBy": "Підтвердив(ла) {name}",
+    "noTxHash": "Хеш транзакції не вказано"
   },
   "systemLogs": {
     "title": "Системні логи",
@@ -171,6 +207,19 @@
       "databaseStatus": "Статус бази даних",
       "healthy": "У порядку",
       "unhealthy": "Несправно"
+    },
+    "dbStats": {
+      "title": "База даних і стан платформи",
+      "memoryUsage": "Використання пам'яті (heap)",
+      "errorsLast24h": "Помилки (24 год.)",
+      "rowLabels": {
+        "users": "Користувачі",
+        "workspaces": "Робочі простори",
+        "leads": "Ліди",
+        "tasks": "Завдання",
+        "payments": "Платежі",
+        "systemLogs": "Системні логи"
+      }
     }
   },
   "websiteSettings": {
