@@ -151,9 +151,8 @@ export function TasksView({ tasks }: { tasks: CrmTask[] }) {
                         </div>
                         {task.dueDate && (
                           <span className="text-muted-foreground text-xs">
-                            {t.rich("due", {
-                              when: () => <RelativeTime date={task.dueDate as string} locale={locale} />,
-                            })}
+                            {t("due", { when: "" })}
+                            <RelativeTime date={task.dueDate as string} locale={locale} />
                           </span>
                         )}
                       </div>
