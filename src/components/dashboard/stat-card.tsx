@@ -4,7 +4,15 @@ import { useTranslations } from "next-intl";
 import type { DashboardStat } from "@/lib/mock/dashboard";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
+import { AnimatedNumber, type NumberFormat } from "@/components/shared/animated-number";
 import { ENTRANCE_DELAYS } from "@/components/dashboard/overview-card";
+
+const NUMBER_FORMATS: Record<DashboardStat["labelKey"], NumberFormat> = {
+  totalLeads: "integer",
+  activeCampaigns: "integer",
+  replyRate: "percent1",
+  revenueMtd: "currency0",
+};
 
 export function StatCard({ stat, index = 0 }: { stat: DashboardStat; index?: number }) {
   const t = useTranslations("dashboard");
@@ -19,7 +27,9 @@ export function StatCard({ stat, index = 0 }: { stat: DashboardStat; index?: num
       <CardContent className="flex items-start justify-between gap-4">
         <div className="space-y-1">
           <p className="text-muted-foreground text-sm">{t(`stats.${stat.labelKey}`)}</p>
-          <p className="text-2xl font-semibold tracking-tight">{stat.value}</p>
+          <p className="text-2xl font-semibold tracking-tight tabular-nums">
+            <AnimatedNumber value={stat.numericValue} format={NUMBER_FORMATS[stat.labelKey]} />
+          </p>
           <div
             className={cn(
               "flex items-center gap-1 text-xs font-medium",

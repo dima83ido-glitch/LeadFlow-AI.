@@ -36,6 +36,7 @@ export async function getDashboardStats(workspaceId: string): Promise<DashboardS
     {
       labelKey: "totalLeads",
       value: totalLeads.toLocaleString(),
+      numericValue: totalLeads,
       delta: percentDelta(leadsLast30, leadsPrev30),
       trend: leadsLast30 >= leadsPrev30 ? "up" : "down",
       icon: Users,
@@ -43,6 +44,7 @@ export async function getDashboardStats(workspaceId: string): Promise<DashboardS
     {
       labelKey: "activeCampaigns",
       value: String(activeCampaigns),
+      numericValue: activeCampaigns,
       delta: 0,
       trend: "up",
       icon: Mail,
@@ -50,6 +52,7 @@ export async function getDashboardStats(workspaceId: string): Promise<DashboardS
     {
       labelKey: "replyRate",
       value: `${replyRate.toFixed(1)}%`,
+      numericValue: replyRate,
       delta: 0,
       trend: "up",
       icon: Target,
@@ -57,6 +60,7 @@ export async function getDashboardStats(workspaceId: string): Promise<DashboardS
     {
       labelKey: "revenueMtd",
       value: `$${(revenueMtdCents / 100).toLocaleString()}`,
+      numericValue: revenueMtdCents / 100,
       delta: 0,
       trend: "up",
       icon: TrendingUp,

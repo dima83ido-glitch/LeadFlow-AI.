@@ -1,0 +1,23 @@
+{
+  "trigger": {
+    "label": "AI Assistant"
+  },
+  "panelTitle": "AI Assistant",
+  "panelDescription": "Preview of your AI business assistant.",
+  "badge": "Enterprise",
+  "close": "Close",
+  "chat": {
+    "seedMessage": "Hi! I'm your AI assistant. I can help you find leads, draft campaigns, and analyze your pipeline. This is a visual preview — full AI capabilities are coming soon.",
+    "previewReply": "This is a visual preview of the AI Assistant. Full AI-powered responses aren't connected yet — stay tuned!",
+    "suggestions": [
+      "Summarize this week's leads",
+      "Draft a follow-up email",
+      "Which campaign performs best?",
+      "Suggest a marketing plan"
+    ],
+    "inputPlaceholder": "Ask your AI assistant...",
+    "voiceLabel": "Voice input",
+    "sendLabel": "Send message",
+    "previewNotice": "Preview interface — AI responses are not connected yet."
+  }
+}

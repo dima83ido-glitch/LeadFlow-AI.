@@ -2,6 +2,7 @@ import { prisma } from "@/lib/db";
 import { requireSession } from "@/lib/workspace";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { AiAssistantTrigger } from "@/components/ai-assistant/ai-assistant-trigger";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
@@ -10,7 +11,7 @@ import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { UserMenu } from "@/components/layout/user-menu";
 import { ViewAsMenu } from "@/components/admin/view-as-menu";
 
-export async function Topbar({ isAdmin }: { isAdmin: boolean }) {
+export async function Topbar({ isAdmin, canUseAiAssistant }: { isAdmin: boolean; canUseAiAssistant: boolean }) {
   const session = await requireSession();
   const user = await prisma.user.findUnique({
     where: { id: session.user.id as string },
@@ -28,6 +29,12 @@ export async function Topbar({ isAdmin }: { isAdmin: boolean }) {
         <LanguageSwitcher />
         <ThemeToggle />
         <NotificationsPopover />
+        {canUseAiAssistant && (
+          <>
+            <Separator orientation="vertical" className="mx-1 h-6" />
+            <AiAssistantTrigger />
+          </>
+        )}
         <Separator orientation="vertical" className="mx-1 h-6" />
         <UserMenu avatarUrl={user?.image ?? null} />
       </div>
