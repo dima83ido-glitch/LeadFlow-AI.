@@ -1,5 +1,6 @@
 "use server";
 
+import { APIConnectionTimeoutError, RateLimitError } from "openai";
 import { getLocale } from "next-intl/server";
 
 import { requireWorkspace } from "@/lib/workspace";
@@ -11,14 +12,24 @@ import { logSystemEvent } from "@/lib/system-log";
 
 export type AiActionResult<T> = { ok: true; data: T } | { ok: false; errorCode: string };
 
-export async function analyzeWebsite(url: string): Promise<AiActionResult<WebsiteAnalysisResult>> {
+export type WebsiteAnalysisData = WebsiteAnalysisResult & {
+  analyzedUrl: string;
+  isHttps: boolean;
+};
+
+const MAX_URL_LENGTH = 2048;
+
+export async function analyzeWebsite(url: string): Promise<AiActionResult<WebsiteAnalysisData>> {
   await requireWorkspace();
-  if (!url.trim()) return { ok: false, errorCode: "URL_REQUIRED" };
+
+  const trimmedUrl = url.trim();
+  if (!trimmedUrl) return { ok: false, errorCode: "URL_REQUIRED" };
+  if (trimmedUrl.length > MAX_URL_LENGTH) return { ok: false, errorCode: "INVALID_URL" };
 
   const clientResult = getOpenAIClientSafe();
   if ("error" in clientResult) return { ok: false, errorCode: clientResult.error };
 
-  const pageResult = await fetchPageSignals(url);
+  const pageResult = await fetchPageSignals(trimmedUrl);
   if (!pageResult.ok) return { ok: false, errorCode: pageResult.errorCode };
 
   const locale = await getLocale();
@@ -37,12 +48,28 @@ export async function analyzeWebsite(url: string): Promise<AiActionResult<Websit
     const raw = completion.choices[0]?.message?.content;
     if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
 
-    const parsed = websiteAnalysisResultSchema.safeParse(JSON.parse(raw));
+    let json: unknown;
+    try {
+      json = JSON.parse(raw);
+    } catch {
+      return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
+    }
+
+    const parsed = websiteAnalysisResultSchema.safeParse(json);
     if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
 
     await logSystemEvent({ message: "AI website analysis generated", feature: "ai.websiteAnalyzer" });
-    return { ok: true, data: parsed.data };
-  } catch {
+    return {
+      ok: true,
+      data: {
+        ...parsed.data,
+        analyzedUrl: pageResult.signals.finalUrl,
+        isHttps: pageResult.signals.isHttps,
+      },
+    };
+  } catch (err) {
+    if (err instanceof APIConnectionTimeoutError) return { ok: false, errorCode: "AI_TIMEOUT" };
+    if (err instanceof RateLimitError) return { ok: false, errorCode: "AI_RATE_LIMITED" };
     return { ok: false, errorCode: "AI_ERROR" };
   }
 }

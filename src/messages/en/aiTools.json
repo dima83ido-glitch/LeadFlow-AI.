@@ -20,6 +20,10 @@
     "AI_EMPTY_RESPONSE": "The AI didn't return a response. Please try again.",
     "AI_INVALID_RESPONSE": "The AI response couldn't be understood. Please try again.",
     "AI_ERROR": "The AI request failed. Please try again.",
+    "AI_TIMEOUT": "The AI took too long to respond. Please try again.",
+    "AI_RATE_LIMITED": "Too many requests right now — please wait a moment and try again.",
+    "FETCH_TIMEOUT": "That site took too long to respond. Please try again.",
+    "TOO_MANY_REDIRECTS": "That URL redirected too many times to follow safely.",
     "INVALID_LANGUAGE": "Choose a target language.",
     "REQUIRED_FIELDS_MISSING": "Fill in all required fields first."
   },
@@ -29,7 +33,8 @@
       "cardTitle": "Website",
       "urlLabel": "Website URL",
       "urlPlaceholder": "e.g. northwindanalytics.com",
-      "submit": "Analyze"
+      "submit": "Analyze",
+      "analyzing": "Analyzing..."
     },
     "result": {
       "cardTitle": "Analysis",
