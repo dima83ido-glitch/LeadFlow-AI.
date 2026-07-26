@@ -23,9 +23,9 @@ export function QuickActions() {
           <Link
             key={action.href}
             href={action.href}
-            className="hover:border-primary/40 hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 transition-colors"
+            className="group hover:border-primary/40 hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm"
           >
-            <div className="bg-muted flex size-9 shrink-0 items-center justify-center rounded-md">
+            <div className="bg-primary/10 text-primary flex size-9 shrink-0 items-center justify-center rounded-md transition-transform duration-200 group-hover:scale-110">
               <action.icon className="size-4.5" />
             </div>
             <div>

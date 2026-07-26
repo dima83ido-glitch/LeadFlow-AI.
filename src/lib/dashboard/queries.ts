@@ -2,6 +2,7 @@ import { Mail, Target, TrendingUp, Users } from "lucide-react";
 
 import { prisma } from "@/lib/db";
 import type { DashboardStat } from "@/lib/mock/dashboard";
+import type { SubscriptionPlan, SubscriptionStatus } from "@/generated/prisma/enums";
 
 function startOf(daysAgo: number) {
   return new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000);
@@ -113,4 +114,72 @@ export async function getRecentCampaigns(workspaceId: string, take = 4): Promise
     sentCount: row.sentCount,
     recipientCount: row.sentCount,
   }));
+}
+
+export type WorkspaceOverview = {
+  subscription: {
+    plan: SubscriptionPlan;
+    status: SubscriptionStatus;
+    currentPeriodEnd: string | null;
+  };
+  counts: {
+    totalLeads: number;
+    totalCampaigns: number;
+    totalContacts: number;
+    totalCompanies: number;
+    totalMeetings: number;
+    totalTasks: number;
+    totalNotes: number;
+    totalDeals: number;
+    totalSent: number;
+  };
+};
+
+/** Aggregate counts + subscription info powering the dashboard hero cards and platform guide progress bars. */
+export async function getWorkspaceOverview(workspaceId: string): Promise<WorkspaceOverview> {
+  const [
+    subscription,
+    totalLeads,
+    totalCampaigns,
+    totalContacts,
+    totalCompanies,
+    totalMeetings,
+    totalTasks,
+    totalNotes,
+    totalDeals,
+    campaignAgg,
+  ] = await Promise.all([
+    prisma.subscription.findUnique({
+      where: { workspaceId },
+      select: { plan: true, status: true, currentPeriodEnd: true },
+    }),
+    prisma.lead.count({ where: { workspaceId } }),
+    prisma.campaign.count({ where: { workspaceId } }),
+    prisma.contact.count({ where: { workspaceId } }),
+    prisma.company.count({ where: { workspaceId } }),
+    prisma.meeting.count({ where: { workspaceId } }),
+    prisma.task.count({ where: { workspaceId } }),
+    prisma.note.count({ where: { workspaceId } }),
+    prisma.deal.count({ where: { workspaceId } }),
+    prisma.campaign.aggregate({ where: { workspaceId }, _sum: { sentCount: true } }),
+  ]);
+
+  return {
+    subscription: {
+      plan: subscription?.plan ?? "FREE",
+      status: subscription?.status ?? "ACTIVE",
+      currentPeriodEnd: subscription?.currentPeriodEnd?.toISOString() ?? null,
+    },
+    counts: {
+      totalLeads,
+      totalCampaigns,
+      totalContacts,
+      totalCompanies,
+      totalMeetings,
+      totalTasks,
+      totalNotes,
+      totalDeals,
+      totalSent: campaignAgg._sum.sentCount ?? 0,
+    },
+  };
 }

@@ -1,12 +1,142 @@
 {
   "welcome": "Welcome back, {name}",
-  "subtitle": "Here's what's happening across your workspace.",
+  "subtitle": "The LeadFlow AI team welcomes you to your AI business workspace.",
   "vsLastMonth": "vs last month",
   "stats": {
     "totalLeads": "Total Leads",
     "activeCampaigns": "Active Campaigns",
     "replyRate": "Reply Rate",
     "revenueMtd": "Revenue (MTD)"
+  },
+  "hero": {
+    "cards": {
+      "plan": {
+        "label": "Current Plan",
+        "freeForever": "Free forever",
+        "perMonth": "/ month"
+      },
+      "trial": {
+        "label": "Trial Status",
+        "daysLeft": "{days} days left",
+        "noTrial": "Not on a trial",
+        "fullAccess": "Full plan access"
+      },
+      "account": {
+        "label": "Account Status",
+        "active": "Active",
+        "memberSince": "Member since {date}",
+        "roles": {
+          "OWNER": "Owner",
+          "ADMIN": "Admin",
+          "MEMBER": "Member"
+        }
+      },
+      "billing": {
+        "label": "Next Billing Date",
+        "renews": "Renews automatically",
+        "none": "No charge scheduled",
+        "freePlan": "You're on the Free plan"
+      },
+      "aiTools": {
+        "label": "Available AI Tools",
+        "value": "{count} tools",
+        "detail": "Website analysis, email copy, SEO audits & more"
+      },
+      "summary": {
+        "label": "Workspace Summary",
+        "value": "{leads} leads · {contacts} contacts",
+        "detail": "{campaigns} campaigns launched"
+      }
+    }
+  },
+  "guide": {
+    "title": "Your Complete Platform Guide",
+    "subtitle": "A visual tour of every tool inside LeadFlow AI — what it does, and where to find it.",
+    "openLabel": "Open",
+    "sections": {
+      "profile": {
+        "title": "Complete Profile",
+        "description": "Add your name, job title, and photo so teammates and AI-generated outreach always sound like they're coming from you.",
+        "meta": "{percent}% complete"
+      },
+      "leadSearch": {
+        "title": "Lead Search",
+        "description": "Search thousands of companies by country, industry, city, and keyword to build a targeted list of prospects worth reaching out to.",
+        "meta": "{count} leads found"
+      },
+      "campaigns": {
+        "title": "Campaigns",
+        "description": "Schedule multi-step email sequences with built-in open, reply, and click tracking, then watch them run on autopilot.",
+        "meta": "{count} campaigns created"
+      },
+      "crm": {
+        "title": "CRM Pipeline",
+        "description": "Drag deals across stages from first contact to closed-won, and keep every conversation organized in one shared pipeline.",
+        "meta": "{count} deals in your pipeline"
+      },
+      "contacts": {
+        "title": "Contacts",
+        "description": "Keep a single source of truth for every person you talk to, complete with history and easy access from any deal.",
+        "meta": "{count} contacts saved"
+      },
+      "companies": {
+        "title": "Companies",
+        "description": "Track the organizations behind your leads and deals, including size, industry, and website details.",
+        "meta": "{count} companies tracked"
+      },
+      "meetings": {
+        "title": "Meetings",
+        "description": "Log calls and meetings, capture outcomes, and never lose track of what was discussed or agreed.",
+        "meta": "{count} meetings logged"
+      },
+      "tasks": {
+        "title": "Tasks",
+        "description": "Assign follow-ups to yourself or teammates with due dates, so nothing slips through the cracks.",
+        "meta": "{count} tasks tracked"
+      },
+      "notes": {
+        "title": "Notes",
+        "description": "Jot down context on any lead, contact, or deal so the next conversation always picks up where the last one left off.",
+        "meta": "{count} notes written"
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "See open rate, reply rate, and revenue trends at a glance, with clean reports you can compare campaign to campaign.",
+        "metaReady": "Live data ready to explore",
+        "metaEmpty": "Send a campaign to unlock insights"
+      },
+      "websiteAnalyzer": {
+        "title": "Website Analyzer",
+        "description": "Paste any company's website and get an instant AI breakdown of their positioning, tone, and best angles for outreach.",
+        "metaReady": "Ready to analyze any website",
+        "metaEmpty": "Add a lead to get started"
+      },
+      "marketingPlanGenerator": {
+        "title": "Marketing Plan Generator",
+        "description": "Generate a tailored, channel-by-channel marketing plan for any company in seconds, ready to share or execute.",
+        "metaReady": "Ready to generate a plan",
+        "metaEmpty": "Add a company to get started"
+      },
+      "payments": {
+        "title": "Payments",
+        "description": "Manage your subscription, payment method, and invoices, and see exactly what's included in your current plan.",
+        "meta": "You're on the {plan} plan"
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Manage your profile, security, workspace members, notification preferences, and API keys — all from one place.",
+        "meta": "{percent}% profile complete"
+      },
+      "support": {
+        "title": "Support",
+        "description": "Have a question or hit a snag? Reach the LeadFlow AI team directly and we'll get back to you fast.",
+        "meta": "We're here whenever you need us"
+      }
+    }
+  },
+  "activitySection": {
+    "title": "Workspace Activity",
+    "subtitle": "Live numbers and recent events across your workspace."
   },
   "quickActions": {
     "title": "Quick Actions",

@@ -33,11 +33,11 @@ export function RecentCampaigns({ campaigns }: { campaigns: RecentCampaignItem[]
                   ? Math.round((campaign.sentCount / campaign.recipientCount) * 100)
                   : 0;
               return (
-                <li key={campaign.id} className="space-y-2">
+                <li key={campaign.id} className="group space-y-2 rounded-lg p-2 -mx-2 transition-colors hover:bg-accent/50">
                   <div className="flex items-center justify-between gap-2">
                     <Link
                       href="/campaigns"
-                      className="truncate text-sm font-medium hover:underline"
+                      className="truncate text-sm font-medium transition-colors group-hover:text-primary hover:underline"
                     >
                       {campaign.name}
                     </Link>

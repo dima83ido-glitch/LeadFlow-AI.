@@ -23,9 +23,9 @@ export function RecentActivity({ items }: { items: RecentActivityItem[] }) {
         ) : (
           <ul className="space-y-5">
             {items.map((activity) => (
-              <li key={activity.id} className="flex items-start gap-3">
-                <Avatar className="size-8">
-                  <AvatarFallback className="text-xs">
+              <li key={activity.id} className="group flex items-start gap-3">
+                <Avatar className="ring-background size-8 ring-2 transition-transform duration-200 group-hover:scale-105">
+                  <AvatarFallback className="bg-primary/10 text-primary text-xs font-medium">
                     {activity.actorName
                       .split(" ")
                       .map((part) => part[0])
