@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 
 import { prisma } from "@/lib/db";
 import { getCurrentWorkspaceId } from "@/lib/workspace";
+import { toSafeISOString } from "@/lib/utils";
 import type { CrmTask } from "@/types/crm";
 import { PageHeader } from "@/components/shared/page-header";
 import { AddTaskDialog } from "@/components/crm/add-task-dialog";
@@ -26,7 +27,7 @@ export default async function TasksPage() {
     description: row.description ?? undefined,
     status: row.status,
     priority: row.priority,
-    dueDate: row.dueDate?.toISOString(),
+    dueDate: toSafeISOString(row.dueDate),
     createdAt: row.createdAt.toISOString(),
     assigneeId: row.assigneeId ?? undefined,
     assigneeName: row.assignee?.name ?? row.assignee?.email ?? t("unassigned"),

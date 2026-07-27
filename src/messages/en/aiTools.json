@@ -17,6 +17,7 @@
     "BLOCKED_HOST": "This URL can't be analyzed for security reasons.",
     "DNS_ERROR": "Couldn't resolve that domain.",
     "FETCH_FAILED": "Couldn't reach that page — check the URL and try again.",
+    "FETCH_BLOCKED": "That site's security protection blocked our request. Try again later or analyze a different page on the same site.",
     "AI_EMPTY_RESPONSE": "The AI didn't return a response. Please try again.",
     "AI_INVALID_RESPONSE": "The AI response couldn't be understood. Please try again.",
     "AI_ERROR": "The AI request failed. Please try again.",

@@ -12,6 +12,7 @@ import {
   Kanban,
   Languages,
   LayoutDashboard,
+  LayoutTemplate,
   Lightbulb,
   Mail,
   MessagesSquare,
@@ -78,6 +79,12 @@ export const mainNav: NavGroup[] = [
       { titleKey: "nav.items.rewriteEmail", href: "/ai-tools/rewrite-email", icon: Wand2 },
       { titleKey: "nav.items.translateEmail", href: "/ai-tools/translate-email", icon: Languages },
       { titleKey: "nav.items.outreachHub", href: "/ai-outreach-hub", icon: Rocket },
+    ],
+  },
+  {
+    titleKey: "nav.groups.services",
+    items: [
+      { titleKey: "nav.items.websiteCreation", href: "/website-creation", icon: LayoutTemplate },
     ],
   },
   {

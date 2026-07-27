@@ -39,6 +39,7 @@ const SEGMENT_KEYS: Record<string, string> = {
   "landing-page-analyzer": "nav.items.landingPageAnalyzer",
   "rewrite-email": "nav.items.rewriteEmail",
   "translate-email": "nav.items.translateEmail",
+  "website-creation": "nav.items.websiteCreation",
   notifications: "nav.items.notifications",
   billing: "nav.items.billing",
   settings: "nav.items.settings",

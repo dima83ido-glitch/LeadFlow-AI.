@@ -58,7 +58,9 @@ export async function analyzeWebsite(url: string): Promise<AiActionResult<Websit
     const parsed = websiteAnalysisResultSchema.safeParse(json);
     if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
 
-    await logSystemEvent({ message: "AI website analysis generated", feature: "ai.websiteAnalyzer" });
+    // Logging is a side effect, not part of the result — a DB hiccup here must
+    // never discard an analysis the user already successfully got back.
+    logSystemEvent({ message: "AI website analysis generated", feature: "ai.websiteAnalyzer" }).catch(() => {});
     return {
       ok: true,
       data: {

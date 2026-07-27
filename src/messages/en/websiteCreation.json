@@ -1,0 +1,119 @@
+{
+  "hero": {
+    "badge": "Website Development",
+    "title": "Websites that turn visitors into customers",
+    "subtitle": "From landing pages to full corporate sites — we design and build premium, high-converting websites for your brand, from the same team behind LeadFlow AI.",
+    "ctaPrimary": "Get a Free Quote",
+    "ctaSecondary": "View Live Portfolio",
+    "note": "No obligation. We usually reply within 24 hours."
+  },
+  "overview": {
+    "title": "Service Overview",
+    "description": "We handle web development end-to-end — planning, design, and build — from a single landing page to a full corporate site or custom web app. Every project ships with clean code, responsive design, and SEO fundamentals built in, so your site looks great and performs from day one."
+  },
+  "benefits": {
+    "title": "Why teams choose us",
+    "description": "Every project is built the same way we build LeadFlow AI itself — with care, speed, and an obsession with the details.",
+    "items": [
+      {
+        "title": "Premium, Modern Design",
+        "description": "Every layout is custom-designed — no generic templates — so your site looks and feels like nothing else in your industry."
+      },
+      {
+        "title": "Built for Speed",
+        "description": "Next.js and modern tooling under the hood mean fast load times, smooth animations, and happier visitors."
+      },
+      {
+        "title": "SEO-Ready from Day One",
+        "description": "Clean semantic markup, metadata, and structured content so search engines can find and rank your site."
+      },
+      {
+        "title": "Mobile-First & Responsive",
+        "description": "Every page is designed to look flawless on phones, tablets, and desktops alike."
+      },
+      {
+        "title": "Transparent, Milestone-Based Delivery",
+        "description": "You see progress at every stage and pay as milestones are completed — no surprises."
+      },
+      {
+        "title": "Ongoing Support & Maintenance",
+        "description": "Launch day isn't the finish line — we stay on to fix, update, and grow your site as your business does."
+      }
+    ]
+  },
+  "services": {
+    "title": "What we build",
+    "description": "Whatever stage your business is at, there's a website format to match.",
+    "items": [
+      {
+        "title": "Landing Pages",
+        "description": "High-converting single pages built to turn traffic into leads and sales."
+      },
+      {
+        "title": "Business Websites",
+        "description": "Multi-page sites that introduce your company, services, and offer clearly."
+      },
+      {
+        "title": "Corporate Websites",
+        "description": "Larger, structured sites for established companies with multiple teams and offerings."
+      },
+      {
+        "title": "Dashboards & Web Apps",
+        "description": "Custom internal tools and dashboards tailored to how your team actually works."
+      },
+      {
+        "title": "Telegram Web Apps",
+        "description": "Mini-apps that run inside Telegram — ideal for bots, storefronts, and community tools."
+      },
+      {
+        "title": "Custom Development",
+        "description": "Something that doesn't fit a template? We scope and build it from scratch."
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Featured Work",
+    "description": "A recent example from the studio behind this service — live, in production.",
+    "siteName": "Vladislav — Premium Web Development Studio",
+    "siteDescription": "A freelance full-stack web development portfolio: premium landing pages, dashboards, corporate sites, and Telegram Web Apps, built with Next.js, TypeScript, and React.",
+    "tags": ["Next.js", "TypeScript", "Framer Motion"],
+    "cta": "Visit Live Site"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "description": "Starting points only — every quote is scoped to your actual project.",
+    "disclaimer": "* Placeholder pricing shown for illustration. Final cost depends on scope, pages, and integrations — contact us for an exact quote.",
+    "mostPopular": "Most Popular",
+    "getStarted": "Get Started",
+    "startingAt": "starting at",
+    "tiers": [
+      {
+        "name": "Starter",
+        "price": "$1,200",
+        "description": "A focused landing page or small site to get you live fast.",
+        "features": ["Up to 3 pages", "Mobile-first responsive design", "Basic SEO setup", "2-week delivery"],
+        "highlighted": false
+      },
+      {
+        "name": "Business",
+        "price": "$3,200",
+        "description": "A complete business website with everything you need to convert visitors.",
+        "features": ["Up to 8 pages", "Custom design & animations", "SEO & analytics setup", "Contact & lead forms", "4-week delivery"],
+        "highlighted": true
+      },
+      {
+        "name": "Premium",
+        "price": "Custom Quote",
+        "description": "Corporate sites, dashboards, and custom web apps scoped to your requirements.",
+        "features": ["Unlimited pages / custom app", "Dedicated design system", "Ongoing support option", "Timeline scoped to project"],
+        "highlighted": false
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to launch your new website?",
+    "description": "Tell us about your project and we'll get back to you with a plan and a quote — no obligation.",
+    "primaryButton": "Request a Quote",
+    "secondaryButton": "Visit vladislav-portfolio.onrender.com"
+  }
+}

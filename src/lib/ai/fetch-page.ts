@@ -1,7 +1,10 @@
 import dns from "node:dns/promises";
 import net from "node:net";
 
-const FETCH_TIMEOUT_MS = 8000;
+// Real-world sites (shared hosting, cold-starting free-tier hosts, etc.)
+// routinely take several seconds to first byte. 8s was cutting off pages
+// that would otherwise have loaded fine, especially across a redirect hop.
+const FETCH_TIMEOUT_MS = 15000;
 const DNS_TIMEOUT_MS = 3000;
 const MAX_BYTES = 300_000;
 const MAX_REDIRECTS = 5;
@@ -162,7 +165,16 @@ export async function fetchPageSignals(rawUrl: string): Promise<FetchPageResult>
     if (!fetchResult.ok) return fetchResult;
     const { response, finalUrl } = fetchResult;
 
-    if (!response.ok) return { ok: false, errorCode: "FETCH_FAILED" };
+    if (!response.ok) {
+      // 401/403/429 from the target almost always means bot/WAF protection
+      // rejected our request, not that the URL is wrong — surface that
+      // distinction so the user isn't told to "check the URL" for a page
+      // that loads fine in a real browser.
+      if (response.status === 401 || response.status === 403 || response.status === 429) {
+        return { ok: false, errorCode: "FETCH_BLOCKED" };
+      }
+      return { ok: false, errorCode: "FETCH_FAILED" };
+    }
 
     const reader = response.body?.getReader();
     let received = "";

@@ -40,4 +40,5 @@ export const namespaces = [
   "onboarding",
   "support",
   "aiAssistant",
+  "websiteCreation",
 ] as const;
