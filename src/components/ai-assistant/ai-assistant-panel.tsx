@@ -12,7 +12,7 @@ import { AiChatPanel } from "@/components/ai-assistant/ai-chat-panel";
 import { useAiAssistant } from "@/components/ai-assistant/ai-assistant-provider";
 import { EarthScene } from "@/components/ai-assistant/earth-scene";
 
-const PANEL_WIDTH = "w-[400px] xl:w-[600px] 2xl:w-[720px]";
+const PANEL_WIDTH = "w-[420px] xl:w-[640px] 2xl:w-[780px]";
 
 function PanelHeader({ onClose }: { onClose: () => void }) {
   const t = useTranslations("aiAssistant");
@@ -74,7 +74,7 @@ export function AiAssistantPanel() {
       >
         <PanelHeader onClose={() => setOpen(false)} />
         <div className="flex min-h-0 flex-1">
-          <EarthScene className="hidden w-[260px] shrink-0 border-r xl:flex 2xl:w-[320px]" />
+          <EarthScene className="hidden w-[44%] shrink-0 border-r border-white/5 lg:flex" />
           <AiChatPanel className="min-w-0 flex-1" />
         </div>
       </div>

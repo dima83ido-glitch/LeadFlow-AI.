@@ -28,7 +28,7 @@ export function MarketingNavbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+              className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200 hover:[text-shadow:0_0_12px_color-mix(in_oklch,var(--primary)_50%,transparent)] dark:hover:[text-shadow:0_0_14px_color-mix(in_oklch,var(--chart-3)_55%,transparent)]"
             >
               {link.title}
             </Link>

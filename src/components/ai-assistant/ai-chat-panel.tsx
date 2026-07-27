@@ -53,14 +53,14 @@ export function AiChatPanel({ className }: { className?: string }) {
 
   return (
     <div className={cn("flex h-full min-h-0 flex-col", className)}>
-      <div ref={listRef} className="flex-1 min-h-0 space-y-4 overflow-y-auto p-4">
+      <div ref={listRef} className="flex-1 min-h-0 space-y-5 overflow-y-auto px-4 py-5 sm:px-6">
         {messages.map((message) => (
           <ChatBubble key={message.id} message={message} />
         ))}
         {isTyping && <TypingBubble />}
       </div>
 
-      <div className="space-y-3 border-t p-3">
+      <div className="space-y-3 border-t bg-gradient-to-b from-transparent to-muted/30 p-3 sm:p-4">
         {suggestions.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {suggestions.map((suggestion) => (
@@ -68,7 +68,7 @@ export function AiChatPanel({ className }: { className?: string }) {
                 key={suggestion}
                 type="button"
                 onClick={() => setInput(suggestion)}
-                className="hover:border-primary/50 hover:bg-primary/5 hover:text-foreground text-muted-foreground rounded-full border px-3 py-1 text-xs transition-all duration-200 hover:-translate-y-0.5"
+                className="hover:border-primary/50 hover:bg-primary/8 hover:text-foreground hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--primary)_35%,transparent),0_6px_18px_-8px_color-mix(in_oklch,var(--primary)_45%,transparent)] dark:hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--chart-1)_40%,transparent),0_0_18px_-4px_color-mix(in_oklch,var(--chart-3)_45%,transparent)] text-muted-foreground rounded-full border px-3 py-1 text-xs transition-all duration-300 hover:-translate-y-0.5"
               >
                 {suggestion}
               </button>
@@ -90,7 +90,7 @@ export function AiChatPanel({ className }: { className?: string }) {
             aria-pressed={recording}
             aria-label={t("voiceLabel")}
             onClick={() => setRecording((value) => !value)}
-            className={cn(recording && "ring-4 ring-primary/20")}
+            className={cn("shrink-0", recording && "ring-4 ring-primary/20")}
           >
             <Mic className={cn("size-4", recording && "animate-pulse")} />
           </Button>
@@ -105,9 +105,15 @@ export function AiChatPanel({ className }: { className?: string }) {
             }}
             placeholder={t("inputPlaceholder")}
             rows={1}
-            className="min-h-9 resize-none py-2"
+            className="min-h-9 resize-none rounded-2xl py-2 shadow-none"
           />
-          <Button type="submit" size="icon" aria-label={t("sendLabel")} disabled={!input.trim() || isTyping}>
+          <Button
+            type="submit"
+            size="icon"
+            aria-label={t("sendLabel")}
+            disabled={!input.trim() || isTyping}
+            className="shrink-0"
+          >
             <Send className="size-4" />
           </Button>
         </form>
@@ -121,18 +127,23 @@ export function AiChatPanel({ className }: { className?: string }) {
 function ChatBubble({ message }: { message: ChatMessage }) {
   const isAssistant = message.role === "assistant";
   return (
-    <div className={cn("animate-in fade-in-0 slide-in-from-bottom-2 flex items-end gap-2 duration-300", !isAssistant && "flex-row-reverse")}>
+    <div
+      className={cn(
+        "animate-in fade-in-0 slide-in-from-bottom-3 flex items-end gap-2 duration-500 ease-out",
+        !isAssistant && "flex-row-reverse",
+      )}
+    >
       {isAssistant && (
-        <div className="from-primary to-primary/60 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white">
+        <div className="from-primary to-primary/60 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white shadow-[0_2px_8px_-1px_color-mix(in_oklch,var(--primary)_60%,transparent)]">
           <Sparkles className="size-3.5" />
         </div>
       )}
       <div
         className={cn(
-          "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm",
+          "max-w-[82%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed break-words shadow-sm",
           isAssistant
             ? "bg-muted text-foreground rounded-bl-sm"
-            : "bg-primary text-primary-foreground rounded-br-sm",
+            : "bg-primary text-primary-foreground rounded-br-sm shadow-[0_4px_16px_-4px_color-mix(in_oklch,var(--primary)_55%,transparent)]",
         )}
       >
         {message.content}
@@ -143,11 +154,11 @@ function ChatBubble({ message }: { message: ChatMessage }) {
 
 function TypingBubble() {
   return (
-    <div className="animate-in fade-in-0 flex items-end gap-2 duration-300">
+    <div className="animate-in fade-in-0 slide-in-from-bottom-2 flex items-end gap-2 duration-300">
       <div className="from-primary to-primary/60 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white">
         <Sparkles className="size-3.5" />
       </div>
-      <div className="bg-muted flex items-center gap-1 rounded-2xl rounded-bl-sm px-3.5 py-3">
+      <div className="bg-muted flex items-center gap-1 rounded-2xl rounded-bl-sm px-3.5 py-3 shadow-sm">
         {[0, 1, 2].map((i) => (
           <span
             key={i}

@@ -12,7 +12,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground shadow-xs ring-1 ring-foreground/10 transition-all duration-300 ease-out [--card-spacing:--spacing(4)] hover:-translate-y-1 hover:shadow-[0_20px_44px_-16px_hsl(var(--shadow-color)/0.45)] hover:ring-primary/20 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
+        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground shadow-xs ring-1 ring-foreground/10 transition-all duration-300 ease-out [--card-spacing:--spacing(4)] hover:-translate-y-1 hover:ring-primary/30 hover:shadow-[0_20px_44px_-16px_hsl(var(--shadow-color)/0.45),0_0_0_1px_color-mix(in_oklch,var(--primary)_18%,transparent),0_0_26px_-10px_color-mix(in_oklch,var(--primary)_40%,transparent)] dark:hover:shadow-[0_20px_44px_-16px_hsl(var(--shadow-color)/0.45),0_0_0_1px_color-mix(in_oklch,var(--chart-1)_32%,transparent),0_0_30px_-8px_color-mix(in_oklch,var(--chart-3)_38%,transparent),0_0_48px_-12px_color-mix(in_oklch,var(--chart-2)_28%,transparent)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
         className
       )}
       {...props}
