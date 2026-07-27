@@ -17,6 +17,27 @@ const STARS = Array.from({ length: 70 }, (_, i) => {
   };
 });
 
+// A second, denser layer of very small, dim, far-away stars for parallax depth.
+const FAR_STARS = Array.from({ length: 60 }, (_, i) => ({
+  id: i,
+  top: rand() * 100,
+  left: rand() * 100,
+  size: 0.5 + rand() * 0.7,
+  opacity: 0.12 + rand() * 0.25,
+  duration: 5 + rand() * 8,
+  delay: rand() * 10,
+}));
+
+// Fine space dust — tiny specks with a slow, wandering drift.
+const DUST = Array.from({ length: 45 }, (_, i) => ({
+  id: i,
+  top: rand() * 100,
+  left: rand() * 100,
+  size: 1 + rand() * 1.4,
+  duration: 20 + rand() * 25,
+  delay: rand() * 12,
+}));
+
 const GALAXIES = [
   { id: "g1", top: 10, left: 68, width: 130, color: "rgba(168,139,250,0.35)", duration: 240 },
   { id: "g2", top: 62, left: 8, width: 90, color: "rgba(103,232,249,0.28)", duration: 300 },
@@ -26,8 +47,21 @@ const METEORS = Array.from({ length: 3 }, (_, i) => ({
   id: i,
   top: rand() * 35,
   left: 5 + rand() * 55,
+  width: 96,
+  rotate: -32,
   duration: 11 + rand() * 8,
   delay: i * 9 + rand() * 5,
+}));
+
+// A handful of smaller, quicker micro-meteors layered in for extra life.
+const MICRO_METEORS = Array.from({ length: 4 }, (_, i) => ({
+  id: i,
+  top: rand() * 45,
+  left: 10 + rand() * 60,
+  width: 30 + rand() * 26,
+  rotate: -40 + rand() * 16,
+  duration: 6 + rand() * 6,
+  delay: i * 4 + rand() * 6,
 }));
 
 const SATELLITES = [
@@ -90,11 +124,38 @@ export function EarthScene({ className }: { className?: string }) {
           filter: "blur(6px)",
         }}
       />
+      {/* a second, softer ray sweep crossing the opposite diagonal */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-10 -right-24 size-[85%] opacity-25 animate-[atmosphere-pulse_24s_ease-in-out_infinite_reverse]"
+        style={{
+          background:
+            "conic-gradient(from 230deg at 100% 0%, transparent, rgba(165,180,252,0.12), transparent 24%)",
+          filter: "blur(10px)",
+        }}
+      />
       {/* lens glow bloom */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-12 -right-12 size-48 rounded-full bg-[radial-gradient(circle,rgba(224,242,254,0.55),transparent_70%)] blur-2xl animate-[atmosphere-pulse_11s_ease-in-out_infinite]"
       />
+
+      {/* distant, dim starfield layer for parallax depth */}
+      {FAR_STARS.map((s) => (
+        <span
+          key={`far-${s.id}`}
+          aria-hidden
+          className="absolute rounded-full bg-white"
+          style={{
+            top: `${s.top}%`,
+            left: `${s.left}%`,
+            width: s.size,
+            height: s.size,
+            opacity: s.opacity,
+            animation: `twinkle ${s.duration}s ease-in-out ${s.delay}s infinite`,
+          }}
+        />
+      ))}
 
       {/* stars, varied size + brightness */}
       {STARS.map((s) => (
@@ -114,18 +175,37 @@ export function EarthScene({ className }: { className?: string }) {
         />
       ))}
 
-      {/* occasional slow shooting stars */}
-      {METEORS.map((m) => (
+      {/* fine drifting space dust */}
+      {DUST.map((d) => (
         <span
-          key={m.id}
+          key={`dust-${d.id}`}
           aria-hidden
-          className="absolute h-px w-24 -rotate-[32deg] bg-gradient-to-r from-transparent via-white to-transparent opacity-0"
+          className="absolute rounded-full bg-white/50"
           style={{
-            top: `${m.top}%`,
-            left: `${m.left}%`,
-            animation: `meteor ${m.duration}s linear ${m.delay}s infinite`,
+            top: `${d.top}%`,
+            left: `${d.left}%`,
+            width: d.size,
+            height: d.size,
+            animation: `drift-slow ${d.duration}s ease-in-out ${d.delay}s infinite`,
           }}
         />
+      ))}
+
+      {/* occasional slow shooting stars — outer div carries the static
+          rotation, inner span the animated translate (an animated `transform`
+          fully replaces any static transform on the same element) */}
+      {[...METEORS, ...MICRO_METEORS].map((m, i) => (
+        <div
+          key={`meteor-${i}`}
+          aria-hidden
+          className="absolute"
+          style={{ top: `${m.top}%`, left: `${m.left}%`, transform: `rotate(${m.rotate}deg)` }}
+        >
+          <span
+            className="absolute h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-0"
+            style={{ width: m.width, animation: `meteor ${m.duration}s linear ${m.delay}s infinite` }}
+          />
+        </div>
       ))}
 
       {/* THE PLANET — anchored bottom-left, bleeding off the visible edges */}

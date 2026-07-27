@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 export function MarketingNavbar() {
   const t = useTranslations("marketing.navbar");
@@ -20,7 +21,7 @@ export function MarketingNavbar() {
           <div className="bg-primary text-primary-foreground flex size-7 items-center justify-center rounded-md">
             <Sparkles className="size-4" />
           </div>
-          <span className="text-sm font-semibold">LeadFlow AI</span>
+          <span className="hidden text-sm font-semibold sm:inline">LeadFlow AI</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
@@ -35,8 +36,9 @@ export function MarketingNavbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <LanguageSwitcher />
+          <ThemeToggle />
           <Button variant="ghost" size="sm" render={<Link href="/login" />}>
             {t("logIn")}
           </Button>
