@@ -38,6 +38,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  AnalyticsIllustration,
+  CampaignsIllustration,
+  CrmIllustration,
+  MarketingIllustration,
+} from "@/components/marketing/showcase-illustrations";
 
 const problemIcons = [FileWarning, Clock, EyeOff, CreditCard];
 const featureIcons = [
@@ -54,7 +60,12 @@ const featureIcons = [
   LineChart,
   PieChart,
 ];
-const showcaseIcons = [Rocket, Kanban, Wand2, LineChart];
+const showcaseIllustrations = {
+  campaigns: CampaignsIllustration,
+  crm: CrmIllustration,
+  aiTools: MarketingIllustration,
+  analytics: AnalyticsIllustration,
+};
 const whyChooseIcons = [PiggyBank, TrendingUp, Rocket, Gauge];
 
 export default function LandingPage() {
@@ -199,7 +210,7 @@ export default function LandingPage() {
         </div>
         <div className="space-y-16">
           {showcaseKeys.map((key, index) => {
-            const Icon = showcaseIcons[index] ?? Sparkles;
+            const Illustration = showcaseIllustrations[key];
             const points = t.raw(`showcase.${key}.points`) as string[];
             return (
               <div
@@ -224,11 +235,9 @@ export default function LandingPage() {
                     ))}
                   </ul>
                 </div>
-                <Card className="border-border/60">
-                  <CardContent className="flex aspect-video items-center justify-center">
-                    <div className="bg-primary/10 flex size-20 items-center justify-center rounded-2xl">
-                      <Icon className="text-primary size-10" />
-                    </div>
+                <Card className="border-border/60 min-h-[320px] p-0">
+                  <CardContent className="flex-1 p-0">
+                    <Illustration />
                   </CardContent>
                 </Card>
               </div>
