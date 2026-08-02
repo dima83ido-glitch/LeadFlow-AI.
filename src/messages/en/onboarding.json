@@ -66,7 +66,7 @@
     "billing": {
       "title": "Billing",
       "description": "Manage your subscription, payment method, and invoices, and see exactly what's included in your current plan.",
-      "limits": "Free is $0/month, Starter $49/month, Pro $149/month, and Enterprise $499/month with custom limits.",
+      "limits": "Free is $0/month, Starter $49/month, Pro $99/month, and Enterprise $299/month with custom limits.",
       "tip": "You can upgrade or downgrade anytime from Settings → Subscription."
     },
     "settings": {

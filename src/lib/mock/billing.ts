@@ -20,7 +20,7 @@ export const mockPlans: PlanDetails[] = [
   {
     id: "PRO",
     name: "Pro",
-    price: 149,
+    price: 99,
     billingPeriod: "month",
     description: "For growing teams that need full CRM + analytics.",
     features: [
@@ -35,7 +35,7 @@ export const mockPlans: PlanDetails[] = [
   {
     id: "ENTERPRISE",
     name: "Enterprise",
-    price: 499,
+    price: 299,
     billingPeriod: "month",
     description: "Custom limits, SSO, and dedicated support.",
     features: [
@@ -58,8 +58,8 @@ export const mockSubscription: CurrentSubscription = {
 };
 
 export const mockInvoices: Invoice[] = [
-  { id: "inv_1", number: "INV-2026-0007", amount: 149, status: "PAID", issuedAt: "2026-07-01T00:00:00Z", pdfUrl: "#" },
-  { id: "inv_2", number: "INV-2026-0006", amount: 149, status: "PAID", issuedAt: "2026-06-01T00:00:00Z", pdfUrl: "#" },
-  { id: "inv_3", number: "INV-2026-0005", amount: 149, status: "PAID", issuedAt: "2026-05-01T00:00:00Z", pdfUrl: "#" },
+  { id: "inv_1", number: "INV-2026-0007", amount: 99, status: "PAID", issuedAt: "2026-07-01T00:00:00Z", pdfUrl: "#" },
+  { id: "inv_2", number: "INV-2026-0006", amount: 99, status: "PAID", issuedAt: "2026-06-01T00:00:00Z", pdfUrl: "#" },
+  { id: "inv_3", number: "INV-2026-0005", amount: 99, status: "PAID", issuedAt: "2026-05-01T00:00:00Z", pdfUrl: "#" },
   { id: "inv_4", number: "INV-2026-0004", amount: 49, status: "PAID", issuedAt: "2026-04-01T00:00:00Z", pdfUrl: "#" },
 ];

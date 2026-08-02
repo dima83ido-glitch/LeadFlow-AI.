@@ -5,8 +5,8 @@ export const PLAN_ORDER: SubscriptionPlan[] = ["FREE", "STARTER", "PRO", "ENTERP
 export const PLAN_PRICES_CENTS: Record<SubscriptionPlan, number> = {
   FREE: 0,
   STARTER: 4900,
-  PRO: 14900,
-  ENTERPRISE: 49900,
+  PRO: 9900,
+  ENTERPRISE: 29900,
 };
 
 export const PLAN_LABELS: Record<SubscriptionPlan, string> = {

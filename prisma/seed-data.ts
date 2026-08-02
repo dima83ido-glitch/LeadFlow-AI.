@@ -110,14 +110,14 @@ export const campaigns = [
 ];
 
 export const payments = [
-  { amount: 14900, currency: "USD", status: "SUCCEEDED", description: "Pro plan — monthly subscription", daysAgo: 1 },
-  { amount: 14900, currency: "USD", status: "SUCCEEDED", description: "Pro plan — monthly subscription", daysAgo: 31 },
-  { amount: 14900, currency: "USD", status: "SUCCEEDED", description: "Pro plan — monthly subscription", daysAgo: 61 },
+  { amount: 9900, currency: "USD", status: "SUCCEEDED", description: "Pro plan — monthly subscription", daysAgo: 1 },
+  { amount: 9900, currency: "USD", status: "SUCCEEDED", description: "Pro plan — monthly subscription", daysAgo: 31 },
+  { amount: 9900, currency: "USD", status: "SUCCEEDED", description: "Pro plan — monthly subscription", daysAgo: 61 },
   { amount: 4900, currency: "USD", status: "SUCCEEDED", description: "Starter plan — monthly subscription", daysAgo: 91 },
-  { amount: 14900, currency: "USD", status: "FAILED", description: "Pro plan — monthly subscription (card declined)", daysAgo: 92 },
-  { amount: 14900, currency: "USD", status: "REFUNDED", description: "Pro plan — refunded after downgrade", daysAgo: 95 },
+  { amount: 9900, currency: "USD", status: "FAILED", description: "Pro plan — monthly subscription (card declined)", daysAgo: 92 },
+  { amount: 9900, currency: "USD", status: "REFUNDED", description: "Pro plan — refunded after downgrade", daysAgo: 95 },
   {
-    amount: 14900,
+    amount: 9900,
     currency: "USD",
     status: "PENDING",
     description: "Pro plan — monthly subscription (crypto)",
@@ -141,8 +141,8 @@ export const payments = [
 export const planConfigs = [
   { plan: "FREE", priceCents: 0, leadSearchLimit: 50, campaignLimit: 1, aiToolLimit: 10, seatsLimit: 1 },
   { plan: "STARTER", priceCents: 4900, leadSearchLimit: 1000, campaignLimit: 5, aiToolLimit: 100, seatsLimit: 3 },
-  { plan: "PRO", priceCents: 14900, leadSearchLimit: 10000, campaignLimit: null, aiToolLimit: 500, seatsLimit: 10 },
-  { plan: "ENTERPRISE", priceCents: 49900, leadSearchLimit: null, campaignLimit: null, aiToolLimit: null, seatsLimit: null },
+  { plan: "PRO", priceCents: 9900, leadSearchLimit: 10000, campaignLimit: null, aiToolLimit: 500, seatsLimit: 10 },
+  { plan: "ENTERPRISE", priceCents: 29900, leadSearchLimit: null, campaignLimit: null, aiToolLimit: null, seatsLimit: null },
 ];
 
 export const featureFlags = [
