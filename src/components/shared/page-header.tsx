@@ -11,14 +11,14 @@ export function PageHeader({ title, description, actions, className }: PageHeade
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between",
+        "animate-in fade-in slide-in-from-bottom-1 flex flex-col gap-4 duration-500 ease-out sm:flex-row sm:items-center sm:justify-between",
         className,
       )}
     >
-      <div className="space-y-1">
-        <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+      <div className="space-y-1.5">
+        <h1 className="text-3xl font-semibold tracking-[-0.025em] text-balance">{title}</h1>
         {description && (
-          <p className="text-muted-foreground text-sm">{description}</p>
+          <p className="max-w-2xl text-sm text-muted-foreground">{description}</p>
         )}
       </div>
       {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}

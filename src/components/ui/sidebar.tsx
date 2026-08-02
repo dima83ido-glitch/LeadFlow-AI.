@@ -363,7 +363,10 @@ function SidebarSeparator({
     <Separator
       data-slot="sidebar-separator"
       data-sidebar="separator"
-      className={cn("mx-2 w-auto bg-sidebar-border", className)}
+      className={cn(
+        "mx-2 w-auto bg-transparent bg-gradient-to-r from-transparent via-sidebar-border to-transparent",
+        className
+      )}
       {...props}
     />
   )
@@ -404,7 +407,7 @@ function SidebarGroupLabel({
     props: mergeProps<"div">(
       {
         className: cn(
-          "flex h-8 shrink-0 items-center rounded-md px-2 text-[0.6875rem] font-medium tracking-wider text-sidebar-foreground/60 uppercase ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+          "mt-1 flex h-8 shrink-0 items-center rounded-md px-2 text-[0.6875rem] font-semibold tracking-[0.09em] text-sidebar-foreground/55 uppercase ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
           className
         ),
       },
@@ -479,7 +482,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding,box-shadow,background-color,color] duration-200 group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--sidebar-ring)_30%,transparent),0_0_16px_-6px_color-mix(in_oklch,var(--primary)_40%,transparent)] dark:hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--chart-1)_35%,transparent),0_0_18px_-6px_color-mix(in_oklch,var(--chart-3)_40%,transparent),0_0_28px_-10px_color-mix(in_oklch,var(--chart-2)_30%,transparent)] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-open:hover:bg-sidebar-accent data-open:hover:text-sidebar-accent-foreground data-active:bg-sidebar-accent data-active:font-medium data-active:text-sidebar-accent-foreground data-active:shadow-[0_0_0_1px_color-mix(in_oklch,var(--sidebar-ring)_35%,transparent)] dark:data-active:shadow-[0_0_0_1px_color-mix(in_oklch,var(--chart-1)_40%,transparent)] [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
+  "peer/menu-button group/menu-button relative flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding,box-shadow,background-color,color] duration-200 group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--sidebar-ring)_30%,transparent),0_0_16px_-6px_color-mix(in_oklch,var(--primary)_40%,transparent)] dark:hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--chart-1)_35%,transparent),0_0_18px_-6px_color-mix(in_oklch,var(--chart-3)_40%,transparent),0_0_28px_-10px_color-mix(in_oklch,var(--chart-2)_30%,transparent)] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-open:hover:bg-sidebar-accent data-open:hover:text-sidebar-accent-foreground data-active:bg-sidebar-accent data-active:font-medium data-active:text-sidebar-accent-foreground data-active:shadow-[0_0_0_1px_color-mix(in_oklch,var(--sidebar-ring)_35%,transparent)] dark:data-active:shadow-[0_0_0_1px_color-mix(in_oklch,var(--chart-1)_40%,transparent)] before:absolute before:inset-y-1.5 before:left-0 before:w-0.5 before:scale-y-0 before:rounded-full before:bg-primary before:opacity-0 before:shadow-[0_0_8px_-1px_color-mix(in_oklch,var(--primary)_70%,transparent)] before:transition-[opacity,transform] before:duration-200 before:content-[''] data-active:before:scale-y-100 data-active:before:opacity-100 [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
   {
     variants: {
       variant: {

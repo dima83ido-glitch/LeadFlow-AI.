@@ -3,11 +3,11 @@ import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 
-type Accent = "primary" | "violet" | "amber" | "emerald" | "sky" | "rose";
+type Accent = "primary" | "bronze" | "amber" | "emerald" | "sky" | "rose";
 
 const ACCENT_CLASSES: Record<Accent, string> = {
   primary: "from-primary/30 via-primary/10 to-transparent text-primary",
-  violet: "from-violet-500/30 via-violet-500/10 to-transparent text-violet-600 dark:text-violet-400",
+  bronze: "from-chart-3/30 via-chart-3/10 to-transparent text-chart-3",
   amber: "from-amber-500/30 via-amber-500/10 to-transparent text-amber-600 dark:text-amber-400",
   emerald: "from-emerald-500/30 via-emerald-500/10 to-transparent text-emerald-600 dark:text-emerald-400",
   sky: "from-sky-500/30 via-sky-500/10 to-transparent text-sky-600 dark:text-sky-400",

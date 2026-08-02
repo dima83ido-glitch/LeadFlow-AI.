@@ -54,7 +54,7 @@ export async function DashboardHero({ name, workspaceRole, memberSince, overview
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         <OverviewCard
           index={0}
-          accent="violet"
+          accent="bronze"
           icon={Crown}
           label={t("hero.cards.plan.label")}
           value={planName}

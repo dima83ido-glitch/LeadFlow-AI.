@@ -58,7 +58,7 @@ export function getAdminPaymentsColumns(
               variant="outline"
               className={cn(
                 payment.method === "CRYPTO"
-                  ? "border-transparent bg-violet-500/10 text-violet-600 dark:text-violet-400"
+                  ? "border-transparent bg-chart-3/10 text-chart-3"
                   : "border-transparent bg-muted text-muted-foreground",
               )}
             >

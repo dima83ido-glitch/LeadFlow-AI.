@@ -39,7 +39,7 @@ const DUST = Array.from({ length: 45 }, (_, i) => ({
 }));
 
 const GALAXIES = [
-  { id: "g1", top: 10, left: 68, width: 130, color: "rgba(168,139,250,0.35)", duration: 240 },
+  { id: "g1", top: 10, left: 68, width: 130, color: "rgba(217,168,74,0.32)", duration: 240 },
   { id: "g2", top: 62, left: 8, width: 90, color: "rgba(103,232,249,0.28)", duration: 300 },
 ];
 
@@ -66,7 +66,7 @@ const MICRO_METEORS = Array.from({ length: 4 }, (_, i) => ({
 
 const SATELLITES = [
   { id: "a", radiusPct: 30, size: "size-1.5", duration: 34, reverse: false, tilt: -10, color: "bg-cyan-300", glow: "shadow-[0_0_10px_3px_rgba(34,211,238,0.75)]" },
-  { id: "b", radiusPct: 40, size: "size-1", duration: 50, reverse: true, tilt: 16, color: "bg-violet-300", glow: "shadow-[0_0_8px_3px_rgba(196,181,253,0.7)]" },
+  { id: "b", radiusPct: 40, size: "size-1", duration: 50, reverse: true, tilt: 16, color: "bg-amber-200", glow: "shadow-[0_0_8px_3px_rgba(253,230,138,0.7)]" },
 ];
 
 export function EarthScene({ className }: { className?: string }) {
@@ -80,13 +80,13 @@ export function EarthScene({ className }: { className?: string }) {
       {/* deep space ambient wash */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_30%_100%,rgba(76,29,149,0.16),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_30%_100%,rgba(120,80,20,0.16),transparent_60%)]"
       />
 
       {/* nebula clouds — large, blurred, drifting extremely slowly */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-1/3 -left-1/4 size-[140%] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.20),transparent_65%)] blur-3xl animate-[drift-slower_75s_ease-in-out_infinite]"
+        className="pointer-events-none absolute -top-1/3 -left-1/4 size-[140%] rounded-full bg-[radial-gradient(circle,rgba(196,145,54,0.18),transparent_65%)] blur-3xl animate-[drift-slower_75s_ease-in-out_infinite]"
       />
       <div
         aria-hidden
@@ -213,7 +213,7 @@ export function EarthScene({ className }: { className?: string }) {
           regardless of how wide the banner is */}
       <div className="relative aspect-square h-[148%] shrink-0 animate-[float_16s_ease-in-out_infinite] sm:h-[158%] lg:h-[168%]">
         {/* outer atmosphere glow */}
-        <div className="absolute -inset-[10%] rounded-full bg-gradient-to-br from-cyan-300/35 via-violet-400/25 to-transparent blur-3xl animate-[atmosphere-pulse_13s_ease-in-out_infinite]" />
+        <div className="absolute -inset-[10%] rounded-full bg-gradient-to-br from-cyan-300/35 via-amber-300/20 to-transparent blur-3xl animate-[atmosphere-pulse_13s_ease-in-out_infinite]" />
 
         {/* orbital rings (flattened ellipses) */}
         <div
