@@ -7,13 +7,13 @@
     "startTrial": "Start free trial"
   },
   "footer": {
-    "tagline": "Find, analyze, and win your next client — powered by AI.",
+    "tagline": "The Business Automation Platform for revenue teams who want to grow faster, spend less, and never lose a lead.",
     "product": "Product",
     "company": "Company",
     "legal": "Legal",
-    "searchLeads": "Search Leads",
-    "aiTools": "AI Tools",
-    "campaigns": "Campaigns",
+    "searchLeads": "Lead Management",
+    "aiTools": "Marketing Automation",
+    "campaigns": "Sales Automation",
     "pricing": "Pricing",
     "helpCenter": "Help Center",
     "contactUs": "Contact Us",
@@ -24,40 +24,104 @@
     "copyright": "© {year} Nexora. All rights reserved."
   },
   "hero": {
-    "badge": "Now with AI-generated outreach",
-    "title": "Find your next client. Let AI write the pitch.",
-    "description": "Nexora helps agencies and sales teams discover companies, analyze their websites, and generate personalized proposals — then track every deal in one clean CRM.",
+    "badge": "Enterprise Growth Platform",
+    "title": "One Platform to Automate Growth, End to End",
+    "description": "Nexora is the enterprise Growth Platform that unifies Lead Management, Sales Automation, CRM Automation, and Marketing Automation into a single system of record. Replace a dozen disconnected tools, eliminate manual busywork, and give your revenue team the Business Intelligence to close more deals, faster — at a fraction of the operating cost.",
     "startTrial": "Start free trial",
     "logIn": "Log in",
-    "noCreditCard": "No credit card required · Free plan available"
+    "noCreditCard": "No credit card required · Enterprise-ready from day one",
+    "stats": [
+      { "value": "10,000+", "label": "companies discovered every month" },
+      { "value": "38%", "label": "average increase in reply rates" },
+      { "value": "6 hrs", "label": "saved per rep, every week" },
+      { "value": "99.9%", "label": "platform uptime" }
+    ]
   },
-  "features": {
-    "title": "Everything you need to close more deals",
-    "description": "One platform from prospecting to signed contract.",
+  "problem": {
+    "title": "Growing revenue shouldn't mean growing chaos",
+    "description": "Most sales and marketing teams run on a patchwork of spreadsheets, generic CRMs, and disconnected point solutions. Nexora replaces the chaos with one connected system of record.",
     "items": [
       {
-        "title": "Find leads in seconds",
-        "description": "Filter by country, city, industry, rating, and more to build a targeted list of companies worth reaching out to."
+        "title": "Scattered lead data",
+        "description": "Prospect research lives across browser tabs, spreadsheets, and inboxes instead of one reliable source of truth."
       },
       {
-        "title": "AI-powered outreach",
-        "description": "Generate personalized emails, subject lines, and CTAs tuned to each lead's website and industry."
+        "title": "Inconsistent follow-up",
+        "description": "Without Sales Automation, hot leads go cold and follow-ups fall through the cracks between reps."
       },
       {
-        "title": "Full CRM & pipeline",
-        "description": "Track deals, contacts, tasks, and meetings from first contact to closed-won without leaving Nexora."
+        "title": "Zero pipeline visibility",
+        "description": "Leadership finds out revenue is off target only after the quarter is already lost."
       },
       {
-        "title": "Email campaigns",
-        "description": "Schedule and monitor multi-step outreach sequences with open, reply, and click tracking built in."
+        "title": "Rising operating costs",
+        "description": "Every disconnected tool adds another subscription, another integration, and another hour of manual data entry."
+      }
+    ]
+  },
+  "features": {
+    "title": "Everything your revenue team needs, fully automated",
+    "description": "Lead Management, Sales Automation, CRM Automation, Marketing Automation, Customer Management, and Business Intelligence — unified in one platform.",
+    "items": [
+      {
+        "category": "Lead Management",
+        "title": "Discover verified companies in seconds",
+        "description": "Filter by country, city, industry, size, and rating to build a precision-targeted account list in minutes, not weeks."
       },
       {
-        "title": "Actionable analytics",
-        "description": "See open rate, reply rate, conversion rate, and revenue trends at a glance with clean, exportable reports."
+        "category": "Lead Management",
+        "title": "Automatic lead enrichment",
+        "description": "Every company you save is automatically enriched with firmographic and website data, so your team never starts from a blank profile."
       },
       {
-        "title": "Built for teams",
-        "description": "Workspaces, roles, and shared templates keep your whole sales team aligned as you scale."
+        "category": "Sales Automation",
+        "title": "Multi-step outreach sequences",
+        "description": "Build a sequence once and let Sales Automation handle sending, timing, and follow-ups until a prospect replies."
+      },
+      {
+        "category": "Sales Automation",
+        "title": "Smart reply detection",
+        "description": "Sequences pause automatically the moment a lead responds, so nobody gets an awkward follow-up after saying yes."
+      },
+      {
+        "category": "CRM Automation",
+        "title": "Deals that move themselves",
+        "description": "CRM Automation updates stages, assigns owners, and syncs activity automatically as deals progress through your pipeline."
+      },
+      {
+        "category": "CRM Automation",
+        "title": "Zero-effort activity logging",
+        "description": "Calls, emails, and meetings are logged against the right contact and deal automatically — no manual data entry required."
+      },
+      {
+        "category": "Marketing Automation",
+        "title": "Personalized outreach at scale",
+        "description": "Generate on-brand emails, subject lines, and calls-to-action tuned to each prospect's industry and website — without writing from scratch."
+      },
+      {
+        "category": "Marketing Automation",
+        "title": "Campaign performance tracking",
+        "description": "Every send, open, reply, and click is tracked automatically so you know exactly which messaging is working."
+      },
+      {
+        "category": "Customer Management",
+        "title": "One workspace for every relationship",
+        "description": "Contacts, companies, meetings, tasks, and notes live together, so your whole team sees the full history before every conversation."
+      },
+      {
+        "category": "Customer Management",
+        "title": "Team-wide collaboration",
+        "description": "Workspaces, roles, and shared templates keep sales, marketing, and customer success aligned as you scale."
+      },
+      {
+        "category": "Business Intelligence",
+        "title": "Real-time revenue dashboards",
+        "description": "Track reply rate, conversion rate, and revenue trends at a glance, with clean, exportable reports for leadership."
+      },
+      {
+        "category": "Business Intelligence",
+        "title": "Source and channel breakdowns",
+        "description": "See exactly which lead sources and campaigns generate the most revenue, so budget goes where it performs."
       }
     ]
   },
@@ -66,12 +130,12 @@
     "description": "Four steps, one platform — no spreadsheets or copy-pasting between tools.",
     "steps": [
       {
-        "title": "Find your leads",
-        "description": "Search by country, city, industry, and rating to build a targeted list of real companies in minutes."
+        "title": "Discover your ideal accounts",
+        "description": "Search by country, city, industry, and rating to build a precision-targeted list of real companies in minutes."
       },
       {
-        "title": "Let AI write the pitch",
-        "description": "Generate a personalized email, subject line, and CTA tuned to each lead's website and industry."
+        "title": "Automate the outreach",
+        "description": "Sales Automation drafts a personalized email, subject line, and call-to-action tuned to each prospect's industry and website."
       },
       {
         "title": "Send & track automatically",
@@ -79,69 +143,101 @@
       },
       {
         "title": "Close it in one CRM",
-        "description": "Move the deal through your pipeline, log meetings, and keep every contact and note in one place."
+        "description": "Move the deal through your pipeline, log meetings, and keep every contact and note in one place with CRM Automation."
       }
     ]
   },
   "showcase": {
-    "title": "Built for the whole outreach workflow",
-    "description": "A closer look at the tools that do the heavy lifting.",
+    "title": "Built for the whole revenue workflow",
+    "description": "A closer look at the automation that does the heavy lifting.",
     "campaigns": {
-      "badge": "Automation",
+      "badge": "Sales Automation",
       "title": "Outreach that runs itself",
       "description": "Set up a multi-step sequence once, and Nexora handles the rest — sending, waiting, following up, and stopping automatically the moment someone replies.",
       "points": [
         "Schedule multi-step sequences with custom delays between steps",
         "Automatic pause when a lead replies, so nobody gets a follow-up after they've already said yes",
-        "Built-in open, reply, and click tracking on every message you send"
+        "Built-in open, reply, and click tracking on every message you send",
+        "Detailed engagement timeline for every prospect, so reps always know the right moment to follow up"
       ]
     },
     "crm": {
-      "badge": "CRM & pipeline",
+      "badge": "CRM Automation",
       "title": "Every deal, contact, and conversation in one place",
       "description": "Stop losing context in your inbox. Track companies, contacts, meetings, tasks, and notes alongside the deal itself, from first reply to signed contract.",
       "points": [
         "A visual pipeline board you can drag deals through stage by stage",
         "Contacts and companies linked automatically to the leads you've already found",
-        "Meetings, tasks, and notes tied to every deal — nothing falls through the cracks"
+        "Meetings, tasks, and notes tied to every deal — nothing falls through the cracks",
+        "Automatic stage updates and task creation keep deals moving without manual upkeep"
       ]
     },
     "aiTools": {
-      "badge": "AI Tools",
-      "title": "A full AI toolkit for outreach that converts",
-      "description": "Nine purpose-built AI tools handle the writing so you don't have to — from analyzing a prospect's website to drafting the email, the subject line, and the follow-up.",
+      "badge": "Marketing Automation",
+      "title": "A complete Marketing Automation toolkit that converts",
+      "description": "A full suite of purpose-built automation tools handles the writing and analysis so your team doesn't have to — from analyzing a prospect's website to drafting the email, the subject line, and the follow-up.",
       "points": [
         "Website and landing page analyzers surface tech stack, SEO gaps, and messaging issues in seconds",
         "Email, subject line, headline, and CTA generators tuned to each lead's industry",
-        "Rewrite and translate existing copy instead of starting from a blank page"
+        "Rewrite and translate existing copy instead of starting from a blank page",
+        "Every generated asset is fully editable, so your brand voice stays consistent"
       ]
     },
     "analytics": {
-      "badge": "Analytics",
+      "badge": "Business Intelligence",
       "title": "Know exactly what's working",
       "description": "Open rate, reply rate, conversion rate, and revenue trends — all in one clean dashboard, so you know which campaigns to double down on and which to cut.",
       "points": [
         "Real-time campaign performance, from first send to signed deal",
         "Clean, exportable reports you can share with your team or clients",
-        "Revenue-by-plan and lead-source breakdowns to spot your best channels"
+        "Revenue-by-plan and lead-source breakdowns to spot your best channels",
+        "Forecast pipeline coverage against target so leadership always knows where revenue stands"
       ]
     }
   },
-  "team": {
-    "badge": "Who's behind Nexora",
-    "title": "Built by people who were tired of juggling five tools",
-    "description": "Nexora started as an internal tool for a small outbound team stitching together a spreadsheet, a generic CRM, and a few different AI writing apps just to send one campaign. We built the platform we wished we had — and now we're building it for you. We're a small, product-obsessed team, and we read every piece of feedback ourselves."
+  "whyChoose": {
+    "title": "Built to pay for itself",
+    "description": "Nexora replaces manual work and disconnected software with one measurable return on investment.",
+    "items": [
+      {
+        "title": "Save money",
+        "description": "Consolidate a dozen subscriptions and hours of manual admin into one platform — most teams cut their outreach tooling costs significantly within the first quarter."
+      },
+      {
+        "title": "Increase revenue",
+        "description": "Faster follow-up, consistent messaging, and full pipeline visibility mean fewer deals slip through the cracks — and more of them close."
+      },
+      {
+        "title": "Scale without adding headcount",
+        "description": "Automation handles the repetitive work, so your existing team can carry a heavier pipeline without burning out."
+      },
+      {
+        "title": "Make confident, data-backed decisions",
+        "description": "Business Intelligence built into every workspace means leadership always knows what's driving — or blocking — revenue."
+      }
+    ]
   },
   "pricing": {
-    "title": "Simple, transparent pricing",
-    "description": "Start free. Upgrade when your outreach starts scaling."
+    "title": "Enterprise power, transparent pricing",
+    "description": "Start free. Upgrade as your revenue operations scale — no long-term contracts."
+  },
+  "trust": {
+    "badge": "Why Enterprises Trust Nexora",
+    "title": "An established platform, built for serious revenue teams",
+    "description": "Nexora is built and continuously refined by a team obsessed with revenue operations, with ongoing investment in security, reliability, and product depth. Every workspace runs on infrastructure designed for enterprise scale — so your team can move fast without compromising on trust.",
+    "items": [
+      "Enterprise-grade security",
+      "Granular role-based permissions",
+      "Encrypted data, in transit and at rest",
+      "Dedicated onboarding & support"
+    ]
   },
   "faq": {
     "title": "Frequently asked questions",
     "items": [
       {
         "question": "Do I need my own list of leads to get started?",
-        "answer": "No. Use Search Leads to discover companies by country, industry, and keywords, then import the ones you want to work."
+        "answer": "No. Use Lead Management to discover companies by country, industry, and keywords, then import the ones you want to work."
       },
       {
         "question": "Can I bring my own email provider?",
@@ -154,12 +250,21 @@
       {
         "question": "Can I cancel anytime?",
         "answer": "Subscriptions are month-to-month and can be canceled from Settings → Subscription at any time."
+      },
+      {
+        "question": "Does Nexora integrate with our existing tools?",
+        "answer": "Yes. Nexora connects with your transactional email provider and works alongside the tools your team already uses, so you can adopt it without ripping out your existing stack."
+      },
+      {
+        "question": "How is our data protected?",
+        "answer": "Every workspace uses encrypted data in transit and at rest, with role-based access control so team members only see what they need to."
       }
     ]
   },
   "cta": {
-    "title": "Ready to fill your pipeline?",
-    "description": "Start finding leads and generating outreach today — no credit card required.",
-    "button": "Start free trial"
+    "title": "Ready to automate your growth?",
+    "description": "Join revenue teams who've replaced a dozen disconnected tools with one Business Automation Platform — no credit card required.",
+    "button": "Start free trial",
+    "secondaryButton": "Talk to sales"
   }
 }

@@ -17,7 +17,7 @@
   },
   "expectations": {
     "title": "What to expect",
-    "description": "We're a small team, so replies come from a real person, not a ticket queue. Email is typically answered within 1 business day; Telegram messages are often answered within a few hours during the day (Mon–Fri)."
+    "description": "Every reply comes from a real person, not a ticket queue. Email is typically answered within 1 business day; Telegram messages are often answered within a few hours during the day (Mon–Fri)."
   },
   "faq": {
     "title": "Support FAQ",
@@ -35,7 +35,7 @@
     },
     "phoneSupport": {
       "question": "Is phone support available?",
-      "answer": "Not currently — as a small team, email and Telegram let us give every message proper attention and keep responses fast and personal."
+      "answer": "Not currently — email and Telegram let us give every message proper attention and keep responses fast and personal."
     },
     "languages": {
       "question": "What languages can I contact support in?",

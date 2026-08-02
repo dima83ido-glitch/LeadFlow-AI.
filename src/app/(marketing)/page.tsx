@@ -2,15 +2,26 @@ import Link from "next/link";
 import {
   ArrowRight,
   BarChart3,
-  Bot,
   Building2,
+  ClipboardList,
   Check,
+  Clock,
+  CreditCard,
+  Database,
+  EyeOff,
+  FileWarning,
+  Gauge,
   Kanban,
   LineChart,
-  Mail,
-  Megaphone,
+  PieChart,
+  PiggyBank,
+  Repeat,
+  Reply,
+  Rocket,
   Search,
+  ShieldCheck,
   Sparkles,
+  TrendingUp,
   Users,
   Wand2,
 } from "lucide-react";
@@ -28,14 +39,37 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-const featureIcons = [Search, Bot, Kanban, Mail, BarChart3, Building2];
-const showcaseIcons = [Megaphone, Kanban, Wand2, LineChart];
+const problemIcons = [FileWarning, Clock, EyeOff, CreditCard];
+const featureIcons = [
+  Search,
+  Database,
+  Repeat,
+  Reply,
+  Kanban,
+  ClipboardList,
+  Wand2,
+  BarChart3,
+  Building2,
+  Users,
+  LineChart,
+  PieChart,
+];
+const showcaseIcons = [Rocket, Kanban, Wand2, LineChart];
+const whyChooseIcons = [PiggyBank, TrendingUp, Rocket, Gauge];
 
 export default function LandingPage() {
   const t = useTranslations("marketing");
   const tb = useTranslations("billing.plans");
 
-  const features = t.raw("features.items") as { title: string; description: string }[];
+  const heroStats = t.raw("hero.stats") as { value: string; label: string }[];
+  const problems = t.raw("problem.items") as { title: string; description: string }[];
+  const features = t.raw("features.items") as {
+    category: string;
+    title: string;
+    description: string;
+  }[];
+  const whyChooseItems = t.raw("whyChoose.items") as { title: string; description: string }[];
+  const trustItems = t.raw("trust.items") as string[];
   const faqs = t.raw("faq.items") as { question: string; answer: string }[];
   const steps = t.raw("howItWorks.steps") as { title: string; description: string }[];
   const showcaseKeys = ["campaigns", "crm", "aiTools", "analytics"] as const;
@@ -71,6 +105,42 @@ export default function LandingPage() {
             </Button>
           </div>
           <p className="text-muted-foreground text-xs">{t("hero.noCreditCard")}</p>
+
+          <div className="mt-4 grid w-full max-w-3xl grid-cols-2 gap-6 border-t pt-10 sm:grid-cols-4">
+            {heroStats.map((stat) => (
+              <div key={stat.label} className="space-y-1 text-center">
+                <p className="text-2xl font-semibold tracking-tight sm:text-3xl">{stat.value}</p>
+                <p className="text-muted-foreground text-xs text-balance sm:text-sm">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-muted/30 border-y py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-12 space-y-2 text-center">
+            <h2 className="text-3xl font-semibold tracking-tight">{t("problem.title")}</h2>
+            <p className="text-muted-foreground mx-auto max-w-2xl text-balance">
+              {t("problem.description")}
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {problems.map((problem, index) => {
+              const Icon = problemIcons[index] ?? Sparkles;
+              return (
+                <div key={problem.title} className="space-y-3">
+                  <div className="bg-background flex size-10 items-center justify-center rounded-lg border">
+                    <Icon className="text-muted-foreground size-5" />
+                  </div>
+                  <p className="font-medium">{problem.title}</p>
+                  <p className="text-muted-foreground text-sm">{problem.description}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -103,8 +173,13 @@ export default function LandingPage() {
             return (
               <Card key={feature.title} className="border-border/60">
                 <CardHeader className="gap-3">
-                  <div className="bg-primary/10 flex size-10 items-center justify-center rounded-lg">
-                    <Icon className="text-primary size-5" />
+                  <div className="flex items-center justify-between">
+                    <div className="bg-primary/10 flex size-10 items-center justify-center rounded-lg">
+                      <Icon className="text-primary size-5" />
+                    </div>
+                    <Badge variant="outline" className="text-muted-foreground text-[11px]">
+                      {feature.category}
+                    </Badge>
                   </div>
                   <div>
                     <p className="font-medium">{feature.title}</p>
@@ -162,6 +237,33 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-6 py-20">
+        <div className="mb-12 space-y-2 text-center">
+          <h2 className="text-3xl font-semibold tracking-tight">{t("whyChoose.title")}</h2>
+          <p className="text-muted-foreground mx-auto max-w-2xl text-balance">
+            {t("whyChoose.description")}
+          </p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {whyChooseItems.map((item, index) => {
+            const Icon = whyChooseIcons[index] ?? Sparkles;
+            return (
+              <Card key={item.title} className="border-border/60">
+                <CardHeader className="gap-3">
+                  <div className="bg-primary/10 flex size-10 items-center justify-center rounded-lg">
+                    <Icon className="text-primary size-5" />
+                  </div>
+                  <div>
+                    <p className="font-medium">{item.title}</p>
+                    <p className="text-muted-foreground mt-1 text-sm">{item.description}</p>
+                  </div>
+                </CardHeader>
+              </Card>
+            );
+          })}
+        </div>
+      </section>
+
       <section id="pricing" className="bg-muted/30 border-y py-20">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-12 space-y-2 text-center">
@@ -211,16 +313,24 @@ export default function LandingPage() {
       <section className="mx-auto max-w-4xl px-6 py-20 text-center">
         <div className="mb-6 flex justify-center">
           <div className="bg-primary/10 flex size-14 items-center justify-center rounded-2xl">
-            <Users className="text-primary size-7" />
+            <ShieldCheck className="text-primary size-7" />
           </div>
         </div>
         <Badge variant="secondary" className="mb-4">
-          {t("team.badge")}
+          {t("trust.badge")}
         </Badge>
-        <h2 className="text-3xl font-semibold tracking-tight">{t("team.title")}</h2>
+        <h2 className="text-3xl font-semibold tracking-tight">{t("trust.title")}</h2>
         <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-balance">
-          {t("team.description")}
+          {t("trust.description")}
         </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {trustItems.map((item) => (
+            <Badge key={item} variant="outline" className="gap-1.5 px-3 py-1.5">
+              <Check className="text-primary size-3.5" />
+              {item}
+            </Badge>
+          ))}
+        </div>
       </section>
 
       <section id="faq" className="mx-auto max-w-3xl px-6 py-20">
@@ -242,10 +352,15 @@ export default function LandingPage() {
           <CardContent className="flex flex-col items-center gap-4 py-12">
             <h2 className="text-3xl font-semibold tracking-tight">{t("cta.title")}</h2>
             <p className="text-muted-foreground max-w-md">{t("cta.description")}</p>
-            <Button size="lg" render={<Link href="/register" />}>
-              {t("cta.button")}
-              <ArrowRight className="size-4" />
-            </Button>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button size="lg" render={<Link href="/register" />}>
+                {t("cta.button")}
+                <ArrowRight className="size-4" />
+              </Button>
+              <Button size="lg" variant="outline" render={<Link href="/contact" />}>
+                {t("cta.secondaryButton")}
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </section>
