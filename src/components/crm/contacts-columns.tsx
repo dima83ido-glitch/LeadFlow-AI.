@@ -104,7 +104,9 @@ export function getContactsColumns(
         return (
           <div className="flex items-center justify-end gap-1">
             <DropdownMenu>
-              <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" />}>
+              <DropdownMenuTrigger
+                render={<Button variant="ghost" size="icon" className="size-8" aria-label={t("common.actions.actions")} />}
+              >
                 <MoreHorizontal className="size-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">

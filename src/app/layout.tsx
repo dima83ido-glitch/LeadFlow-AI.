@@ -19,13 +19,34 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+const SITE_DESCRIPTION =
+  "Nexora is the enterprise Growth Platform that unifies Lead Management, Sales Automation, CRM Automation, and Marketing Automation into a single system of record.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Nexora",
+    default: "Nexora — Enterprise Growth Platform",
     template: "%s · Nexora",
   },
-  description:
-    "Find potential clients, analyze their websites, and turn cold leads into closed deals — all from one platform.",
+  description: SITE_DESCRIPTION,
+  applicationName: "Nexora",
+  openGraph: {
+    type: "website",
+    siteName: "Nexora",
+    title: "Nexora — Enterprise Growth Platform",
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nexora — Enterprise Growth Platform",
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default async function RootLayout({

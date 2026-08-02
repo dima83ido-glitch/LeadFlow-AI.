@@ -2,10 +2,17 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
 import { prisma } from "@/lib/db";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { registerSchema } from "@/lib/validations/auth";
 import { ensureWorkspaceForUser } from "@/lib/workspace";
 
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  const { allowed } = checkRateLimit(`register:${ip}`, { limit: 5, windowMs: 15 * 60 * 1000 });
+  if (!allowed) {
+    return NextResponse.json({ errorCode: "RATE_LIMITED" }, { status: 429 });
+  }
+
   const body = await request.json();
   const parsed = registerSchema.safeParse(body);
 

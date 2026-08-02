@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import type { ColumnDef } from "@tanstack/react-table";
 import { CalendarPlus, Gift, MoreHorizontal, Pause, Play } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import type { Locale } from "@/i18n/config";
@@ -74,6 +75,7 @@ function PlanSelect({ sub, t }: { sub: AdminSubscription; t: AdminSubscriptionsC
 
 function RowActions({ sub, t }: { sub: AdminSubscription; t: AdminSubscriptionsColumnsMessages }) {
   const router = useRouter();
+  const tc = useTranslations("common");
 
   async function run(action: () => Promise<{ ok: boolean }>) {
     const result = await action();
@@ -88,7 +90,9 @@ function RowActions({ sub, t }: { sub: AdminSubscription; t: AdminSubscriptionsC
   return (
     <div className="flex items-center justify-end gap-1">
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" />}>
+        <DropdownMenuTrigger
+          render={<Button variant="ghost" size="icon" className="size-8" aria-label={tc("actions.actions")} />}
+        >
           <MoreHorizontal className="size-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

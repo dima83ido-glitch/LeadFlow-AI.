@@ -55,10 +55,10 @@ export default function ContactPage() {
             </CardHeader>
             <CardContent>
               <Link
-                href="mailto:hhgn034@gmail.com"
+                href="mailto:support@nexora.ai"
                 className="text-primary font-medium underline underline-offset-4"
               >
-                hhgn034@gmail.com
+                support@nexora.ai
               </Link>
             </CardContent>
           </Card>
@@ -77,12 +77,12 @@ export default function ContactPage() {
             </CardHeader>
             <CardContent>
               <Link
-                href="https://t.me/karchhss"
+                href="https://t.me/nexora_support"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary font-medium underline underline-offset-4"
               >
-                @karchhss
+                @nexora_support
               </Link>
             </CardContent>
           </Card>

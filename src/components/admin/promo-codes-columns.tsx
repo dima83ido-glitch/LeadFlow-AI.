@@ -45,7 +45,12 @@ function DeleteAction({ promo, t }: { promo: PromoCode; t: PromoCodesColumnsMess
   return (
     <ConfirmDialog
       trigger={
-        <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive size-8">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-destructive hover:text-destructive size-8"
+          aria-label={t.deleteConfirmLabel}
+        >
           <Trash2 className="size-4" />
         </Button>
       }

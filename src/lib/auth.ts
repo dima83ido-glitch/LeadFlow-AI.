@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 
 import { authConfig } from "@/lib/auth.config";
 import { prisma } from "@/lib/db";
+import { checkRateLimit } from "@/lib/rate-limit";
 import { loginSchema } from "@/lib/validations/auth";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -21,6 +22,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!parsed.success) return null;
 
         const { email, password } = parsed.data;
+
+        // Keyed by the attempted email so a single account can't be
+        // brute-forced, without locking out other users sharing an IP.
+        const { allowed } = checkRateLimit(`login:${email.toLowerCase()}`, {
+          limit: 10,
+          windowMs: 15 * 60 * 1000,
+        });
+        if (!allowed) return null;
+
         const user = await prisma.user.findUnique({ where: { email } });
         if (!user?.password) return null;
         if (user.status === "SUSPENDED") return null;

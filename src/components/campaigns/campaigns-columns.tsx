@@ -88,7 +88,7 @@ export function getCampaignsColumns(
       header: "",
       cell: () => (
         <DropdownMenu>
-          <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" />}>
+          <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" aria-label="Actions" />}>
             <MoreHorizontal className="size-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

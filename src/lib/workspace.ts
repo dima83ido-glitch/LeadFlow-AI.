@@ -16,9 +16,14 @@ function slugify(input: string) {
   return `${base || "workspace"}-${suffix}`;
 }
 
+const DEFAULT_PIPELINE_STAGES = ["New", "Contacted", "Proposal Sent", "Negotiation", "Won"];
+
 /**
  * Idempotent: creates a Workspace + default FREE Subscription for a user
  * that doesn't have one yet, and returns the (possibly pre-existing) workspaceId.
+ * Also seeds a default set of pipeline stages — without this, a brand-new
+ * workspace's CRM Pipeline page renders with zero columns and no way to add
+ * one (there's no "create stage" UI), which looks broken on first login.
  */
 export async function ensureWorkspaceForUser(userId: string): Promise<string> {
   const user = await prisma.user.findUniqueOrThrow({ where: { id: userId } });
@@ -31,6 +36,12 @@ export async function ensureWorkspaceForUser(userId: string): Promise<string> {
         name,
         slug: slugify(user.email),
         subscription: { create: { plan: "FREE", status: "ACTIVE" } },
+        pipelineStages: {
+          create: DEFAULT_PIPELINE_STAGES.map((stageName, index) => ({
+            name: stageName,
+            order: index,
+          })),
+        },
       },
     });
     await tx.user.update({

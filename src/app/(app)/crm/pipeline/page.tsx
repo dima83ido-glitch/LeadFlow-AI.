@@ -15,16 +15,20 @@ export default async function PipelinePage() {
   const t = await getTranslations("crm.pipeline");
   const workspaceId = await getCurrentWorkspaceId();
 
-  const stageRows = await prisma.pipelineStage.findMany({
-    where: { workspaceId },
-    orderBy: { order: "asc" },
-  });
-
-  const dealRows = await prisma.deal.findMany({
-    where: { workspaceId },
-    include: { company: true, contact: true },
-    orderBy: { createdAt: "desc" },
-  });
+  const [stageRows, dealRows, companyRows, contactRows] = await Promise.all([
+    prisma.pipelineStage.findMany({ where: { workspaceId }, orderBy: { order: "asc" } }),
+    prisma.deal.findMany({
+      where: { workspaceId },
+      include: { company: true, contact: true },
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.company.findMany({ where: { workspaceId }, select: { id: true, name: true }, orderBy: { name: "asc" } }),
+    prisma.contact.findMany({
+      where: { workspaceId },
+      select: { id: true, firstName: true, lastName: true },
+      orderBy: { firstName: "asc" },
+    }),
+  ]);
 
   const stages: PipelineStage[] = stageRows.map((row, index) => ({
     id: row.id,
@@ -45,10 +49,16 @@ export default async function PipelinePage() {
     createdAt: row.createdAt.toISOString(),
   }));
 
+  const companies = companyRows.map((row) => ({ id: row.id, name: row.name }));
+  const contacts = contactRows.map((row) => ({
+    id: row.id,
+    name: [row.firstName, row.lastName].filter(Boolean).join(" "),
+  }));
+
   return (
     <div className="space-y-6">
       <PageHeader title={t("pageTitle")} description={t("pageDescription")} />
-      <PipelineBoard stages={stages} deals={deals} />
+      <PipelineBoard stages={stages} deals={deals} companies={companies} contacts={contacts} />
     </div>
   );
 }

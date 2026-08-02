@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, ShieldOff, Trash2, UserCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import type { Locale } from "@/i18n/config";
@@ -50,6 +51,7 @@ interface AdminUsersColumnsMessages {
 
 function RowActions({ user, t }: { user: AdminUser; t: AdminUsersColumnsMessages }) {
   const router = useRouter();
+  const tc = useTranslations("common");
 
   async function handleToggleStatus() {
     const nextStatus = user.status === "SUSPENDED" ? "ACTIVE" : "SUSPENDED";
@@ -75,7 +77,9 @@ function RowActions({ user, t }: { user: AdminUser; t: AdminUsersColumnsMessages
   return (
     <div className="flex items-center justify-end gap-1">
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" />}>
+        <DropdownMenuTrigger
+          render={<Button variant="ghost" size="icon" className="size-8" aria-label={tc("actions.actions")} />}
+        >
           <MoreHorizontal className="size-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -94,7 +98,12 @@ function RowActions({ user, t }: { user: AdminUser; t: AdminUsersColumnsMessages
       </DropdownMenu>
       <ConfirmDialog
         trigger={
-          <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive size-8">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-destructive hover:text-destructive size-8"
+            aria-label={t.deleteUser}
+          >
             <Trash2 className="size-4" />
           </Button>
         }

@@ -5,7 +5,19 @@ import { authConfig } from "@/lib/auth.config";
 
 const { auth } = NextAuth(authConfig);
 
-const PUBLIC_PATHS = new Set(["/", "/login", "/register", "/forgot-password", "/contact"]);
+// Note: /robots.txt and /sitemap.xml already bypass this middleware entirely
+// via the matcher's `.*\..*` exclusion below. /opengraph-image does NOT —
+// it's served at a clean, extension-less path — so it needs to be listed
+// explicitly or link-preview crawlers get redirected to /login instead of
+// the image.
+const PUBLIC_PATHS = new Set([
+  "/",
+  "/login",
+  "/register",
+  "/forgot-password",
+  "/contact",
+  "/opengraph-image",
+]);
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;

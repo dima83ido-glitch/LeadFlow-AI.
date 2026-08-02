@@ -116,7 +116,30 @@
     },
     "stageTotal": "Разом: {amount}",
     "noDeals": "Немає угод на цьому етапі",
-    "notWiredUp": "Ще не підключено."
+    "noDealsDrop": "Перетягніть угоду сюди",
+    "addDeal": "Додати угоду в «{stage}»",
+    "dealActions": "Дії з угодою",
+    "moveToStage": "Перемістити на етап",
+    "addDialog": {
+      "title": "Нова угода",
+      "description": "Додайте нову угоду на етап «{stage}».",
+      "titleLabel": "Назва угоди",
+      "titlePlaceholder": "наприклад, Acme Corp — річний план",
+      "titleRequired": "Назва обов'язкова",
+      "valueLabel": "Сума угоди",
+      "companyLabel": "Компанія",
+      "companyPlaceholder": "Без компанії",
+      "contactLabel": "Контакт",
+      "contactPlaceholder": "Без контакту",
+      "closeDateLabel": "Очікувана дата закриття",
+      "submit": "Додати угоду",
+      "successToast": "«{title}» додано до воронки."
+    },
+    "deleteTitle": "Видалити цю угоду?",
+    "deleteDescription": "Угоду «{title}» буде безповоротно видалено з воронки.",
+    "deleteConfirm": "Видалити угоду",
+    "deletedToast": "«{title}» видалено.",
+    "movedToast": "«{title}» переміщено на етап «{stage}»."
   },
   "tasks": {
     "pageTitle": "Завдання",

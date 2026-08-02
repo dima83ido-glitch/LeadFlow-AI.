@@ -25,6 +25,7 @@ import {
   Users,
   Wand2,
 } from "lucide-react";
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 
 import { mockPlans } from "@/lib/mock/billing";
@@ -44,6 +45,22 @@ import {
   CrmIllustration,
   MarketingIllustration,
 } from "@/components/marketing/showcase-illustrations";
+
+const PAGE_DESCRIPTION =
+  "Nexora unifies Lead Management, Sales Automation, CRM Automation, and Marketing Automation into one platform — so revenue teams close more deals, faster.";
+
+export const metadata: Metadata = {
+  title: "Enterprise Growth Platform — Lead, Sales & CRM Automation",
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    title: "Nexora — Enterprise Growth Platform",
+    description: PAGE_DESCRIPTION,
+  },
+  twitter: {
+    title: "Nexora — Enterprise Growth Platform",
+    description: PAGE_DESCRIPTION,
+  },
+};
 
 const problemIcons = [FileWarning, Clock, EyeOff, CreditCard];
 const featureIcons = [

@@ -15,22 +15,27 @@ export async function updateAppSettings(input: {
   metaTitle: string;
   metaDescription: string;
 }): Promise<ActionResult> {
-  await requireAdmin();
+  try {
+    await requireAdmin();
 
-  const entries: [keyof typeof DEFAULT_APP_SETTINGS, string][] = [
-    ["site.name", input.siteName],
-    ["site.supportEmail", input.supportEmail],
-    ["site.maintenanceMode", String(input.maintenanceMode)],
-    ["seo.metaTitle", input.metaTitle],
-    ["seo.metaDescription", input.metaDescription],
-  ];
+    const entries: [keyof typeof DEFAULT_APP_SETTINGS, string][] = [
+      ["site.name", input.siteName],
+      ["site.supportEmail", input.supportEmail],
+      ["site.maintenanceMode", String(input.maintenanceMode)],
+      ["seo.metaTitle", input.metaTitle],
+      ["seo.metaDescription", input.metaDescription],
+    ];
 
-  await Promise.all(
-    entries.map(([key, value]) =>
-      prisma.appSetting.upsert({ where: { key }, update: { value }, create: { key, value } }),
-    ),
-  );
+    await Promise.all(
+      entries.map(([key, value]) =>
+        prisma.appSetting.upsert({ where: { key }, update: { value }, create: { key, value } }),
+      ),
+    );
 
-  revalidatePath("/admin/website-settings");
-  return { ok: true };
+    revalidatePath("/admin/website-settings");
+    return { ok: true };
+  } catch (error) {
+    console.error("updateAppSettings failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }

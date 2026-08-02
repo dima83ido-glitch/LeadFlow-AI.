@@ -60,9 +60,13 @@ export default function RegisterPage() {
     if (!res.ok) {
       const data = await res.json().catch(() => null);
       setIsSubmitting(false);
-      toast.error(
-        data?.errorCode === "EMAIL_EXISTS" ? t("errorEmailExists") : t("errorGeneric"),
-      );
+      const message =
+        data?.errorCode === "EMAIL_EXISTS"
+          ? t("errorEmailExists")
+          : data?.errorCode === "RATE_LIMITED"
+            ? t("errorRateLimited")
+            : t("errorGeneric");
+      toast.error(message);
       return;
     }
 

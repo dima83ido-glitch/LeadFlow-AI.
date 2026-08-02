@@ -116,7 +116,30 @@
     },
     "stageTotal": "Итого: {amount}",
     "noDeals": "Нет сделок на этом этапе",
-    "notWiredUp": "Пока не подключено."
+    "noDealsDrop": "Перетащите сделку сюда",
+    "addDeal": "Добавить сделку в «{stage}»",
+    "dealActions": "Действия со сделкой",
+    "moveToStage": "Переместить на этап",
+    "addDialog": {
+      "title": "Новая сделка",
+      "description": "Добавьте новую сделку на этап «{stage}».",
+      "titleLabel": "Название сделки",
+      "titlePlaceholder": "например, Acme Corp — годовой план",
+      "titleRequired": "Название обязательно",
+      "valueLabel": "Сумма сделки",
+      "companyLabel": "Компания",
+      "companyPlaceholder": "Без компании",
+      "contactLabel": "Контакт",
+      "contactPlaceholder": "Без контакта",
+      "closeDateLabel": "Ожидаемая дата закрытия",
+      "submit": "Добавить сделку",
+      "successToast": "«{title}» добавлена в воронку."
+    },
+    "deleteTitle": "Удалить эту сделку?",
+    "deleteDescription": "Сделка «{title}» будет безвозвратно удалена из воронки.",
+    "deleteConfirm": "Удалить сделку",
+    "deletedToast": "«{title}» удалена.",
+    "movedToast": "«{title}» перемещена на этап «{stage}»."
   },
   "tasks": {
     "pageTitle": "Задачи",

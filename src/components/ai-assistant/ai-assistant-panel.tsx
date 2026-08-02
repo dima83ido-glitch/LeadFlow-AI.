@@ -32,7 +32,7 @@ function PanelHeader({ onClose }: { onClose: () => void }) {
   return (
     <div className="flex shrink-0 items-center justify-between gap-2 border-b px-4 py-3">
       <div className="flex items-center gap-2">
-        <div className="from-primary to-primary/60 flex size-7 items-center justify-center rounded-lg bg-gradient-to-br text-white">
+        <div className="from-primary to-primary/60 flex size-7 items-center justify-center rounded-lg bg-gradient-to-br text-primary-foreground">
           <Sparkles className="size-4" />
         </div>
         <div>

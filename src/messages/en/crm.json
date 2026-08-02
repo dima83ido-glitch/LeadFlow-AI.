@@ -116,7 +116,30 @@
     },
     "stageTotal": "{amount} total",
     "noDeals": "No deals in this stage",
-    "notWiredUp": "Not wired up yet."
+    "noDealsDrop": "Drop a deal here",
+    "addDeal": "Add deal to {stage}",
+    "dealActions": "Deal actions",
+    "moveToStage": "Move to stage",
+    "addDialog": {
+      "title": "Add Deal",
+      "description": "Add a new deal to {stage}.",
+      "titleLabel": "Deal title",
+      "titlePlaceholder": "e.g. Acme Corp — Annual Plan",
+      "titleRequired": "Title is required",
+      "valueLabel": "Deal value",
+      "companyLabel": "Company",
+      "companyPlaceholder": "No company",
+      "contactLabel": "Contact",
+      "contactPlaceholder": "No contact",
+      "closeDateLabel": "Expected close date",
+      "submit": "Add Deal",
+      "successToast": "{title} was added to the pipeline."
+    },
+    "deleteTitle": "Delete this deal?",
+    "deleteDescription": "This will permanently remove \"{title}\" from your pipeline.",
+    "deleteConfirm": "Delete deal",
+    "deletedToast": "\"{title}\" was deleted.",
+    "movedToast": "\"{title}\" moved to {stage}."
   },
   "tasks": {
     "pageTitle": "Tasks",

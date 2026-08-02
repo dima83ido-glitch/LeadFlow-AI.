@@ -69,7 +69,13 @@ export function CreateApiKeyDialog({ onCreate }: { onCreate: (name: string) => v
             </DialogHeader>
             <div className="flex items-center gap-2 py-4">
               <Input readOnly value={generatedKey} className="font-mono text-sm" />
-              <Button type="button" variant="outline" size="icon" onClick={handleCopy}>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                aria-label={copied ? tc("copied") : tc("copy")}
+                onClick={handleCopy}
+              >
                 {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
               </Button>
             </div>

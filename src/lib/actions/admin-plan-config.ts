@@ -17,19 +17,24 @@ export async function updatePlanConfig(input: {
   seatsLimit: number | null;
   isActive: boolean;
 }): Promise<ActionResult> {
-  await requireAdmin();
-  await prisma.planConfig.upsert({
-    where: { plan: input.plan },
-    update: {
-      priceCents: input.priceCents,
-      leadSearchLimit: input.leadSearchLimit,
-      campaignLimit: input.campaignLimit,
-      aiToolLimit: input.aiToolLimit,
-      seatsLimit: input.seatsLimit,
-      isActive: input.isActive,
-    },
-    create: input,
-  });
-  revalidatePath("/admin/system-management");
-  return { ok: true };
+  try {
+    await requireAdmin();
+    await prisma.planConfig.upsert({
+      where: { plan: input.plan },
+      update: {
+        priceCents: input.priceCents,
+        leadSearchLimit: input.leadSearchLimit,
+        campaignLimit: input.campaignLimit,
+        aiToolLimit: input.aiToolLimit,
+        seatsLimit: input.seatsLimit,
+        isActive: input.isActive,
+      },
+      create: input,
+    });
+    revalidatePath("/admin/system-management");
+    return { ok: true };
+  } catch (error) {
+    console.error("updatePlanConfig failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }

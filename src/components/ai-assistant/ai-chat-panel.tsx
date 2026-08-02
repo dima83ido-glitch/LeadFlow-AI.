@@ -134,7 +134,7 @@ function ChatBubble({ message }: { message: ChatMessage }) {
       )}
     >
       {isAssistant && (
-        <div className="from-primary to-primary/60 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white shadow-[0_2px_8px_-1px_color-mix(in_oklch,var(--primary)_60%,transparent)]">
+        <div className="from-primary to-primary/60 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-primary-foreground shadow-[0_2px_8px_-1px_color-mix(in_oklch,var(--primary)_60%,transparent)]">
           <Sparkles className="size-3.5" />
         </div>
       )}
@@ -155,7 +155,7 @@ function ChatBubble({ message }: { message: ChatMessage }) {
 function TypingBubble() {
   return (
     <div className="animate-in fade-in-0 slide-in-from-bottom-2 flex items-end gap-2 duration-300">
-      <div className="from-primary to-primary/60 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white">
+      <div className="from-primary to-primary/60 flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-primary-foreground">
         <Sparkles className="size-3.5" />
       </div>
       <div className="bg-muted flex items-center gap-1 rounded-2xl rounded-bl-sm px-3.5 py-3 shadow-sm">

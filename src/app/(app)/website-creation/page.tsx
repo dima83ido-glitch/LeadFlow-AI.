@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   Check,
-  ExternalLink,
   Gauge,
   Globe,
   HeartHandshake,
@@ -23,8 +22,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = { title: "Website Creation" };
 
-const PORTFOLIO_URL = "https://vladislav-portfolio.onrender.com";
-const QUOTE_EMAIL = "mailto:hhgn034@gmail.com?subject=Website%20Creation%20%E2%80%94%20New%20Project%20Inquiry";
+const QUOTE_EMAIL = "mailto:hello@nexora.ai?subject=Website%20Creation%20%E2%80%94%20New%20Project%20Inquiry";
 
 const benefitIcons = [Sparkles, Gauge, Globe, MonitorSmartphone, Layers, HeartHandshake];
 const serviceIcons = [Rows3, Globe, Layers, Gauge, MessageSquareCode, Wand2];
@@ -77,13 +75,8 @@ export default function WebsiteCreationPage() {
               {t("hero.ctaPrimary")}
               <ArrowRight className="size-4" />
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              render={<Link href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer" />}
-            >
+            <Button size="lg" variant="outline" render={<Link href="#portfolio" />}>
               {t("hero.ctaSecondary")}
-              <ExternalLink className="size-4" />
             </Button>
           </div>
           <p className="text-muted-foreground text-xs">{t("hero.note")}</p>
@@ -145,7 +138,7 @@ export default function WebsiteCreationPage() {
         </div>
       </section>
 
-      <section className="space-y-6">
+      <section id="portfolio" className="scroll-mt-20 space-y-6">
         <div className="space-y-2 text-center">
           <h2 className="text-2xl font-semibold tracking-tight">{t("portfolio.title")}</h2>
           <p className="text-muted-foreground mx-auto max-w-2xl">{t("portfolio.description")}</p>
@@ -158,7 +151,7 @@ export default function WebsiteCreationPage() {
               <span className="size-2.5 rounded-full bg-emerald-500/70" />
             </div>
             <div className="bg-background/80 text-muted-foreground ml-2 flex-1 truncate rounded-md border px-3 py-1 text-xs">
-              vladislav-portfolio.onrender.com
+              client-project.nexora.site
             </div>
           </div>
           <CardContent className="space-y-4 py-6">
@@ -179,10 +172,6 @@ export default function WebsiteCreationPage() {
                 </Badge>
               ))}
             </div>
-            <Button render={<Link href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer" />}>
-              {t("portfolio.cta")}
-              <ExternalLink className="size-4" />
-            </Button>
           </CardContent>
         </Card>
       </section>
@@ -241,13 +230,8 @@ export default function WebsiteCreationPage() {
                 {t("cta.primaryButton")}
                 <ArrowRight className="size-4" />
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                render={<Link href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer" />}
-              >
+              <Button size="lg" variant="outline" render={<Link href="#portfolio" />}>
                 {t("cta.secondaryButton")}
-                <ExternalLink className="size-4" />
               </Button>
             </div>
           </CardContent>

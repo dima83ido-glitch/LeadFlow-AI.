@@ -121,7 +121,9 @@ export function MeetingsView({ meetings }: { meetings: Meeting[] }) {
                   </AvatarGroup>
                 )}
                 <DropdownMenu>
-                  <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" />}>
+                  <DropdownMenuTrigger
+                    render={<Button variant="ghost" size="icon" className="size-8" aria-label={tc("actions.actions")} />}
+                  >
                     <MoreHorizontal className="size-4" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
@@ -133,7 +135,12 @@ export function MeetingsView({ meetings }: { meetings: Meeting[] }) {
                 </DropdownMenu>
                 <ConfirmDialog
                   trigger={
-                    <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive size-8">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-destructive hover:text-destructive size-8"
+                      aria-label={t("deleteConfirm")}
+                    >
                       <Trash2 className="size-4" />
                     </Button>
                   }

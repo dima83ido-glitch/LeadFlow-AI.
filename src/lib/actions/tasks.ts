@@ -27,61 +27,81 @@ export async function createTask(input: {
   dueDate?: string;
   priority: TaskPriority;
 }): Promise<ActionResult> {
-  const { workspaceId, userId } = await requireWorkspace();
-  if (!input.title.trim()) return { ok: false, errorCode: "TITLE_REQUIRED" };
+  try {
+    const { workspaceId, userId } = await requireWorkspace();
+    if (!input.title.trim()) return { ok: false, errorCode: "TITLE_REQUIRED" };
 
-  const dueDate = parseDueDate(input.dueDate);
-  if (!dueDate.ok) return { ok: false, errorCode: "INVALID_DUE_DATE" };
+    const dueDate = parseDueDate(input.dueDate);
+    if (!dueDate.ok) return { ok: false, errorCode: "INVALID_DUE_DATE" };
 
-  await prisma.task.create({
-    data: {
-      workspaceId,
-      title: input.title.trim(),
-      description: input.description?.trim() || null,
-      dueDate: dueDate.date,
-      priority: input.priority,
-      assigneeId: userId,
-    },
-  });
+    await prisma.task.create({
+      data: {
+        workspaceId,
+        title: input.title.trim(),
+        description: input.description?.trim() || null,
+        dueDate: dueDate.date,
+        priority: input.priority,
+        assigneeId: userId,
+      },
+    });
 
-  revalidatePath("/crm/tasks");
-  return { ok: true };
+    revalidatePath("/crm/tasks");
+    return { ok: true };
+  } catch (error) {
+    console.error("createTask failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }
 
 export async function updateTask(
   taskId: string,
   input: { title: string; description?: string; dueDate?: string; priority: TaskPriority },
 ): Promise<ActionResult> {
-  const { workspaceId } = await requireWorkspace();
-  if (!input.title.trim()) return { ok: false, errorCode: "TITLE_REQUIRED" };
+  try {
+    const { workspaceId } = await requireWorkspace();
+    if (!input.title.trim()) return { ok: false, errorCode: "TITLE_REQUIRED" };
 
-  const dueDate = parseDueDate(input.dueDate);
-  if (!dueDate.ok) return { ok: false, errorCode: "INVALID_DUE_DATE" };
+    const dueDate = parseDueDate(input.dueDate);
+    if (!dueDate.ok) return { ok: false, errorCode: "INVALID_DUE_DATE" };
 
-  await prisma.task.updateMany({
-    where: { id: taskId, workspaceId },
-    data: {
-      title: input.title.trim(),
-      description: input.description?.trim() || null,
-      dueDate: dueDate.date,
-      priority: input.priority,
-    },
-  });
+    await prisma.task.updateMany({
+      where: { id: taskId, workspaceId },
+      data: {
+        title: input.title.trim(),
+        description: input.description?.trim() || null,
+        dueDate: dueDate.date,
+        priority: input.priority,
+      },
+    });
 
-  revalidatePath("/crm/tasks");
-  return { ok: true };
+    revalidatePath("/crm/tasks");
+    return { ok: true };
+  } catch (error) {
+    console.error("updateTask failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }
 
 export async function updateTaskStatus(taskId: string, status: TaskStatus): Promise<ActionResult> {
-  const { workspaceId } = await requireWorkspace();
-  await prisma.task.updateMany({ where: { id: taskId, workspaceId }, data: { status } });
-  revalidatePath("/crm/tasks");
-  return { ok: true };
+  try {
+    const { workspaceId } = await requireWorkspace();
+    await prisma.task.updateMany({ where: { id: taskId, workspaceId }, data: { status } });
+    revalidatePath("/crm/tasks");
+    return { ok: true };
+  } catch (error) {
+    console.error("updateTaskStatus failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }
 
 export async function deleteTask(taskId: string): Promise<ActionResult> {
-  const { workspaceId } = await requireWorkspace();
-  await prisma.task.deleteMany({ where: { id: taskId, workspaceId } });
-  revalidatePath("/crm/tasks");
-  return { ok: true };
+  try {
+    const { workspaceId } = await requireWorkspace();
+    await prisma.task.deleteMany({ where: { id: taskId, workspaceId } });
+    revalidatePath("/crm/tasks");
+    return { ok: true };
+  } catch (error) {
+    console.error("deleteTask failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }

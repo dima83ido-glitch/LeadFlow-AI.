@@ -77,6 +77,7 @@ function NoteCard({ note, locale }: { note: Note; locale: Locale }) {
                     variant="ghost"
                     size="icon"
                     className="size-7"
+                    aria-label={tc("actions.edit")}
                     onClick={() => {
                       setDraft(note.content);
                       setIsEditing(true);
@@ -86,7 +87,12 @@ function NoteCard({ note, locale }: { note: Note; locale: Locale }) {
                   </Button>
                   <ConfirmDialog
                     trigger={
-                      <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive size-7">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-destructive hover:text-destructive size-7"
+                        aria-label={t("deleteConfirm")}
+                      >
                         <Trash2 className="size-3.5" />
                       </Button>
                     }

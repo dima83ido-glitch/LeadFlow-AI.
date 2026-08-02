@@ -4,7 +4,7 @@
     "title": "Websites that turn visitors into customers",
     "subtitle": "From landing pages to full corporate sites — we design and build premium, high-converting websites for your brand, from the same team behind Nexora.",
     "ctaPrimary": "Get a Free Quote",
-    "ctaSecondary": "View Live Portfolio",
+    "ctaSecondary": "See Example Work",
     "note": "No obligation. We usually reply within 24 hours."
   },
   "overview": {
@@ -73,11 +73,10 @@
   },
   "portfolio": {
     "title": "Featured Work",
-    "description": "A recent example from the studio behind this service — live, in production.",
-    "siteName": "Vladislav — Premium Web Development Studio",
-    "siteDescription": "A freelance full-stack web development portfolio: premium landing pages, dashboards, corporate sites, and Telegram Web Apps, built with Next.js, TypeScript, and React.",
-    "tags": ["Next.js", "TypeScript", "Framer Motion"],
-    "cta": "Visit Live Site"
+    "description": "An example of the premium, high-converting sites we build for clients.",
+    "siteName": "Client Project — Premium Corporate Website",
+    "siteDescription": "A recent client build: a fast, custom-designed corporate site with smooth animations and SEO fundamentals — built with Next.js, TypeScript, and React.",
+    "tags": ["Next.js", "TypeScript", "Framer Motion"]
   },
   "pricing": {
     "title": "Pricing",
@@ -114,6 +113,6 @@
     "title": "Ready to launch your new website?",
     "description": "Tell us about your project and we'll get back to you with a plan and a quote — no obligation.",
     "primaryButton": "Request a Quote",
-    "secondaryButton": "Visit vladislav-portfolio.onrender.com"
+    "secondaryButton": "See Example Work"
   }
 }

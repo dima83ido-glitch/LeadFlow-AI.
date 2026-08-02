@@ -72,7 +72,12 @@ export function ApiKeysView() {
                   <TableCell className="text-right">
                     <ConfirmDialog
                       trigger={
-                        <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive size-8">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="text-destructive hover:text-destructive size-8"
+                          aria-label={t("revokeConfirm")}
+                        >
                           <Trash2 className="size-4" />
                         </Button>
                       }

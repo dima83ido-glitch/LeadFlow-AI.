@@ -10,57 +10,77 @@ import type { SubscriptionPlan, SubscriptionStatus } from "@/generated/prisma/en
 export type ActionResult = { ok: true } | { ok: false; errorCode: string };
 
 export async function updateSubscriptionPlan(subscriptionId: string, plan: SubscriptionPlan): Promise<ActionResult> {
-  await requireAdmin();
-  await prisma.subscription.update({ where: { id: subscriptionId }, data: { plan } });
-  await logSystemEvent({ message: `Subscription ${subscriptionId} plan changed to ${plan}`, source: "admin", feature: "admin.subscriptions.changePlan" });
-  revalidatePath("/admin/subscriptions");
-  return { ok: true };
+  try {
+    await requireAdmin();
+    await prisma.subscription.update({ where: { id: subscriptionId }, data: { plan } });
+    await logSystemEvent({ message: `Subscription ${subscriptionId} plan changed to ${plan}`, source: "admin", feature: "admin.subscriptions.changePlan" });
+    revalidatePath("/admin/subscriptions");
+    return { ok: true };
+  } catch (error) {
+    console.error("updateSubscriptionPlan failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }
 
 export async function updateSubscriptionStatus(subscriptionId: string, status: SubscriptionStatus): Promise<ActionResult> {
-  await requireAdmin();
-  await prisma.subscription.update({ where: { id: subscriptionId }, data: { status } });
-  await logSystemEvent({ message: `Subscription ${subscriptionId} status changed to ${status}`, source: "admin", feature: "admin.subscriptions.changeStatus" });
-  revalidatePath("/admin/subscriptions");
-  return { ok: true };
+  try {
+    await requireAdmin();
+    await prisma.subscription.update({ where: { id: subscriptionId }, data: { status } });
+    await logSystemEvent({ message: `Subscription ${subscriptionId} status changed to ${status}`, source: "admin", feature: "admin.subscriptions.changeStatus" });
+    revalidatePath("/admin/subscriptions");
+    return { ok: true };
+  } catch (error) {
+    console.error("updateSubscriptionStatus failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }
 
 export async function extendSubscription(subscriptionId: string, days: number): Promise<ActionResult> {
-  await requireAdmin();
-  const sub = await prisma.subscription.findUniqueOrThrow({ where: { id: subscriptionId } });
-  const base = sub.currentPeriodEnd && sub.currentPeriodEnd > new Date() ? sub.currentPeriodEnd : new Date();
-  const newEnd = new Date(base.getTime() + days * 24 * 60 * 60 * 1000);
+  try {
+    await requireAdmin();
+    const sub = await prisma.subscription.findUniqueOrThrow({ where: { id: subscriptionId } });
+    const base = sub.currentPeriodEnd && sub.currentPeriodEnd > new Date() ? sub.currentPeriodEnd : new Date();
+    const newEnd = new Date(base.getTime() + days * 24 * 60 * 60 * 1000);
 
-  await prisma.subscription.update({
-    where: { id: subscriptionId },
-    data: { currentPeriodEnd: newEnd, status: "ACTIVE" },
-  });
-  await logSystemEvent({ message: `Subscription ${subscriptionId} extended by ${days} days`, source: "admin", feature: "admin.subscriptions.extend" });
-  revalidatePath("/admin/subscriptions");
-  return { ok: true };
+    await prisma.subscription.update({
+      where: { id: subscriptionId },
+      data: { currentPeriodEnd: newEnd, status: "ACTIVE" },
+    });
+    await logSystemEvent({ message: `Subscription ${subscriptionId} extended by ${days} days`, source: "admin", feature: "admin.subscriptions.extend" });
+    revalidatePath("/admin/subscriptions");
+    return { ok: true };
+  } catch (error) {
+    console.error("extendSubscription failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }
 
 export async function grantFreeAccess(subscriptionId: string): Promise<ActionResult> {
-  await requireAdmin();
-  const farFuture = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
+  try {
+    await requireAdmin();
+    const farFuture = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
 
-  const sub = await prisma.subscription.update({
-    where: { id: subscriptionId },
-    data: { status: "ACTIVE", currentPeriodEnd: farFuture },
-  });
+    const sub = await prisma.subscription.update({
+      where: { id: subscriptionId },
+      data: { status: "ACTIVE", currentPeriodEnd: farFuture },
+    });
 
-  await prisma.payment.create({
-    data: {
-      workspaceId: sub.workspaceId,
-      subscriptionId: sub.id,
-      amount: 0,
-      status: "SUCCEEDED",
-      description: "Admin-granted free access",
-    },
-  });
+    await prisma.payment.create({
+      data: {
+        workspaceId: sub.workspaceId,
+        subscriptionId: sub.id,
+        amount: 0,
+        status: "SUCCEEDED",
+        description: "Admin-granted free access",
+      },
+    });
 
-  await logSystemEvent({ message: `Free access granted to subscription ${subscriptionId}`, source: "admin", feature: "admin.subscriptions.grantFreeAccess" });
-  revalidatePath("/admin/subscriptions");
-  revalidatePath("/admin/payments");
-  return { ok: true };
+    await logSystemEvent({ message: `Free access granted to subscription ${subscriptionId}`, source: "admin", feature: "admin.subscriptions.grantFreeAccess" });
+    revalidatePath("/admin/subscriptions");
+    revalidatePath("/admin/payments");
+    return { ok: true };
+  } catch (error) {
+    console.error("grantFreeAccess failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
 }

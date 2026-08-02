@@ -92,7 +92,9 @@ export function getCompaniesColumns(
             onClick={(e) => e.stopPropagation()}
           >
             <DropdownMenu>
-              <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" />}>
+              <DropdownMenuTrigger
+                render={<Button variant="ghost" size="icon" className="size-8" aria-label={t("common.actions.actions")} />}
+              >
                 <MoreHorizontal className="size-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">

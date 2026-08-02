@@ -35,6 +35,7 @@ const categories: (TemplateCategory | "All")[] = [
 export function TemplatesGrid({ templates }: { templates: Template[] }) {
   const t = useTranslations("templates");
   const tCategory = useTranslations("templates.categories");
+  const tc = useTranslations("common");
   const locale = useLocale() as Locale;
   const [category, setCategory] = React.useState<TemplateCategory | "All">("All");
   const [search, setSearch] = React.useState("");
@@ -91,7 +92,9 @@ export function TemplatesGrid({ templates }: { templates: Template[] }) {
                   <p className="font-medium">{template.name}</p>
                 </div>
                 <DropdownMenu>
-                  <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8" />}>
+                  <DropdownMenuTrigger
+                    render={<Button variant="ghost" size="icon" className="size-8" aria-label={tc("actions.actions")} />}
+                  >
                     <MoreHorizontal className="size-4" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
