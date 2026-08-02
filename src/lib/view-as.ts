@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { cookies } from "next/headers";
 
 import { prisma } from "@/lib/db";
@@ -13,7 +14,12 @@ export interface EffectivePlan {
   isAdmin: boolean;
 }
 
-export async function getEffectivePlan(): Promise<EffectivePlan> {
+/**
+ * Called independently by the app layout and by individual pages that need
+ * plan-gating info — `cache()` so a request only does the workspace +
+ * subscription lookup once no matter how many call sites need it.
+ */
+export const getEffectivePlan = cache(async function getEffectivePlan(): Promise<EffectivePlan> {
   const { workspaceId, role } = await requireWorkspace();
   const subscription = await prisma.subscription.findUnique({ where: { workspaceId } });
   const realPlan: SubscriptionPlan = subscription?.plan ?? "FREE";
@@ -28,7 +34,7 @@ export async function getEffectivePlan(): Promise<EffectivePlan> {
   }
 
   return { plan: realPlan, realPlan, isOverride: false, isAdmin };
-}
+});
 
 /**
  * Admins with no active "view as" override always pass (they can verify

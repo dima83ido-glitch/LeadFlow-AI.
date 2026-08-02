@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+import dynamic from "next/dynamic";
 import { Sparkles, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -8,9 +10,20 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { AiChatPanel } from "@/components/ai-assistant/ai-chat-panel";
 import { useAiAssistant } from "@/components/ai-assistant/ai-assistant-provider";
-import { EarthScene } from "@/components/ai-assistant/earth-scene";
+
+// Both are only ever needed once the panel is actually opened, and the
+// Earth scene in particular is a lot of generated star/dust/meteor markup —
+// code-split them out of the main bundle instead of shipping them to every
+// page load for admins/Enterprise users who may never open the assistant.
+const AiChatPanel = dynamic(
+  () => import("@/components/ai-assistant/ai-chat-panel").then((m) => m.AiChatPanel),
+  { ssr: false },
+);
+const EarthScene = dynamic(
+  () => import("@/components/ai-assistant/earth-scene").then((m) => m.EarthScene),
+  { ssr: false },
+);
 
 const PANEL_WIDTH = "w-[420px] xl:w-[640px] 2xl:w-[780px]";
 
@@ -41,6 +54,16 @@ export function AiAssistantPanel() {
   const isMobile = useIsMobile();
   const t = useTranslations("aiAssistant");
 
+  // The Earth scene and chat are only mounted once the assistant has been
+  // opened at least once — otherwise their ~180 animated elements and
+  // dedicated chunk would load and animate on every page for nothing.
+  // Once opened, they stay mounted so closing/reopening keeps the
+  // conversation instead of resetting it.
+  const [hasOpened, setHasOpened] = React.useState(false);
+  React.useEffect(() => {
+    if (open) setHasOpened(true);
+  }, [open]);
+
   if (isMobile) {
     return (
       <Sheet open={open} onOpenChange={setOpen}>
@@ -50,10 +73,12 @@ export function AiAssistantPanel() {
             <SheetDescription>{t("panelDescription")}</SheetDescription>
           </SheetHeader>
           <PanelHeader onClose={() => setOpen(false)} />
-          <div className="flex min-h-0 flex-1 flex-col">
-            <EarthScene className="h-48 w-full shrink-0 border-b border-white/5 sm:h-56" />
-            <AiChatPanel className="min-h-0 flex-1" />
-          </div>
+          {hasOpened && (
+            <div className="flex min-h-0 flex-1 flex-col">
+              <EarthScene className="h-48 w-full shrink-0 border-b border-white/5 sm:h-56" />
+              <AiChatPanel className="min-h-0 flex-1" />
+            </div>
+          )}
         </SheetContent>
       </Sheet>
     );
@@ -76,10 +101,12 @@ export function AiAssistantPanel() {
         aria-hidden={!open}
       >
         <PanelHeader onClose={() => setOpen(false)} />
-        <div className="flex min-h-0 flex-1 flex-col">
-          <EarthScene className="h-64 w-full shrink-0 border-b border-white/5 xl:h-72 2xl:h-80" />
-          <AiChatPanel className="min-h-0 flex-1" />
-        </div>
+        {hasOpened && (
+          <div className="flex min-h-0 flex-1 flex-col">
+            <EarthScene className="h-64 w-full shrink-0 border-b border-white/5 xl:h-72 2xl:h-80" />
+            <AiChatPanel className="min-h-0 flex-1" />
+          </div>
+        )}
       </div>
     </>
   );

@@ -120,6 +120,8 @@ model User {
   notes             Note[]
   notifications     Notification[]
   confirmedPayments Payment[]
+
+  @@index([workspaceId])
 }
 
 // ---------------------------------------------------------------------------
@@ -160,6 +162,8 @@ model Lead {
 
   campaignEmails CampaignEmail[]
   tasks          Task[]
+
+  @@index([workspaceId, createdAt])
 }
 
 model Company {
@@ -184,6 +188,8 @@ model Company {
   contacts Contact[]
   deals    Deal[]
   notes    Note[]
+
+  @@index([workspaceId, createdAt])
 }
 
 model Contact {
@@ -208,6 +214,8 @@ model Contact {
   meetings       Meeting[]
   notes          Note[]
   campaignEmails CampaignEmail[]
+
+  @@index([workspaceId, createdAt])
 }
 
 // ---------------------------------------------------------------------------
@@ -244,6 +252,8 @@ model Campaign {
   updatedAt   DateTime  @updatedAt
 
   emails CampaignEmail[]
+
+  @@index([workspaceId, createdAt])
 }
 
 model CampaignEmail {
@@ -260,6 +270,8 @@ model CampaignEmail {
   openedAt  DateTime?
   repliedAt DateTime?
   clickedAt DateTime?
+
+  @@index([campaignId])
 }
 
 model Template {
@@ -277,6 +289,8 @@ model Template {
   updatedAt DateTime @updatedAt
 
   campaigns Campaign[]
+
+  @@index([workspaceId, createdAt])
 }
 
 // ---------------------------------------------------------------------------
@@ -292,6 +306,8 @@ model PipelineStage {
   order Int
 
   deals Deal[]
+
+  @@index([workspaceId, order])
 }
 
 enum DealStatus {
@@ -321,6 +337,9 @@ model Deal {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([workspaceId, createdAt])
+  @@index([pipelineStageId])
 }
 
 enum MeetingStatus {
@@ -346,6 +365,8 @@ model Meeting {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([workspaceId, createdAt])
 }
 
 enum TaskStatus {
@@ -379,6 +400,9 @@ model Task {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([workspaceId, createdAt])
+  @@index([assigneeId])
 }
 
 model Note {
@@ -398,6 +422,8 @@ model Note {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([workspaceId, createdAt])
 }
 
 // ---------------------------------------------------------------------------
@@ -425,6 +451,8 @@ model Notification {
   read    Boolean          @default(false)
 
   createdAt DateTime @default(now())
+
+  @@index([workspaceId, createdAt])
 }
 
 model ApiKey {
@@ -439,6 +467,8 @@ model ApiKey {
   revokedAt  DateTime?
 
   createdAt DateTime @default(now())
+
+  @@index([workspaceId])
 }
 
 enum SubscriptionPlan {
@@ -518,6 +548,8 @@ model Payment {
   confirmedBy       User?     @relation(fields: [confirmedByUserId], references: [id])
 
   createdAt DateTime @default(now())
+
+  @@index([workspaceId, createdAt])
 }
 
 model PlanConfig {

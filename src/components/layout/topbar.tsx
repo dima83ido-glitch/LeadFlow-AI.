@@ -1,5 +1,4 @@
-import { prisma } from "@/lib/db";
-import { requireSession } from "@/lib/workspace";
+import { getCurrentUserRow } from "@/lib/workspace";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { AiAssistantTrigger } from "@/components/ai-assistant/ai-assistant-trigger";
@@ -13,11 +12,7 @@ import { UserMenu } from "@/components/layout/user-menu";
 import { ViewAsMenu } from "@/components/admin/view-as-menu";
 
 export async function Topbar({ isAdmin, canUseAiAssistant }: { isAdmin: boolean; canUseAiAssistant: boolean }) {
-  const session = await requireSession();
-  const user = await prisma.user.findUnique({
-    where: { id: session.user.id as string },
-    select: { image: true },
-  });
+  const { user } = await getCurrentUserRow();
 
   return (
     <header className="bg-background/85 sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b border-border/70 px-4 shadow-[0_1px_0_0_var(--border)] backdrop-blur-md">

@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { cache } from "react";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
@@ -49,16 +50,28 @@ export class AccountSuspendedError extends Error {
   }
 }
 
-/** Non-null session, redirecting to /login if absent (mirrors middleware). */
-export async function requireSession() {
+/**
+ * Non-null session, redirecting to /login if absent (mirrors middleware).
+ * Wrapped in React's `cache()` so the handful of Server Components that
+ * each need the session (layout, topbar, the page itself) share one
+ * `auth()` call per request instead of re-decoding the JWT repeatedly.
+ */
+export const requireSession = cache(async function requireSession() {
   const session = await auth();
   if (!session?.user?.id) {
     redirect("/login");
   }
   return session;
-}
+});
 
-export async function getCurrentWorkspaceId(): Promise<string> {
+/**
+ * The current user's full row, fetched at most once per request. Backs
+ * both `getCurrentWorkspaceId` and `requireWorkspace` so they don't each
+ * issue their own duplicate `prisma.user.findUnique` — also exported for
+ * call sites (like the topbar avatar) that just need a user field and
+ * would otherwise run their own redundant lookup.
+ */
+export const getCurrentUserRow = cache(async function getCurrentUserRow() {
   const session = await requireSession();
   const userId = session.user.id as string;
 
@@ -66,22 +79,22 @@ export async function getCurrentWorkspaceId(): Promise<string> {
   if (!user) redirect("/login");
   if (user.status === "SUSPENDED") throw new AccountSuspendedError();
 
+  return { session, userId, user };
+});
+
+export const getCurrentWorkspaceId = cache(async function getCurrentWorkspaceId(): Promise<string> {
+  const { userId, user } = await getCurrentUserRow();
   if (user.workspaceId) return user.workspaceId;
   return ensureWorkspaceForUser(userId);
-}
+});
 
-export async function requireWorkspace(): Promise<{
+export const requireWorkspace = cache(async function requireWorkspace(): Promise<{
   workspaceId: string;
   userId: string;
   role: "USER" | "ADMIN";
   workspaceRole: WorkspaceRole;
 }> {
-  const session = await requireSession();
-  const userId = session.user.id as string;
-  const user = await prisma.user.findUnique({ where: { id: userId } });
-  if (!user) redirect("/login");
-  if (user.status === "SUSPENDED") throw new AccountSuspendedError();
-
+  const { session, userId, user } = await getCurrentUserRow();
   const workspaceId = user.workspaceId ?? (await ensureWorkspaceForUser(userId));
 
   return {
@@ -90,12 +103,12 @@ export async function requireWorkspace(): Promise<{
     role: session.user.role as "USER" | "ADMIN",
     workspaceRole: user.workspaceRole,
   };
-}
+});
 
-export async function requireAdmin() {
+export const requireAdmin = cache(async function requireAdmin() {
   const session = await requireSession();
   if (session.user.role !== "ADMIN") {
     redirect("/dashboard");
   }
   return session;
-}
+});
