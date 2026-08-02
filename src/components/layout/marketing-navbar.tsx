@@ -1,13 +1,14 @@
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { BrandMark } from "@/components/shared/brand-mark";
 
 export function MarketingNavbar() {
   const t = useTranslations("marketing.navbar");
+  const tc = useTranslations("common");
   const links = [
     { title: t("product"), href: "#product" },
     { title: t("pricing"), href: "#pricing" },
@@ -18,10 +19,8 @@ export function MarketingNavbar() {
     <header className="bg-background/80 sticky top-0 z-40 border-b backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
-          <div className="bg-primary text-primary-foreground flex size-7 items-center justify-center rounded-md">
-            <Sparkles className="size-4" />
-          </div>
-          <span className="hidden text-sm font-semibold sm:inline">LeadFlow AI</span>
+          <BrandMark className="size-7" />
+          <span className="hidden text-sm font-semibold sm:inline">{tc("appName")}</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

@@ -7,12 +7,12 @@
   "finish": "Finish",
   "gettingStarted": {
     "title": "Getting Started",
-    "description": "Replay the welcome tour to see what each part of LeadFlow AI does.",
+    "description": "Replay the welcome tour to see what each part of Nexora does.",
     "button": "Restart tour"
   },
   "steps": {
     "welcome": {
-      "title": "Welcome to LeadFlow AI",
+      "title": "Welcome to Nexora",
       "description": "Let's take a quick 2-minute tour so you know exactly where everything lives before you dive in."
     },
     "dashboard": {

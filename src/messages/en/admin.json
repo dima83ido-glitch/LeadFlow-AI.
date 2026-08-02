@@ -49,7 +49,7 @@
   },
   "aiUsage": {
     "title": "AI Usage",
-    "description": "How your team is using LeadFlow AI's AI-powered tools.",
+    "description": "How your team is using Nexora's AI-powered tools.",
     "stats": {
       "totalCalls": "Total AI Calls (30d)",
       "activeTools": "Active Tools",
@@ -93,7 +93,7 @@
   },
   "users": {
     "title": "Users",
-    "description": "Every user across all workspaces on LeadFlow AI.",
+    "description": "Every user across all workspaces on Nexora.",
     "columns": {
       "user": "User",
       "role": "Role",
@@ -116,7 +116,7 @@
   },
   "payments": {
     "title": "Payments",
-    "description": "All payments across every workspace on LeadFlow AI.",
+    "description": "All payments across every workspace on Nexora.",
     "filters": {
       "all": "All"
     },
@@ -141,7 +141,7 @@
   },
   "systemLogs": {
     "title": "System Logs",
-    "description": "Recent events emitted across LeadFlow AI services.",
+    "description": "Recent events emitted across Nexora services.",
     "filters": {
       "all": "All",
       "info": "Info",
@@ -157,7 +157,7 @@
   },
   "promoCodes": {
     "title": "Promo Codes",
-    "description": "Create and manage discount codes for LeadFlow AI plans.",
+    "description": "Create and manage discount codes for Nexora plans.",
     "columns": {
       "code": "Code",
       "discount": "Discount",
@@ -224,7 +224,7 @@
   },
   "websiteSettings": {
     "title": "Website Settings",
-    "description": "Global settings for the LeadFlow AI marketing site and app.",
+    "description": "Global settings for the Nexora marketing site and app.",
     "general": {
       "title": "General",
       "siteNameLabel": "Site name",

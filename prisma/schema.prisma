@@ -1,4 +1,4 @@
-// LeadFlow AI — data model.
+// Nexora — data model.
 
 generator client {
   provider = "prisma-client"

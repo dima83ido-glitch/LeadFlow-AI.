@@ -3,11 +3,12 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRight, HelpCircle, Sparkles } from "lucide-react";
+import { ChevronRight, HelpCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { adminNav, mainNav } from "@/lib/nav-config";
 import { cn } from "@/lib/utils";
+import { BrandMark } from "@/components/shared/brand-mark";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Sidebar,
@@ -27,6 +28,7 @@ import { SupportButton } from "@/components/shared/support-button";
 export function AppSidebar() {
   const pathname = usePathname();
   const t = useTranslations();
+  const tc = useTranslations("common");
   const isAdmin = pathname.startsWith("/admin");
   const groups = isAdmin ? adminNav : mainNav;
 
@@ -37,11 +39,9 @@ export function AppSidebar() {
           href="/dashboard"
           className="flex items-center gap-2 px-2 py-1.5 group-data-[collapsible=icon]:justify-center"
         >
-          <div className="bg-primary text-primary-foreground flex size-7 shrink-0 items-center justify-center rounded-md">
-            <Sparkles className="size-4" />
-          </div>
+          <BrandMark className="size-7" />
           <span className="text-sm font-semibold group-data-[collapsible=icon]:hidden">
-            LeadFlow AI
+            {tc("appName")}
           </span>
         </Link>
       </SidebarHeader>

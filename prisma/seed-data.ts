@@ -166,9 +166,9 @@ export const systemLogs = [
 ];
 
 export const appSettings = [
-  { key: "site.name", value: "LeadFlow AI" },
-  { key: "site.supportEmail", value: "support@leadflow.ai" },
+  { key: "site.name", value: "Nexora" },
+  { key: "site.supportEmail", value: "support@nexora.ai" },
   { key: "site.maintenanceMode", value: "false" },
-  { key: "seo.metaTitle", value: "LeadFlow AI — Find, reach, and close more leads" },
+  { key: "seo.metaTitle", value: "Nexora — Find, reach, and close more leads" },
   { key: "seo.metaDescription", value: "AI-powered lead generation, outreach, and CRM in one platform." },
 ];

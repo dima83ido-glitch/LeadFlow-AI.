@@ -62,7 +62,7 @@
   },
   "apiKeys": {
     "emptyTitle": "Пока нет API-ключей",
-    "emptyDescription": "Создайте ключ для аутентификации запросов к API LeadFlow AI.",
+    "emptyDescription": "Создайте ключ для аутентификации запросов к API Nexora.",
     "columnName": "Название",
     "columnKey": "Ключ",
     "columnCreated": "Создан",

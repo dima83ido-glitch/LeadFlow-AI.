@@ -49,7 +49,7 @@
   },
   "aiUsage": {
     "title": "Використання ШІ",
-    "description": "Як ваша команда використовує AI-інструменти LeadFlow AI.",
+    "description": "Як ваша команда використовує AI-інструменти Nexora.",
     "stats": {
       "totalCalls": "Викликів ШІ (30 дн.)",
       "activeTools": "Активних інструментів",
@@ -93,7 +93,7 @@
   },
   "users": {
     "title": "Користувачі",
-    "description": "Усі користувачі всіх робочих просторів LeadFlow AI.",
+    "description": "Усі користувачі всіх робочих просторів Nexora.",
     "columns": {
       "user": "Користувач",
       "role": "Роль",
@@ -116,7 +116,7 @@
   },
   "payments": {
     "title": "Платежі",
-    "description": "Усі платежі в усіх робочих просторах LeadFlow AI.",
+    "description": "Усі платежі в усіх робочих просторах Nexora.",
     "filters": {
       "all": "Усі"
     },
@@ -141,7 +141,7 @@
   },
   "systemLogs": {
     "title": "Системні логи",
-    "description": "Останні події в усіх сервісах LeadFlow AI.",
+    "description": "Останні події в усіх сервісах Nexora.",
     "filters": {
       "all": "Усі",
       "info": "Інфо",
@@ -157,7 +157,7 @@
   },
   "promoCodes": {
     "title": "Промокоди",
-    "description": "Створюйте та керуйте знижковими кодами для тарифів LeadFlow AI.",
+    "description": "Створюйте та керуйте знижковими кодами для тарифів Nexora.",
     "columns": {
       "code": "Код",
       "discount": "Знижка",
@@ -224,7 +224,7 @@
   },
   "websiteSettings": {
     "title": "Налаштування сайту",
-    "description": "Глобальні налаштування маркетингового сайту та застосунку LeadFlow AI.",
+    "description": "Глобальні налаштування маркетингового сайту та застосунку Nexora.",
     "general": {
       "title": "Загальне",
       "siteNameLabel": "Назва сайту",

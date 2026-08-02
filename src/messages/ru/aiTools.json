@@ -234,7 +234,7 @@
     "form": {
       "cardTitle": "Информация о продукте",
       "productLabel": "Название продукта / компании",
-      "productPlaceholder": "например, LeadFlow AI",
+      "productPlaceholder": "например, Nexora",
       "valuePropLabel": "Ценностное предложение",
       "valuePropPlaceholder": "например, находить и закрывать новых клиентов быстрее",
       "submit": "Сгенерировать"

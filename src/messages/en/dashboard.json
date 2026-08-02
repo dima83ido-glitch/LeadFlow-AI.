@@ -1,6 +1,6 @@
 {
   "welcome": "Welcome back, {name}",
-  "subtitle": "The LeadFlow AI team welcomes you to your AI business workspace.",
+  "subtitle": "The Nexora team welcomes you to your AI business workspace.",
   "vsLastMonth": "vs last month",
   "stats": {
     "totalLeads": "Total Leads",
@@ -51,7 +51,7 @@
   },
   "guide": {
     "title": "Your Complete Platform Guide",
-    "subtitle": "A visual tour of every tool inside LeadFlow AI — what it does, and where to find it.",
+    "subtitle": "A visual tour of every tool inside Nexora — what it does, and where to find it.",
     "openLabel": "Open",
     "sections": {
       "profile": {
@@ -129,7 +129,7 @@
       },
       "support": {
         "title": "Support",
-        "description": "Have a question or hit a snag? Reach the LeadFlow AI team directly and we'll get back to you fast.",
+        "description": "Have a question or hit a snag? Reach the Nexora team directly and we'll get back to you fast.",
         "meta": "We're here whenever you need us"
       }
     }

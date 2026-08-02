@@ -1,10 +1,10 @@
 import { prisma } from "@/lib/db";
 
 export const DEFAULT_APP_SETTINGS = {
-  "site.name": "LeadFlow AI",
-  "site.supportEmail": "support@leadflow.ai",
+  "site.name": "Nexora",
+  "site.supportEmail": "support@nexora.ai",
   "site.maintenanceMode": "false",
-  "seo.metaTitle": "LeadFlow AI — Find, reach, and close more leads",
+  "seo.metaTitle": "Nexora — Find, reach, and close more leads",
   "seo.metaDescription": "AI-powered lead generation, outreach, and CRM in one platform.",
 } as const;
 

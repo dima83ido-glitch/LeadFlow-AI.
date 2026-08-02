@@ -127,7 +127,7 @@ async function safeFetch(
     const response = await fetch(currentUrl.toString(), {
       signal,
       redirect: "manual",
-      headers: { "User-Agent": "LeadFlowAI-WebsiteAnalyzer/1.0" },
+      headers: { "User-Agent": "NexoraAI-WebsiteAnalyzer/1.0" },
     });
 
     const isRedirect = response.status >= 300 && response.status < 400;

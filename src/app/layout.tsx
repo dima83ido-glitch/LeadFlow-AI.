@@ -21,8 +21,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "LeadFlow AI",
-    template: "%s · LeadFlow AI",
+    default: "Nexora",
+    template: "%s · Nexora",
   },
   description:
     "Find potential clients, analyze their websites, and turn cold leads into closed deals — all from one platform.",

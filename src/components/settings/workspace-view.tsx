@@ -45,7 +45,7 @@ export function WorkspaceView() {
     formState: { errors },
   } = useForm<WorkspaceFormValues>({
     resolver: zodResolver(workspaceSchema),
-    defaultValues: { name: "LeadFlow Internal", slug: "leadflow-internal" },
+    defaultValues: { name: "Nexora Internal", slug: "nexora-internal" },
   });
 
   function onSubmit() {

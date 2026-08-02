@@ -1,4 +1,4 @@
-const STORAGE_KEY = "leadflow:onboarding-completed";
+const STORAGE_KEY = "nexora:onboarding-completed";
 
 export function hasCompletedOnboarding(): boolean {
   if (typeof window === "undefined") return true;

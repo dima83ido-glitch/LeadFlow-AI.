@@ -62,7 +62,7 @@
   },
   "apiKeys": {
     "emptyTitle": "No API keys yet",
-    "emptyDescription": "Create a key to authenticate requests to the LeadFlow AI API.",
+    "emptyDescription": "Create a key to authenticate requests to the Nexora API.",
     "columnName": "Name",
     "columnKey": "Key",
     "columnCreated": "Created",

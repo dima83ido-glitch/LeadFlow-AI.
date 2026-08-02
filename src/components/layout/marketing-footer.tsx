@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
+
+import { BrandMark } from "@/components/shared/brand-mark";
 
 export function MarketingFooter() {
   const t = useTranslations("marketing.footer");
+  const tc = useTranslations("common");
 
   const columns = [
     {
@@ -38,10 +40,8 @@ export function MarketingFooter() {
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-12 md:flex-row md:justify-between">
         <div className="max-w-xs space-y-3">
           <div className="flex items-center gap-2">
-            <div className="bg-primary text-primary-foreground flex size-7 items-center justify-center rounded-md">
-              <Sparkles className="size-4" />
-            </div>
-            <span className="text-sm font-semibold">LeadFlow AI</span>
+            <BrandMark className="size-7" />
+            <span className="text-sm font-semibold">{tc("appName")}</span>
           </div>
           <p className="text-muted-foreground text-sm">{t("tagline")}</p>
         </div>

@@ -234,7 +234,7 @@
     "form": {
       "cardTitle": "Product Details",
       "productLabel": "Product / company name",
-      "productPlaceholder": "e.g. LeadFlow AI",
+      "productPlaceholder": "e.g. Nexora",
       "valuePropLabel": "Value proposition",
       "valuePropPlaceholder": "e.g. find and close new clients faster",
       "submit": "Generate"

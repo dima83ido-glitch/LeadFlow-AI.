@@ -7,7 +7,7 @@
   "resources": {
     "documentation": {
       "title": "Documentation",
-      "description": "Guides for every feature in LeadFlow AI."
+      "description": "Guides for every feature in Nexora."
     },
     "community": {
       "title": "Community",
@@ -26,7 +26,7 @@
     },
     "aiEmailGenerator": {
       "question": "How does the AI email generator work?",
-      "answer": "Open AI Tools → Email Generator, pick a lead, and choose a tone. LeadFlow AI drafts a personalized email you can edit before sending."
+      "answer": "Open AI Tools → Email Generator, pick a lead, and choose a tone. Nexora drafts a personalized email you can edit before sending."
     },
     "inviteTeammates": {
       "question": "Can I invite teammates to my workspace?",
