@@ -25,7 +25,7 @@ export function AiAssistantTrigger() {
             className={cn(
               "relative overflow-visible",
               !open &&
-                "before:absolute before:inset-0 before:-z-10 before:rounded-lg before:bg-gradient-to-br before:from-violet-500/40 before:via-fuchsia-500/30 before:to-cyan-400/40 before:opacity-0 before:blur-md before:transition-opacity before:duration-300 hover:before:opacity-100",
+                "before:absolute before:inset-0 before:-z-10 before:rounded-lg before:bg-[linear-gradient(135deg,color-mix(in_oklch,var(--primary)_45%,transparent),color-mix(in_oklch,var(--chart-2)_35%,transparent),color-mix(in_oklch,var(--chart-3)_40%,transparent))] before:opacity-0 before:blur-md before:transition-opacity before:duration-300 hover:before:opacity-100",
             )}
           />
         }
@@ -33,8 +33,8 @@ export function AiAssistantTrigger() {
         <Sparkles className={cn("size-4 transition-colors", open ? "text-primary" : "")} />
         {!open && (
           <span className="absolute top-1 right-1 flex size-1.5">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-violet-400 opacity-75" />
-            <span className="relative inline-flex size-1.5 rounded-full bg-violet-500" />
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" />
+            <span className="relative inline-flex size-1.5 rounded-full bg-primary" />
           </span>
         )}
       </TooltipTrigger>

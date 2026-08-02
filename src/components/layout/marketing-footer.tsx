@@ -49,7 +49,9 @@ export function MarketingFooter() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
           {columns.map((column) => (
             <div key={column.title} className="space-y-3">
-              <p className="text-sm font-medium">{column.title}</p>
+              <p className="text-xs font-medium tracking-wider text-foreground/70 uppercase">
+                {column.title}
+              </p>
               <ul className="space-y-2">
                 {column.links.map((link) => (
                   <li key={link.title}>

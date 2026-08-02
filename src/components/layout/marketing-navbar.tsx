@@ -16,19 +16,21 @@ export function MarketingNavbar() {
   ];
 
   return (
-    <header className="bg-background/80 sticky top-0 z-40 border-b backdrop-blur">
+    <header className="bg-background/85 sticky top-0 z-40 border-b border-border/70 shadow-[0_1px_0_0_var(--border)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
           <BrandMark className="size-7" />
-          <span className="hidden text-sm font-semibold sm:inline">{tc("appName")}</span>
+          <span className="hidden text-sm font-semibold tracking-wide sm:inline">
+            {tc("appName")}
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200 hover:[text-shadow:0_0_12px_color-mix(in_oklch,var(--primary)_50%,transparent)] dark:hover:[text-shadow:0_0_14px_color-mix(in_oklch,var(--chart-3)_55%,transparent)]"
+              className="text-muted-foreground hover:text-foreground text-sm font-medium tracking-wide transition-colors duration-200 hover:[text-shadow:0_0_12px_color-mix(in_oklch,var(--primary)_50%,transparent)] dark:hover:[text-shadow:0_0_14px_color-mix(in_oklch,var(--chart-2)_55%,transparent)]"
             >
               {link.title}
             </Link>

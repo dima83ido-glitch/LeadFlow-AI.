@@ -276,14 +276,21 @@ export default function LandingPage() {
                 key={plan.id}
                 className={cn(
                   "flex flex-col",
-                  plan.highlighted && "border-primary shadow-lg",
+                  plan.highlighted &&
+                    "border-primary/50 shadow-[0_24px_60px_-24px_hsl(var(--shadow-color)/0.55),0_0_0_1px_color-mix(in_oklch,var(--primary)_35%,transparent)] hover:shadow-[0_28px_70px_-20px_hsl(var(--shadow-color)/0.6),0_0_0_1px_color-mix(in_oklch,var(--primary)_45%,transparent),0_0_32px_-8px_color-mix(in_oklch,var(--primary)_45%,transparent)]",
                 )}
               >
                 <CardHeader className="gap-2">
-                  {plan.highlighted && <Badge className="w-fit">{tb("mostPopular")}</Badge>}
-                  <p className="font-medium">{tb(`${plan.id}.name`)}</p>
+                  {plan.highlighted && (
+                    <Badge className="w-fit tracking-wide uppercase">{tb("mostPopular")}</Badge>
+                  )}
+                  <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
+                    {tb(`${plan.id}.name`)}
+                  </p>
                   <p>
-                    <span className="text-3xl font-semibold">${plan.price}</span>
+                    <span className="font-heading text-4xl font-semibold tracking-tight">
+                      ${plan.price}
+                    </span>
                     <span className="text-muted-foreground text-sm"> {tb("perMonth")}</span>
                   </p>
                   <p className="text-muted-foreground text-sm">{tb(`${plan.id}.description`)}</p>
@@ -292,7 +299,7 @@ export default function LandingPage() {
                   <ul className="text-muted-foreground flex-1 space-y-2 text-sm">
                     {(tb.raw(`${plan.id}.features`) as string[]).map((feature) => (
                       <li key={feature} className="flex items-start gap-2">
-                        <span className="bg-primary mt-1.5 size-1 shrink-0 rounded-full" />
+                        <Check className="text-primary mt-0.5 size-3.5 shrink-0" />
                         {feature}
                       </li>
                     ))}
