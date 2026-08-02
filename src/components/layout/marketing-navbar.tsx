@@ -18,8 +18,8 @@ export function MarketingNavbar() {
   return (
     <header className="bg-background/85 sticky top-0 z-40 border-b border-border/70 shadow-[0_1px_0_0_var(--border)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href="/" className="flex items-center gap-2">
-          <BrandMark className="size-7" />
+        <Link href="/" className="group flex items-center gap-2.5">
+          <BrandMark className="size-8" />
           <span className="hidden text-sm font-semibold tracking-wide sm:inline">
             {tc("appName")}
           </span>

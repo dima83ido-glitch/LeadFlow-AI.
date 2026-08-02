@@ -39,8 +39,8 @@ export function MarketingFooter() {
     <footer className="border-t">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-12 md:flex-row md:justify-between">
         <div className="max-w-xs space-y-3">
-          <div className="flex items-center gap-2">
-            <BrandMark className="size-7" />
+          <div className="group flex items-center gap-2.5">
+            <BrandMark className="size-8" />
             <span className="text-sm font-semibold">{tc("appName")}</span>
           </div>
           <p className="text-muted-foreground text-sm">{t("tagline")}</p>

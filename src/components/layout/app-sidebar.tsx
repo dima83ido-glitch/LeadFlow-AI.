@@ -37,12 +37,9 @@ export function AppSidebar() {
       <SidebarHeader>
         <Link
           href="/dashboard"
-          className="group flex items-center gap-2 px-2 py-1.5 group-data-[collapsible=icon]:justify-center"
+          className="group flex items-center gap-2.5 px-2 py-1.5 group-data-[collapsible=icon]:justify-center"
         >
-          <span className="relative flex items-center justify-center">
-            <span className="absolute inset-0 scale-[2] rounded-full bg-primary/25 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
-            <BrandMark className="relative size-7 transition-transform duration-300 group-hover:scale-105" />
-          </span>
+          <BrandMark className="size-8" />
           <span className="text-sm font-semibold tracking-tight group-data-[collapsible=icon]:hidden">
             {tc("appName")}
           </span>
