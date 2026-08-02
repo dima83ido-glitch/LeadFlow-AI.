@@ -73,7 +73,7 @@ export function EarthScene({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative isolate flex h-full items-end justify-start overflow-hidden bg-gradient-to-b from-[#040311] via-[#0a0722] to-[#050318]",
+        "relative isolate flex h-full items-center justify-center overflow-hidden bg-gradient-to-b from-[#040311] via-[#0a0722] to-[#050318]",
         className,
       )}
     >
@@ -208,8 +208,10 @@ export function EarthScene({ className }: { className?: string }) {
         </div>
       ))}
 
-      {/* THE PLANET — anchored bottom-left, bleeding off the visible edges */}
-      <div className="relative -mb-[8%] -ml-[36%] aspect-square w-[168%] shrink-0 animate-[float_16s_ease-in-out_infinite]">
+      {/* THE PLANET — centered, oversized relative to the frame's height so it
+          bleeds softly off the top/bottom edges for a large, close-up feel
+          regardless of how wide the banner is */}
+      <div className="relative aspect-square h-[148%] shrink-0 animate-[float_16s_ease-in-out_infinite] sm:h-[158%] lg:h-[168%]">
         {/* outer atmosphere glow */}
         <div className="absolute -inset-[10%] rounded-full bg-gradient-to-br from-cyan-300/35 via-violet-400/25 to-transparent blur-3xl animate-[atmosphere-pulse_13s_ease-in-out_infinite]" />
 

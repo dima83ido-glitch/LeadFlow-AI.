@@ -50,7 +50,10 @@ export function AiAssistantPanel() {
             <SheetDescription>{t("panelDescription")}</SheetDescription>
           </SheetHeader>
           <PanelHeader onClose={() => setOpen(false)} />
-          <AiChatPanel className="min-h-0 flex-1" />
+          <div className="flex min-h-0 flex-1 flex-col">
+            <EarthScene className="h-48 w-full shrink-0 border-b border-white/5 sm:h-56" />
+            <AiChatPanel className="min-h-0 flex-1" />
+          </div>
         </SheetContent>
       </Sheet>
     );
@@ -73,9 +76,9 @@ export function AiAssistantPanel() {
         aria-hidden={!open}
       >
         <PanelHeader onClose={() => setOpen(false)} />
-        <div className="flex min-h-0 flex-1">
-          <EarthScene className="hidden w-[44%] shrink-0 border-r border-white/5 lg:flex" />
-          <AiChatPanel className="min-w-0 flex-1" />
+        <div className="flex min-h-0 flex-1 flex-col">
+          <EarthScene className="h-64 w-full shrink-0 border-b border-white/5 xl:h-72 2xl:h-80" />
+          <AiChatPanel className="min-h-0 flex-1" />
         </div>
       </div>
     </>
