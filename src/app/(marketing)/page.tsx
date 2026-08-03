@@ -45,6 +45,19 @@ import {
   CrmIllustration,
   MarketingIllustration,
 } from "@/components/marketing/showcase-illustrations";
+import {
+  CtaDecor,
+  FaqDecor,
+  FeaturesDecor,
+  HeroLeftDecor,
+  HeroRightDecor,
+  HowItWorksDecor,
+  PricingDecor,
+  ProblemDecor,
+  ShowcaseAmbient,
+  TrustDecor,
+  WhyChooseDecor,
+} from "@/components/marketing/section-decor";
 
 const PAGE_DESCRIPTION =
   "Nexora unifies Lead Management, Sales Automation, CRM Automation, and Marketing Automation into one platform — so revenue teams close more deals, faster.";
@@ -112,6 +125,8 @@ export default function LandingPage() {
               "radial-gradient(circle at 20% 20%, var(--color-chart-1) 0%, transparent 35%), radial-gradient(circle at 80% 0%, var(--color-chart-2) 0%, transparent 35%)",
           }}
         />
+        <HeroLeftDecor />
+        <HeroRightDecor />
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-6 pt-24 pb-20 text-center">
           <Badge variant="secondary" className="gap-1.5 px-3 py-1">
             <Sparkles className="size-3.5" />
@@ -126,7 +141,7 @@ export default function LandingPage() {
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button size="lg" render={<Link href="/register" />}>
               {t("hero.startTrial")}
-              <ArrowRight className="size-4" />
+              <ArrowRight className="size-4 transition-transform duration-300 ease-out group-hover/button:translate-x-1" />
             </Button>
             <Button size="lg" variant="outline" render={<Link href="/login" />}>
               {t("hero.logIn")}
@@ -147,8 +162,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="bg-muted/30 border-y py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="relative overflow-hidden bg-muted/30 border-y py-20">
+        <ProblemDecor />
+        <div className="relative mx-auto max-w-6xl px-6">
           <div className="mb-12 space-y-2 text-center">
             <h2 className="text-3xl font-semibold tracking-tight">{t("problem.title")}</h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-balance">
@@ -172,31 +188,36 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-20">
-        <div className="mb-12 space-y-2 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight">{t("howItWorks.title")}</h2>
-          <p className="text-muted-foreground">{t("howItWorks.description")}</p>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, index) => (
-            <div key={step.title} className="space-y-3">
-              <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-full text-sm font-semibold">
-                {index + 1}
+      <section className="relative overflow-hidden py-20">
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="mb-12 space-y-2 text-center">
+            <h2 className="text-3xl font-semibold tracking-tight">{t("howItWorks.title")}</h2>
+            <p className="text-muted-foreground">{t("howItWorks.description")}</p>
+          </div>
+          <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <HowItWorksDecor />
+            {steps.map((step, index) => (
+              <div key={step.title} className="relative space-y-3">
+                <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-full text-sm font-semibold">
+                  {index + 1}
+                </div>
+                <p className="font-medium">{step.title}</p>
+                <p className="text-muted-foreground text-sm">{step.description}</p>
               </div>
-              <p className="font-medium">{step.title}</p>
-              <p className="text-muted-foreground text-sm">{step.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="product" className="mx-auto max-w-6xl px-6 py-20">
-        <div className="mb-12 space-y-2 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight">{t("features.title")}</h2>
-          <p className="text-muted-foreground">{t("features.description")}</p>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => {
+      <section id="product" className="relative overflow-hidden py-20">
+        <FeaturesDecor />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="mb-12 space-y-2 text-center">
+            <h2 className="text-3xl font-semibold tracking-tight">{t("features.title")}</h2>
+            <p className="text-muted-foreground">{t("features.description")}</p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((feature, index) => {
             const Icon = featureIcons[index] ?? Sparkles;
             return (
               <Card key={feature.title} className="border-border/60">
@@ -216,7 +237,8 @@ export default function LandingPage() {
                 </CardHeader>
               </Card>
             );
-          })}
+            })}
+          </div>
         </div>
       </section>
 
@@ -252,46 +274,53 @@ export default function LandingPage() {
                     ))}
                   </ul>
                 </div>
-                <Card className="border-border/60 min-h-[320px] p-0">
-                  <CardContent className="flex-1 p-0">
-                    <Illustration />
-                  </CardContent>
-                </Card>
+                <div className="relative">
+                  <ShowcaseAmbient variant={key} />
+                  <Card className="border-border/60 relative min-h-[320px] p-0 transition-transform duration-500 ease-out hover:-rotate-[0.4deg]">
+                    <CardContent className="flex-1 p-0">
+                      <Illustration />
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             );
           })}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-20">
-        <div className="mb-12 space-y-2 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight">{t("whyChoose.title")}</h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-balance">
-            {t("whyChoose.description")}
-          </p>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {whyChooseItems.map((item, index) => {
-            const Icon = whyChooseIcons[index] ?? Sparkles;
-            return (
-              <Card key={item.title} className="border-border/60">
-                <CardHeader className="gap-3">
-                  <div className="bg-primary/10 flex size-10 items-center justify-center rounded-lg">
-                    <Icon className="text-primary size-5" />
-                  </div>
-                  <div>
-                    <p className="font-medium">{item.title}</p>
-                    <p className="text-muted-foreground mt-1 text-sm">{item.description}</p>
-                  </div>
-                </CardHeader>
-              </Card>
-            );
-          })}
+      <section className="relative overflow-hidden py-20">
+        <WhyChooseDecor />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="mb-12 space-y-2 text-center">
+            <h2 className="text-3xl font-semibold tracking-tight">{t("whyChoose.title")}</h2>
+            <p className="text-muted-foreground mx-auto max-w-2xl text-balance">
+              {t("whyChoose.description")}
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {whyChooseItems.map((item, index) => {
+              const Icon = whyChooseIcons[index] ?? Sparkles;
+              return (
+                <Card key={item.title} className="border-border/60">
+                  <CardHeader className="gap-3">
+                    <div className="bg-primary/10 flex size-10 items-center justify-center rounded-lg">
+                      <Icon className="text-primary size-5" />
+                    </div>
+                    <div>
+                      <p className="font-medium">{item.title}</p>
+                      <p className="text-muted-foreground mt-1 text-sm">{item.description}</p>
+                    </div>
+                  </CardHeader>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      <section id="pricing" className="bg-muted/30 border-y py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section id="pricing" className="relative overflow-hidden bg-muted/30 border-y py-20">
+        <PricingDecor />
+        <div className="relative mx-auto max-w-6xl px-6">
           <div className="mb-12 space-y-2 text-center">
             <h2 className="text-3xl font-semibold tracking-tight">{t("pricing.title")}</h2>
             <p className="text-muted-foreground">{t("pricing.description")}</p>
@@ -343,59 +372,68 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <div className="mb-6 flex justify-center">
-          <div className="bg-primary/10 flex size-14 items-center justify-center rounded-2xl">
-            <ShieldCheck className="text-primary size-7" />
+      <section className="relative overflow-hidden py-20 text-center">
+        <TrustDecor />
+        <div className="relative mx-auto max-w-4xl px-6">
+          <div className="mb-6 flex justify-center">
+            <div className="bg-primary/10 flex size-14 items-center justify-center rounded-2xl">
+              <ShieldCheck className="text-primary size-7" />
+            </div>
+          </div>
+          <Badge variant="secondary" className="mb-4">
+            {t("trust.badge")}
+          </Badge>
+          <h2 className="text-3xl font-semibold tracking-tight">{t("trust.title")}</h2>
+          <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-balance">
+            {t("trust.description")}
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            {trustItems.map((item) => (
+              <Badge key={item} variant="outline" className="gap-1.5 px-3 py-1.5">
+                <Check className="text-primary size-3.5" />
+                {item}
+              </Badge>
+            ))}
           </div>
         </div>
-        <Badge variant="secondary" className="mb-4">
-          {t("trust.badge")}
-        </Badge>
-        <h2 className="text-3xl font-semibold tracking-tight">{t("trust.title")}</h2>
-        <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-balance">
-          {t("trust.description")}
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          {trustItems.map((item) => (
-            <Badge key={item} variant="outline" className="gap-1.5 px-3 py-1.5">
-              <Check className="text-primary size-3.5" />
-              {item}
-            </Badge>
-          ))}
+      </section>
+
+      <section id="faq" className="relative overflow-hidden py-20">
+        <FaqDecor />
+        <div className="relative mx-auto max-w-3xl px-6">
+          <div className="mb-8 space-y-2 text-center">
+            <h2 className="text-3xl font-semibold tracking-tight">{t("faq.title")}</h2>
+          </div>
+          <Accordion>
+            {faqs.map((faq, index) => (
+              <AccordionItem key={faq.question} value={`item-${index}`}>
+                <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
-      <section id="faq" className="mx-auto max-w-3xl px-6 py-20">
-        <div className="mb-8 space-y-2 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight">{t("faq.title")}</h2>
+      <section className="relative overflow-hidden pb-24 text-center">
+        <div className="relative mx-auto max-w-4xl px-6">
+          <Card className="from-primary/10 border-primary/20 relative overflow-hidden bg-gradient-to-br to-transparent">
+            <CtaDecor />
+            <CardContent className="relative flex flex-col items-center gap-4 py-12">
+              <h2 className="text-3xl font-semibold tracking-tight">{t("cta.title")}</h2>
+              <p className="text-muted-foreground max-w-md">{t("cta.description")}</p>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button size="lg" render={<Link href="/register" />}>
+                  {t("cta.button")}
+                  <ArrowRight className="size-4 transition-transform duration-300 ease-out group-hover/button:translate-x-1" />
+                </Button>
+                <Button size="lg" variant="outline" render={<Link href="/contact" />}>
+                  {t("cta.secondaryButton")}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
-        <Accordion>
-          {faqs.map((faq, index) => (
-            <AccordionItem key={faq.question} value={`item-${index}`}>
-              <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </section>
-
-      <section className="mx-auto max-w-4xl px-6 pb-24 text-center">
-        <Card className="from-primary/10 border-primary/20 bg-gradient-to-br to-transparent">
-          <CardContent className="flex flex-col items-center gap-4 py-12">
-            <h2 className="text-3xl font-semibold tracking-tight">{t("cta.title")}</h2>
-            <p className="text-muted-foreground max-w-md">{t("cta.description")}</p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <Button size="lg" render={<Link href="/register" />}>
-                {t("cta.button")}
-                <ArrowRight className="size-4" />
-              </Button>
-              <Button size="lg" variant="outline" render={<Link href="/contact" />}>
-                {t("cta.secondaryButton")}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
       </section>
     </>
   );

@@ -46,15 +46,27 @@ function Button({
   variant = "default",
   size = "default",
   nativeButton,
+  children,
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
   return (
     <ButtonPrimitive
       data-slot="button"
       nativeButton={nativeButton ?? props.render === undefined}
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(
+        buttonVariants({ variant, size, className }),
+        "relative overflow-hidden"
+      )}
       {...props}
-    />
+    >
+      {variant !== "link" && variant !== "ghost" && (
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -translate-x-[120%] skew-x-[-12deg] bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-out group-hover/button:translate-x-[120%] dark:via-white/15"
+        />
+      )}
+      {children}
+    </ButtonPrimitive>
   )
 }
 
