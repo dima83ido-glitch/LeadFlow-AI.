@@ -1,0 +1,1857 @@
+{
+  "index": {
+    "title": "Documentation",
+    "subtitle": "Everything you need to get the most out of Nexora — what each feature does, why it matters, and how to use it well.",
+    "searchPlaceholder": "Search documentation...",
+    "noResults": "No documentation matches your search.",
+    "comingSoonBadge": "Coming Soon",
+    "backToDocs": "Back to Documentation",
+    "openFeature": "Open feature",
+    "readMore": "Read more",
+    "groups": {
+      "core": "Core",
+      "grow": "Grow",
+      "crm": "CRM",
+      "insights": "Insights",
+      "aiTools": "AI Tools",
+      "assistant": "AI Assistant",
+      "services": "Services",
+      "account": "Account",
+      "settings": "Settings",
+      "admin": "Admin"
+    },
+    "sections": {
+      "whatItDoes": "What it does",
+      "whyYouNeedIt": "Why you need it",
+      "useCases": "Use cases",
+      "bestPractices": "Best practices",
+      "commonMistakes": "Common mistakes",
+      "workflow": "How it works",
+      "expectedResults": "Expected results",
+      "combineWith": "Combine with",
+      "scenarios": "Real-world scenarios"
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "summary": "Your workspace at a glance — plan status, key metrics, and quick links to everything else.",
+      "whatItDoes": "The Dashboard is the first screen you see after signing in. It surfaces your account and trial status, headline metrics like total leads, active campaigns, reply rate, and revenue, plus a guided tour of every tool in the platform.",
+      "whyYouNeedIt": "Instead of hunting through menus, the Dashboard gives you an instant read on how your outreach is performing and what to do next. New teams use it to learn the platform; established teams use it as a daily check-in.",
+      "useCases": [
+        "Start the day by checking reply rate and revenue trends before diving into individual campaigns.",
+        "Onboard a new teammate using the Complete Platform Guide instead of a separate training doc.",
+        "Jump straight into a common action — searching leads, creating a campaign, adding a contact — from Quick Actions.",
+        "Confirm plan, trial, and billing status without opening Settings."
+      ],
+      "bestPractices": [
+        "Complete your profile first — the guide card tracks this and personalized AI outreach reads better with a real name and title attached.",
+        "Check Recent Activity daily so nothing from your team goes unnoticed.",
+        "Use Quick Actions instead of navigating through menus for the four most common tasks.",
+        "Revisit the Complete Platform Guide whenever a new feature ships — it always reflects what's actually live."
+      ],
+      "commonMistakes": [
+        "Treating the Dashboard as a report you check monthly instead of a daily habit.",
+        "Ignoring the trial/plan cards and getting surprised by a billing change.",
+        "Skipping profile completion, which weakens AI-personalized outreach later."
+      ],
+      "workflow": [
+        "Sign in and land on the Dashboard automatically.",
+        "Scan the hero cards for plan, trial, and account status.",
+        "Review the four headline stats: leads, campaigns, reply rate, revenue.",
+        "Use Quick Actions or the platform guide to jump into the next task.",
+        "Check Recent Activity and Recent Campaigns before switching to a dedicated page."
+      ],
+      "expectedResults": "A five-second read on where your business stands, with no need to visit multiple pages to answer 'how are we doing today?'",
+      "combineWith": [
+        "Pair with Leads to act on the Total Leads number immediately.",
+        "Pair with Analytics for a deeper breakdown of the same metrics over time.",
+        "Pair with Campaigns to investigate anything flagged in Recent Campaigns."
+      ],
+      "scenarios": [
+        "A sales lead starts their morning on the Dashboard, sees reply rate dropped, and opens Analytics to investigate which campaign is underperforming.",
+        "A new hire uses the Complete Platform Guide on day one instead of waiting for a training session.",
+        "An account owner checks the Trial Status card and upgrades before access is interrupted."
+      ]
+    },
+    "leads": {
+      "title": "Search Leads",
+      "summary": "Find potential clients by country, industry, city, and keyword, then save the best matches to your CRM.",
+      "whatItDoes": "Search Leads lets you filter a large database of companies by country, city, industry, and keywords, plus signals like whether they have a website, email, or phone number, and a minimum rating. Results show company, contact, location, reachable channels, and status, and each lead has a detail view with activity and campaign history.",
+      "whyYouNeedIt": "Every outreach motion starts with a target list. Search Leads replaces manual list-building in spreadsheets with structured, filterable search, and connects straight into campaigns and the CRM so a promising company never lives in a separate document.",
+      "useCases": [
+        "Build a list of mid-size companies in a specific industry and city before launching a regional campaign.",
+        "Filter for leads with a known email address to keep a cold email campaign's deliverability high.",
+        "Use keywords to find companies mentioning a specific pain point or technology.",
+        "Open a lead's detail view to review prior activity before reaching out again."
+      ],
+      "bestPractices": [
+        "Narrow by industry and keyword together rather than relying on one broad filter — it produces a more relevant list.",
+        "Filter for 'Has email' before building an email campaign so you're not wasting sends on incomplete records.",
+        "Save qualified leads into a campaign right away instead of leaving them in a search results list.",
+        "Use minimum rating as a quick proxy for company legitimacy when working with local business data."
+      ],
+      "commonMistakes": [
+        "Searching with no filters at all and getting an unmanageably broad result set.",
+        "Reaching out to leads without a saved email or phone number on file.",
+        "Re-running the same broad search repeatedly instead of saving and refining a target list."
+      ],
+      "workflow": [
+        "Open Search Leads and set filters — country, city, industry, keywords, and available channels.",
+        "Click Search Leads to run the query.",
+        "Scan results in the table: company, contact, location, reachable channels, rating, status.",
+        "Open a lead to review details, then Analyze it or Generate Email directly from the detail view.",
+        "Save qualified leads to your CRM, or add them to a campaign."
+      ],
+      "expectedResults": "A targeted, filterable list of real companies matching your ideal customer profile, ready to move into a campaign or the CRM pipeline without re-entering data.",
+      "combineWith": [
+        "Send saved leads straight into a Campaign to start outreach.",
+        "Push qualified leads into the CRM Pipeline to track them as deals.",
+        "Once the AI Outreach Hub ships, use it alongside Search Leads to source from additional channels."
+      ],
+      "scenarios": [
+        "A founder searches for 'logistics' companies in Texas with a known website, exports the top 40, and launches a campaign the same day.",
+        "A sales rep filters for leads with a phone number to prioritize a call-first outreach sprint.",
+        "A marketer revisits a saved lead's detail view to see whether a past campaign already reached them before adding it to a new one."
+      ]
+    },
+    "campaigns": {
+      "title": "Campaigns",
+      "summary": "Create, schedule, and monitor multi-step email outreach sequences with built-in tracking.",
+      "whatItDoes": "Campaigns let you name an outreach sequence, write or generate a subject line and body (optionally starting from a Template), schedule it, and track its progress — sent count, opens, replies — from a single list view. Campaigns can be edited, paused, resumed, or deleted at any stage.",
+      "whyYouNeedIt": "Outreach that isn't tracked is outreach you can't improve. Campaigns give every sequence a status, a send count, and open/reply numbers, so you know within days whether a message is working, and can pause the ones that aren't.",
+      "useCases": [
+        "Launch a cold outreach sequence to a freshly searched list of leads.",
+        "Reuse a high-performing Template as the starting point for a new regional campaign.",
+        "Pause a campaign the moment open rate drops instead of letting it run to completion.",
+        "Review Opens / Replies across all campaigns to see which subject lines are working."
+      ],
+      "bestPractices": [
+        "Give campaigns a specific, dated name (e.g. 'Q3 Data Teams Outreach') so performance is easy to compare later.",
+        "Start from a Template with strong past performance rather than a blank page.",
+        "Schedule sends instead of leaving campaigns as an unscheduled draft indefinitely.",
+        "Check the Opens / Replies column regularly and pause underperforming campaigns early."
+      ],
+      "commonMistakes": [
+        "Leaving a campaign in draft status with no schedule, so it never actually sends.",
+        "Writing a generic subject line instead of testing a specific, curiosity-driven one.",
+        "Never revisiting a paused campaign to understand why it underperformed."
+      ],
+      "workflow": [
+        "Click Create Campaign and give it a name and subject line.",
+        "Optionally start from a Template, or write the body from scratch.",
+        "Set a schedule, or leave it blank to save as a draft.",
+        "Monitor sent count, opens, and replies from the Campaigns list once it's live.",
+        "Pause, resume, edit, or delete the campaign as performance data comes in."
+      ],
+      "expectedResults": "A running log of every outreach sequence with real send, open, and reply numbers — enough signal to know which messaging to double down on and which to retire.",
+      "combineWith": [
+        "Pull the send list straight from Search Leads.",
+        "Start from a Template to skip writing from a blank page.",
+        "Check Analytics for a cross-campaign view of open and reply rate trends."
+      ],
+      "scenarios": [
+        "A team launches three variants of the same offer as separate campaigns to see which subject line wins.",
+        "A rep pauses a campaign mid-run after noticing the open rate is half the account average.",
+        "A manager reviews last month's Recent Campaigns on the Dashboard to report send/open/reply numbers to leadership."
+      ]
+    },
+    "templates": {
+      "title": "Templates",
+      "summary": "Reusable email templates — written by hand or generated with AI — for every stage of outreach.",
+      "whatItDoes": "Templates are reusable email drafts organized by category (Cold Outreach, Introduction, Follow-up, Proposal, Re-engagement). You can generate one with AI, duplicate an existing template, or edit and delete your own, and see how many campaigns currently use each one.",
+      "whyYouNeedIt": "Rewriting outreach copy from scratch for every campaign is slow and inconsistent. Templates let your best-performing copy get reused deliberately, and give the whole team a consistent starting point instead of everyone improvising their own tone.",
+      "useCases": [
+        "Generate a first draft of a cold outreach template with AI, then refine the wording by hand.",
+        "Duplicate a high-performing Follow-up template before customizing it for a new segment.",
+        "Standardize how the whole team writes Proposal emails by giving them one shared template.",
+        "Check how many campaigns use a template before deleting or heavily editing it."
+      ],
+      "bestPractices": [
+        "Organize templates by the categories provided so the right one is easy to find under time pressure.",
+        "Use Generate with AI as a starting point, then edit for your specific voice and offer.",
+        "Duplicate before editing a template that's already attached to active campaigns.",
+        "Retire templates with a 0-campaign count regularly to keep the library relevant."
+      ],
+      "commonMistakes": [
+        "Editing a shared template that's actively used by several running campaigns without checking impact first.",
+        "Leaving AI-generated drafts unedited and sending generic-sounding copy.",
+        "Letting the template library grow without pruning unused or outdated drafts."
+      ],
+      "workflow": [
+        "Open Templates and filter by category, or search by keyword.",
+        "Click Generate with AI for a first draft, or start from scratch.",
+        "Edit the subject and body to match your offer and voice.",
+        "Duplicate a template instead of overwriting one already in use.",
+        "Attach the finished template to a new Campaign."
+      ],
+      "expectedResults": "A growing library of proven, categorized email copy that makes launching the next campaign a matter of minutes, not hours.",
+      "combineWith": [
+        "Start a new Campaign directly from a template.",
+        "Use the Email Generator for one-off, highly personalized drafts instead of a reusable template.",
+        "Check Campaigns to see which templates are tied to your best-performing sequences."
+      ],
+      "scenarios": [
+        "A rep generates a Re-engagement template with AI for a batch of dormant leads, then hand-edits the tone before sending.",
+        "A team duplicates their best Cold Outreach template to adapt it for a new industry vertical.",
+        "A manager audits the template library and deletes five drafts with zero attached campaigns."
+      ]
+    },
+    "crmPipeline": {
+      "title": "CRM Pipeline",
+      "summary": "A drag-and-drop deal board from first contact through closed-won.",
+      "whatItDoes": "The Pipeline is a Kanban-style board with five stages — New, Contacted, Proposal Sent, Negotiation, Won — where each deal card shows its title, value, company, and contact. Drag a deal to move it forward, or open it to change stage, add detail, or delete it.",
+      "whyYouNeedIt": "A spreadsheet can't show you, at a glance, where every deal actually stands. The Pipeline turns your sales process into a visual board so bottlenecks — deals stuck in Proposal Sent, for example — are obvious the moment you open it.",
+      "useCases": [
+        "Track every active deal from first contact to Won on one shared board.",
+        "Spot deals that have been stuck in Negotiation too long and prioritize follow-up.",
+        "Add a deal manually for a lead that came in outside of Search Leads.",
+        "Report total pipeline value per stage to leadership using the stage totals."
+      ],
+      "bestPractices": [
+        "Move deals the same day their status actually changes — a stale pipeline is worse than no pipeline.",
+        "Attach a company and contact to every deal so it links cleanly to Contacts and Companies.",
+        "Set an expected close date on every deal to keep forecasting realistic.",
+        "Review stage totals weekly to catch a pipeline that's front-loaded with New deals and thin on Proposal Sent."
+      ],
+      "commonMistakes": [
+        "Letting deals sit in the wrong stage for weeks because no one updates them after a call.",
+        "Creating deals with no company or contact attached, losing the connection to CRM history.",
+        "Only looking at deal count per stage and ignoring total deal value."
+      ],
+      "workflow": [
+        "Open Pipeline and review deals across all five stages.",
+        "Click Add deal on a stage to log a new opportunity with title, value, company, and contact.",
+        "Drag a deal card to a new stage as it progresses, or use Move to stage from deal actions.",
+        "Open a deal to review or edit its details.",
+        "Mark deals Won as they close, or delete ones that fall through."
+      ],
+      "expectedResults": "A live, visual view of total deal value at every stage of your sales process, so forecasting and follow-up prioritization don't depend on anyone's memory.",
+      "combineWith": [
+        "Link every deal to a record in Contacts and a record in Companies.",
+        "Log calls related to a deal in Meetings.",
+        "Track pipeline health over time in Analytics (Sales Funnel, Deal Success Rate)."
+      ],
+      "scenarios": [
+        "A rep drags a deal from Proposal Sent to Negotiation right after a client call and schedules a follow-up meeting.",
+        "A manager notices six deals stuck in Contacted for over three weeks and assigns tasks to revive them.",
+        "A founder reviews stage totals to forecast next month's likely closed revenue."
+      ]
+    },
+    "crmContacts": {
+      "title": "Contacts",
+      "summary": "A single source of truth for every person you talk to, linked to their company and deals.",
+      "whatItDoes": "Contacts stores the people behind your leads and deals — name, email, phone, Telegram, and the company they belong to — in one searchable table. Each contact can be added, edited, or deleted, and connects to related meetings, tasks, and notes.",
+      "whyYouNeedIt": "Deals and companies are abstractions; contacts are the actual people who reply to your emails and take your calls. Keeping one clean contact record per person prevents duplicate outreach and gives anyone on the team the full history before they reach out.",
+      "useCases": [
+        "Look up a contact's phone or Telegram before a scheduled call.",
+        "Add a new contact the moment a lead responds, even if they weren't in your original search.",
+        "Check a contact's company affiliation before looping in the right account team.",
+        "Review notes and past meetings tied to a contact before a renewal conversation."
+      ],
+      "bestPractices": [
+        "Fill in job title on every contact — it makes AI-personalized outreach noticeably better.",
+        "Attach every contact to a company record rather than leaving it standalone.",
+        "Add a Telegram handle when available, since it's a channel many prospects check faster than email.",
+        "Update a contact's details as soon as you learn they've changed roles or companies."
+      ],
+      "commonMistakes": [
+        "Creating duplicate contact records for the same person under slightly different names.",
+        "Leaving contacts unattached to any company, breaking the link to CRM history.",
+        "Never revisiting old contacts, so stale information (old job title, old email) goes unnoticed."
+      ],
+      "workflow": [
+        "Click Add Contact and fill in first name, last name, email, and job title.",
+        "Optionally attach a company and Telegram username.",
+        "Save the contact — it's now searchable and linkable from deals, meetings, and notes.",
+        "Edit details as they change, or delete a contact that's no longer relevant.",
+        "Open a contact to review associated meetings, tasks, and notes."
+      ],
+      "expectedResults": "One clean, deduplicated contact record per person, with enough context that anyone on the team can pick up a relationship without starting from zero.",
+      "combineWith": [
+        "Link contacts to Companies for full account context.",
+        "Attach a contact to a deal in the Pipeline.",
+        "Log related Meetings and Notes against the same contact."
+      ],
+      "scenarios": [
+        "A rep adds a new contact the moment a prospect replies from a personal email address instead of the company one.",
+        "An account manager checks a contact's job title before deciding who else on the team should join a call.",
+        "A teammate reviews all notes on a contact before taking over an account from a departing colleague."
+      ]
+    },
+    "crmCompanies": {
+      "title": "Companies",
+      "summary": "Track the organizations behind your leads and deals — size, industry, and website in one place.",
+      "whatItDoes": "Companies stores the organizations you're working with, including size, location, and how many contacts and deals are tied to each one. It's the account-level record that contacts and pipeline deals roll up into.",
+      "whyYouNeedIt": "Deals and contacts only make sense in context of the company behind them. Companies gives you the account view — how many people you know there, how many deals are in flight, and where they're based — without cross-referencing multiple lists.",
+      "useCases": [
+        "Check how many contacts and deals exist for an account before a renewal or upsell conversation.",
+        "Review company size to prioritize outreach toward your ideal customer profile.",
+        "Confirm a company's location before scheduling an in-person meeting or considering timezone for calls.",
+        "Clean up companies with no contacts or deals attached."
+      ],
+      "bestPractices": [
+        "Keep company size and location up to date — they're useful segmentation signals in Analytics later.",
+        "Attach every new contact and deal to an existing company record instead of leaving them orphaned.",
+        "Review the deals/contacts counts before deleting a company to avoid losing linked history.",
+        "Use company records as the account view when planning multi-threaded outreach."
+      ],
+      "commonMistakes": [
+        "Creating a second company record for a business that already exists under a slightly different name.",
+        "Deleting a company without checking how many contacts or deals will lose their link.",
+        "Never updating company size after major account growth, causing stale segmentation."
+      ],
+      "workflow": [
+        "Companies populate automatically as you save leads and add contacts or deals tied to an organization.",
+        "Open a company to review size, location, and how many contacts and deals are attached.",
+        "Update details as they change.",
+        "Delete a company only after confirming its contacts and deals are handled.",
+        "Use the company view before multi-threading outreach across several contacts at the same account."
+      ],
+      "expectedResults": "A reliable account-level view of every organization you're engaged with, so nothing about a deal or contact is missing its business context.",
+      "combineWith": [
+        "Cross-reference with Contacts for every person at the account.",
+        "Cross-reference with the Pipeline for every deal tied to the account.",
+        "Compare against segment data in Analytics."
+      ],
+      "scenarios": [
+        "An account manager opens a company record to see three open deals and five contacts before a quarterly business review.",
+        "A rep checks a company's size before deciding whether to pursue a self-serve or enterprise-style outreach approach.",
+        "A team lead cleans up a duplicate company record after two teammates added the same business separately."
+      ]
+    },
+    "crmMeetings": {
+      "title": "Meetings",
+      "summary": "Schedule calls and meetings with leads and contacts, and keep a record of what was discussed.",
+      "whatItDoes": "Meetings lets you schedule a call with a title, date/time, and location (e.g. Google Meet), attach it to a contact, and track it as scheduled, completed, cancelled, or upcoming. Every meeting can be edited or deleted after the fact.",
+      "whyYouNeedIt": "Calls that aren't logged get forgotten, and outcomes that live only in someone's memory don't help the next person who talks to that contact. Meetings creates a durable record tied directly to the CRM contact.",
+      "useCases": [
+        "Schedule a discovery call and attach it to the relevant contact and deal.",
+        "Review upcoming meetings before starting the day to prepare talking points.",
+        "Check whether a contact has any completed meetings before reaching out cold again.",
+        "Track cancelled meetings to follow up on rescheduling."
+      ],
+      "bestPractices": [
+        "Always attach a meeting to the correct contact so it shows up in their history.",
+        "Use a specific, descriptive title ('Discovery Call' vs. just 'Meeting') so the calendar stays scannable.",
+        "Update status promptly after a call — completed or cancelled — instead of leaving it stuck as scheduled.",
+        "Log location consistently (e.g. always naming the video tool) to reduce last-minute confusion."
+      ],
+      "commonMistakes": [
+        "Scheduling a meeting without attaching it to a contact, losing it from that person's history.",
+        "Leaving completed meetings marked as scheduled indefinitely.",
+        "Not following up after a cancelled meeting, letting the relationship go cold."
+      ],
+      "workflow": [
+        "Click Schedule Meeting and set a title, date/time, and location.",
+        "Attach the meeting to the relevant contact.",
+        "Review upcoming meetings from the Meetings list before each call.",
+        "Update status to completed or cancelled once the meeting happens.",
+        "Edit or delete a meeting if plans change."
+      ],
+      "expectedResults": "A reliable calendar of every call tied to a real CRM contact, so meeting history is never scattered across separate calendars or memory alone.",
+      "combineWith": [
+        "Link every meeting to a record in Contacts.",
+        "Follow a meeting with a Task for next steps.",
+        "Log outcomes in Notes for anyone reviewing the account later."
+      ],
+      "scenarios": [
+        "A rep schedules a Discovery Call for a newly saved lead directly from their contact page.",
+        "A manager reviews all upcoming meetings on a Monday to plan the week's priorities.",
+        "A teammate marks a call as cancelled and creates a follow-up task to reschedule within the week."
+      ]
+    },
+    "crmTasks": {
+      "title": "Tasks",
+      "summary": "Assign follow-ups with priorities and due dates so nothing slips through the cracks.",
+      "whatItDoes": "Tasks lets you create action items with a title, description, priority (Low, Medium, High), due date, and assignee. Tasks can be filtered by priority or assignee, sorted by due date, priority, creation date, or title, and edited or deleted as work progresses.",
+      "whyYouNeedIt": "Every deal and account eventually needs a specific next action from a specific person. Tasks turns 'someone should follow up with them' into an assigned, dated, trackable item instead of a line in a meeting note that gets forgotten.",
+      "useCases": [
+        "Assign a follow-up task to a teammate right after a discovery call.",
+        "Sort all tasks by due date to plan today's priorities.",
+        "Filter tasks by High priority to see what needs attention first.",
+        "Filter by assignee to check a specific teammate's current workload."
+      ],
+      "bestPractices": [
+        "Set a due date on every task — an undated task is easy to forget.",
+        "Use priority deliberately (reserve High for genuinely time-sensitive items) so it stays a useful signal.",
+        "Assign tasks to a specific person rather than leaving them unassigned.",
+        "Sort by due date each morning as a quick daily planning habit."
+      ],
+      "commonMistakes": [
+        "Creating tasks with no due date, letting them pile up indefinitely.",
+        "Marking everything High priority until the label loses meaning.",
+        "Leaving tasks unassigned so no one feels ownership of the follow-up."
+      ],
+      "workflow": [
+        "Click Add Task and set a title, optional description, priority, and due date.",
+        "Assign it to yourself or a teammate.",
+        "Filter or sort the task list by priority, assignee, or due date.",
+        "Update or complete tasks as work happens.",
+        "Delete tasks that are no longer relevant."
+      ],
+      "expectedResults": "A prioritized, assigned list of concrete next actions across every deal and account, so follow-through doesn't depend on anyone's memory.",
+      "combineWith": [
+        "Create tasks directly after logging a Meeting.",
+        "Tie tasks to specific deals in the Pipeline.",
+        "Reference Notes for context on why a task was created."
+      ],
+      "scenarios": [
+        "A rep creates a High priority task to send a proposal within 48 hours of a strong discovery call.",
+        "A manager filters tasks by assignee to check whether a teammate's workload is too heavy this week.",
+        "A team sorts tasks by due date every Monday morning to set the week's plan."
+      ]
+    },
+    "crmNotes": {
+      "title": "Notes",
+      "summary": "Shared notes on any lead, contact, or deal so every conversation has full context.",
+      "whatItDoes": "Notes lets you write free-form context tied to a lead, contact, or deal, so the next person to open that record — or the next conversation with that person — starts with full history instead of a blank slate. Notes can be edited or deleted at any time.",
+      "whyYouNeedIt": "CRM records need more than structured fields to be useful — the nuance of a conversation ('they're comparing us to Competitor X', 'decision-maker is actually the VP, not the manager') lives in notes, not dropdowns.",
+      "useCases": [
+        "Capture a key detail from a call that doesn't fit any structured field.",
+        "Leave context for a teammate before handing off an account.",
+        "Record objections or competitive mentions for future reference.",
+        "Document why a deal moved stages or a contact went quiet."
+      ],
+      "bestPractices": [
+        "Write notes immediately after a call, while detail is still fresh.",
+        "Keep notes specific and actionable rather than vague ('follow up' vs. 'they want pricing for 20 seats by Friday').",
+        "Tag the note to the right record (contact vs. deal vs. lead) so it surfaces in the right context.",
+        "Review notes before every follow-up call or handoff."
+      ],
+      "commonMistakes": [
+        "Writing vague notes that don't help a future reader understand what actually happened.",
+        "Forgetting to leave a note before handing an account to a new teammate.",
+        "Letting important context live only in someone's email inbox instead of the shared CRM note."
+      ],
+      "workflow": [
+        "Open a lead, contact, or deal and go to its Notes section.",
+        "Write a note capturing the relevant context.",
+        "Save it — it's now visible to your whole team.",
+        "Edit or delete a note as circumstances change.",
+        "Review existing notes before your next interaction with that record."
+      ],
+      "expectedResults": "A running, shared history of the nuance behind every relationship, so account handoffs and follow-ups never start from scratch.",
+      "combineWith": [
+        "Attach notes to any record in Contacts.",
+        "Reference notes when moving a deal in the Pipeline.",
+        "Use notes to record context after a Meeting."
+      ],
+      "scenarios": [
+        "A rep leaves a note right after a call that the buyer's budget approval needs board sign-off in Q3.",
+        "A departing teammate documents open threads on every active account before their last day.",
+        "A manager reviews notes on a stalled deal to understand what's actually blocking it before stepping in."
+      ]
+    },
+    "analytics": {
+      "title": "Analytics",
+      "summary": "Track outreach performance and revenue trends with clean, comparable reports.",
+      "whatItDoes": "Analytics reports on email performance (open, reply, conversion rate), leads by source, lead trends over time, meeting statistics, task statistics, the sales funnel, deal success rate, performance over time, revenue by plan, and a full conversion funnel from leads found to deals won.",
+      "whyYouNeedIt": "Individual pages show you what happened on one record. Analytics shows you the trend across all of them — whether reply rates are improving, which lead source actually converts, and how much revenue your pipeline is really producing.",
+      "useCases": [
+        "Compare open and reply rate trends month over month to judge whether messaging is improving.",
+        "See which lead source (Google Maps, LinkedIn, referral, etc.) produces the highest-quality leads.",
+        "Review the conversion funnel to find the exact stage where prospects are dropping off.",
+        "Report revenue by plan to understand which pricing tier is driving the most MRR."
+      ],
+      "bestPractices": [
+        "Check Analytics weekly, not just when something feels off — trends are easier to catch early.",
+        "Cross-reference Leads by Source with your own Search Leads habits to double down on what's working.",
+        "Use the Conversion Funnel to diagnose drop-off before assuming a campaign or template is at fault.",
+        "Compare Deal Success Rate over time, not just in isolation, to judge whether recent process changes helped."
+      ],
+      "commonMistakes": [
+        "Only looking at Analytics after a problem is already visible elsewhere.",
+        "Reading a single metric (like open rate) in isolation instead of the full funnel.",
+        "Ignoring meeting and task statistics, which often explain why deals stall before revenue numbers do."
+      ],
+      "workflow": [
+        "Open Analytics and start with the headline metrics: open rate, reply rate, conversion rate, revenue.",
+        "Drill into Email Performance and Leads by Source for channel-level detail.",
+        "Review the Sales Funnel and Deal Success Rate for pipeline health.",
+        "Check Meeting and Task Statistics for operational bottlenecks.",
+        "Use Performance Over Time and Revenue by Plan for longer-term trend reporting."
+      ],
+      "expectedResults": "A clear, comparable view of what's working across outreach, pipeline, and revenue — enough to make a confident call on where to invest more effort.",
+      "combineWith": [
+        "Cross-check trends against the Dashboard's headline stats.",
+        "Investigate a dip in a specific Campaign flagged by the data.",
+        "Use Sales Funnel and Deal Success Rate alongside the CRM Pipeline for deal-level detail."
+      ],
+      "scenarios": [
+        "A founder reviews Revenue by Plan and realizes the Starter tier is driving unexpectedly high MRR, and adjusts pricing strategy.",
+        "A sales manager uses the Conversion Funnel to find that most leads drop off between Contacted and Qualified, and retrains the team on qualification questions.",
+        "A marketer compares Leads by Source and shifts budget away from a channel that's producing low-quality leads."
+      ]
+    },
+    "aiToolsOverview": {
+      "title": "AI Tools",
+      "summary": "The hub for every AI-powered tool that generates outreach copy or analyzes prospects.",
+      "whatItDoes": "AI Tools is the landing page for every generative and analysis tool in Nexora — Website Analyzer, Marketing Plan Generator, Email Generator, Subject Generator, Headline Generator, CTA Generator, SEO Audit, Landing Page Analyzer, Rewrite Email, Translate Email, and the AI Outreach Hub — in one place.",
+      "whyYouNeedIt": "Instead of remembering a dozen separate URLs, AI Tools gives you a single entry point to every AI capability, so switching from analyzing a prospect's site to drafting an email to them takes one click, not a search through menus.",
+      "useCases": [
+        "Start a research-to-outreach workflow: analyze a company's website, then generate a personalized email in the same session.",
+        "Discover tools you haven't tried yet, including which ones are already live versus Coming Soon.",
+        "Use it as the jumping-off point before diving into a specific generator or analyzer.",
+        "Check tool availability against your plan before building a workflow around one."
+      ],
+      "bestPractices": [
+        "Treat AI Tools as your daily starting point for any AI-assisted outreach task rather than bookmarking individual tools.",
+        "Chain tools together — analyze, then generate, then translate — instead of using them in isolation.",
+        "Revisit periodically as Coming Soon tools go live.",
+        "Pair AI-generated output with a human edit pass before sending anything externally."
+      ],
+      "commonMistakes": [
+        "Sending AI-generated copy straight through without a quick human review.",
+        "Not realizing a tool is available and manually doing work an existing generator already automates.",
+        "Treating each tool as a one-off instead of chaining them into a repeatable workflow."
+      ],
+      "workflow": [
+        "Open AI Tools from the main navigation.",
+        "Pick the tool that matches your current task — analysis or copy generation.",
+        "Complete that tool's task, then return to AI Tools to chain into the next one.",
+        "Save or copy the output into a Campaign, Template, or CRM record.",
+        "Check back periodically for newly launched tools."
+      ],
+      "expectedResults": "A faster path from raw prospect data to sent outreach, with AI handling the first draft of research and copy so your team spends its time on judgment, not typing.",
+      "combineWith": [
+        "Start with Website Analyzer to research a prospect before generating anything.",
+        "Feed Marketing Plan Generator output into new Campaigns.",
+        "Use the AI Assistant panel for quick, conversational help alongside the dedicated tools."
+      ],
+      "scenarios": [
+        "A rep opens AI Tools, runs Website Analyzer on a prospect, then jumps straight to generating a personalized email referencing what they found.",
+        "A marketer generates a full Marketing Plan for a new vertical and uses it to brief the outreach team.",
+        "A founder checks AI Tools weekly to see which Coming Soon generators have gone live."
+      ]
+    },
+    "websiteAnalyzer": {
+      "title": "Website Analyzer",
+      "summary": "Scan any prospect's website for tech stack, SEO health, and messaging gaps in seconds.",
+      "whatItDoes": "Paste a website URL and Website Analyzer returns an overall score plus category-level findings — SEO, speed, performance, security, UX, UI, responsiveness, accessibility, structure, content, calls to action, conversion, and errors — with concrete recommendations for each.",
+      "whyYouNeedIt": "Before reaching out cold, knowing a prospect's actual weaknesses turns a generic pitch into a specific, credible one. Website Analyzer automates the research a rep would otherwise spend 20 minutes doing by hand.",
+      "useCases": [
+        "Research a lead's website before drafting a personalized outreach email referencing a specific gap.",
+        "Identify a prospect's weakest category (e.g. mobile responsiveness) as the hook for your pitch.",
+        "Benchmark your own site the same way you'd benchmark a prospect's.",
+        "Prioritize leads whose site shows the clearest signs your product or service would help."
+      ],
+      "bestPractices": [
+        "Run the analysis before writing any outreach copy, not after — it should shape the pitch, not just decorate it.",
+        "Focus your email on the one or two weakest categories rather than listing every finding.",
+        "Combine with the Marketing Plan Generator when a prospect needs a broader strategic pitch, not just a website fix.",
+        "Re-run the analysis periodically for long sales cycles — sites change."
+      ],
+      "commonMistakes": [
+        "Analyzing a URL that redirects or blocks automated requests and not verifying the result actually completed.",
+        "Copy-pasting every recommendation into an email instead of picking the most relevant one or two.",
+        "Never using the output at all — running the analysis but not connecting it to outreach."
+      ],
+      "workflow": [
+        "Enter a website URL in the Website field.",
+        "Click Analyze and wait for the report.",
+        "Review the overall score and category breakdown.",
+        "Read the specific recommendations for the weakest categories.",
+        "Use the findings to inform an email, plan, or pitch."
+      ],
+      "expectedResults": "A concrete, categorized list of a prospect's website weaknesses and strengths, giving your outreach a specific, credible hook instead of generic messaging.",
+      "combineWith": [
+        "Feed findings straight into the SEO Audit for a deeper technical dive once it ships.",
+        "Use alongside Landing Page Analyzer when the prospect's homepage and landing pages differ significantly.",
+        "Reference findings directly in a Marketing Plan Generator brief."
+      ],
+      "scenarios": [
+        "A rep analyzes a prospect's site, finds a poor mobile score, and opens an email referencing exactly that.",
+        "A marketer benchmarks three competitor sites to see where their own client's site stands relatively.",
+        "An agency runs the analyzer on every new lead before deciding which service package to pitch."
+      ]
+    },
+    "marketingPlanGenerator": {
+      "title": "Marketing Plan Generator",
+      "summary": "Generate a complete, budget-aware, channel-by-channel marketing strategy in seconds.",
+      "whatItDoes": "Fill in business basics, what you offer, goals and budget, and channels and audience, and the generator produces a full plan: persona, brand positioning, SWOT, marketing funnel, channel-specific strategies (lead gen, cold outreach, email, SEO, content, social, paid, partnership, referral), a 90-day roadmap, action plans, KPIs, budget allocation, expected results, risks, and bonus growth ideas.",
+      "whyYouNeedIt": "Writing a full go-to-market plan from scratch takes days and often stalls before it's finished. This tool turns a structured intake form into a complete, presentable strategy in minutes, so you spend your time executing rather than drafting.",
+      "useCases": [
+        "Generate a first-draft marketing plan for a new business or new market before your first strategy meeting.",
+        "Produce a client-ready strategy document for an agency engagement.",
+        "Use the 90-Day Roadmap as a working project plan for the quarter.",
+        "Pull channel-specific strategies (e.g. Cold Outreach Strategy) directly into your next campaign brief."
+      ],
+      "bestPractices": [
+        "Fill in every field, especially Unique Selling Proposition and Biggest Marketing Challenge — vague input produces a vague plan.",
+        "Treat the output as a strong first draft to refine with your team's specific knowledge, not a final document.",
+        "Use the Budget Allocation and KPIs tabs to set concrete, trackable targets, not just narrative goals.",
+        "Regenerate with updated inputs once your business context changes materially."
+      ],
+      "commonMistakes": [
+        "Leaving optional fields blank and getting a generic plan as a result.",
+        "Presenting the raw output to a client without a human review pass.",
+        "Generating once and never revisiting the plan as circumstances change."
+      ],
+      "workflow": [
+        "Fill in Business Basics, What You Offer, Goals & Budget, and Channels & Audience.",
+        "Click Generate Marketing Plan.",
+        "Review the Overview tab: persona, positioning, SWOT, funnel.",
+        "Review Strategy, Action Plan, and Metrics & Budget tabs.",
+        "Export or copy the relevant sections into your working documents."
+      ],
+      "expectedResults": "A complete, structured strategy document — persona through KPIs — ready to execute or present, cutting a multi-day planning exercise down to minutes.",
+      "combineWith": [
+        "Turn the Cold Outreach and Email Campaign strategies into real Campaigns.",
+        "Reference Website Analyzer findings when filling in Existing Assets or Biggest Marketing Challenge.",
+        "Use the Headline Generator to produce copy for ideas surfaced in the plan."
+      ],
+      "scenarios": [
+        "A founder generates a full plan before a fundraising conversation to show a credible go-to-market strategy.",
+        "An agency uses the tool to produce a first-draft strategy for a new client, then customizes it in a kickoff call.",
+        "A marketing lead pulls the 90-Day Roadmap directly into their quarterly planning doc."
+      ]
+    },
+    "emailGenerator": {
+      "title": "Email Generator",
+      "summary": "Draft a personalized outreach email from a lead's profile and your key talking points.",
+      "whatItDoes": "Enter a recipient or company, choose a tone (Formal, Friendly, Direct), and list key points, and the generator drafts a complete subject line and body ready to copy into a campaign or send directly.",
+      "whyYouNeedIt": "Personalizing every outreach email by hand doesn't scale past a handful of leads a day. Email Generator produces a strong, on-tone first draft in seconds so your team can send more personalized outreach without more hours.",
+      "useCases": [
+        "Draft a personalized first-touch email for a newly saved lead.",
+        "Generate multiple tone variants of the same message to A/B test.",
+        "Produce a quick draft to adapt into a reusable Template.",
+        "Speed up outreach volume without sacrificing personalization."
+      ],
+      "bestPractices": [
+        "Give specific key points (a real pain point, a real detail about the company) rather than generic instructions.",
+        "Match tone to the channel and relationship stage — Direct for a warm follow-up, Formal for enterprise outreach.",
+        "Edit the generated draft before sending — treat it as a strong starting point, not a final email.",
+        "Save particularly effective generated emails as Templates for reuse."
+      ],
+      "commonMistakes": [
+        "Sending the generated draft completely unedited.",
+        "Providing vague key points and getting back generic-sounding copy.",
+        "Using the same tone for every recipient regardless of context."
+      ],
+      "workflow": [
+        "Enter the recipient or company name.",
+        "Choose a tone: Formal, Friendly, or Direct.",
+        "List the key points the email should mention.",
+        "Click Generate and review the subject and body.",
+        "Copy into a campaign, save as a template, or send directly."
+      ],
+      "expectedResults": "A ready-to-edit, personalized email draft in seconds instead of the 5-10 minutes it typically takes to write one from scratch.",
+      "combineWith": [
+        "Research the recipient first with Website Analyzer for sharper key points.",
+        "Save strong drafts as reusable Templates.",
+        "Translate the finished email with Translate Email for international prospects."
+      ],
+      "scenarios": [
+        "A rep generates three tone variants of the same pitch to test which resonates with a specific segment.",
+        "A founder drafts a direct, no-fluff follow-up for a lead who went quiet after a demo.",
+        "A team converts their best-performing generated email into a shared Template."
+      ],
+      "comingSoonNote": "Email Generator is not yet wired up to the AI backend — the interface exists but generation isn't live yet. It will connect to the same AI infrastructure already powering Website Analyzer, Marketing Plan Generator, and Translate Email."
+    },
+    "subjectGenerator": {
+      "title": "Subject Line Generator",
+      "summary": "Generate multiple high-open-rate subject line variants with a predicted open rate for each.",
+      "whatItDoes": "Describe what the email is about and choose a tone (Curious, Direct, Playful, Formal), and the generator produces several subject line variants, each with a predicted open rate to help you choose.",
+      "whyYouNeedIt": "Subject line is the single biggest lever on whether an email gets opened at all. Testing several AI-generated variants beats guessing at one and hoping it lands.",
+      "useCases": [
+        "Generate five subject line options for a new campaign instead of relying on one guess.",
+        "Compare predicted open rates across tones for the same message.",
+        "Refresh subject lines for a campaign that's underperforming on opens.",
+        "Brainstorm subject line angles you wouldn't have thought of manually."
+      ],
+      "bestPractices": [
+        "Describe the email context specifically — the more detail, the more relevant the variants.",
+        "Test more than one tone rather than defaulting to the same one every time.",
+        "Use predicted open rate as a guide, not gospel — validate with real campaign data over time.",
+        "Pair a strong subject line variant with the actual Email Generator output for consistency."
+      ],
+      "commonMistakes": [
+        "Providing a one-word context and getting back generic subject lines.",
+        "Ignoring predicted open rate entirely and picking a variant at random.",
+        "Never testing whether the predicted rate matches real campaign performance."
+      ],
+      "workflow": [
+        "Describe what the email is about in the context field.",
+        "Choose a tone: Curious, Direct, Playful, or Formal.",
+        "Click Generate.",
+        "Compare variants and their predicted open rates.",
+        "Copy the winning subject line into your campaign or template."
+      ],
+      "expectedResults": "Several ready-to-test subject line options with a predicted performance signal, replacing guesswork with a shortlist worth actually testing.",
+      "combineWith": [
+        "Pair with Email Generator for a matching body.",
+        "Feed the winning subject line into a Template for reuse.",
+        "Validate predictions against real performance in Campaigns and Analytics."
+      ],
+      "scenarios": [
+        "A marketer generates five subject lines for a product launch email and A/B tests the top two.",
+        "A rep refreshes the subject line on a stalled campaign and sees open rate recover within days.",
+        "A team standardizes on a Curious-tone subject line style after seeing it consistently predicted higher."
+      ],
+      "comingSoonNote": "Subject Line Generator isn't connected to the AI backend yet — it will generate real variants and predictions once wired up, using the same infrastructure as the other live AI tools."
+    },
+    "headlineGenerator": {
+      "title": "Headline Generator",
+      "summary": "Produce landing page and ad headline options from your product and value proposition.",
+      "whatItDoes": "Enter your product or company name and value proposition, and the generator produces multiple headline variants suitable for landing pages, ads, or social posts.",
+      "whyYouNeedIt": "A strong headline is often the difference between a visitor bouncing and reading further. This tool gives you several strong options to test instead of staring at a blank page.",
+      "useCases": [
+        "Generate headline options for a new landing page before a campaign launch.",
+        "Produce ad headline variants to A/B test in a paid campaign.",
+        "Refresh a stale landing page headline to lift conversion.",
+        "Brainstorm angles for a value proposition you're still refining."
+      ],
+      "bestPractices": [
+        "Write a specific, differentiated value proposition as input — vague input produces vague headlines.",
+        "Generate multiple rounds with slightly different value prop phrasing to widen your options.",
+        "Pair the winning headline with the CTA Generator for a complete above-the-fold section.",
+        "Test headline variants against real traffic rather than picking a favorite by instinct alone."
+      ],
+      "commonMistakes": [
+        "Entering a generic value proposition ('we help businesses grow') and getting equally generic headlines.",
+        "Picking the first variant without testing alternatives.",
+        "Never revisiting headlines after the initial launch."
+      ],
+      "workflow": [
+        "Enter your product or company name.",
+        "Enter your value proposition.",
+        "Click Generate.",
+        "Review the headline variants.",
+        "Copy the strongest option into your landing page or ad."
+      ],
+      "expectedResults": "A set of headline options ready to test on a real landing page or ad, instead of relying on a single instinct-driven draft.",
+      "combineWith": [
+        "Pair with the CTA Generator for a complete headline-plus-CTA section.",
+        "Feed strong headlines into a Marketing Plan Generator brief.",
+        "Use alongside Website Analyzer findings when the current headline is flagged as a weakness."
+      ],
+      "scenarios": [
+        "A founder generates headline options before launching a new landing page for a product update.",
+        "A marketer A/B tests two AI-generated headlines and finds a 20% lift in click-through.",
+        "An agency uses the tool to quickly produce headline options across several client landing pages."
+      ],
+      "comingSoonNote": "Headline Generator isn't connected to the AI backend yet — the form is ready, and generation will go live using the same AI infrastructure as the other tools."
+    },
+    "ctaGenerator": {
+      "title": "CTA Generator",
+      "summary": "Generate call-to-action copy tuned to your specific campaign goal.",
+      "whatItDoes": "Pick a goal — Book a call, Start free trial, Reply to email, Download resource — add optional context, and the generator produces CTA copy variants matched to that specific goal.",
+      "whyYouNeedIt": "A generic 'Learn More' button underperforms a CTA written for the specific action you actually want. This tool tailors call-to-action copy to the goal instead of reusing the same phrase everywhere.",
+      "useCases": [
+        "Generate CTA copy for a landing page whose goal is booking a call.",
+        "Produce reply-focused CTA variants for a cold email campaign.",
+        "Create download-focused CTAs for a gated resource like a pricing guide.",
+        "Test multiple CTA phrasings for the same free trial signup flow."
+      ],
+      "bestPractices": [
+        "Match the goal precisely to the actual next step you want the reader to take.",
+        "Add context (e.g. 'the pricing guide') so the CTA references the specific asset or offer.",
+        "Pair with the Headline Generator so the headline and CTA reinforce the same goal.",
+        "Test CTA variants against real conversion data rather than picking on instinct."
+      ],
+      "commonMistakes": [
+        "Picking a goal that doesn't match the actual page or email's purpose.",
+        "Leaving context blank when a specific reference would make the CTA sharper.",
+        "Never testing whether a new CTA variant actually outperforms the old one."
+      ],
+      "workflow": [
+        "Choose a campaign goal from the list.",
+        "Optionally add context about the offer.",
+        "Click Generate.",
+        "Review the CTA variants.",
+        "Use the strongest option on your page, email, or ad."
+      ],
+      "expectedResults": "Goal-specific call-to-action copy that matches the exact next step you want, rather than a one-size-fits-all button label.",
+      "combineWith": [
+        "Pair with the Headline Generator for a complete conversion section.",
+        "Use alongside Landing Page Analyzer findings when weak CTAs are flagged.",
+        "Reference in Email Generator drafts for a consistent close."
+      ],
+      "scenarios": [
+        "A marketer generates 'book a call' CTA variants for a new landing page and tests two of them.",
+        "A rep uses a reply-focused CTA in a cold email sequence and sees reply rate improve.",
+        "An agency standardizes CTA phrasing across a client's site using goal-matched variants."
+      ],
+      "comingSoonNote": "CTA Generator isn't connected to the AI backend yet — it will produce real goal-matched variants once wired up to the same infrastructure as the live AI tools."
+    },
+    "seoAudit": {
+      "title": "SEO Audit",
+      "summary": "Run an automated SEO health check on any domain and get a clear score.",
+      "whatItDoes": "Enter a website URL and SEO Audit runs an automated check, returning an SEO score plus specific findings you can act on.",
+      "whyYouNeedIt": "SEO issues quietly cap organic growth. A quick automated audit surfaces concrete problems — the kind an agency would normally charge for — in seconds, either for your own site or a prospect's.",
+      "useCases": [
+        "Audit a prospect's site to open a conversation about SEO services.",
+        "Check your own site's SEO score before a content or marketing push.",
+        "Benchmark a client's site before and after an SEO engagement.",
+        "Prioritize which pages need the most SEO attention."
+      ],
+      "bestPractices": [
+        "Run the audit before proposing SEO work to a prospect, so your pitch references specific findings.",
+        "Re-run periodically to track whether SEO improvements are actually moving the score.",
+        "Pair with Website Analyzer for the fuller picture beyond SEO alone.",
+        "Focus outreach or fixes on the highest-impact findings first, not every minor issue."
+      ],
+      "commonMistakes": [
+        "Running the audit once and never checking back to see if the score improved.",
+        "Treating every finding as equally urgent instead of prioritizing.",
+        "Auditing the wrong URL (e.g. a redirect page instead of the actual homepage)."
+      ],
+      "workflow": [
+        "Enter the website URL.",
+        "Click Run Audit.",
+        "Review the SEO score and detailed findings.",
+        "Prioritize the highest-impact recommendations.",
+        "Re-run after fixes to confirm improvement."
+      ],
+      "expectedResults": "A clear SEO score and prioritized findings, giving you or your prospect a concrete starting point instead of a vague sense that 'SEO could be better.'",
+      "combineWith": [
+        "Run alongside Website Analyzer for a full technical and messaging picture.",
+        "Reference findings in Landing Page Analyzer if conversion is also a concern.",
+        "Use findings to justify a Marketing Plan Generator's SEO Strategy section."
+      ],
+      "scenarios": [
+        "An agency audits a prospect's site and opens outreach referencing a specific, fixable SEO gap.",
+        "A founder checks their own SEO score before a big content push and fixes the top three issues first.",
+        "A marketer re-audits a client site three months into an engagement to show measurable improvement."
+      ],
+      "comingSoonNote": "SEO Audit isn't connected to the AI backend yet — the form is in place, and real scoring will go live using the same infrastructure as Website Analyzer."
+    },
+    "landingPageAnalyzer": {
+      "title": "Landing Page Analyzer",
+      "summary": "Evaluate a landing page's structure and conversion signals with a clear readiness score.",
+      "whatItDoes": "Enter a landing page URL and get a Conversion Report with a conversion readiness score, evaluating structure, calls to action, content clarity, and other conversion signals specific to landing pages rather than full sites.",
+      "whyYouNeedIt": "A landing page has one job — convert — and that's a different bar than a general website audit. This tool focuses specifically on the signals that predict whether a page will turn traffic into leads or sales.",
+      "useCases": [
+        "Check a new landing page's conversion readiness before launching a paid campaign against it.",
+        "Diagnose why an existing landing page isn't converting as expected.",
+        "Compare two landing page variants before an A/B test.",
+        "Audit a prospect's landing page as part of a sales or agency pitch."
+      ],
+      "bestPractices": [
+        "Analyze the exact landing page traffic will hit, not a similar but different page.",
+        "Use the conversion readiness score as a pre-launch gate before spending ad budget.",
+        "Combine with the CTA Generator and Headline Generator to fix flagged weaknesses directly.",
+        "Re-analyze after changes to confirm the score actually improved."
+      ],
+      "commonMistakes": [
+        "Analyzing the homepage when the actual campaign traffic lands on a dedicated landing page.",
+        "Launching paid traffic against a page that scored poorly without addressing the findings first.",
+        "Treating the score as final instead of iterating based on the specific recommendations."
+      ],
+      "workflow": [
+        "Enter the landing page URL.",
+        "Click Analyze.",
+        "Review the conversion readiness score and report.",
+        "Address flagged structure, CTA, or content issues.",
+        "Re-analyze to confirm improvement before launching traffic."
+      ],
+      "expectedResults": "A clear conversion readiness score and specific fixes, reducing the risk of spending ad budget against a page that was never going to convert well.",
+      "combineWith": [
+        "Fix flagged CTA issues directly with the CTA Generator.",
+        "Fix flagged headline issues with the Headline Generator.",
+        "Compare against full-site findings from Website Analyzer."
+      ],
+      "scenarios": [
+        "A marketer analyzes a new landing page the day before a paid campaign launches and fixes a weak CTA first.",
+        "An agency uses the score as a standard pre-launch checkpoint for every client landing page.",
+        "A founder compares two landing page variants' scores before deciding which to send traffic to."
+      ]
+    },
+    "rewriteEmail": {
+      "title": "Rewrite Email",
+      "summary": "Rewrite an existing email in a different tone or length with one click.",
+      "whatItDoes": "Paste an existing email and choose how to rewrite it — More formal, More friendly, More concise, or More persuasive — and get a rewritten version alongside the original for comparison.",
+      "whyYouNeedIt": "Sometimes the content of an email is right but the tone or length isn't landing. Rewrite Email lets you quickly adapt existing copy instead of starting over from a blank page.",
+      "useCases": [
+        "Make a wordy email more concise before sending to a busy executive.",
+        "Adjust a template's tone from formal to friendly for a warmer segment.",
+        "Punch up persuasiveness on an email that's getting low reply rates.",
+        "Adapt one well-performing email into multiple tone variants for testing."
+      ],
+      "bestPractices": [
+        "Start from an email you already believe in — this tool adapts tone and length, not core messaging.",
+        "Compare the rewritten and original tabs side by side before choosing one.",
+        "Test a more concise rewrite specifically for executive or senior-level recipients.",
+        "Save a strong rewritten version as a new Template."
+      ],
+      "commonMistakes": [
+        "Rewriting an email with weak core messaging and expecting tone changes alone to fix it.",
+        "Sending the rewrite without comparing it to the original first.",
+        "Always defaulting to the same rewrite style regardless of recipient."
+      ],
+      "workflow": [
+        "Paste the original email.",
+        "Choose a rewrite style: more formal, friendly, concise, or persuasive.",
+        "Click Rewrite.",
+        "Compare the Rewritten and Original tabs.",
+        "Send the version that fits, or save it as a Template."
+      ],
+      "expectedResults": "A fast, tone-adjusted version of copy you already trust, without needing to write a new email from scratch.",
+      "combineWith": [
+        "Use after the Email Generator to fine-tune tone on a first draft.",
+        "Feed the result into Translate Email for international outreach.",
+        "Save the best version as a reusable Template."
+      ],
+      "scenarios": [
+        "A rep rewrites a long email into a concise version specifically for a C-level prospect.",
+        "A marketer adapts one high-performing email into a friendlier version for a different audience segment.",
+        "A team punches up persuasiveness on a re-engagement email that's been getting weak replies."
+      ],
+      "comingSoonNote": "Rewrite Email isn't connected to the AI backend yet — the interface exists, and rewriting will go live using the same infrastructure that already powers Translate Email."
+    },
+    "translateEmail": {
+      "title": "Translate Email",
+      "summary": "Translate outreach copy into another language while preserving tone and intent.",
+      "whatItDoes": "Paste an email, choose a target language from a searchable list, and get a translated version that preserves the original tone and intent rather than a literal word-for-word conversion.",
+      "whyYouNeedIt": "Reaching international prospects in their own language dramatically improves response rates, but hiring a translator for every outreach email doesn't scale. This tool gives you a fast, tone-aware translation for outreach specifically.",
+      "useCases": [
+        "Translate a proven English template into a prospect's native language before sending.",
+        "Expand outreach into a new international market without a dedicated translator.",
+        "Localize a high-performing campaign across multiple languages for a global launch.",
+        "Quickly check how a specific phrase or offer reads in another language."
+      ],
+      "bestPractices": [
+        "Start from an email you already know performs well in the source language.",
+        "Have a native speaker spot-check important or high-stakes translations before sending.",
+        "Use the searchable language list to find less common target languages quickly.",
+        "Save well-performing translated versions as language-specific Templates."
+      ],
+      "commonMistakes": [
+        "Translating an email with weak content and expecting translation alone to fix low reply rates.",
+        "Sending a translation for an unfamiliar language without any native review.",
+        "Re-translating from scratch every time instead of saving good translations as templates."
+      ],
+      "workflow": [
+        "Paste the original email.",
+        "Search for and select the target language.",
+        "Click Translate.",
+        "Review the translation for tone and accuracy.",
+        "Send directly, or save as a language-specific Template."
+      ],
+      "expectedResults": "A tone-preserving translation ready to send to international prospects, opening up markets that a language barrier would otherwise close off.",
+      "combineWith": [
+        "Translate the output of the Email Generator for international leads.",
+        "Save translated versions as Templates for reuse in that market.",
+        "Pair with Rewrite Email if tone needs further adjustment after translation."
+      ],
+      "scenarios": [
+        "A team expanding into a new market translates their best cold outreach template before the first campaign there.",
+        "A rep quickly translates a reply to a prospect who wrote in a language they don't speak.",
+        "A global company standardizes translated Templates for its five most common outreach languages."
+      ]
+    },
+    "aiOutreachHub": {
+      "title": "AI Outreach Hub",
+      "summary": "Connect every channel and data source you use to find and reach prospects, all in one place.",
+      "whatItDoes": "AI Outreach Hub is a single hub of integrations spanning messaging channels (email, LinkedIn, Telegram, Instagram, Facebook, WhatsApp, X, Reddit, Discord, and more), local and business data sources (Google Maps, Google Business Profile, Bing Maps, Apple Maps, Yelp, Yellow Pages, government registries), marketplaces (Upwork, Fiverr, Etsy, Amazon Sellers, Shopify Stores), and professional/talent sources (Crunchbase, Wellfound, GitHub, Indeed, Glassdoor), plus spreadsheet/CRM import and custom API connections.",
+      "whyYouNeedIt": "Prospecting rarely lives in one channel. AI Outreach Hub is designed to be the single place that connects every channel and data source your team actually uses, instead of juggling a dozen separate tools and manual exports.",
+      "useCases": [
+        "Source leads from Google Maps or Google Business Profile alongside your existing Search Leads workflow.",
+        "Reach prospects on the channel they actually respond on — LinkedIn, Telegram, or WhatsApp instead of only email.",
+        "Import leads in bulk from spreadsheets, Notion, or an external CRM.",
+        "Discover funded companies via Crunchbase or startups via Wellfound as new outbound targets."
+      ],
+      "bestPractices": [
+        "Plan which channels matter most for your specific market before enabling every integration at once.",
+        "Combine data-source integrations (like Google Maps) with messaging integrations (like WhatsApp) for a complete find-and-reach workflow.",
+        "Keep imported leads consistent with your existing Search Leads and CRM data model.",
+        "Review plan requirements — this is an Enterprise-tier feature."
+      ],
+      "commonMistakes": [
+        "Enabling every integration at once instead of starting with the two or three channels your prospects actually use.",
+        "Duplicating leads across imported sources and Search Leads without deduplication.",
+        "Assuming Enterprise-only integrations are available on lower plans."
+      ],
+      "workflow": [
+        "Review the available integrations across messaging, data sources, marketplaces, and professional networks.",
+        "Enable the channels and sources relevant to your market.",
+        "Import or sync leads into your existing workspace.",
+        "Reach out through the connected channel of choice.",
+        "Monitor results alongside your existing Leads and Analytics."
+      ],
+      "expectedResults": "A single connected hub spanning every channel and data source your team prospects through, instead of fragmented, manual workflows across a dozen separate tools.",
+      "combineWith": [
+        "Feed sourced leads into Search Leads and the CRM Pipeline.",
+        "Pair with Campaigns for channels that support sequenced outreach.",
+        "Use alongside the AI Assistant for quick channel-specific guidance."
+      ],
+      "scenarios": [
+        "An agency on the Enterprise plan connects Google Maps and WhatsApp to prospect and reach local businesses in one workflow.",
+        "A recruiter-style team connects Indeed and Glassdoor to source companies that are actively hiring.",
+        "A global sales team imports leads from an external CRM via spreadsheet sync instead of manual re-entry."
+      ],
+      "comingSoonNote": "AI Outreach Hub is an upcoming Enterprise feature — the integrations catalog is defined, but connecting and syncing real channels and data sources is not yet live."
+    },
+    "aiAssistant": {
+      "title": "AI Assistant",
+      "summary": "A conversational AI panel for quick help with leads, campaigns, and your pipeline.",
+      "whatItDoes": "The AI Assistant is a chat panel available throughout the app where you can ask questions and get help — summarizing leads, drafting follow-ups, checking campaign performance, or suggesting a marketing plan — without leaving your current page.",
+      "whyYouNeedIt": "Some questions are faster to just ask than to look up across several pages. The AI Assistant is designed to be a fast, conversational shortcut to the same data and tools available elsewhere in Nexora.",
+      "useCases": [
+        "Ask for a quick summary of this week's new leads without opening Analytics.",
+        "Get a draft follow-up email suggestion without switching to the Email Generator.",
+        "Ask which campaign is performing best instead of scanning the Campaigns table.",
+        "Request a quick marketing plan suggestion for a fast, conversational starting point."
+      ],
+      "bestPractices": [
+        "Use it for quick, conversational questions rather than deep, structured work — the dedicated AI Tools are better suited to that.",
+        "Try the suggested prompts if you're not sure where to start.",
+        "Treat current responses as a preview — full AI-powered answers aren't connected yet.",
+        "Keep an eye out as it moves from preview to full capability."
+      ],
+      "commonMistakes": [
+        "Expecting fully connected AI responses today — the current panel is a visual preview.",
+        "Using it for complex, structured tasks better suited to a dedicated AI Tool.",
+        "Overlooking the suggested prompts, which are a fast way to explore what it will eventually do."
+      ],
+      "workflow": [
+        "Open the AI Assistant panel from anywhere in the app.",
+        "Type a question, or pick one of the suggested prompts.",
+        "Review the response (currently a preview experience).",
+        "Continue the conversation or switch to a dedicated AI Tool for deeper work.",
+        "Close the panel to return to your task."
+      ],
+      "expectedResults": "A fast, low-friction way to get quick answers and suggestions without navigating away from your current task, once fully connected.",
+      "combineWith": [
+        "Use alongside AI Tools for deeper, structured work.",
+        "Reference Dashboard data in the questions you ask.",
+        "Use it as a fast on-ramp to any of the dedicated generators."
+      ],
+      "scenarios": [
+        "A rep opens the panel mid-task to quickly ask which campaign is performing best.",
+        "A new user tries the suggested prompts to get a feel for what the assistant will eventually do.",
+        "A manager asks for a lead summary while reviewing the Dashboard, instead of switching pages."
+      ],
+      "comingSoonNote": "The AI Assistant panel is currently a visual preview — the chat interface and suggested prompts are in place, but responses aren't generated by a live AI model yet."
+    },
+    "websiteCreation": {
+      "title": "Website Creation",
+      "summary": "Premium, high-converting websites designed and built by the team behind Nexora.",
+      "whatItDoes": "Website Creation is a done-for-you web development service — landing pages, business and corporate websites, dashboards and web apps, and Telegram web apps — delivered end-to-end from planning through design and build, with milestone-based delivery and ongoing support.",
+      "whyYouNeedIt": "Not every team has in-house design and development capacity. Website Creation gives Nexora customers a direct path to a premium, custom-built site without hiring or managing a separate agency.",
+      "useCases": [
+        "Launch a high-converting landing page for a new campaign without in-house design resources.",
+        "Replace an outdated corporate site with a modern, fast, SEO-ready build.",
+        "Commission a custom internal dashboard or web app tailored to your team's workflow.",
+        "Build a Telegram web app for a bot, storefront, or community tool."
+      ],
+      "bestPractices": [
+        "Start with a clear goal (lead generation, brand credibility, internal tooling) before requesting a quote.",
+        "Review the milestone-based delivery model so you know what to expect at each stage of the project.",
+        "Use the Website Analyzer on your current site first to identify concrete goals for the new build.",
+        "Plan for ongoing support and maintenance rather than treating launch day as the finish line."
+      ],
+      "commonMistakes": [
+        "Requesting a quote without a clear sense of pages, scope, or goal, which slows down the process.",
+        "Skipping the free quote step and assuming the listed pricing tiers are final without scoping.",
+        "Not planning for post-launch support and maintenance."
+      ],
+      "workflow": [
+        "Review the service overview and example work.",
+        "Choose the closest-fitting pricing tier as a starting reference.",
+        "Request a free quote with details about your project.",
+        "Work through planning, design, and build milestones with the team.",
+        "Launch, then continue with ongoing support as needed."
+      ],
+      "expectedResults": "A premium, custom-designed, fast, SEO-ready website delivered end-to-end, without needing to manage an external agency relationship.",
+      "combineWith": [
+        "Run the new site through Website Analyzer post-launch to confirm strong scores.",
+        "Feed content and positioning from the Marketing Plan Generator into the new site's messaging.",
+        "Use SEO Audit periodically after launch to keep the site healthy."
+      ],
+      "scenarios": [
+        "A startup requests a quote for a new landing page ahead of a product launch campaign.",
+        "An established company replaces its aging corporate site with a modern, milestone-delivered rebuild.",
+        "A team commissions a custom Telegram web app storefront for their community."
+      ],
+      "comingSoonNote": "Website Creation requests aren't wired up to a live intake flow yet — the service pages and pricing are in place, and the request-a-quote flow will connect to the team directly once launched."
+    },
+    "billing": {
+      "title": "Billing",
+      "summary": "Manage your subscription, plan, payment method, and invoice history in one place.",
+      "whatItDoes": "Billing shows your current plan, seats used, default payment method, and full billing history, alongside a plan comparison grid (Free, Starter, Pro, Enterprise) so you can switch plans as your needs change.",
+      "whyYouNeedIt": "Plan and payment questions shouldn't require contacting support. Billing gives account owners full visibility and control over what they're paying for and why.",
+      "useCases": [
+        "Check how many seats are used against your current plan's limit.",
+        "Download a past invoice for expense reporting.",
+        "Compare plans before deciding whether to upgrade or downgrade.",
+        "Update your default payment method before a renewal date."
+      ],
+      "bestPractices": [
+        "Review your plan against actual usage periodically — Analytics and Admin usage data can inform this.",
+        "Keep your payment method current well before the renewal date shown on Current Plan.",
+        "Download and archive invoices as they arrive rather than searching for them later.",
+        "Compare the plans grid before assuming you need to contact support to change tiers."
+      ],
+      "commonMistakes": [
+        "Letting a payment method expire and only noticing after a failed charge.",
+        "Never reviewing seat usage, leading to paying for more seats than are actually in use.",
+        "Assuming plan changes require a support ticket instead of checking the plans grid first."
+      ],
+      "workflow": [
+        "Open Billing and review your current plan and seats used.",
+        "Check the Billing History table for past invoices.",
+        "Compare plans in the plans grid if you're considering a change.",
+        "Update your payment method if needed.",
+        "Contact support for anything not yet self-serve."
+      ],
+      "expectedResults": "Full self-serve visibility into your subscription, usage, and billing history, without needing to open a support ticket for routine questions.",
+      "combineWith": [
+        "Cross-check seat usage against Settings → Workspace members.",
+        "Compare with plan-level feature availability across AI Tools and CRM.",
+        "Reference Admin → Subscriptions if you manage billing for a team account."
+      ],
+      "scenarios": [
+        "An account owner downloads last quarter's invoices for their finance team.",
+        "A growing team checks seat usage and decides it's time to upgrade from Starter to Pro.",
+        "A user updates an expiring card before their renewal date to avoid a lapsed subscription."
+      ],
+      "comingSoonNote": "Plan switching and payment method updates aren't wired up to live billing yet — the plan comparison and invoice history views are ready, and self-serve changes will go live alongside Stripe billing integration."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "summary": "Stay on top of campaign, lead, deal, and payment activity across your workspace.",
+      "whatItDoes": "Notifications surfaces workspace events — a campaign sent or paused, a new lead added, a meeting reminder, a deal won, a payment failure — in a single feed, filterable by All or Unread, with the ability to mark everything as read.",
+      "whyYouNeedIt": "Important events (a deal moving to Won, a payment failure) shouldn't require someone to notice them by chance while browsing another page. Notifications centralizes everything that needs attention.",
+      "useCases": [
+        "Catch a payment failure immediately instead of discovering it during a billing review.",
+        "See at a glance which campaigns sent or paused overnight.",
+        "Get reminded of an upcoming meeting without checking the CRM directly.",
+        "Review unread notifications at the start of the day to catch up on what happened."
+      ],
+      "bestPractices": [
+        "Check Unread specifically at the start of each day rather than scrolling the full feed.",
+        "Act on payment failure and deal-won notifications immediately — they're typically time-sensitive.",
+        "Mark all as read once you've reviewed the feed to keep the unread count meaningful.",
+        "Pair with the Settings → Notifications preferences to control what actually reaches you."
+      ],
+      "commonMistakes": [
+        "Letting unread notifications pile up until the badge count becomes meaningless.",
+        "Missing a payment failure notification and only noticing after a service interruption.",
+        "Not configuring notification preferences, resulting in either too much or too little signal."
+      ],
+      "workflow": [
+        "Open Notifications from the popover or the dedicated page.",
+        "Switch between All and Unread as needed.",
+        "Review and act on time-sensitive items first.",
+        "Mark all as read once reviewed.",
+        "Adjust preferences in Settings → Notifications if the volume or content isn't right."
+      ],
+      "expectedResults": "A single, centralized feed of everything that needs attention across your workspace, so nothing time-sensitive is missed by accident.",
+      "combineWith": [
+        "Configure what you receive in Settings → Notifications.",
+        "Follow a deal-won notification straight into the CRM Pipeline.",
+        "Follow a payment-failure notification straight into Billing."
+      ],
+      "scenarios": [
+        "A user sees a payment failure notification and updates their card before service is interrupted.",
+        "A rep gets a meeting reminder notification an hour before a discovery call.",
+        "A manager reviews unread notifications each morning as part of their daily routine."
+      ],
+      "comingSoonNote": "The notifications feed currently displays representative activity — live, real-time delivery of workspace events is being connected next."
+    },
+    "settingsProfile": {
+      "title": "Profile Settings",
+      "summary": "Manage your name, job title, email, and avatar.",
+      "whatItDoes": "Profile settings let you update your full name, job title, and avatar, and view your account email (which requires contacting support to change).",
+      "whyYouNeedIt": "Your profile isn't just cosmetic — job title and name feed directly into AI-personalized outreach and how teammates identify you across the CRM.",
+      "useCases": [
+        "Add a professional photo and job title after joining a new workspace.",
+        "Update your name or title after a role change.",
+        "Replace an outdated avatar before a client-facing engagement.",
+        "Confirm the email tied to your account before reaching out to support."
+      ],
+      "bestPractices": [
+        "Fill in job title specifically — it's referenced in AI-generated outreach copy.",
+        "Keep your avatar current so teammates can identify you quickly across shared records.",
+        "Use an image under 2 MB to avoid upload errors.",
+        "Contact support promptly if your account email needs to change."
+      ],
+      "commonMistakes": [
+        "Leaving job title blank, which weakens AI-personalized outreach quality.",
+        "Trying to change the account email directly instead of contacting support.",
+        "Uploading an oversized image and not realizing why the upload failed."
+      ],
+      "workflow": [
+        "Open Settings → Profile.",
+        "Update full name, job title, and avatar.",
+        "Click Save changes.",
+        "Contact support if you need to change your account email.",
+        "Revisit after any role change."
+      ],
+      "expectedResults": "An accurate, up-to-date profile that improves personalized outreach and makes your identity clear across shared team records.",
+      "combineWith": [
+        "Pair with Settings → Workspace to see how your profile appears to teammates.",
+        "Reference in Email Generator output, which uses your name and title.",
+        "Check Settings → Security afterward to keep your account fully up to date."
+      ],
+      "scenarios": [
+        "A new hire completes their profile on day one as prompted by the Dashboard's onboarding guide.",
+        "A rep updates their job title after a promotion so future AI-generated emails reflect it.",
+        "A user emails support after realizing they need to change the email tied to their account."
+      ]
+    },
+    "settingsSecurity": {
+      "title": "Security Settings",
+      "summary": "Change your password and manage two-factor authentication.",
+      "whatItDoes": "Security settings let you change your password (current, new, confirm) and toggle a requirement for a two-factor authentication code at sign-in.",
+      "whyYouNeedIt": "Account security is the foundation everything else — your CRM data, campaigns, and billing — depends on. Strong, current credentials and 2FA meaningfully reduce the risk of unauthorized access.",
+      "useCases": [
+        "Change your password on a regular schedule or after a suspected compromise.",
+        "Enable two-factor authentication for an account with access to sensitive workspace data.",
+        "Update credentials immediately after offboarding a shared-device scenario.",
+        "Review security settings as part of a periodic account audit."
+      ],
+      "bestPractices": [
+        "Use a unique, strong password rather than one reused across other services.",
+        "Enable two-factor authentication, especially for Owner and Admin accounts.",
+        "Change your password immediately if you suspect any compromise.",
+        "Review security settings whenever your workspace's data sensitivity increases."
+      ],
+      "commonMistakes": [
+        "Reusing a password from another service.",
+        "Leaving two-factor authentication off for high-privilege accounts.",
+        "Forgetting to update credentials after a device or team change."
+      ],
+      "workflow": [
+        "Open Settings → Security.",
+        "Enter current password, then set and confirm a new one.",
+        "Click Update password.",
+        "Toggle on two-factor authentication if required at sign-in.",
+        "Repeat periodically as part of good account hygiene."
+      ],
+      "expectedResults": "A meaningfully more secure account, reducing the risk that a leaked or weak password alone is enough to compromise your workspace.",
+      "combineWith": [
+        "Pair with Settings → Danger Zone for full account-level control.",
+        "Review alongside Settings → API Keys, another common access surface.",
+        "Coordinate with Settings → Workspace when managing security across a full team."
+      ],
+      "scenarios": [
+        "An account owner enables two-factor authentication after onboarding several new admins.",
+        "A user changes their password immediately after noticing an unfamiliar login alert.",
+        "A team lead audits security settings across the workspace's admin accounts."
+      ],
+      "comingSoonNote": "Two-factor authentication isn't wired up yet — the toggle is in place, and enforcing a real code at sign-in is coming soon. Password changes are already fully live."
+    },
+    "settingsWorkspace": {
+      "title": "Workspace Settings",
+      "summary": "Manage your workspace name, slug, and team member invites and roles.",
+      "whatItDoes": "Workspace settings let you update the workspace name and slug, and manage members — inviting new teammates by email and viewing their role (Admin or Member).",
+      "whyYouNeedIt": "As a team grows past one person, someone needs a clear way to invite teammates and understand who has what level of access. Workspace settings is that control center.",
+      "useCases": [
+        "Invite a new teammate by email when they join the company.",
+        "Rename the workspace after a company rebrand.",
+        "Review the full member list and their roles during a security review.",
+        "Update the workspace slug to match a new brand identity."
+      ],
+      "bestPractices": [
+        "Keep the member list current — remove or downgrade access as roles change.",
+        "Choose a clear, permanent-feeling slug, since changing it later may affect any shared links.",
+        "Send invites directly through this page rather than sharing login credentials.",
+        "Review roles periodically, especially before a security-sensitive project."
+      ],
+      "commonMistakes": [
+        "Sharing login credentials instead of sending a proper invite.",
+        "Letting departed teammates retain active access.",
+        "Changing the workspace slug without checking what else references it."
+      ],
+      "workflow": [
+        "Open Settings → Workspace.",
+        "Update workspace name or slug and save changes.",
+        "Click Invite member and enter their email address.",
+        "Review the member list and roles.",
+        "Repeat as your team grows or changes."
+      ],
+      "expectedResults": "A workspace with an accurate name, a stable identity, and a clean, current list of who has access.",
+      "combineWith": [
+        "Pair with Settings → API Keys when granting programmatic access to a new integration.",
+        "Cross-check with Admin → Users if you're an Enterprise administrator.",
+        "Review alongside Settings → Security for a full access audit."
+      ],
+      "scenarios": [
+        "A manager invites three new hires to the workspace during onboarding week.",
+        "A company updates its workspace name and slug after a rebrand.",
+        "A team lead reviews the member list before starting a client project with sensitive data."
+      ],
+      "comingSoonNote": "Member invites and role management aren't fully wired up yet — the workspace details form is live, and full invite/role workflows are coming soon."
+    },
+    "settingsNotifications": {
+      "title": "Notification Preferences",
+      "summary": "Choose exactly which email notifications you want to receive.",
+      "whatItDoes": "Notification preferences let you toggle weekly summary emails, campaign alerts, new lead alerts, deal updates, and product update emails individually.",
+      "whyYouNeedIt": "Not every user wants every notification. This gives each person control over their own signal-to-noise ratio instead of a one-size-fits-all setting.",
+      "useCases": [
+        "Turn off product update emails while keeping campaign alerts on.",
+        "Enable deal update alerts specifically for someone focused on the pipeline.",
+        "Turn on the weekly summary email for a manager who wants a digest instead of real-time alerts.",
+        "Disable new lead alerts for a role that doesn't work leads directly."
+      ],
+      "bestPractices": [
+        "Match notification settings to your actual role — a closer's needs differ from a marketer's.",
+        "Revisit preferences if you're feeling either overwhelmed or out of the loop.",
+        "Keep campaign and deal alerts on if you're directly responsible for either.",
+        "Turn on the weekly digest for a lightweight way to stay generally aware."
+      ],
+      "commonMistakes": [
+        "Leaving every toggle on and getting overwhelmed by email volume.",
+        "Turning everything off and missing a time-sensitive deal or campaign event.",
+        "Never revisiting preferences after a role change."
+      ],
+      "workflow": [
+        "Open Settings → Notifications.",
+        "Toggle each preference — weekly summary, campaign alerts, lead alerts, deal updates, product updates.",
+        "Click Save preferences.",
+        "Adjust again any time your role or preferences change."
+      ],
+      "expectedResults": "An email notification volume that actually matches what's useful to you, rather than an all-or-nothing default.",
+      "combineWith": [
+        "Pair with the in-app Notifications feed for real-time visibility beyond email.",
+        "Coordinate with your role in Settings → Workspace to decide which alerts matter.",
+        "Revisit alongside Campaigns and CRM Pipeline activity levels."
+      ],
+      "scenarios": [
+        "A closer keeps deal updates and campaign alerts on but turns off product update emails.",
+        "A new manager turns on the weekly summary email to stay broadly aware without real-time noise.",
+        "A support-focused teammate disables new lead alerts since leads aren't part of their role."
+      ],
+      "comingSoonNote": "Preference toggles are in place, but saved preferences aren't yet enforced against real outgoing email — that connection is coming soon."
+    },
+    "settingsApiKeys": {
+      "title": "API Keys",
+      "summary": "Create and revoke API keys to authenticate integrations with the Nexora API.",
+      "whatItDoes": "API Keys lets you generate named keys for authenticating external integrations, see when each was created and last used, and revoke a key instantly if it's no longer needed or may be compromised.",
+      "whyYouNeedIt": "Any integration talking to Nexora programmatically needs a way to authenticate that isn't your personal login. Named, revocable API keys give you that access without sharing credentials.",
+      "useCases": [
+        "Generate a key for a production integration and name it clearly for future reference.",
+        "Revoke a key immediately if an integration is deprecated or a key may have leaked.",
+        "Check last-used dates to identify and clean up stale, unused keys.",
+        "Issue separate keys per integration instead of reusing one everywhere."
+      ],
+      "bestPractices": [
+        "Name each key by what it's used for ('Production integration') so future audits are easy.",
+        "Store a newly generated key immediately in a password manager — it won't be shown again.",
+        "Revoke keys the moment an integration is retired.",
+        "Audit last-used dates periodically and revoke anything that's gone stale."
+      ],
+      "commonMistakes": [
+        "Losing a generated key because it wasn't saved anywhere before closing the dialog.",
+        "Reusing one key across many unrelated integrations, making revocation risky.",
+        "Never revoking keys tied to deprecated integrations."
+      ],
+      "workflow": [
+        "Click Create API Key and give it a descriptive name.",
+        "Click Generate key.",
+        "Copy and store the key immediately — it won't be shown again.",
+        "Use the key to authenticate your integration.",
+        "Revoke it from the table if it's no longer needed."
+      ],
+      "expectedResults": "Secure, auditable, per-integration authentication for anything connecting to Nexora programmatically, without ever sharing your personal login.",
+      "combineWith": [
+        "Pair with Settings → Workspace when granting integration access on behalf of a team.",
+        "Review alongside Settings → Security during an access audit.",
+        "Reference from Admin → System Management if you administer the platform."
+      ],
+      "scenarios": [
+        "A developer generates a key named 'Zapier integration' and stores it in the team's password manager.",
+        "An admin revokes a key immediately after noticing it hasn't been used in over a year.",
+        "A security review checks every key's last-used date and revokes anything stale."
+      ],
+      "comingSoonNote": "API key creation and revocation aren't wired up to a live API yet — the management interface is in place, and real key issuance is coming soon."
+    },
+    "settingsSubscription": {
+      "title": "Subscription Settings",
+      "summary": "Review your subscription details and access your full invoice history.",
+      "whatItDoes": "Subscription settings provides quick access to your invoice history alongside the broader Billing page's plan and payment details.",
+      "whyYouNeedIt": "Subscription details and invoice history are frequently needed for expense reports, renewals, and plan decisions — having quick access avoids a support request for routine questions.",
+      "useCases": [
+        "Pull invoice history for an expense report.",
+        "Review subscription details before a renewal date.",
+        "Check plan details before deciding whether to upgrade.",
+        "Confirm what's included in your current tier."
+      ],
+      "bestPractices": [
+        "Check invoice history before month-end close if you handle expense reporting.",
+        "Review subscription details ahead of the renewal date shown on Billing.",
+        "Cross-reference with the Billing plans grid before requesting a plan change.",
+        "Keep this page bookmarked if you handle billing regularly for your team."
+      ],
+      "commonMistakes": [
+        "Searching for invoices manually via email instead of checking here first.",
+        "Missing a renewal date because subscription details weren't reviewed in advance.",
+        "Not checking current plan inclusions before assuming an upgrade is needed."
+      ],
+      "workflow": [
+        "Open Settings → Subscription.",
+        "Click See invoice history for the full billing history.",
+        "Cross-reference plan details on the main Billing page.",
+        "Review ahead of your renewal date.",
+        "Escalate to support for anything not yet self-serve."
+      ],
+      "expectedResults": "Fast, self-serve access to subscription and invoice details without needing to file a support request.",
+      "combineWith": [
+        "Pair directly with Billing for the full plan comparison and payment method management.",
+        "Reference Admin → Subscriptions if you administer billing for a full team.",
+        "Cross-check with Admin → Payments for a complete financial picture."
+      ],
+      "scenarios": [
+        "A finance team member pulls invoice history every month-end for expense reconciliation.",
+        "An account owner reviews subscription details a week before their renewal date.",
+        "A manager checks current plan inclusions before requesting an upgrade from their admin."
+      ],
+      "comingSoonNote": "Deeper subscription self-service (like plan-change requests from this page) is coming soon — invoice history access is already live."
+    },
+    "settingsDangerZone": {
+      "title": "Danger Zone",
+      "summary": "Transfer ownership, export your workspace data, or permanently delete the workspace.",
+      "whatItDoes": "Danger Zone contains three high-impact, irreversible-adjacent actions: transferring workspace ownership to another member, exporting all workspace data as a ZIP archive, and permanently deleting the workspace.",
+      "whyYouNeedIt": "Every workspace eventually needs an owner change, a full data export for compliance or migration, or in rare cases, full deletion. These actions are powerful enough to deserve their own clearly separated, deliberate section.",
+      "useCases": [
+        "Transfer ownership when the founding account owner leaves the company.",
+        "Export all workspace data before migrating to a different system.",
+        "Delete a test or duplicate workspace that's no longer needed.",
+        "Satisfy a compliance request for a full data export."
+      ],
+      "bestPractices": [
+        "Confirm the new owner is ready to accept responsibility before initiating a transfer.",
+        "Export data as a backup before making any other high-impact workspace change.",
+        "Double-check you're in the correct workspace before requesting deletion.",
+        "Treat every action in this section as effectively irreversible."
+      ],
+      "commonMistakes": [
+        "Deleting the wrong workspace when managing multiple accounts.",
+        "Transferring ownership without confirming the recipient is prepared to take it on.",
+        "Assuming an export or deletion can be easily undone."
+      ],
+      "workflow": [
+        "Open Settings → Danger Zone.",
+        "For ownership transfer: select the new owner and confirm.",
+        "For data export: confirm the export request and wait for the emailed link.",
+        "For deletion: read the warning carefully and confirm only when certain.",
+        "Treat all three actions with extra caution before confirming."
+      ],
+      "expectedResults": "Full control over the most consequential account-level actions, handled deliberately and separately from routine settings changes.",
+      "combineWith": [
+        "Export data before any Settings → Workspace restructuring.",
+        "Coordinate ownership transfer with Settings → Security review for the new owner.",
+        "Reference Admin → Users if you're managing this at a platform level."
+      ],
+      "scenarios": [
+        "A founder transfers ownership to a co-founder before stepping back from day-to-day operations.",
+        "A compliance officer requests a full data export ahead of an audit.",
+        "A team deletes a leftover test workspace created during initial evaluation."
+      ],
+      "comingSoonNote": "These actions currently record a request rather than executing it immediately — ownership transfer, data export, and workspace deletion are confirmed and processed by the team while the fully automated, instant versions of each flow are finished."
+    },
+    "adminOverview": {
+      "title": "Admin Overview",
+      "summary": "Workspace, billing, and platform health at a glance for platform administrators.",
+      "whatItDoes": "Admin Overview shows platform-wide stats — total users, active users, monthly recurring revenue, active subscriptions — plus a list of recent signups, giving administrators a single-screen view of platform health.",
+      "whyYouNeedIt": "Running the platform requires visibility beyond any single workspace. Admin Overview is the equivalent of the regular Dashboard, but scoped to the entire platform instead of one account.",
+      "useCases": [
+        "Check total and active user counts to gauge platform health at a glance.",
+        "Monitor MRR trends as a leading indicator of business health.",
+        "Review recent signups to spot spikes or unusual patterns.",
+        "Use as the starting point before drilling into Statistics or specific user records."
+      ],
+      "bestPractices": [
+        "Check Admin Overview daily if you're responsible for platform health.",
+        "Cross-reference MRR here with the deeper trend charts in Statistics.",
+        "Investigate any unusual pattern in Recent Signups rather than dismissing it.",
+        "Use View As to see the platform from a specific plan's perspective when debugging a report."
+      ],
+      "commonMistakes": [
+        "Only checking platform health reactively, after a problem is reported.",
+        "Treating Admin Overview's numbers in isolation instead of cross-referencing Statistics.",
+        "Forgetting to switch back from View As mode after debugging."
+      ],
+      "workflow": [
+        "Open Admin → Overview.",
+        "Review total users, active users, MRR, and active subscriptions.",
+        "Scan Recent Signups for anything notable.",
+        "Drill into Statistics, Users, or Subscriptions for more detail.",
+        "Use View As if you need to debug a plan-specific issue."
+      ],
+      "expectedResults": "A fast, reliable read on overall platform health, giving administrators the same instant clarity regular users get from the Dashboard.",
+      "combineWith": [
+        "Drill into Admin → Statistics for trend charts behind these headline numbers.",
+        "Cross-reference Admin → Users for individual account detail.",
+        "Check Admin → Subscriptions for billing-level detail behind MRR."
+      ],
+      "scenarios": [
+        "A platform admin reviews Admin Overview each morning as part of their operational routine.",
+        "An admin notices a spike in Recent Signups and checks Statistics to see if it's a sustained trend.",
+        "An admin uses View As Enterprise to confirm a plan-specific bug report before escalating."
+      ]
+    },
+    "adminUsers": {
+      "title": "Admin: Users",
+      "summary": "Every user across all workspaces on the platform, with role, plan, and status controls.",
+      "whatItDoes": "Admin Users lists every user across every workspace with their role, plan, status, join date, and last active date, and lets administrators activate, suspend, or delete accounts.",
+      "whyYouNeedIt": "Platform administrators need a global view of every account, not just their own workspace, to handle support requests, enforce policy, and manage account lifecycle at scale.",
+      "useCases": [
+        "Suspend an account that's violating platform policy.",
+        "Reactivate a user account after resolving a support issue.",
+        "Check a specific user's plan and last active date while investigating a support ticket.",
+        "Delete a user account per a data-removal request."
+      ],
+      "bestPractices": [
+        "Confirm identity and context carefully before suspending or deleting an account.",
+        "Use last active date to distinguish a churned account from a genuinely inactive one.",
+        "Document the reason for any suspension or deletion outside the tool for audit purposes.",
+        "Reactivate promptly once a support issue is resolved to avoid unnecessary downtime for the user."
+      ],
+      "commonMistakes": [
+        "Deleting an account when suspension would have been the appropriate, reversible action.",
+        "Acting on a user record without confirming it's the correct account first.",
+        "Leaving suspended accounts suspended long after the underlying issue is resolved."
+      ],
+      "workflow": [
+        "Open Admin → Users.",
+        "Search or scan for the relevant user by role, plan, or status.",
+        "Review join date and last active date for context.",
+        "Activate, suspend, or delete the account as appropriate.",
+        "Document the action taken for audit purposes."
+      ],
+      "expectedResults": "Reliable, auditable control over every user account on the platform, supporting both support workflows and policy enforcement.",
+      "combineWith": [
+        "Cross-reference with Admin → Subscriptions for billing context on the same user.",
+        "Check Admin → Payments if a user dispute involves a specific charge.",
+        "Reference Admin → System Logs when investigating unusual account activity."
+      ],
+      "scenarios": [
+        "An admin suspends an account after a policy violation is reported.",
+        "Support reactivates a user's account immediately after a billing issue is resolved.",
+        "An admin processes a data-removal request by deleting the associated user account."
+      ]
+    },
+    "adminSubscriptions": {
+      "title": "Admin: Subscriptions",
+      "summary": "All active and past workspace subscriptions across the platform.",
+      "whatItDoes": "Admin Subscriptions lists every workspace's plan, status, MRR contribution, and renewal date, and lets administrators activate, disable, extend by 30 days, or grant free access.",
+      "whyYouNeedIt": "Subscription issues — a failed renewal, a support-driven extension, a manual override for a partner account — need a fast, direct path that doesn't require going through Stripe or engineering.",
+      "useCases": [
+        "Extend a subscription 30 days as a goodwill gesture after a support issue.",
+        "Grant free access to a partner, pilot, or investor account.",
+        "Disable a subscription tied to a workspace that violated terms.",
+        "Reactivate a subscription after resolving a payment problem."
+      ],
+      "bestPractices": [
+        "Reserve extensions and free access grants for clearly justified cases, and document why.",
+        "Check Admin → Payments before disabling a subscription to understand the full billing context first.",
+        "Communicate with the affected user before disabling, when possible.",
+        "Review MRR impact before granting free access at scale."
+      ],
+      "commonMistakes": [
+        "Granting free access without any record of the justification.",
+        "Disabling a subscription without checking for an in-progress payment resolution.",
+        "Losing track of how many extensions or free grants have accumulated over time."
+      ],
+      "workflow": [
+        "Open Admin → Subscriptions.",
+        "Find the relevant workspace by name, plan, or status.",
+        "Review MRR and renewal date for context.",
+        "Activate, disable, extend, or grant free access as appropriate.",
+        "Document the reason for the action."
+      ],
+      "expectedResults": "Direct, auditable control over every workspace subscription, without needing to go through billing infrastructure directly for routine adjustments.",
+      "combineWith": [
+        "Cross-reference with Admin → Users for the people behind a workspace's subscription.",
+        "Check Admin → Payments for the transaction history behind MRR figures.",
+        "Reference Admin → Statistics to see aggregate subscription trends."
+      ],
+      "scenarios": [
+        "Support extends a subscription 30 days after a billing system issue delayed a renewal.",
+        "An admin grants free access to a pilot customer during an extended evaluation.",
+        "An admin disables a subscription tied to a workspace flagged for a terms-of-service violation."
+      ]
+    },
+    "adminPayments": {
+      "title": "Admin: Payments",
+      "summary": "All payments across every workspace, including manual crypto payment confirmation.",
+      "whatItDoes": "Admin Payments lists every payment across the platform with amount, status, method (Card or Crypto), and date, and lets administrators manually confirm crypto payments by reviewing the transaction hash.",
+      "whyYouNeedIt": "Card payments process automatically, but crypto payments need a human to verify the transaction actually cleared on-chain before granting access. This page is where that verification happens.",
+      "useCases": [
+        "Confirm a crypto payment after verifying its transaction hash on-chain.",
+        "Investigate a payment dispute by reviewing the full transaction record.",
+        "Audit payment methods in use across the platform.",
+        "Cross-check a workspace's payment history during a subscription support case."
+      ],
+      "bestPractices": [
+        "Always verify the transaction hash independently before confirming a crypto payment.",
+        "Cross-reference payment status with Admin → Subscriptions before making manual adjustments.",
+        "Document who confirmed each manual payment for audit purposes — the system already tracks this.",
+        "Investigate any payment marked as failed before assuming it's a customer-side error."
+      ],
+      "commonMistakes": [
+        "Confirming a crypto payment without actually checking the transaction hash on-chain.",
+        "Not cross-referencing a disputed payment with the related subscription record.",
+        "Ignoring a pattern of failed payments that might indicate a systemic billing issue."
+      ],
+      "workflow": [
+        "Open Admin → Payments.",
+        "Filter by method or status as needed.",
+        "For crypto payments, review the transaction hash.",
+        "Click Confirm once the transaction is independently verified.",
+        "Cross-reference with Admin → Subscriptions if access needs to be granted."
+      ],
+      "expectedResults": "A complete, auditable payment record across the whole platform, with crypto payments verified by a human before being treated as settled.",
+      "combineWith": [
+        "Cross-reference with Admin → Subscriptions to grant access after confirming payment.",
+        "Check Admin → Users for the account behind a specific payment.",
+        "Reference Admin → Statistics for aggregate revenue trends."
+      ],
+      "scenarios": [
+        "An admin confirms a crypto payment after independently verifying the transaction hash on a block explorer.",
+        "Support investigates a customer's payment dispute by reviewing their full payment history.",
+        "An admin notices a cluster of failed card payments and flags it as a possible processor issue."
+      ]
+    },
+    "adminStatistics": {
+      "title": "Admin: Statistics",
+      "summary": "Platform-wide growth, revenue, and feature usage trends.",
+      "whatItDoes": "Statistics charts platform growth (users and MRR over time), plan distribution across workspaces, new registrations, annual recurring revenue, paid conversion rate, and the most popular features by usage.",
+      "whyYouNeedIt": "Point-in-time numbers on Admin Overview don't show direction. Statistics gives platform administrators and leadership the trend lines needed to judge whether the business is actually growing healthily.",
+      "useCases": [
+        "Track user and MRR growth trends over time for leadership reporting.",
+        "Review plan distribution to understand which tier the platform is most dependent on.",
+        "Check paid conversion rate to judge how well free users are converting.",
+        "Identify the most popular features to prioritize product investment."
+      ],
+      "bestPractices": [
+        "Review growth trends monthly, not just headline numbers from Admin Overview.",
+        "Cross-reference plan distribution with pricing strategy discussions.",
+        "Use Most Popular Features data to prioritize roadmap and documentation investment.",
+        "Track paid conversion rate over time rather than as a single snapshot."
+      ],
+      "commonMistakes": [
+        "Reading a single month's numbers without checking the trend line.",
+        "Ignoring plan distribution when making pricing decisions.",
+        "Not using feature usage data to inform which Coming Soon tools to prioritize."
+      ],
+      "workflow": [
+        "Open Admin → Statistics.",
+        "Review the Growth chart for user and MRR trends.",
+        "Check Plan Distribution and extra stats (new registrations, ARR, paid conversion rate).",
+        "Review Most Popular Features for product usage signal.",
+        "Report findings to leadership or use them to prioritize roadmap work."
+      ],
+      "expectedResults": "A clear picture of platform trajectory — growth, revenue, and feature adoption — supporting confident business and product decisions.",
+      "combineWith": [
+        "Cross-reference with Admin Overview for the current-moment snapshot behind these trends.",
+        "Use alongside Admin → AI Usage to see which AI tools are driving the most engagement.",
+        "Reference when prioritizing which Coming Soon features to ship next."
+      ],
+      "scenarios": [
+        "Leadership reviews the Growth chart quarterly to assess overall business trajectory.",
+        "A product manager uses Most Popular Features data to decide which AI tool to finish next.",
+        "An admin tracks paid conversion rate after a pricing change to measure its impact."
+      ]
+    },
+    "adminAiUsage": {
+      "title": "Admin: AI Usage",
+      "summary": "How your team is using Nexora's AI-powered tools, tool by tool.",
+      "whatItDoes": "AI Usage tracks total AI calls over the last 30 days, active tools, the most-used tool, a daily call chart for the last 14 days, and a breakdown of usage by specific tool (Website Analyzer, Landing Page Analyzer, Translate Email, Marketing Plan Generator, and others as they launch).",
+      "whyYouNeedIt": "AI tools are core to the product's value, and usage data shows which ones are actually earning their place versus which need improvement or more visibility.",
+      "useCases": [
+        "Identify the most-used AI tool to prioritize related improvements.",
+        "Spot a sudden spike or drop in daily AI calls that might indicate an issue.",
+        "Compare usage across tools to decide which Coming Soon generator to finish next.",
+        "Report AI adoption trends to leadership."
+      ],
+      "bestPractices": [
+        "Check the daily chart for anomalies, not just the 30-day total.",
+        "Cross-reference low-usage tools with documentation quality — sometimes it's a discovery problem, not a value problem.",
+        "Use usage-by-tool data alongside Statistics' Most Popular Features for a fuller picture.",
+        "Watch for adoption trends after any tool ships or changes."
+      ],
+      "commonMistakes": [
+        "Assuming low usage always means low value, without checking discoverability first.",
+        "Only checking the 30-day total and missing a recent daily anomaly.",
+        "Not connecting AI usage data to product or documentation decisions."
+      ],
+      "workflow": [
+        "Open Admin → AI Usage.",
+        "Review total calls, active tools, and the most-used tool.",
+        "Check the daily chart for the last 14 days for anomalies.",
+        "Review usage by tool to compare adoption across the AI Tools suite.",
+        "Use findings to prioritize product or documentation work."
+      ],
+      "expectedResults": "Clear visibility into which AI tools are actually driving engagement, supporting better prioritization of what to fix, promote, or ship next.",
+      "combineWith": [
+        "Cross-reference with Admin → Statistics for platform-wide feature usage.",
+        "Reference specific tools in AI Tools when investigating low adoption.",
+        "Use alongside Admin → System Management if usage limits need adjustment."
+      ],
+      "scenarios": [
+        "A product manager notices Translate Email has low usage and improves its documentation and visibility.",
+        "An admin spots a spike in daily AI calls and confirms it's tied to a marketing campaign, not an error.",
+        "Leadership reviews AI Usage trends to justify continued investment in the AI Tools roadmap."
+      ]
+    },
+    "adminSystemManagement": {
+      "title": "Admin: System Management",
+      "summary": "Pricing, plan limits, feature toggles, and system health in one control panel.",
+      "whatItDoes": "System Management lets administrators configure per-plan pricing and limits (lead search limit, campaign limit, AI tool limit, seats limit), toggle feature flags, and monitor system information (app version, environment, node version, uptime, database status) and database/platform health (memory usage, error count, and row counts by table).",
+      "whyYouNeedIt": "Running a multi-tenant platform means pricing and limits change over time, features need to be rolled out gradually, and system health needs to be visible without SSHing into a server. This page centralizes all of it.",
+      "useCases": [
+        "Adjust a plan's lead search or campaign limit as pricing strategy evolves.",
+        "Toggle a feature flag to gradually roll out a new capability.",
+        "Check database status and error count when investigating a reported issue.",
+        "Monitor uptime and memory usage as part of routine platform health checks."
+      ],
+      "bestPractices": [
+        "Change plan limits deliberately and communicate changes that affect existing customers.",
+        "Use feature flags for gradual rollouts rather than shipping directly to 100% of users.",
+        "Check Database & Platform Health regularly, not just when something is already broken.",
+        "Cross-reference error counts here with Admin → System Logs for detail on what's actually failing."
+      ],
+      "commonMistakes": [
+        "Changing plan limits without considering the impact on existing subscribers.",
+        "Leaving feature flags on indefinitely instead of cleaning them up after a full rollout.",
+        "Only checking system health reactively, after a user reports a problem."
+      ],
+      "workflow": [
+        "Open Admin → System Management.",
+        "Adjust plan pricing or limits as needed and save changes.",
+        "Toggle feature flags for gradual rollouts.",
+        "Review System Information for version, environment, and uptime.",
+        "Check Database & Platform Health for memory usage, errors, and row counts."
+      ],
+      "expectedResults": "Centralized, direct control over pricing, feature rollout, and platform health, without needing engineering involvement for routine configuration changes.",
+      "combineWith": [
+        "Cross-reference plan limit changes with Admin → Statistics' plan distribution.",
+        "Check Admin → System Logs for the detailed errors behind the health summary here.",
+        "Reference Admin → Website Settings for platform-wide configuration beyond pricing and limits."
+      ],
+      "scenarios": [
+        "An admin raises the Pro plan's lead search limit after a pricing strategy review.",
+        "A team gradually rolls out a new AI tool using a feature flag before making it generally available.",
+        "An admin checks database status and error count after a user reports intermittent slowness."
+      ]
+    },
+    "adminWebsiteSettings": {
+      "title": "Admin: Website Settings",
+      "summary": "Global settings for the Nexora marketing site and app, including SEO metadata and maintenance mode.",
+      "whatItDoes": "Website Settings lets administrators configure the site name, support email, maintenance mode, and SEO metadata (meta title and description) that apply platform-wide.",
+      "whyYouNeedIt": "Some settings apply to the entire platform rather than a single workspace — the public-facing site name, the support contact shown to all users, and whether the platform is in maintenance mode.",
+      "useCases": [
+        "Enable maintenance mode during a planned migration to block new sign-ups temporarily.",
+        "Update the support email shown across the platform after a team change.",
+        "Refresh SEO meta title and description ahead of a rebrand or marketing push.",
+        "Confirm the site name is correct after any branding update."
+      ],
+      "bestPractices": [
+        "Schedule maintenance mode during low-traffic windows and communicate it in advance.",
+        "Keep the support email current — it's often the only contact path users see.",
+        "Review SEO metadata whenever positioning or branding changes materially.",
+        "Test changes in a staging context before enabling maintenance mode in production, if possible."
+      ],
+      "commonMistakes": [
+        "Enabling maintenance mode without warning during business hours.",
+        "Letting the support email go stale after a team or process change.",
+        "Forgetting to update SEO metadata after a rebrand, leaving outdated messaging in search results."
+      ],
+      "workflow": [
+        "Open Admin → Website Settings.",
+        "Update site name and support email under General.",
+        "Toggle maintenance mode if a planned outage or migration requires it.",
+        "Update meta title and description under SEO.",
+        "Click Save changes."
+      ],
+      "expectedResults": "Platform-wide configuration that stays accurate and current, from the support contact users see to how the site appears in search results.",
+      "combineWith": [
+        "Coordinate maintenance mode timing with Admin → System Management's platform health data.",
+        "Cross-reference support email changes with your team's actual support workflow.",
+        "Reference Website Creation if a broader site redesign is in progress."
+      ],
+      "scenarios": [
+        "An admin enables maintenance mode overnight during a planned database migration.",
+        "A team updates the support email after moving support to a new address.",
+        "A marketer refreshes SEO meta title and description ahead of a rebrand launch."
+      ]
+    },
+    "adminPromoCodes": {
+      "title": "Admin: Promo Codes",
+      "summary": "Create and manage discount codes for Nexora plans.",
+      "whatItDoes": "Promo Codes lets administrators create discount codes with a percentage discount and expiration, track redemptions, and delete codes that are no longer active.",
+      "whyYouNeedIt": "Promotions, partner discounts, and win-back offers all need a controlled way to grant a discount without manually adjusting individual subscriptions.",
+      "useCases": [
+        "Create a limited-time discount code for a marketing promotion.",
+        "Issue a partner-specific code with a set expiration date.",
+        "Track redemptions to measure a promotion's actual uptake.",
+        "Delete an expired or misused code."
+      ],
+      "bestPractices": [
+        "Set a clear expiration date on every promotional code to avoid indefinite discounting.",
+        "Use descriptive, memorable codes (like SUMMER25) so they're easy to communicate and track.",
+        "Monitor redemption counts during a live promotion to gauge its performance in real time.",
+        "Delete codes promptly once a promotion ends to prevent unintended late redemptions."
+      ],
+      "commonMistakes": [
+        "Creating a code with no expiration and forgetting about it indefinitely.",
+        "Not tracking redemptions, missing the chance to measure a promotion's actual effectiveness.",
+        "Leaving expired codes active and confusing customers who try to redeem them."
+      ],
+      "workflow": [
+        "Click Create Promo Code.",
+        "Set the code, discount percentage, and expiration.",
+        "Monitor redemptions as the promotion runs.",
+        "Delete the code once the promotion ends or it's no longer needed.",
+        "Review redemption data to evaluate the promotion afterward."
+      ],
+      "expectedResults": "A controlled, trackable way to run discount promotions, with clear visibility into how many customers actually redeemed each code.",
+      "combineWith": [
+        "Cross-reference redemptions with Admin → Subscriptions to see resulting plan changes.",
+        "Reference Admin → Statistics to measure a promotion's impact on new registrations.",
+        "Coordinate with Billing plan pricing when setting discount percentages."
+      ],
+      "scenarios": [
+        "A marketer creates a SUMMER25 code for a seasonal campaign and tracks redemptions daily.",
+        "An admin issues a partner-specific promo code with a fixed expiration for a co-marketing deal.",
+        "A team deletes a promo code the day after a limited-time promotion ends."
+      ]
+    },
+    "adminSystemLogs": {
+      "title": "Admin: System Logs",
+      "summary": "Recent events emitted across every Nexora service, filterable by severity.",
+      "whatItDoes": "System Logs shows a filterable feed (All, Info, Warn, Error) of platform events with level, message, source, and timestamp, giving administrators visibility into what's actually happening across services.",
+      "whyYouNeedIt": "When something goes wrong, System Logs is often the fastest way to understand what actually happened and where, without needing direct server or database access.",
+      "useCases": [
+        "Filter to Error level immediately after a user reports unexpected behavior.",
+        "Review Warn-level logs to catch issues before they become user-facing errors.",
+        "Trace which service (source) is generating repeated errors.",
+        "Cross-reference log timestamps with a reported incident to narrow down the cause."
+      ],
+      "bestPractices": [
+        "Check Error-level logs regularly, not only after a user report.",
+        "Use the source column to identify whether an issue is isolated to one service.",
+        "Cross-reference timestamps with Admin → System Management's error count for a fuller picture.",
+        "Treat a rising Warn-level trend as an early signal before it becomes an Error."
+      ],
+      "commonMistakes": [
+        "Only reviewing logs reactively after something visibly breaks.",
+        "Ignoring Warn-level entries until they escalate to Error.",
+        "Not cross-referencing the source field, making it harder to isolate which service is at fault."
+      ],
+      "workflow": [
+        "Open Admin → System Logs.",
+        "Filter by level — All, Info, Warn, or Error.",
+        "Review message, source, and time for relevant entries.",
+        "Cross-reference with a reported incident's timestamp if investigating a specific issue.",
+        "Escalate to engineering with specific log entries as evidence."
+      ],
+      "expectedResults": "Fast, filterable visibility into platform events, cutting the time it takes to diagnose an issue from a user report to a root cause.",
+      "combineWith": [
+        "Cross-reference with Admin → System Management's error count and database health.",
+        "Reference when investigating a specific user's issue alongside Admin → Users.",
+        "Use alongside Admin → AI Usage if an AI tool is behaving unexpectedly."
+      ],
+      "scenarios": [
+        "An admin filters to Error level right after a support ticket reports a broken page.",
+        "Engineering traces a repeated warning to a specific service and fixes it before it becomes a user-facing error.",
+        "An admin cross-references a log timestamp with a user's reported incident time to confirm the root cause."
+      ]
+    }
+  }
+}

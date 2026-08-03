@@ -34,7 +34,8 @@
     "notifications": "Уведомления",
     "help": "Помощь",
     "aiToolsOverview": "AI-инструменты",
-    "websiteCreation": "Создание сайтов"
+    "websiteCreation": "Создание сайтов",
+    "documentation": "Документация"
   },
   "admin": {
     "group": "Админ",

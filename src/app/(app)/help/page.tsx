@@ -20,7 +20,7 @@ export const metadata: Metadata = { title: "Help" };
 const faqKeys = ["findLeads", "aiEmailGenerator", "inviteTeammates", "cancelSubscription", "apiKeys"] as const;
 
 const resources = [
-  { icon: BookOpen, key: "documentation" },
+  { icon: BookOpen, key: "documentation", href: "/help/docs" },
   { icon: MessageCircle, key: "community" },
   { icon: LifeBuoy, key: "contactSupport", href: "/contact" },
 ] as const;

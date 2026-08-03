@@ -147,4 +147,5 @@ export const commandPaletteNav: NavItem[] = [
   ...mainNav.flatMap((group) => group.items),
   aiToolsOverviewLink,
   { titleKey: "nav.items.help", href: "/help", icon: Bot },
+  { titleKey: "nav.items.documentation", href: "/help/docs", icon: FileText },
 ];
