@@ -38,6 +38,7 @@ export const namespaces = [
   "settings",
   "errors",
   "onboarding",
+  "personalization",
   "support",
   "aiAssistant",
   "websiteCreation",

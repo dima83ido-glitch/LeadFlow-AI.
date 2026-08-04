@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, email, password } = parsed.data;
+  const { name, email, password, hasExistingBusiness, businessType } = parsed.data;
 
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) {
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     select: { id: true, name: true, email: true, role: true },
   });
 
-  await ensureWorkspaceForUser(user.id);
+  await ensureWorkspaceForUser(user.id, { hasExistingBusiness, businessType });
 
   return NextResponse.json({ user }, { status: 201 });
 }

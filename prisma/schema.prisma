@@ -67,6 +67,15 @@ model Workspace {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Onboarding: captured once at registration. `null` means the question
+  // was never answered (workspaces created before this feature existed).
+  hasExistingBusiness Boolean?
+  businessType        String?
+  // Cached AI-generated recommendations for `businessType` (traffic
+  // sources, automations, tips, suggested content) — generated once on
+  // first dashboard visit and reused after that, not regenerated per view.
+  personalization     Json?
+
   users          User[]
   leads          Lead[]
   companies      Company[]

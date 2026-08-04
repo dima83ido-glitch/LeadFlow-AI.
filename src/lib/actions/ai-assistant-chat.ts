@@ -3,6 +3,7 @@
 import { getLocale } from "next-intl/server";
 import type OpenAI from "openai";
 
+import { prisma } from "@/lib/db";
 import { requireWorkspace } from "@/lib/workspace";
 import { getOpenAIClientSafe, AI_MODEL } from "@/lib/ai/client";
 import { buildAssistantSystemPrompt } from "@/lib/ai/prompts";
@@ -31,7 +32,15 @@ export async function sendAssistantMessage(
   if ("error" in clientResult) return { ok: false, errorCode: clientResult.error };
 
   const locale = await getLocale();
-  const systemPrompt = buildAssistantSystemPrompt(locale);
+  const workspace = await prisma.workspace.findUnique({
+    where: { id: workspaceId },
+    select: { hasExistingBusiness: true, businessType: true },
+  });
+  const businessContext =
+    workspace?.hasExistingBusiness === null || workspace?.hasExistingBusiness === undefined
+      ? null
+      : { hasExistingBusiness: workspace.hasExistingBusiness, businessType: workspace.businessType };
+  const systemPrompt = buildAssistantSystemPrompt(locale, businessContext);
   const tools = getAssistantOpenAiTools();
 
   const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [

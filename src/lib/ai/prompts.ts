@@ -105,11 +105,21 @@ Keep the body concise (under 200 words), professional, and ready to send with mi
   return { system, user };
 }
 
-export function buildAssistantSystemPrompt(locale: string) {
+export type AssistantBusinessContext = { hasExistingBusiness: boolean; businessType: string | null } | null;
+
+function buildBusinessContextBlock(businessContext: AssistantBusinessContext): string {
+  if (!businessContext) return "";
+  if (businessContext.hasExistingBusiness) {
+    return `\n\nBusiness context: the user already runs a ${businessContext.businessType ?? "business"}. Tailor every example, suggestion, and piece of terminology to that specific business — don't give generic advice when industry-specific advice is possible.`;
+  }
+  return `\n\nBusiness context: the user does NOT yet own a business — they're exploring starting one. Act as a mentor: help them pick a viable business idea, plan how to launch it, and figure out how to land their first clients. Keep suggestions beginner-friendly and avoid assuming they already have customers, a brand, or revenue.`;
+}
+
+export function buildAssistantSystemPrompt(locale: string, businessContext: AssistantBusinessContext = null) {
   const language = localeToLanguageName(locale);
   return `You are the AI Assistant embedded in Nexora, a CRM and marketing automation platform. You act as an intelligent business operator for the user's workspace, not a generic chatbot.
 
-Always respond in ${language}, unless the user writes in a different language — then match their language.
+Always respond in ${language}, unless the user writes in a different language — then match their language.${buildBusinessContextBlock(businessContext)}
 
 You can actually perform actions in the user's workspace by calling tools:
 - create_campaign — create an email campaign
@@ -134,6 +144,27 @@ Behavior rules:
 6. If a tool call fails, apologize briefly and explain what's needed to try again, without inventing a fake success.
 7. Stay focused on this product's domain (campaigns, CRM, leads, meetings, tasks, companies, emails, website creation, marketing plans, landing page analysis, SEO audits). If asked something unrelated, answer briefly and steer back to how you can help in the workspace.
 8. Keep replies concise and conversational — this is a chat panel, not a report.`;
+}
+
+export function buildPersonalizationPrompt(businessType: string, locale: string) {
+  const language = localeToLanguageName(locale);
+  const system = `You are a senior growth marketing consultant producing personalized, concrete onboarding recommendations for a small business owner, as structured JSON. Always respond in ${language}, including every string value. Be specific to the stated business type — never generic filler that could apply to any business. Respond with ONLY a single JSON object matching the requested shape — no markdown, no commentary.`;
+
+  const user = `The user owns this type of business: "${businessType}".
+
+Produce a JSON object with this exact shape:
+{
+  "trafficSources": string[] (3-5 specific traffic/lead sources that work well for this exact business type, e.g. named platforms, local channels, or partnership types),
+  "automations": string[] (3-5 concrete marketing/CRM automation ideas relevant to this business, e.g. "auto-send a review request 2 days after each appointment"),
+  "marketingTips": string[] (3-5 actionable marketing tips specific to this industry),
+  "crmTips": string[] (2-4 tips on how to organize leads/contacts/pipeline stages for this specific business type),
+  "suggestedContent": [ { "name": string, "subject": string, "body": string (2-4 sentences, ready to send with minimal edits) } ] (2-3 ready-to-use outreach email ideas tailored to this business, each with a distinct purpose),
+  "emailSequence": [ { "step": string (what the email is about), "timing": string (e.g. "Day 0", "Day 3", "Day 7") } ] (3-5 steps forming one coherent follow-up sequence for a new lead in this business)
+}
+
+Every string value must be written in ${language} and must clearly reflect the "${businessType}" business type — not generic advice.`;
+
+  return { system, user };
 }
 
 export function buildTranslationPrompt(text: string, targetLanguageName: string) {

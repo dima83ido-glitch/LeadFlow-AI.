@@ -12,6 +12,7 @@ export async function createCampaign(input: {
   name: string;
   subject?: string;
   status?: CampaignStatus;
+  templateId?: string;
 }): Promise<ActionResult> {
   try {
     const { workspaceId } = await requireWorkspace();
@@ -23,6 +24,7 @@ export async function createCampaign(input: {
         name: input.name.trim(),
         subject: input.subject?.trim() || null,
         status: input.status ?? "DRAFT",
+        templateId: input.templateId || null,
       },
     });
 

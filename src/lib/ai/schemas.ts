@@ -64,6 +64,32 @@ export const emailDraftResultSchema = z.object({
 export type EmailDraftResult = z.infer<typeof emailDraftResultSchema>;
 
 // ---------------------------------------------------------------------------
+// Onboarding personalization
+// ---------------------------------------------------------------------------
+
+const suggestedContentSchema = z.object({
+  name: z.string(),
+  subject: z.string(),
+  body: z.string(),
+});
+
+const emailSequenceStepSchema = z.object({
+  step: z.string(),
+  timing: z.string(),
+});
+
+export const personalizationResultSchema = z.object({
+  trafficSources: z.array(z.string()).min(3).max(5),
+  automations: z.array(z.string()).min(3).max(5),
+  marketingTips: z.array(z.string()).min(3).max(5),
+  crmTips: z.array(z.string()).min(2).max(4),
+  suggestedContent: z.array(suggestedContentSchema).min(2).max(3),
+  emailSequence: z.array(emailSequenceStepSchema).min(3).max(5),
+});
+
+export type PersonalizationResult = z.infer<typeof personalizationResultSchema>;
+
+// ---------------------------------------------------------------------------
 // AI Marketing Plan Generator
 // ---------------------------------------------------------------------------
 

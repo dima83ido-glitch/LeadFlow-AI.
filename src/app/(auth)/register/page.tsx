@@ -23,6 +23,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function RegisterPage() {
         nameMin: tv("nameMin"),
         termsRequired: tv("termsRequired"),
         passwordsDoNotMatch: tv("passwordsDoNotMatch"),
+        businessTypeRequired: tv("businessTypeRequired"),
       }),
     [tv],
   );
@@ -121,6 +123,43 @@ export default function RegisterPage() {
               />
               <FieldError errors={[errors.confirmPassword]} />
             </Field>
+            <Field>
+              <FieldLabel>{t("businessQuestion.label")}</FieldLabel>
+              <RadioGroup
+                className="grid-cols-2"
+                value={watch("hasExistingBusiness") === true ? "yes" : watch("hasExistingBusiness") === false ? "no" : ""}
+                onValueChange={(value) => {
+                  const hasBusiness = value === "yes";
+                  setValue("hasExistingBusiness", hasBusiness);
+                  if (!hasBusiness) setValue("businessType", "");
+                }}
+              >
+                <Field orientation="horizontal">
+                  <RadioGroupItem id="hasBusinessYes" value="yes" />
+                  <FieldLabel htmlFor="hasBusinessYes" className="font-normal">
+                    {t("businessQuestion.yes")}
+                  </FieldLabel>
+                </Field>
+                <Field orientation="horizontal">
+                  <RadioGroupItem id="hasBusinessNo" value="no" />
+                  <FieldLabel htmlFor="hasBusinessNo" className="font-normal">
+                    {t("businessQuestion.no")}
+                  </FieldLabel>
+                </Field>
+              </RadioGroup>
+              <FieldError errors={[errors.hasExistingBusiness]} />
+            </Field>
+            {watch("hasExistingBusiness") === true && (
+              <Field>
+                <FieldLabel htmlFor="businessType">{t("businessTypeLabel")}</FieldLabel>
+                <Input
+                  id="businessType"
+                  placeholder={t("businessTypePlaceholder")}
+                  {...register("businessType")}
+                />
+                <FieldError errors={[errors.businessType]} />
+              </Field>
+            )}
             <Field orientation="horizontal">
               <Checkbox
                 id="acceptTerms"

@@ -1,0 +1,62 @@
+{
+  "dashboard": {
+    "businessTitle": "Recommended for your business",
+    "businessSubtitle": "AI-generated recommendations for a \"{businessType}\" business, generated once and saved to your workspace.",
+    "beginnerTitle": "Getting started",
+    "beginnerSubtitle": "You haven't started a business yet — here's your beginner playbook.",
+    "trafficSources": "Recommended traffic sources",
+    "automations": "Recommended automations",
+    "marketingTips": "Marketing tips",
+    "crmTips": "CRM recommendations",
+    "suggestedContent": "Suggested campaigns & templates",
+    "useThis": "Use this",
+    "usedToast": "Added to your Templates and Campaigns as a draft",
+    "useError": "Couldn't apply this suggestion. Please try again.",
+    "emailSequence": "Suggested email sequence",
+    "generating": "Personalizing your dashboard for your business...",
+    "unavailable": "Personalized recommendations aren't available right now — AI features aren't configured.",
+    "businessIdeasTitle": "Business ideas to consider",
+    "firstClientsTitle": "How to get your first clients",
+    "launchStepsTitle": "How to launch",
+    "learningPathTitle": "Learning path",
+    "recommendedAutomationsTitle": "Recommended first automations"
+  },
+  "beginner": {
+    "businessIdeas": [
+      { "name": "Dental clinic", "description": "Recurring local demand and high per-patient value make this a stable, referral-driven practice." },
+      { "name": "Construction company", "description": "Large project values and long-term client relationships, especially with repeat commercial clients." },
+      { "name": "Law firm", "description": "High-trust, high-margin services; a strong niche (e.g. immigration, real estate law) speeds up growth." },
+      { "name": "Restaurant", "description": "Fast customer feedback loops and strong local word-of-mouth if the food and experience are right." },
+      { "name": "Marketing agency", "description": "Low startup cost, scalable with skill, and every other business on this list is a potential client." },
+      { "name": "Real estate", "description": "Commission-based upside with strong network effects — each happy client refers more." },
+      { "name": "Funeral services", "description": "Recession-resistant, consistent demand, and relationship/trust-driven rather than price-driven." },
+      { "name": "Car dealership", "description": "High transaction value with recurring revenue from service and financing relationships." },
+      { "name": "Gym", "description": "Predictable recurring membership revenue once you pass the initial member-acquisition hump." }
+    ],
+    "firstClientsTips": [
+      "Start with people who already know and trust you — friends, family, and your existing network — before spending on ads.",
+      "Offer a small, low-risk first engagement (a free consultation, trial, or starter package) to remove the barrier to a first \"yes\".",
+      "Ask every first client for a review or referral immediately after a good experience — don't wait weeks.",
+      "Show up where your future clients already are (a local Facebook group, an industry forum, a neighborhood app) instead of waiting for them to find you."
+    ],
+    "launchSteps": [
+      { "step": "Validate the idea", "description": "Talk to 10 potential customers before building anything — confirm they'd actually pay for this." },
+      { "step": "Set up the basics", "description": "A simple website, a business email, and a way to accept payment — done in days, not months." },
+      { "step": "Land your first 3 clients", "description": "Go direct — outreach, your network, local groups — rather than waiting on inbound traffic." },
+      { "step": "Systemize what worked", "description": "Once you have a repeatable way to get a client, turn it into a simple, repeatable process." },
+      { "step": "Reinvest into growth", "description": "Put a fixed share of early revenue back into the channel that brought your best clients." }
+    ],
+    "recommendedAutomations": [
+      "An automatic welcome email/reply the moment a new lead reaches out, so no one waits on you.",
+      "A scheduled follow-up reminder task for any lead who hasn't replied in 3 days.",
+      "A simple pipeline in the CRM with stages for New → Contacted → Proposal Sent → Won, so nothing falls through the cracks."
+    ],
+    "learningPath": [
+      { "title": "Find and qualify leads", "description": "Learn how to search and filter leads before you spend money reaching out.", "slug": "leads" },
+      { "title": "Run your first campaign", "description": "Set up an outreach campaign to your first batch of leads.", "slug": "campaigns" },
+      { "title": "Use email templates", "description": "Save time with reusable templates instead of writing every email from scratch.", "slug": "templates" },
+      { "title": "Track deals in the CRM pipeline", "description": "See every prospective client's stage at a glance.", "slug": "crmPipeline" },
+      { "title": "Explore the AI tools", "description": "Generate marketing plans, analyze websites, and more.", "slug": "aiToolsOverview" }
+    ]
+  }
+}

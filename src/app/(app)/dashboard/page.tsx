@@ -2,16 +2,19 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { prisma } from "@/lib/db";
-import { requireWorkspace } from "@/lib/workspace";
+import { getCurrentWorkspaceRecord, requireWorkspace } from "@/lib/workspace";
 import {
   getDashboardStats,
   getRecentActivity,
   getRecentCampaigns,
   getWorkspaceOverview,
 } from "@/lib/dashboard/queries";
+import { generatePersonalization } from "@/lib/actions/ai-personalization";
+import type { PersonalizationResult } from "@/lib/ai/schemas";
 import { Separator } from "@/components/ui/separator";
 import { SupportButton } from "@/components/shared/support-button";
 import { DashboardHero } from "@/components/dashboard/dashboard-hero";
+import { PersonalizationPanel } from "@/components/dashboard/personalization-panel";
 import { PlatformGuide } from "@/components/dashboard/platform-guide";
 import { QuickActions } from "@/components/dashboard/quick-actions";
 import { RecentActivity } from "@/components/dashboard/recent-activity";
@@ -23,6 +26,18 @@ export const metadata: Metadata = { title: "Dashboard" };
 export default async function DashboardPage() {
   const t = await getTranslations("dashboard");
   const { workspaceId, userId, workspaceRole } = await requireWorkspace();
+  const workspaceRecord = await getCurrentWorkspaceRecord();
+
+  let personalization = workspaceRecord.personalization as PersonalizationResult | null;
+  let personalizationUnavailable = false;
+  if (workspaceRecord.hasExistingBusiness && workspaceRecord.businessType && !personalization) {
+    const result = await generatePersonalization(workspaceRecord.businessType);
+    if (result.ok) {
+      personalization = result.data;
+    } else {
+      personalizationUnavailable = true;
+    }
+  }
 
   const [user, overview, stats, activity, campaigns] = await Promise.all([
     prisma.user.findUnique({
@@ -52,6 +67,13 @@ export default async function DashboardPage() {
       <Separator />
 
       <PlatformGuide overview={overview} profileCompleteness={profileCompleteness} />
+
+      <PersonalizationPanel
+        hasExistingBusiness={workspaceRecord.hasExistingBusiness}
+        businessType={workspaceRecord.businessType}
+        personalization={personalization}
+        personalizationUnavailable={personalizationUnavailable}
+      />
 
       <Separator />
 

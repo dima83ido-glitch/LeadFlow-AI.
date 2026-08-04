@@ -17,10 +17,16 @@ export const registerSchema = z
     acceptTerms: z.boolean().refine((value) => value === true, {
       error: "You must accept the terms to continue",
     }),
+    hasExistingBusiness: z.boolean(),
+    businessType: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
+  })
+  .refine((data) => !data.hasExistingBusiness || Boolean(data.businessType?.trim()), {
+    message: "Tell us what business you own",
+    path: ["businessType"],
   });
 
 export const forgotPasswordSchema = z.object({
@@ -37,6 +43,7 @@ type AuthValidationMessages = {
   nameMin: string;
   termsRequired: string;
   passwordsDoNotMatch: string;
+  businessTypeRequired?: string;
 };
 
 export function createLoginSchema(t: AuthValidationMessages) {
@@ -56,10 +63,16 @@ export function createRegisterSchema(t: AuthValidationMessages) {
       acceptTerms: z.boolean().refine((value) => value === true, {
         error: t.termsRequired,
       }),
+      hasExistingBusiness: z.boolean(),
+      businessType: z.string().optional(),
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: t.passwordsDoNotMatch,
       path: ["confirmPassword"],
+    })
+    .refine((data) => !data.hasExistingBusiness || Boolean(data.businessType?.trim()), {
+      message: t.businessTypeRequired ?? "Tell us what business you own",
+      path: ["businessType"],
     });
 }
 
