@@ -100,14 +100,33 @@ async function assertPublicHost(hostname: string): Promise<{ ok: true } | { ok: 
   }
 }
 
+/**
+ * The `(?:<\/script>|$)` / `(?:>|$)` fallbacks matter because the response
+ * can be cut off mid-tag by the `MAX_BYTES` cap below — without a "or end
+ * of string" escape, an unclosed `<script>` left dangling by truncation
+ * would never match its (missing) closing tag, and the raw JS inside it
+ * would leak straight into the "visible text" the AI is asked to analyze
+ * (confirmed against a real page: linear.app's inline theme-init script
+ * landed exactly at the truncation boundary and leaked verbatim).
+ */
 function stripHtml(html: string): string {
   return html
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ")
+    .replace(/<script[\s\S]*?(?:<\/script>|$)/gi, " ")
+    .replace(/<style[\s\S]*?(?:<\/style>|$)/gi, " ")
+    .replace(/<[^>]*(?:>|$)/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
+
+// Below this many characters of extracted visible text, a page has either
+// failed to render meaningfully (a client-rendered SPA shell with no
+// server-side HTML — confirmed against real sites: linear.app serves only
+// its <title> server-side, 43 chars once scripts are correctly stripped)
+// or is otherwise not worth analyzing. Handing the AI almost nothing
+// produces a fabricated-feeling report built mostly from the title/URL,
+// which isn't a "real" analysis. 60 sits above that confirmed-garbage case
+// and below a confirmed-legitimate minimal page (example.com, 142 chars).
+const MIN_TEXT_LENGTH = 60;
 
 /**
  * Fetches `startUrl`, manually following redirects (rather than letting
@@ -127,7 +146,12 @@ async function safeFetch(
     const response = await fetch(currentUrl.toString(), {
       signal,
       redirect: "manual",
-      headers: { "User-Agent": "NexoraAI-WebsiteAnalyzer/1.0" },
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (compatible; NexoraAI-WebsiteAnalyzer/1.0; +https://nexora.ai/website-analyzer)",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+      },
     });
 
     const isRedirect = response.status >= 300 && response.status < 400;
@@ -169,8 +193,10 @@ export async function fetchPageSignals(rawUrl: string): Promise<FetchPageResult>
       // 401/403/429 from the target almost always means bot/WAF protection
       // rejected our request, not that the URL is wrong — surface that
       // distinction so the user isn't told to "check the URL" for a page
-      // that loads fine in a real browser.
-      if (response.status === 401 || response.status === 403 || response.status === 429) {
+      // that loads fine in a real browser. 503 is included too: several
+      // common bot-mitigation layers (rate limiters, JS-challenge
+      // middleware) return 503 for suspected-bot traffic rather than 403.
+      if ([401, 403, 429, 503].includes(response.status)) {
         return { ok: false, errorCode: "FETCH_BLOCKED" };
       }
       return { ok: false, errorCode: "FETCH_FAILED" };
@@ -196,6 +222,10 @@ export async function fetchPageSignals(rawUrl: string): Promise<FetchPageResult>
     const descMatch = received.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i);
     const viewportMatch = /<meta[^>]+name=["']viewport["']/i.test(received);
     const text = stripHtml(received).slice(0, 4000);
+
+    if (text.length < MIN_TEXT_LENGTH) {
+      return { ok: false, errorCode: "INSUFFICIENT_CONTENT" };
+    }
 
     return {
       ok: true,
