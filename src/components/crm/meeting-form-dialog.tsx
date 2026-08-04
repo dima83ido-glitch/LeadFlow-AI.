@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { createMeeting, updateMeeting } from "@/lib/actions/meetings";
+import type { MeetingType } from "@/generated/prisma/enums";
+import { localDateTimeToUtcIso } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,9 +20,17 @@ import {
 } from "@/components/ui/dialog";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface MeetingFormValues {
   title: string;
+  type: MeetingType;
   startTime: string;
   location: string;
 }
@@ -28,6 +38,7 @@ interface MeetingFormValues {
 export interface MeetingFormDialogMeeting {
   id: string;
   title: string;
+  type?: MeetingType;
   startTime: string;
   location?: string;
 }
@@ -49,6 +60,7 @@ export function MeetingFormDialog({
 }) {
   const t = useTranslations("crm.meetings.scheduleDialog");
   const tMeeting = useTranslations("crm.meetings");
+  const tType = useTranslations("crm.meetings.type");
   const tc = useTranslations("common");
   const router = useRouter();
   const isEdit = Boolean(meeting);
@@ -58,10 +70,13 @@ export function MeetingFormDialog({
     register,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<MeetingFormValues>({
     defaultValues: {
       title: meeting?.title ?? "",
+      type: meeting?.type ?? "MEETING",
       startTime: meeting ? toLocalInputValue(meeting.startTime) : "",
       location: meeting?.location ?? "",
     },
@@ -71,6 +86,7 @@ export function MeetingFormDialog({
     if (open) {
       reset({
         title: meeting?.title ?? "",
+        type: meeting?.type ?? "MEETING",
         startTime: meeting ? toLocalInputValue(meeting.startTime) : "",
         location: meeting?.location ?? "",
       });
@@ -80,9 +96,10 @@ export function MeetingFormDialog({
 
   async function onSubmit(values: MeetingFormValues) {
     setIsSubmitting(true);
+    const payload = { ...values, startTime: localDateTimeToUtcIso(values.startTime) };
     const result = isEdit
-      ? await updateMeeting(meeting!.id, values)
-      : await createMeeting(values);
+      ? await updateMeeting(meeting!.id, payload)
+      : await createMeeting(payload);
     setIsSubmitting(false);
 
     if (result.ok) {
@@ -98,6 +115,8 @@ export function MeetingFormDialog({
       toast.error(tc("genericErrorToast"));
     }
   }
+
+  const type = watch("type");
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -117,6 +136,19 @@ export function MeetingFormDialog({
                   {...register("title", { required: t("titleRequired") })}
                 />
                 <FieldError errors={[errors.title]} />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="type">{t("typeLabel")}</FieldLabel>
+                <Select value={type} onValueChange={(value) => value && setValue("type", value as MeetingType)}>
+                  <SelectTrigger id="type" className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="MEETING">{tType("MEETING")}</SelectItem>
+                    <SelectItem value="CALL">{tType("CALL")}</SelectItem>
+                    <SelectItem value="EVENT">{tType("EVENT")}</SelectItem>
+                  </SelectContent>
+                </Select>
               </Field>
               <Field>
                 <FieldLabel htmlFor="startTime">{t("dateTimeLabel")}</FieldLabel>

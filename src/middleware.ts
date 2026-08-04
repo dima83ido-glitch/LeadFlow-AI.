@@ -84,7 +84,10 @@ function forbiddenResponse(request: Request) {
 export default auth((req) => {
   const { pathname } = req.nextUrl;
 
-  if (PUBLIC_PATHS.has(pathname) || pathname.startsWith("/api/auth")) {
+  // Cron-triggered routes have no session — they authenticate themselves via
+  // a bearer secret (see src/app/api/cron/reminders/route.ts) — so they must
+  // bypass the session redirect below entirely rather than bounce to /login.
+  if (PUBLIC_PATHS.has(pathname) || pathname.startsWith("/api/auth") || pathname.startsWith("/api/cron/")) {
     return NextResponse.next();
   }
 

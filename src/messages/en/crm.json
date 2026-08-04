@@ -96,6 +96,11 @@
     "deleteConfirm": "Delete meeting",
     "deletedToast": "\"{title}\" was deleted.",
     "updatedToast": "\"{title}\" was updated.",
+    "type": {
+      "MEETING": "Meeting",
+      "CALL": "Call",
+      "EVENT": "Event"
+    },
     "scheduleDialog": {
       "trigger": "Schedule Meeting",
       "title": "Schedule Meeting",
@@ -105,6 +110,7 @@
       "titleLabel": "Title",
       "titlePlaceholder": "e.g. Discovery Call",
       "titleRequired": "Title is required",
+      "typeLabel": "Type",
       "dateTimeLabel": "Date & time",
       "dateTimeRequired": "Date and time are required",
       "locationLabel": "Location",
@@ -157,6 +163,7 @@
       "contactLabel": "Contact",
       "contactPlaceholder": "No contact",
       "closeDateLabel": "Expected close date",
+      "closeTimeLabel": "Close time",
       "submit": "Add Deal",
       "successToast": "{title} was added to the pipeline."
     },
@@ -212,6 +219,7 @@
       "descriptionPlaceholder": "Add more detail about this task...",
       "priorityLabel": "Priority",
       "dueDateLabel": "Due date",
+      "dueTimeLabel": "Due time",
       "submit": "Add Task",
       "editSubmit": "Save Task",
       "successToast": "\"{title}\" was added to your tasks."

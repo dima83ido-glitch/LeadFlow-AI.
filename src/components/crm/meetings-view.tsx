@@ -91,6 +91,7 @@ export function MeetingsView({ meetings }: { meetings: Meeting[] }) {
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
                   <p className="font-medium">{meeting.title}</p>
+                  <Badge variant="outline">{t(`type.${meeting.type}`)}</Badge>
                   <Badge variant={statusVariant[meeting.status]}>{tStatus(meeting.status)}</Badge>
                 </div>
                 <p className="text-muted-foreground text-sm">

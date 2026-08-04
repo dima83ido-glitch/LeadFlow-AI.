@@ -8,6 +8,7 @@ import { toast } from "sonner";
 
 import { createTask, updateTask } from "@/lib/actions/tasks";
 import type { TaskPriority } from "@/generated/prisma/enums";
+import { localDateTimeToUtcIso, toLocalTimeInputValue } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -28,10 +29,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+const DEFAULT_DUE_TIME = "09:00";
+
 interface TaskFormValues {
   title: string;
   description: string;
   dueDate: string;
+  dueTime: string;
   priority: TaskPriority;
 }
 
@@ -72,6 +76,7 @@ export function TaskFormDialog({
       title: task?.title ?? "",
       description: task?.description ?? "",
       dueDate: task?.dueDate ? task.dueDate.slice(0, 10) : "",
+      dueTime: task?.dueDate ? toLocalTimeInputValue(task.dueDate) : DEFAULT_DUE_TIME,
       priority: task?.priority ?? "MEDIUM",
     },
   });
@@ -82,6 +87,7 @@ export function TaskFormDialog({
         title: task?.title ?? "",
         description: task?.description ?? "",
         dueDate: task?.dueDate ? task.dueDate.slice(0, 10) : "",
+        dueTime: task?.dueDate ? toLocalTimeInputValue(task.dueDate) : DEFAULT_DUE_TIME,
         priority: task?.priority ?? "MEDIUM",
       });
     }
@@ -90,9 +96,14 @@ export function TaskFormDialog({
 
   async function onSubmit(values: TaskFormValues) {
     setIsSubmitting(true);
+    const { dueTime, ...rest } = values;
+    const payload = {
+      ...rest,
+      dueDate: values.dueDate ? localDateTimeToUtcIso(`${values.dueDate}T${dueTime || DEFAULT_DUE_TIME}`) : "",
+    };
     const result = isEdit
-      ? await updateTask(task!.id, values)
-      : await createTask(values);
+      ? await updateTask(task!.id, payload)
+      : await createTask(payload);
     setIsSubmitting(false);
 
     if (result.ok) {
@@ -135,10 +146,16 @@ export function TaskFormDialog({
                   {...register("description")}
                 />
               </Field>
-              <Field>
-                <FieldLabel htmlFor="dueDate">{t("dueDateLabel")}</FieldLabel>
-                <Input id="dueDate" type="date" {...register("dueDate")} />
-              </Field>
+              <div className="grid grid-cols-2 gap-4">
+                <Field>
+                  <FieldLabel htmlFor="dueDate">{t("dueDateLabel")}</FieldLabel>
+                  <Input id="dueDate" type="date" {...register("dueDate")} />
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="dueTime">{t("dueTimeLabel")}</FieldLabel>
+                  <Input id="dueTime" type="time" {...register("dueTime")} />
+                </Field>
+              </div>
               <Field>
                 <FieldLabel htmlFor="priority">{t("priorityLabel")}</FieldLabel>
                 <Select value={priority} onValueChange={(value) => value && setValue("priority", value as TaskPriority)}>

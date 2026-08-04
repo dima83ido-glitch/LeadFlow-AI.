@@ -38,3 +38,24 @@ export function toSafeISOString(date: Date | null | undefined): string | undefin
   if (!date || Number.isNaN(date.getTime())) return undefined
   return date.toISOString()
 }
+
+/**
+ * Converts a timezone-less local datetime string (a `datetime-local` input
+ * value, or a `date` + `time` pair joined with "T") into an unambiguous
+ * UTC ISO string. MUST be called in the browser: per the Date Time String
+ * Format spec, `new Date(naiveString)` is parsed using whatever timezone is
+ * running it — this only produces the instant the user actually meant when
+ * that timezone is the browser's own local one. Passing the naive string
+ * straight to a server action instead would have it reparsed using the
+ * *server's* timezone (UTC on Vercel), silently shifting the time.
+ */
+export function localDateTimeToUtcIso(localValue: string): string {
+  return new Date(localValue).toISOString()
+}
+
+/** Inverse-ish of `localDateTimeToUtcIso` for a bare "HH:mm" time input, formatted in the browser's local timezone. */
+export function toLocalTimeInputValue(iso: string) {
+  const date = new Date(iso)
+  const pad = (n: number) => String(n).padStart(2, "0")
+  return `${pad(date.getHours())}:${pad(date.getMinutes())}`
+}

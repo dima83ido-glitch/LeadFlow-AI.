@@ -64,6 +64,9 @@ export async function updateTask(
     const dueDate = parseDueDate(input.dueDate);
     if (!dueDate.ok) return { ok: false, errorCode: "INVALID_DUE_DATE" };
 
+    const existing = await prisma.task.findFirst({ where: { id: taskId, workspaceId } });
+    if (!existing) return { ok: false, errorCode: "NOT_FOUND" };
+
     await prisma.task.updateMany({
       where: { id: taskId, workspaceId },
       data: {
@@ -73,6 +76,12 @@ export async function updateTask(
         priority: input.priority,
       },
     });
+
+    // Rescheduling the due date means any already-sent "1 hour before"
+    // reminder was for the old time — clear it so the sweep can fire again.
+    if ((dueDate.date?.getTime() ?? null) !== (existing.dueDate?.getTime() ?? null)) {
+      await prisma.reminderLog.deleteMany({ where: { entityType: "TASK", entityId: taskId } });
+    }
 
     revalidatePath("/crm/tasks");
     return { ok: true };

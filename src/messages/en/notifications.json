@@ -47,5 +47,14 @@
     "title": "Notifications",
     "newBadge": "{count} new",
     "viewAll": "View all notifications"
+  },
+  "pushBanner": {
+    "title": "Enable reminders",
+    "description": "Get a browser notification 1 hour before meetings, tasks, deadlines, events, and calls.",
+    "enable": "Enable",
+    "notNow": "Not now",
+    "successToast": "Reminders enabled — you'll get a notification 1 hour before things are due.",
+    "deniedToast": "Notification permission was denied. You can enable it later in Settings or your browser.",
+    "errorToast": "Couldn't enable reminders. Please try again."
   }
 }

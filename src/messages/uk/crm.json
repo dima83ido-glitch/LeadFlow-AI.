@@ -96,6 +96,11 @@
     "deleteConfirm": "Видалити зустріч",
     "deletedToast": "«{title}» видалено.",
     "updatedToast": "«{title}» оновлено.",
+    "type": {
+      "MEETING": "Зустріч",
+      "CALL": "Дзвінок",
+      "EVENT": "Подія"
+    },
     "scheduleDialog": {
       "trigger": "Запланувати зустріч",
       "title": "Запланувати зустріч",
@@ -105,6 +110,7 @@
       "titleLabel": "Назва",
       "titlePlaceholder": "наприклад, Ознайомчий дзвінок",
       "titleRequired": "Вкажіть назву",
+      "typeLabel": "Тип",
       "dateTimeLabel": "Дата й час",
       "dateTimeRequired": "Вкажіть дату й час",
       "locationLabel": "Місце",
@@ -157,6 +163,7 @@
       "contactLabel": "Контакт",
       "contactPlaceholder": "Без контакту",
       "closeDateLabel": "Очікувана дата закриття",
+      "closeTimeLabel": "Час закриття",
       "submit": "Додати угоду",
       "successToast": "«{title}» додано до воронки."
     },
@@ -212,6 +219,7 @@
       "descriptionPlaceholder": "Додайте деталі про це завдання...",
       "priorityLabel": "Пріоритет",
       "dueDateLabel": "Термін виконання",
+      "dueTimeLabel": "Час виконання",
       "submit": "Додати завдання",
       "editSubmit": "Зберегти завдання",
       "successToast": "«{title}» додано до ваших завдань."

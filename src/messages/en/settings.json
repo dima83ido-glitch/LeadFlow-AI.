@@ -54,6 +54,15 @@
     "title": "Notification preferences",
     "savePreferences": "Save preferences",
     "successToast": "Notification preferences saved.",
+    "push": {
+      "label": "Push notifications",
+      "description": "Get reminders for meetings, tasks, deadlines, events, and calls one hour before they're due.",
+      "blockedDescription": "Notifications are blocked for this site in your browser settings. Update the site permission to enable reminders.",
+      "enabledToast": "Push notifications enabled.",
+      "disabledToast": "Push notifications disabled.",
+      "deniedToast": "Notification permission was denied. Enable it in your browser settings to receive reminders.",
+      "errorToast": "Couldn't enable push notifications. Please try again."
+    },
     "emailDigest": { "label": "Weekly summary email", "description": "A digest of activity across your workspace." },
     "campaignAlerts": { "label": "Campaign alerts", "description": "Get notified when a campaign is sent, paused, or completed." },
     "leadAlerts": { "label": "New lead alerts", "description": "Get notified when new leads match your saved searches." },

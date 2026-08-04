@@ -27,10 +27,10 @@ export const mockTasks: CrmTask[] = [
 ];
 
 export const mockMeetings: Meeting[] = [
-  { id: "mtg_1", title: "Discovery Call", companyName: "Northwind Analytics", contactName: "Ava Chen", startTime: "2026-07-22T15:00:00Z", endTime: "2026-07-22T15:30:00Z", location: "Google Meet", attendees: ["Dmitry", "Ava Chen"], status: "SCHEDULED" },
-  { id: "mtg_2", title: "Product Demo", companyName: "Fjord Studio", contactName: "Lars Eriksen", startTime: "2026-07-23T10:00:00Z", endTime: "2026-07-23T10:45:00Z", location: "Zoom", attendees: ["Dmitry", "Lars Eriksen"], status: "SCHEDULED" },
-  { id: "mtg_3", title: "Contract Review", companyName: "Meridian Health Partners", contactName: "Sofia Alvarez", startTime: "2026-07-24T13:00:00Z", endTime: "2026-07-24T14:00:00Z", location: "Google Meet", attendees: ["Priya Shah", "Sofia Alvarez"], status: "SCHEDULED" },
-  { id: "mtg_4", title: "Quarterly Business Review", companyName: "Kaido Robotics", contactName: "Yuki Tanaka", startTime: "2026-07-25T09:00:00Z", endTime: "2026-07-25T10:00:00Z", location: "In person — Tokyo office", attendees: ["Dmitry", "Yuki Tanaka"], status: "SCHEDULED" },
+  { id: "mtg_1", title: "Discovery Call", type: "MEETING", companyName: "Northwind Analytics", contactName: "Ava Chen", startTime: "2026-07-22T15:00:00Z", endTime: "2026-07-22T15:30:00Z", location: "Google Meet", attendees: ["Dmitry", "Ava Chen"], status: "SCHEDULED" },
+  { id: "mtg_2", title: "Product Demo", type: "MEETING", companyName: "Fjord Studio", contactName: "Lars Eriksen", startTime: "2026-07-23T10:00:00Z", endTime: "2026-07-23T10:45:00Z", location: "Zoom", attendees: ["Dmitry", "Lars Eriksen"], status: "SCHEDULED" },
+  { id: "mtg_3", title: "Contract Review", type: "MEETING", companyName: "Meridian Health Partners", contactName: "Sofia Alvarez", startTime: "2026-07-24T13:00:00Z", endTime: "2026-07-24T14:00:00Z", location: "Google Meet", attendees: ["Priya Shah", "Sofia Alvarez"], status: "SCHEDULED" },
+  { id: "mtg_4", title: "Quarterly Business Review", type: "MEETING", companyName: "Kaido Robotics", contactName: "Yuki Tanaka", startTime: "2026-07-25T09:00:00Z", endTime: "2026-07-25T10:00:00Z", location: "In person — Tokyo office", attendees: ["Dmitry", "Yuki Tanaka"], status: "SCHEDULED" },
 ];
 
 export const mockNotes: Note[] = [

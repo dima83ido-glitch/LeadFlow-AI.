@@ -35,10 +35,12 @@ export interface CrmTask {
 }
 
 export type MeetingStatus = "SCHEDULED" | "COMPLETED" | "CANCELLED";
+export type MeetingType = "MEETING" | "CALL" | "EVENT";
 
 export interface Meeting {
   id: string;
   title: string;
+  type: MeetingType;
   contactName?: string;
   companyName?: string;
   startTime: string;

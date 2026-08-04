@@ -23,6 +23,7 @@ export default async function MeetingsPage() {
   const meetings: Meeting[] = rows.map((row) => ({
     id: row.id,
     title: row.title,
+    type: row.type,
     contactName: row.contact ? [row.contact.firstName, row.contact.lastName].filter(Boolean).join(" ") : undefined,
     companyName: row.contact?.company?.name,
     startTime: row.startTime.toISOString(),

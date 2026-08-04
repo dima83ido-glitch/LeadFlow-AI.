@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { prisma } from "@/lib/db";
 import { requireWorkspace } from "@/lib/workspace";
-import type { MeetingStatus } from "@/generated/prisma/enums";
+import type { MeetingStatus, MeetingType } from "@/generated/prisma/enums";
 
 export type ActionResult = { ok: true } | { ok: false; errorCode: string };
 
@@ -12,11 +12,12 @@ const DEFAULT_DURATION_MS = 30 * 60 * 1000;
 
 export async function createMeeting(input: {
   title: string;
+  type?: MeetingType;
   startTime: string;
   location?: string;
 }): Promise<ActionResult> {
   try {
-    const { workspaceId } = await requireWorkspace();
+    const { workspaceId, userId } = await requireWorkspace();
     if (!input.title.trim()) return { ok: false, errorCode: "TITLE_REQUIRED" };
     if (!input.startTime) return { ok: false, errorCode: "START_TIME_REQUIRED" };
 
@@ -25,9 +26,11 @@ export async function createMeeting(input: {
       data: {
         workspaceId,
         title: input.title.trim(),
+        type: input.type ?? "MEETING",
         startTime: start,
         endTime: new Date(start.getTime() + DEFAULT_DURATION_MS),
         location: input.location?.trim() || null,
+        ownerId: userId,
       },
     });
 
@@ -41,7 +44,7 @@ export async function createMeeting(input: {
 
 export async function updateMeeting(
   meetingId: string,
-  input: { title: string; startTime: string; location?: string },
+  input: { title: string; type?: MeetingType; startTime: string; location?: string },
 ): Promise<ActionResult> {
   try {
     const { workspaceId } = await requireWorkspace();
@@ -58,11 +61,18 @@ export async function updateMeeting(
       where: { id: meetingId },
       data: {
         title: input.title.trim(),
+        type: input.type ?? existing.type,
         startTime: start,
         endTime: new Date(start.getTime() + (durationMs > 0 ? durationMs : DEFAULT_DURATION_MS)),
         location: input.location?.trim() || null,
       },
     });
+
+    // Rescheduling to a new time means any already-sent "1 hour before"
+    // reminder was for the old time — clear it so the sweep can fire again.
+    if (start.getTime() !== existing.startTime.getTime()) {
+      await prisma.reminderLog.deleteMany({ where: { entityType: "MEETING", entityId: meetingId } });
+    }
 
     revalidatePath("/crm/meetings");
     return { ok: true };

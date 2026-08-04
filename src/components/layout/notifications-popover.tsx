@@ -5,7 +5,12 @@ import Link from "next/link";
 import { Bell } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { mockNotifications } from "@/lib/mock/notifications";
+import {
+  getUnreadCount,
+  listNotifications,
+  markNotificationRead,
+  type NotificationRow,
+} from "@/lib/actions/notifications";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,12 +28,38 @@ const toneDot: Record<string, string> = {
   ERROR: "bg-red-500",
 };
 
+const POLL_INTERVAL_MS = 30_000;
+
 export function NotificationsPopover() {
   const t = useTranslations("notifications");
-  const unreadCount = mockNotifications.filter((n) => !n.read).length;
+  const [unreadCount, setUnreadCount] = React.useState(0);
+  const [notifications, setNotifications] = React.useState<NotificationRow[]>([]);
+  const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    getUnreadCount().then(setUnreadCount);
+    const interval = setInterval(() => getUnreadCount().then(setUnreadCount), POLL_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, []);
+
+  React.useEffect(() => {
+    if (open) {
+      listNotifications().then((rows) => {
+        setNotifications(rows);
+        setUnreadCount(rows.filter((n) => !n.read).length);
+      });
+    }
+  }, [open]);
+
+  function handleOpen(notification: NotificationRow) {
+    if (notification.read) return;
+    setNotifications((prev) => prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n)));
+    setUnreadCount((count) => Math.max(0, count - 1));
+    markNotificationRead(notification.id);
+  }
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         render={
           <Button
@@ -55,29 +86,30 @@ export function NotificationsPopover() {
         </div>
         <ScrollArea className="h-80">
           <div className="flex flex-col">
-            {mockNotifications.map((notification) => (
-              <Link
-                key={notification.id}
-                href={notification.href ?? "/notifications"}
-                className="hover:bg-accent flex gap-3 border-b px-4 py-3 last:border-0"
-              >
-                <span
-                  className={cn(
-                    "mt-1.5 size-2 shrink-0 rounded-full",
-                    toneDot[notification.type],
-                    notification.read && "opacity-30",
-                  )}
-                />
-                <div className="space-y-0.5">
-                  <p className={cn("text-sm", !notification.read && "font-medium")}>
-                    {t(`titles.${notification.title}`)}
-                  </p>
-                  <p className="text-muted-foreground line-clamp-2 text-xs">
-                    {t(`messages.${notification.title}`, notification.messageParams)}
-                  </p>
-                </div>
-              </Link>
-            ))}
+            {notifications.length === 0 ? (
+              <p className="text-muted-foreground px-4 py-8 text-center text-sm">{t("empty.allTitle")}</p>
+            ) : (
+              notifications.map((notification) => (
+                <Link
+                  key={notification.id}
+                  href={notification.link ?? "/notifications"}
+                  onClick={() => handleOpen(notification)}
+                  className="hover:bg-accent flex gap-3 border-b px-4 py-3 last:border-0"
+                >
+                  <span
+                    className={cn(
+                      "mt-1.5 size-2 shrink-0 rounded-full",
+                      toneDot[notification.type],
+                      notification.read && "opacity-30",
+                    )}
+                  />
+                  <div className="space-y-0.5">
+                    <p className={cn("text-sm", !notification.read && "font-medium")}>{notification.title}</p>
+                    <p className="text-muted-foreground line-clamp-2 text-xs">{notification.message}</p>
+                  </div>
+                </Link>
+              ))
+            )}
           </div>
         </ScrollArea>
         <div className="border-t p-2">

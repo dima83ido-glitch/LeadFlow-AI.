@@ -8,6 +8,7 @@ import { AiAssistantPanel } from "@/components/ai-assistant/ai-assistant-panel";
 import { AiAssistantProvider } from "@/components/ai-assistant/ai-assistant-provider";
 import { AmbientBackground } from "@/components/layout/ambient-background";
 import { PageTransition } from "@/components/layout/page-transition";
+import { PushPermissionBanner } from "@/components/notifications/push-permission-banner";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const effectivePlan = await getEffectivePlan();
@@ -34,6 +35,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <SidebarProvider>
         {canUseAiAssistant ? <AiAssistantProvider>{shell}</AiAssistantProvider> : shell}
       </SidebarProvider>
+      <PushPermissionBanner />
     </OnboardingProvider>
   );
 }

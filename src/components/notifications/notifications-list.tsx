@@ -6,7 +6,12 @@ import { Bell, BellOff, CheckCheck } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/config";
-import { mockNotifications } from "@/lib/mock/notifications";
+import {
+  listNotifications,
+  markAllNotificationsRead,
+  markNotificationRead,
+  type NotificationRow,
+} from "@/lib/actions/notifications";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -21,16 +26,35 @@ const toneDot: Record<string, string> = {
   ERROR: "bg-red-500",
 };
 
+const POLL_INTERVAL_MS = 30_000;
+
 export function NotificationsList() {
   const t = useTranslations("notifications");
   const locale = useLocale() as Locale;
-  const [notifications, setNotifications] = React.useState(mockNotifications);
+  const [notifications, setNotifications] = React.useState<NotificationRow[]>([]);
   const [filter, setFilter] = React.useState<"all" | "unread">("all");
+
+  const refresh = React.useCallback(() => {
+    listNotifications().then(setNotifications);
+  }, []);
+
+  React.useEffect(() => {
+    refresh();
+    const interval = setInterval(refresh, POLL_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, [refresh]);
 
   const visible = notifications.filter((n) => (filter === "unread" ? !n.read : true));
 
-  function markAllRead() {
+  async function markAllRead() {
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+    await markAllNotificationsRead();
+  }
+
+  function handleOpen(notification: NotificationRow) {
+    if (notification.read) return;
+    setNotifications((prev) => prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n)));
+    markNotificationRead(notification.id);
   }
 
   return (
@@ -66,13 +90,9 @@ export function NotificationsList() {
             {visible.map((notification) => (
               <Link
                 key={notification.id}
-                href={notification.href ?? "/notifications"}
+                href={notification.link ?? "/notifications"}
                 className="hover:bg-accent/50 flex items-start gap-3 px-4 py-4"
-                onClick={() =>
-                  setNotifications((prev) =>
-                    prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n)),
-                  )
-                }
+                onClick={() => handleOpen(notification)}
               >
                 <span
                   className={cn(
@@ -82,12 +102,8 @@ export function NotificationsList() {
                   )}
                 />
                 <div className="flex-1 space-y-0.5">
-                  <p className={cn("text-sm", !notification.read && "font-medium")}>
-                    {t(`titles.${notification.title}`)}
-                  </p>
-                  <p className="text-muted-foreground text-sm">
-                    {t(`messages.${notification.title}`, notification.messageParams)}
-                  </p>
+                  <p className={cn("text-sm", !notification.read && "font-medium")}>{notification.title}</p>
+                  <p className="text-muted-foreground text-sm">{notification.message}</p>
                 </div>
                 <p className="text-muted-foreground shrink-0 text-xs">
                   <RelativeTime date={notification.createdAt} locale={locale} />

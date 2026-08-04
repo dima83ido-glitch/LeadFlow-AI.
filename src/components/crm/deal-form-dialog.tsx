@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { createDeal } from "@/lib/actions/deals";
+import { localDateTimeToUtcIso } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,6 +28,7 @@ import {
 } from "@/components/ui/select";
 
 const NONE_VALUE = "__none__";
+const DEFAULT_CLOSE_TIME = "09:00";
 
 interface DealFormValues {
   title: string;
@@ -34,6 +36,7 @@ interface DealFormValues {
   companyId: string;
   contactId: string;
   closeDate: string;
+  closeTime: string;
 }
 
 export function DealFormDialog({
@@ -64,12 +67,26 @@ export function DealFormDialog({
     setValue,
     formState: { errors },
   } = useForm<DealFormValues>({
-    defaultValues: { title: "", value: "", companyId: NONE_VALUE, contactId: NONE_VALUE, closeDate: "" },
+    defaultValues: {
+      title: "",
+      value: "",
+      companyId: NONE_VALUE,
+      contactId: NONE_VALUE,
+      closeDate: "",
+      closeTime: DEFAULT_CLOSE_TIME,
+    },
   });
 
   React.useEffect(() => {
     if (open) {
-      reset({ title: "", value: "", companyId: NONE_VALUE, contactId: NONE_VALUE, closeDate: "" });
+      reset({
+        title: "",
+        value: "",
+        companyId: NONE_VALUE,
+        contactId: NONE_VALUE,
+        closeDate: "",
+        closeTime: DEFAULT_CLOSE_TIME,
+      });
     }
   }, [open, reset]);
 
@@ -80,7 +97,9 @@ export function DealFormDialog({
       value: values.value ? Number(values.value) : undefined,
       companyId: values.companyId === NONE_VALUE ? undefined : values.companyId,
       contactId: values.contactId === NONE_VALUE ? undefined : values.contactId,
-      closeDate: values.closeDate || undefined,
+      closeDate: values.closeDate
+        ? localDateTimeToUtcIso(`${values.closeDate}T${values.closeTime || DEFAULT_CLOSE_TIME}`)
+        : undefined,
       pipelineStageId,
     });
     setIsSubmitting(false);
@@ -159,10 +178,16 @@ export function DealFormDialog({
                   </SelectContent>
                 </Select>
               </Field>
-              <Field>
-                <FieldLabel htmlFor="deal-close-date">{t("closeDateLabel")}</FieldLabel>
-                <Input id="deal-close-date" type="date" {...register("closeDate")} />
-              </Field>
+              <div className="grid grid-cols-2 gap-4">
+                <Field>
+                  <FieldLabel htmlFor="deal-close-date">{t("closeDateLabel")}</FieldLabel>
+                  <Input id="deal-close-date" type="date" {...register("closeDate")} />
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="deal-close-time">{t("closeTimeLabel")}</FieldLabel>
+                  <Input id="deal-close-time" type="time" {...register("closeTime")} />
+                </Field>
+              </div>
             </FieldGroup>
           </div>
           <DialogFooter>

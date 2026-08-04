@@ -16,7 +16,7 @@ export async function createDeal(input: {
   pipelineStageId: string;
 }): Promise<ActionResult> {
   try {
-    const { workspaceId } = await requireWorkspace();
+    const { workspaceId, userId } = await requireWorkspace();
     if (!input.title.trim()) return { ok: false, errorCode: "TITLE_REQUIRED" };
 
     const stage = await prisma.pipelineStage.findFirst({
@@ -34,6 +34,7 @@ export async function createDeal(input: {
         contactId: input.contactId || null,
         closeDate: input.closeDate ? new Date(input.closeDate) : null,
         pipelineStageId: input.pipelineStageId,
+        ownerId: userId,
       },
     });
 

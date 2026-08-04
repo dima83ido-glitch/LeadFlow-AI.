@@ -126,8 +126,11 @@ model User {
   sessions Session[]
 
   assignedTasks     Task[]         @relation("TaskAssignee")
+  ownedMeetings     Meeting[]      @relation("MeetingOwner")
+  ownedDeals        Deal[]         @relation("DealOwner")
   notes             Note[]
   notifications     Notification[]
+  pushSubscriptions PushSubscription[]
   confirmedPayments Payment[]
 
   @@index([workspaceId])
@@ -344,6 +347,9 @@ model Deal {
   status    DealStatus @default(OPEN)
   closeDate DateTime?
 
+  ownerId String?
+  owner   User?   @relation("DealOwner", fields: [ownerId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -357,12 +363,19 @@ enum MeetingStatus {
   CANCELLED
 }
 
+enum MeetingType {
+  MEETING
+  CALL
+  EVENT
+}
+
 model Meeting {
   id          String    @id @default(cuid())
   workspaceId String
   workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
   title     String
+  type      MeetingType @default(MEETING)
   contactId String?
   contact   Contact? @relation(fields: [contactId], references: [id])
 
@@ -371,6 +384,9 @@ model Meeting {
   location  String?
   notes     String?
   status    MeetingStatus @default(SCHEDULED)
+
+  ownerId String?
+  owner   User?   @relation("MeetingOwner", fields: [ownerId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -457,11 +473,45 @@ model Notification {
   type    NotificationType @default(INFO)
   title   String
   message String
+  link    String?
   read    Boolean          @default(false)
 
   createdAt DateTime @default(now())
 
   @@index([workspaceId, createdAt])
+  @@index([userId, read])
+}
+
+model PushSubscription {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  endpoint String @unique
+  p256dh   String
+  auth     String
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+enum ReminderEntityType {
+  MEETING
+  TASK
+  DEAL
+}
+
+// One row per entity that has ever been reminded — the `@@unique` is both
+// the "don't remind twice" guard and a concurrency-safe claim: if two
+// overlapping cron sweeps race on the same entity, only one `create` wins.
+model ReminderLog {
+  id         String              @id @default(cuid())
+  entityType ReminderEntityType
+  entityId   String
+  sentAt     DateTime            @default(now())
+
+  @@unique([entityType, entityId])
 }
 
 model ApiKey {
