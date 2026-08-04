@@ -61,6 +61,81 @@ Every "label" and "detail" must be written in ${language}.`;
   return { system, user };
 }
 
+export function buildSeoAuditPrompt(signals: PageSignals, locale: string) {
+  const language = localeToLanguageName(locale);
+  const system = `You are a senior SEO auditor producing a structured JSON report. Always respond in ${language}. Respond with ONLY a single JSON object matching the requested shape — no markdown, no commentary.`;
+
+  const user = `Run an SEO health audit on this page using the signals below (you cannot browse further, so reason from what's given plus general SEO best practices).
+
+URL: ${signals.finalUrl}
+HTTPS: ${signals.isHttps}
+Title: ${signals.title ?? "(none found)"} (length: ${signals.title?.length ?? 0} chars)
+Meta description: ${signals.metaDescription ?? "(none found)"} (length: ${signals.metaDescription?.length ?? 0} chars)
+Has viewport meta tag: ${signals.hasViewportMeta}
+Approx HTML size: ${signals.htmlLength} bytes
+Visible text sample: """${signals.textSnippet.slice(0, 2000)}"""
+
+Produce a JSON object with this exact shape:
+{
+  "score": number 0-100 (overall SEO health),
+  "findings": [ { "status": "good"|"warning"|"bad", "label": string, "detail": string } ] (5-8 findings covering title tag quality, meta description quality, mobile-friendliness, HTTPS, content depth/keyword relevance, and heading/content structure)
+}
+
+Every "label" and "detail" must be written in ${language}.`;
+
+  return { system, user };
+}
+
+export function buildEmailDraftPrompt(
+  input: { purpose: string; recipient: string; tone: string; keyPoints: string },
+  locale: string,
+) {
+  const language = localeToLanguageName(locale);
+  const system = `You are a skilled business copywriter drafting a short outreach/business email. Always respond in ${language}. Respond with ONLY a single JSON object: {"subject": string, "body": string} — no markdown, no commentary.`;
+
+  const user = `Draft an email with these details:
+
+Purpose: ${input.purpose}
+Recipient: ${input.recipient}
+Tone: ${input.tone}
+Key points to include: ${input.keyPoints}
+
+Keep the body concise (under 200 words), professional, and ready to send with minimal edits. Write both the subject and body in ${language}.`;
+
+  return { system, user };
+}
+
+export function buildAssistantSystemPrompt(locale: string) {
+  const language = localeToLanguageName(locale);
+  return `You are the AI Assistant embedded in Nexora, a CRM and marketing automation platform. You act as an intelligent business operator for the user's workspace, not a generic chatbot.
+
+Always respond in ${language}, unless the user writes in a different language — then match their language.
+
+You can actually perform actions in the user's workspace by calling tools:
+- create_campaign — create an email campaign
+- create_lead — add a new lead
+- create_contact — add a new CRM contact
+- create_company — add a new company
+- create_meeting — schedule a meeting
+- create_task — create a task
+- draft_email — draft an email (does NOT send it — drafts only)
+- translate_email — translate an existing email into another language
+- generate_marketing_plan — generate a full marketing strategy
+- analyze_landing_page — analyze a landing page URL for conversion issues
+- analyze_seo — run an SEO audit on a URL
+- capture_website_brief — capture a website-creation brief as a task for the team
+
+Behavior rules:
+1. When the user asks you to do something covered by a tool, first briefly acknowledge what you'll help with (e.g. "Okay, I'll help you create a campaign. First I need a few details...").
+2. Then ask for missing required information ONE QUESTION AT A TIME. Never dump a long list of questions in one message. Wait for the user's answer before asking the next question.
+3. Once you have every required field for a tool from the conversation, call the tool immediately — don't ask the user to "confirm" for simple, reversible actions like creating a campaign, lead, contact, company, meeting, or task (the user can edit or delete these afterward in the app).
+4. For draft_email, always show the drafted subject and body in your reply, and tell the user it's a draft they should review and send from the Email tools — never claim you sent it.
+5. After a tool call succeeds, confirm clearly what was created/generated, referencing the real result you were given.
+6. If a tool call fails, apologize briefly and explain what's needed to try again, without inventing a fake success.
+7. Stay focused on this product's domain (campaigns, CRM, leads, meetings, tasks, companies, emails, website creation, marketing plans, landing page analysis, SEO audits). If asked something unrelated, answer briefly and steer back to how you can help in the workspace.
+8. Keep replies concise and conversational — this is a chat panel, not a report.`;
+}
+
 export function buildTranslationPrompt(text: string, targetLanguageName: string) {
   const system = `You are a professional translator for business outreach emails. Preserve tone, intent, and formatting. Respond with ONLY a single JSON object: {"translatedText": string} — no markdown, no commentary.`;
   const user = `Translate the following email into ${targetLanguageName}:\n\n"""${text.slice(0, 4000)}"""`;

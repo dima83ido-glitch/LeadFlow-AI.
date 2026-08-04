@@ -43,11 +43,25 @@ export const landingPageAnalysisResultSchema = z.object({
 
 export type LandingPageAnalysisResult = z.infer<typeof landingPageAnalysisResultSchema>;
 
+export const seoAuditResultSchema = z.object({
+  score: z.number().min(0).max(100),
+  findings: z.array(findingSchema).min(1).max(8),
+});
+
+export type SeoAuditResult = z.infer<typeof seoAuditResultSchema>;
+
 export const translationResultSchema = z.object({
   translatedText: z.string(),
 });
 
 export type TranslationResult = z.infer<typeof translationResultSchema>;
+
+export const emailDraftResultSchema = z.object({
+  subject: z.string(),
+  body: z.string(),
+});
+
+export type EmailDraftResult = z.infer<typeof emailDraftResultSchema>;
 
 // ---------------------------------------------------------------------------
 // AI Marketing Plan Generator

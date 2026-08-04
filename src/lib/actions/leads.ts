@@ -1,8 +1,50 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import { prisma } from "@/lib/db";
 import { requireWorkspace } from "@/lib/workspace";
 import type { Lead, LeadSearchFilters } from "@/types/lead";
+
+export type ActionResult = { ok: true } | { ok: false; errorCode: string };
+
+export async function createLead(input: {
+  companyName: string;
+  contactName?: string;
+  email?: string;
+  phone?: string;
+  website?: string;
+  country?: string;
+  city?: string;
+  industry?: string;
+  source?: string;
+}): Promise<ActionResult> {
+  try {
+    const { workspaceId } = await requireWorkspace();
+    if (!input.companyName.trim()) return { ok: false, errorCode: "COMPANY_NAME_REQUIRED" };
+
+    await prisma.lead.create({
+      data: {
+        workspaceId,
+        companyName: input.companyName.trim(),
+        contactName: input.contactName?.trim() || null,
+        email: input.email?.trim() || null,
+        phone: input.phone?.trim() || null,
+        website: input.website?.trim() || null,
+        country: input.country?.trim() || null,
+        city: input.city?.trim() || null,
+        industry: input.industry?.trim() || null,
+        source: input.source?.trim() || null,
+      },
+    });
+
+    revalidatePath("/leads");
+    return { ok: true };
+  } catch (error) {
+    console.error("createLead failed:", error);
+    return { ok: false, errorCode: "UNKNOWN" };
+  }
+}
 
 export async function searchLeads(filters: LeadSearchFilters): Promise<Lead[]> {
   try {

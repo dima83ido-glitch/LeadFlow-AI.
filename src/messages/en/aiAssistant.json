@@ -3,21 +3,32 @@
     "label": "AI Assistant"
   },
   "panelTitle": "AI Assistant",
-  "panelDescription": "Preview of your AI business assistant.",
+  "panelDescription": "Your AI business assistant.",
   "badge": "Enterprise",
   "close": "Close",
   "chat": {
-    "seedMessage": "Hi! I'm your AI assistant. I can help you find leads, draft campaigns, and analyze your pipeline. This is a visual preview — full AI capabilities are coming soon.",
-    "previewReply": "This is a visual preview of the AI Assistant. Full AI-powered responses aren't connected yet — stay tuned!",
+    "seedMessage": "Hi! I'm your AI assistant. I can help you create campaigns, manage leads and contacts, schedule meetings, generate marketing plans, analyze landing pages and SEO, and more — just tell me what you need.",
     "suggestions": [
-      "Summarize this week's leads",
-      "Draft a follow-up email",
-      "Which campaign performs best?",
+      "Create a campaign",
+      "Add a new lead",
+      "Schedule a meeting",
       "Suggest a marketing plan"
     ],
     "inputPlaceholder": "Ask your AI assistant...",
     "voiceLabel": "Voice input",
     "sendLabel": "Send message",
-    "previewNotice": "Preview interface — AI responses are not connected yet."
+    "voiceModeLabel": "Voice Mode",
+    "muteLabel": "Mute",
+    "unmuteLabel": "Unmute",
+    "micUnsupported": "Voice input isn't supported in this browser.",
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "RATE_LIMITED": "You've sent a lot of messages — please wait a few minutes and try again.",
+      "MISSING_API_KEY": "AI features aren't configured yet — an OPENAI_API_KEY is required.",
+      "AI_EMPTY_RESPONSE": "The assistant didn't return a response. Please try again.",
+      "AI_TOO_MANY_TOOL_CALLS": "That request needed too many steps to complete. Please try a simpler request.",
+      "AI_ERROR": "The AI request failed. Please try again.",
+      "EMPTY_HISTORY": "Please type a message first."
+    }
   }
 }
