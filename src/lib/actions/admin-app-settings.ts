@@ -15,9 +15,8 @@ export async function updateAppSettings(input: {
   metaTitle: string;
   metaDescription: string;
 }): Promise<ActionResult> {
+  await requireAdmin();
   try {
-    await requireAdmin();
-
     const entries: [keyof typeof DEFAULT_APP_SETTINGS, string][] = [
       ["site.name", input.siteName],
       ["site.supportEmail", input.supportEmail],

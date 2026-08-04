@@ -10,8 +10,8 @@ import type { UserStatus } from "@/generated/prisma/enums";
 export type ActionResult = { ok: true } | { ok: false; errorCode: string };
 
 export async function setUserStatus(userId: string, status: UserStatus): Promise<ActionResult> {
+  await requireAdmin();
   try {
-    await requireAdmin();
     const user = await prisma.user.update({ where: { id: userId }, data: { status } });
     await logSystemEvent({
       message: `User ${user.email} status changed to ${status}`,
@@ -27,8 +27,8 @@ export async function setUserStatus(userId: string, status: UserStatus): Promise
 }
 
 export async function deleteUser(userId: string): Promise<ActionResult> {
+  const session = await requireAdmin();
   try {
-    const session = await requireAdmin();
     if (session.user.id === userId) return { ok: false, errorCode: "CANNOT_DELETE_SELF" };
 
     const user = await prisma.user.delete({ where: { id: userId } });

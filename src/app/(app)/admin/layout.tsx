@@ -1,16 +1,7 @@
-import { redirect } from "next/navigation";
-
-import { auth } from "@/lib/auth";
+import { requireAdmin } from "@/lib/workspace";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth();
-
-  if (!session?.user) {
-    redirect("/login?callbackUrl=/admin");
-  }
-  if (session.user.role !== "ADMIN") {
-    redirect("/dashboard");
-  }
+  await requireAdmin();
 
   return <>{children}</>;
 }

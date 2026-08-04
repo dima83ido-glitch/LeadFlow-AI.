@@ -9,9 +9,8 @@ import { logSystemEvent } from "@/lib/system-log";
 export type ActionResult = { ok: true } | { ok: false; errorCode: string };
 
 export async function confirmCryptoPayment(paymentId: string): Promise<ActionResult> {
+  const session = await requireAdmin();
   try {
-    const session = await requireAdmin();
-
     const payment = await prisma.payment.findUnique({ where: { id: paymentId } });
     if (!payment) return { ok: false, errorCode: "NOT_FOUND" };
     if (payment.method !== "CRYPTO") return { ok: false, errorCode: "NOT_CRYPTO" };

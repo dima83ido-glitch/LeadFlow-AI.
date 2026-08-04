@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { cache } from "react";
-import { redirect } from "next/navigation";
+import { forbidden, redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
@@ -116,10 +116,17 @@ export const requireWorkspace = cache(async function requireWorkspace(): Promise
   };
 });
 
+/**
+ * The single source of truth for "is this user allowed into the admin
+ * system" — every admin page, layout, and server action must call this
+ * (and must NOT wrap the call in a try/catch that would swallow the
+ * `forbidden()` interrupt). Unauthenticated visitors are sent to log in
+ * (via `requireSession`); authenticated non-admins get a real HTTP 403.
+ */
 export const requireAdmin = cache(async function requireAdmin() {
   const session = await requireSession();
   if (session.user.role !== "ADMIN") {
-    redirect("/dashboard");
+    forbidden();
   }
   return session;
 });

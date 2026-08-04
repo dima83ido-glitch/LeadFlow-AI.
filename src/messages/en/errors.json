@@ -4,6 +4,11 @@
     "description": "The page you're looking for doesn't exist or may have been moved.",
     "backButton": "Back to Dashboard"
   },
+  "forbidden": {
+    "title": "Access denied",
+    "description": "You don't have permission to view this page.",
+    "backButton": "Back to Dashboard"
+  },
   "appError": {
     "title": "Something went wrong",
     "description": "An unexpected error occurred while loading this page.",

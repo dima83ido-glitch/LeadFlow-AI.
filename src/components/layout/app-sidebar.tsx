@@ -29,8 +29,13 @@ export function AppSidebar() {
   const pathname = usePathname();
   const t = useTranslations();
   const tc = useTranslations("common");
-  const isAdmin = pathname.startsWith("/admin");
-  const groups = isAdmin ? adminNav : mainNav;
+  // Purely a "which nav section is the user currently browsing" switch —
+  // NOT an authorization check. Reaching an /admin/* route at all already
+  // requires role === "ADMIN" (enforced in middleware, admin/layout.tsx,
+  // and every admin server action), so by the time this component renders
+  // for a real page view, only an actual admin's browser gets here.
+  const isViewingAdminSection = pathname.startsWith("/admin");
+  const groups = isViewingAdminSection ? adminNav : mainNav;
 
   return (
     <Sidebar collapsible="icon">

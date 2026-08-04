@@ -17,8 +17,8 @@ export async function updatePlanConfig(input: {
   seatsLimit: number | null;
   isActive: boolean;
 }): Promise<ActionResult> {
+  await requireAdmin();
   try {
-    await requireAdmin();
     await prisma.planConfig.upsert({
       where: { plan: input.plan },
       update: {

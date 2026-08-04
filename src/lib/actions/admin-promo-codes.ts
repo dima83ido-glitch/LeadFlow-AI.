@@ -9,8 +9,8 @@ import { logSystemEvent } from "@/lib/system-log";
 export type ActionResult = { ok: true } | { ok: false; errorCode: string };
 
 export async function createPromoCode(code: string, discountPercent: number): Promise<ActionResult> {
+  await requireAdmin();
   try {
-    await requireAdmin();
     const upperCode = code.trim().toUpperCase();
     if (!upperCode) return { ok: false, errorCode: "CODE_REQUIRED" };
 
@@ -30,8 +30,8 @@ export async function createPromoCode(code: string, discountPercent: number): Pr
 }
 
 export async function setPromoCodeActive(id: string, active: boolean): Promise<ActionResult> {
+  await requireAdmin();
   try {
-    await requireAdmin();
     await prisma.promoCode.update({ where: { id }, data: { active } });
     revalidatePath("/admin/promo-codes");
     return { ok: true };
@@ -42,8 +42,8 @@ export async function setPromoCodeActive(id: string, active: boolean): Promise<A
 }
 
 export async function deletePromoCode(id: string): Promise<ActionResult> {
+  await requireAdmin();
   try {
-    await requireAdmin();
     await prisma.promoCode.delete({ where: { id } });
     revalidatePath("/admin/promo-codes");
     return { ok: true };
