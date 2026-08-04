@@ -50,7 +50,7 @@ export async function generatePersonalization(businessType: string): Promise<AiA
       data: { personalization: parsed.data },
     });
 
-    await logSystemEvent({ message: "Onboarding personalization generated", feature: "ai.personalization" });
+    logSystemEvent({ message: "Onboarding personalization generated", feature: "ai.personalization" }).catch(() => {});
     return { ok: true, data: parsed.data };
   } catch {
     return { ok: false, errorCode: "AI_ERROR" };

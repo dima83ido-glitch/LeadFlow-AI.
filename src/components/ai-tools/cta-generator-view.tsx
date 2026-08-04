@@ -4,6 +4,8 @@ import * as React from "react";
 import { Loader2, MousePointerClick, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { generateCtas } from "@/lib/actions/ai-cta-generator";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
@@ -20,55 +22,26 @@ import { ToolResultPanel } from "@/components/ai-tools/tool-result-panel";
 
 const goals = ["Book a call", "Start free trial", "Reply to email", "Download resource"] as const;
 
-const templates: Record<(typeof goals)[number], (context: string) => string[]> = {
-  "Book a call": (context) => [
-    "Book a 15-minute call",
-    "Grab a time on my calendar",
-    `See how it works for ${context || "your team"}`,
-    "Talk to us this week",
-    "Schedule a quick demo",
-    "Find a time that works",
-  ],
-  "Start free trial": () => [
-    "Start your free trial",
-    "Try it free for 14 days",
-    "Get started at no cost",
-    "Create your free account",
-    "See it in action free",
-    "Start free — no card needed",
-  ],
-  "Reply to email": (context) => [
-    "Worth a quick reply?",
-    `Interested in ${context || "this"}?`,
-    "Let me know your thoughts",
-    "Reply if this is useful",
-    "Should we connect?",
-    "Happy to share more — just reply",
-  ],
-  "Download resource": (context) => [
-    `Download the ${context || "free"} guide`,
-    "Get the free resource",
-    "Grab your copy now",
-    "Download now — it's free",
-    "Access the full report",
-    "Get instant access",
-  ],
-};
-
 export default function CtaGeneratorView() {
   const t = useTranslations("aiTools.ctaGenerator");
+  const tErr = useTranslations("aiTools.errors");
   const [goal, setGoal] = React.useState<(typeof goals)[number]>("Book a call");
   const [context, setContext] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [results, setResults] = React.useState<string[] | null>(null);
+  const [errorCode, setErrorCode] = React.useState<string | null>(null);
 
-  function handleGenerate() {
+  async function handleGenerate() {
     setIsLoading(true);
     setResults(null);
-    setTimeout(() => {
-      setResults(templates[goal](context));
-      setIsLoading(false);
-    }, 800);
+    setErrorCode(null);
+    const response = await generateCtas(goal, context);
+    setIsLoading(false);
+    if (response.ok) {
+      setResults(response.data.ctas);
+    } else {
+      setErrorCode(response.errorCode);
+    }
   }
 
   return (
@@ -114,6 +87,12 @@ export default function CtaGeneratorView() {
           <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
+          {errorCode && !isLoading && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertTitle>{tErr("title")}</AlertTitle>
+              <AlertDescription>{tErr.has(errorCode) ? tErr(errorCode) : tErr("generic")}</AlertDescription>
+            </Alert>
+          )}
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={results !== null}

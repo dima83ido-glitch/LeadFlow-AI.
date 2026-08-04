@@ -4,6 +4,8 @@ import * as React from "react";
 import { Loader2, Mails, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { generateSubjectLines } from "@/lib/actions/ai-subject-generator";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -26,31 +28,27 @@ interface SubjectVariant {
   openRate: number;
 }
 
-function buildResults(context: string): SubjectVariant[] {
-  const topic = context.split(" ").slice(0, 4).join(" ") || "your outreach";
-  return [
-    { text: `Quick idea for ${topic}`, openRate: 61 },
-    { text: `A faster way to handle ${topic}`, openRate: 57 },
-    { text: `${topic} — worth a 2-minute read?`, openRate: 54 },
-    { text: `Saw this and thought of you`, openRate: 49 },
-    { text: `Is ${topic} still a priority this quarter?`, openRate: 46 },
-  ];
-}
-
 export default function SubjectGeneratorView() {
   const t = useTranslations("aiTools.subjectGenerator");
+  const tErr = useTranslations("aiTools.errors");
   const [context, setContext] = React.useState("");
   const [tone, setTone] = React.useState<string>("Curious");
   const [isLoading, setIsLoading] = React.useState(false);
   const [results, setResults] = React.useState<SubjectVariant[] | null>(null);
+  const [errorCode, setErrorCode] = React.useState<string | null>(null);
 
-  function handleGenerate() {
+  async function handleGenerate() {
+    if (!context) return;
     setIsLoading(true);
     setResults(null);
-    setTimeout(() => {
-      setResults(buildResults(context));
-      setIsLoading(false);
-    }, 900);
+    setErrorCode(null);
+    const response = await generateSubjectLines(context, tone);
+    setIsLoading(false);
+    if (response.ok) {
+      setResults(response.data.subjects);
+    } else {
+      setErrorCode(response.errorCode);
+    }
   }
 
   return (
@@ -85,7 +83,7 @@ export default function SubjectGeneratorView() {
               </SelectContent>
             </Select>
           </Field>
-          <Button className="w-full" onClick={handleGenerate} disabled={isLoading}>
+          <Button className="w-full" onClick={handleGenerate} disabled={isLoading || !context}>
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
             {t("form.submit")}
           </Button>
@@ -97,6 +95,12 @@ export default function SubjectGeneratorView() {
           <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
+          {errorCode && !isLoading && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertTitle>{tErr("title")}</AlertTitle>
+              <AlertDescription>{tErr.has(errorCode) ? tErr(errorCode) : tErr("generic")}</AlertDescription>
+            </Alert>
+          )}
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={results !== null}

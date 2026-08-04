@@ -4,6 +4,8 @@ import * as React from "react";
 import { Loader2, Mail, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { draftEmail } from "@/lib/actions/ai-email-draft";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
@@ -27,45 +29,29 @@ interface EmailResult {
   body: string;
 }
 
-function buildResult(company: string, tone: string, keyPoints: string): EmailResult {
-  const name = company || "there";
-  const opener =
-    tone === "Formal"
-      ? `Dear ${name} team,`
-      : tone === "Direct"
-        ? `Hi ${name},`
-        : `Hey ${name}! 👋`;
-
-  return {
-    subject: `A faster way for ${company || "your team"} to close more deals`,
-    body: `${opener}
-
-I came across ${company || "your company"} and wanted to reach out — ${
-      keyPoints || "it looks like your team could benefit from a more streamlined outreach process"
-    }.
-
-We've helped similar teams cut their prospecting time in half while improving reply rates. Would you be open to a quick 15-minute call this week to see if it's a fit?
-
-Best,
-Dmitry`,
-  };
-}
-
 export default function EmailGeneratorView() {
   const t = useTranslations("aiTools.emailGenerator");
+  const tErr = useTranslations("aiTools.errors");
+  const [purpose, setPurpose] = React.useState("");
   const [company, setCompany] = React.useState("");
   const [tone, setTone] = React.useState<string>("Friendly");
   const [keyPoints, setKeyPoints] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [result, setResult] = React.useState<EmailResult | null>(null);
+  const [errorCode, setErrorCode] = React.useState<string | null>(null);
 
-  function handleGenerate() {
+  async function handleGenerate() {
+    if (!purpose) return;
     setIsLoading(true);
     setResult(null);
-    setTimeout(() => {
-      setResult(buildResult(company, tone, keyPoints));
-      setIsLoading(false);
-    }, 1000);
+    setErrorCode(null);
+    const response = await draftEmail({ purpose, recipient: company, tone, keyPoints });
+    setIsLoading(false);
+    if (response.ok) {
+      setResult(response.data);
+    } else {
+      setErrorCode(response.errorCode);
+    }
   }
 
   return (
@@ -75,6 +61,15 @@ export default function EmailGeneratorView() {
           <CardTitle className="text-base">{t("form.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          <Field>
+            <FieldLabel htmlFor="purpose">{t("form.purposeLabel")}</FieldLabel>
+            <Input
+              id="purpose"
+              placeholder={t("form.purposePlaceholder")}
+              value={purpose}
+              onChange={(e) => setPurpose(e.target.value)}
+            />
+          </Field>
           <Field>
             <FieldLabel htmlFor="company">{t("form.recipientLabel")}</FieldLabel>
             <Input
@@ -109,7 +104,7 @@ export default function EmailGeneratorView() {
               rows={4}
             />
           </Field>
-          <Button className="w-full" onClick={handleGenerate} disabled={isLoading}>
+          <Button className="w-full" onClick={handleGenerate} disabled={isLoading || !purpose}>
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
             {t("form.submit")}
           </Button>
@@ -121,6 +116,12 @@ export default function EmailGeneratorView() {
           <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
+          {errorCode && !isLoading && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertTitle>{tErr("title")}</AlertTitle>
+              <AlertDescription>{tErr.has(errorCode) ? tErr(errorCode) : tErr("generic")}</AlertDescription>
+            </Alert>
+          )}
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={result !== null}

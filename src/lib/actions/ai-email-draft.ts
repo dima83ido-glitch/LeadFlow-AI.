@@ -43,7 +43,7 @@ export async function draftEmail(input: EmailDraftInput): Promise<AiActionResult
     const parsed = emailDraftResultSchema.safeParse(JSON.parse(raw));
     if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
 
-    await logSystemEvent({ message: "AI email draft generated", feature: "ai.emailDraft" });
+    logSystemEvent({ message: "AI email draft generated", feature: "ai.emailDraft" }).catch(() => {});
     return { ok: true, data: parsed.data };
   } catch {
     return { ok: false, errorCode: "AI_ERROR" };

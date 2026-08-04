@@ -105,6 +105,48 @@ Keep the body concise (under 200 words), professional, and ready to send with mi
   return { system, user };
 }
 
+export function buildEmailRewritePrompt(originalText: string, tone: string, locale: string) {
+  const language = localeToLanguageName(locale);
+  const system = `You are a skilled business copywriter rewriting an existing email. Preserve the core meaning and any concrete facts (names, dates, numbers, links) — only change tone, phrasing, and length as instructed. Always respond in ${language}. Respond with ONLY a single JSON object: {"rewrittenText": string} — no markdown, no commentary.`;
+  const user = `Rewrite the following email to be "${tone}":\n\n"""${originalText.slice(0, 4000)}"""`;
+  return { system, user };
+}
+
+export function buildHeadlineGeneratorPrompt(product: string, valueProp: string, locale: string) {
+  const language = localeToLanguageName(locale);
+  const system = `You are a direct-response copywriter generating landing page and ad headline variants. Always respond in ${language}. Respond with ONLY a single JSON object: {"headlines": string[]} — no markdown, no commentary.`;
+  const user = `Generate 5 distinct, punchy headline variants for:
+
+Product / company name: ${product}
+Value proposition: ${valueProp || "(not specified — infer something plausible from the product name)"}
+
+Vary the angle across the 5 (benefit-led, curiosity, urgency, social proof, direct) rather than 5 rephrasings of the same idea.`;
+  return { system, user };
+}
+
+export function buildCtaGeneratorPrompt(goal: string, context: string, locale: string) {
+  const language = localeToLanguageName(locale);
+  const system = `You are a conversion copywriter generating short call-to-action button/link copy. Always respond in ${language}. Respond with ONLY a single JSON object: {"ctas": string[]} — no markdown, no commentary.`;
+  const user = `Generate 6 distinct call-to-action variants (each short enough for a button, under 6 words) for this goal:
+
+Goal: ${goal}
+Context: ${context || "(none specified)"}
+
+Vary the phrasing and urgency across the 6 rather than repeating the same structure.`;
+  return { system, user };
+}
+
+export function buildSubjectGeneratorPrompt(context: string, tone: string, locale: string) {
+  const language = localeToLanguageName(locale);
+  const system = `You are an email marketing copywriter generating subject line variants and estimating their relative open-rate potential based on best practices (curiosity, personalization, specificity, length). Always respond in ${language}. Respond with ONLY a single JSON object: {"subjects": [{"text": string, "openRate": number 0-100}]} — no markdown, no commentary.`;
+  const user = `Generate 5 distinct email subject line variants, toned "${tone}", for an email about:
+
+${context}
+
+Vary the angle across the 5 (curiosity, direct/clear, personalized, urgency, social proof) and give each a realistic estimated open rate percentage reflecting how strong that specific line is relative to the others.`;
+  return { system, user };
+}
+
 export type AssistantBusinessContext = { hasExistingBusiness: boolean; businessType: string | null } | null;
 
 function buildBusinessContextBlock(businessContext: AssistantBusinessContext): string {

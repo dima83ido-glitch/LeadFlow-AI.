@@ -26,7 +26,11 @@
     "FETCH_TIMEOUT": "That site took too long to respond. Please try again.",
     "TOO_MANY_REDIRECTS": "That URL redirected too many times to follow safely.",
     "INVALID_LANGUAGE": "Choose a target language.",
-    "REQUIRED_FIELDS_MISSING": "Fill in all required fields first."
+    "REQUIRED_FIELDS_MISSING": "Fill in all required fields first.",
+    "PURPOSE_REQUIRED": "Describe the email's purpose first.",
+    "PRODUCT_REQUIRED": "Enter a product or company name first.",
+    "GOAL_REQUIRED": "Choose a goal first.",
+    "CONTEXT_REQUIRED": "Describe what the email is about first."
   },
   "websiteAnalyzer": {
     "cardDescription": "Scan a prospect's site for tech stack, SEO health, and messaging gaps.",
@@ -185,6 +189,8 @@
     "cardDescription": "Draft a personalized outreach email from a lead's profile.",
     "form": {
       "cardTitle": "Details",
+      "purposeLabel": "Purpose",
+      "purposePlaceholder": "e.g. Follow up after a demo call",
       "recipientLabel": "Recipient / Company",
       "recipientPlaceholder": "e.g. Northwind Analytics",
       "toneLabel": "Tone",

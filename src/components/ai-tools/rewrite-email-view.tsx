@@ -4,6 +4,8 @@ import * as React from "react";
 import { Loader2, Wand2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { rewriteEmail } from "@/lib/actions/ai-rewrite-email";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
@@ -21,38 +23,27 @@ import { ToolResultPanel } from "@/components/ai-tools/tool-result-panel";
 
 const tones = ["More formal", "More friendly", "More concise", "More persuasive"] as const;
 
-function buildResult(original: string, tone: string): string {
-  const base =
-    original.trim() ||
-    "Hi there, just wanted to check in about the proposal we sent last week. Let me know if you have any questions.";
-
-  if (tone === "More concise") {
-    return "Hi — following up on our proposal. Any questions before we move forward?";
-  }
-  if (tone === "More formal") {
-    return `Dear team,\n\nI wanted to follow up regarding the proposal shared last week. Please let us know if you require any further information.\n\nBest regards,\nDmitry`;
-  }
-  if (tone === "More persuasive") {
-    return `Hi! Quick nudge on the proposal — teams that move on this within a week typically see results within the first month. Happy to answer anything holding you back.`;
-  }
-  return `Hey! Just checking in on the proposal 🙂 Let me know if anything's unclear — happy to hop on a quick call.\n\n(Original: "${base.slice(0, 60)}...")`;
-}
-
 export default function RewriteEmailView() {
   const t = useTranslations("aiTools.rewriteEmail");
+  const tErr = useTranslations("aiTools.errors");
   const [original, setOriginal] = React.useState("");
   const [tone, setTone] = React.useState<string>("More concise");
   const [isLoading, setIsLoading] = React.useState(false);
   const [result, setResult] = React.useState<string | null>(null);
+  const [errorCode, setErrorCode] = React.useState<string | null>(null);
 
-  function handleRewrite() {
+  async function handleRewrite() {
     if (!original) return;
     setIsLoading(true);
     setResult(null);
-    setTimeout(() => {
-      setResult(buildResult(original, tone));
-      setIsLoading(false);
-    }, 1000);
+    setErrorCode(null);
+    const response = await rewriteEmail(original, tone);
+    setIsLoading(false);
+    if (response.ok) {
+      setResult(response.data.rewrittenText);
+    } else {
+      setErrorCode(response.errorCode);
+    }
   }
 
   return (
@@ -99,6 +90,12 @@ export default function RewriteEmailView() {
           <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
+          {errorCode && !isLoading && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertTitle>{tErr("title")}</AlertTitle>
+              <AlertDescription>{tErr.has(errorCode) ? tErr(errorCode) : tErr("generic")}</AlertDescription>
+            </Alert>
+          )}
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={result !== null}

@@ -26,7 +26,11 @@
     "FETCH_TIMEOUT": "Сайт занадто довго відповідав. Спробуйте ще раз.",
     "TOO_MANY_REDIRECTS": "Цей URL зробив забагато перенаправлень, щоб безпечно його відкрити.",
     "INVALID_LANGUAGE": "Оберіть мову перекладу.",
-    "REQUIRED_FIELDS_MISSING": "Спочатку заповніть усі обов'язкові поля."
+    "REQUIRED_FIELDS_MISSING": "Спочатку заповніть усі обов'язкові поля.",
+    "PURPOSE_REQUIRED": "Спочатку опишіть мету листа.",
+    "PRODUCT_REQUIRED": "Спочатку вкажіть назву продукту чи компанії.",
+    "GOAL_REQUIRED": "Спочатку оберіть мету.",
+    "CONTEXT_REQUIRED": "Спочатку опишіть, про що лист."
   },
   "websiteAnalyzer": {
     "cardDescription": "Проаналізуйте сайт потенційного клієнта: технології, SEO та прогалини в позиціонуванні.",
@@ -185,6 +189,8 @@
     "cardDescription": "Складіть персоналізований лист на основі профілю ліда.",
     "form": {
       "cardTitle": "Деталі",
+      "purposeLabel": "Мета листа",
+      "purposePlaceholder": "наприклад, follow-up після демо-дзвінка",
       "recipientLabel": "Отримувач / компанія",
       "recipientPlaceholder": "наприклад, Northwind Analytics",
       "toneLabel": "Тон",

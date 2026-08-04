@@ -26,7 +26,11 @@
     "FETCH_TIMEOUT": "Сайт слишком долго отвечал. Попробуйте ещё раз.",
     "TOO_MANY_REDIRECTS": "Этот URL сделал слишком много перенаправлений, чтобы безопасно его открыть.",
     "INVALID_LANGUAGE": "Выберите язык перевода.",
-    "REQUIRED_FIELDS_MISSING": "Сначала заполните все обязательные поля."
+    "REQUIRED_FIELDS_MISSING": "Сначала заполните все обязательные поля.",
+    "PURPOSE_REQUIRED": "Сначала опишите цель письма.",
+    "PRODUCT_REQUIRED": "Сначала укажите название продукта или компании.",
+    "GOAL_REQUIRED": "Сначала выберите цель.",
+    "CONTEXT_REQUIRED": "Сначала опишите, о чём письмо."
   },
   "websiteAnalyzer": {
     "cardDescription": "Проанализируйте сайт потенциального клиента: технологии, SEO и пробелы в позиционировании.",
@@ -185,6 +189,8 @@
     "cardDescription": "Составьте персонализированное письмо на основе профиля лида.",
     "form": {
       "cardTitle": "Детали",
+      "purposeLabel": "Цель письма",
+      "purposePlaceholder": "например, follow-up после демо-звонка",
       "recipientLabel": "Получатель / компания",
       "recipientPlaceholder": "например, Northwind Analytics",
       "toneLabel": "Тон",

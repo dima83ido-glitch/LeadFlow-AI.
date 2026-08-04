@@ -1,25 +1,24 @@
 "use server";
 
+import { getLocale } from "next-intl/server";
+
 import { requireWorkspace } from "@/lib/workspace";
 import { getOpenAIClientSafe, AI_MODEL } from "@/lib/ai/client";
-import { buildTranslationPrompt } from "@/lib/ai/prompts";
-import { translationResultSchema, type TranslationResult } from "@/lib/ai/schemas";
-import { LANGUAGES } from "@/lib/languages";
+import { buildCtaGeneratorPrompt } from "@/lib/ai/prompts";
+import { ctaGeneratorResultSchema, type CtaGeneratorResult } from "@/lib/ai/schemas";
 import { logSystemEvent } from "@/lib/system-log";
 
 export type AiActionResult<T> = { ok: true; data: T } | { ok: false; errorCode: string };
 
-export async function translateEmail(text: string, languageCode: string): Promise<AiActionResult<TranslationResult>> {
+export async function generateCtas(goal: string, context: string): Promise<AiActionResult<CtaGeneratorResult>> {
   await requireWorkspace();
-  if (!text.trim()) return { ok: false, errorCode: "TEXT_REQUIRED" };
-
-  const language = LANGUAGES.find((l) => l.code === languageCode);
-  if (!language) return { ok: false, errorCode: "INVALID_LANGUAGE" };
+  if (!goal.trim()) return { ok: false, errorCode: "GOAL_REQUIRED" };
 
   const clientResult = getOpenAIClientSafe();
   if ("error" in clientResult) return { ok: false, errorCode: clientResult.error };
 
-  const { system, user } = buildTranslationPrompt(text, language.nameEn);
+  const locale = await getLocale();
+  const { system, user } = buildCtaGeneratorPrompt(goal, context, locale);
 
   try {
     const completion = await clientResult.client.chat.completions.create({
@@ -34,10 +33,10 @@ export async function translateEmail(text: string, languageCode: string): Promis
     const raw = completion.choices[0]?.message?.content;
     if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
 
-    const parsed = translationResultSchema.safeParse(JSON.parse(raw));
+    const parsed = ctaGeneratorResultSchema.safeParse(JSON.parse(raw));
     if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
 
-    logSystemEvent({ message: "AI email translation generated", feature: "ai.emailTranslation" }).catch(() => {});
+    logSystemEvent({ message: "AI CTAs generated", feature: "ai.ctaGenerator" }).catch(() => {});
     return { ok: true, data: parsed.data };
   } catch {
     return { ok: false, errorCode: "AI_ERROR" };

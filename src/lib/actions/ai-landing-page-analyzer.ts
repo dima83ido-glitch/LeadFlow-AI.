@@ -40,7 +40,7 @@ export async function analyzeLandingPage(url: string): Promise<AiActionResult<La
     const parsed = landingPageAnalysisResultSchema.safeParse(JSON.parse(raw));
     if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
 
-    await logSystemEvent({ message: "AI landing page analysis generated", feature: "ai.landingPageAnalyzer" });
+    logSystemEvent({ message: "AI landing page analysis generated", feature: "ai.landingPageAnalyzer" }).catch(() => {});
     return { ok: true, data: parsed.data };
   } catch {
     return { ok: false, errorCode: "AI_ERROR" };

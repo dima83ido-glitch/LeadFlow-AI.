@@ -50,7 +50,7 @@ export async function generateMarketingPlan(input: MarketingPlanInput): Promise<
     const parsed = marketingPlanResultSchema.safeParse(JSON.parse(raw));
     if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
 
-    await logSystemEvent({ message: "AI marketing plan generated", feature: "ai.marketingPlanGenerator" });
+    logSystemEvent({ message: "AI marketing plan generated", feature: "ai.marketingPlanGenerator" }).catch(() => {});
     return { ok: true, data: parsed.data };
   } catch {
     return { ok: false, errorCode: "AI_ERROR" };

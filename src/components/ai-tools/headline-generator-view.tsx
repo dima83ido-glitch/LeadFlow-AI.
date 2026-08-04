@@ -4,6 +4,8 @@ import * as React from "react";
 import { Lightbulb, Loader2, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { generateHeadlines } from "@/lib/actions/ai-headline-generator";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
@@ -11,32 +13,27 @@ import { Input } from "@/components/ui/input";
 import { CopyButton } from "@/components/ai-tools/copy-button";
 import { ToolResultPanel } from "@/components/ai-tools/tool-result-panel";
 
-function buildResults(product: string, valueProp: string): string[] {
-  const name = product || "Your Product";
-  const value = valueProp || "get more done in less time";
-  return [
-    `${name}: The fastest way to ${value}`,
-    `Meet ${name} — built to help you ${value}`,
-    `${value.charAt(0).toUpperCase() + value.slice(1)}, powered by ${name}`,
-    `Stop wasting time. Start using ${name}.`,
-    `${name} helps teams ${value} every day`,
-  ];
-}
-
 export default function HeadlineGeneratorView() {
   const t = useTranslations("aiTools.headlineGenerator");
+  const tErr = useTranslations("aiTools.errors");
   const [product, setProduct] = React.useState("");
   const [valueProp, setValueProp] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [results, setResults] = React.useState<string[] | null>(null);
+  const [errorCode, setErrorCode] = React.useState<string | null>(null);
 
-  function handleGenerate() {
+  async function handleGenerate() {
+    if (!product) return;
     setIsLoading(true);
     setResults(null);
-    setTimeout(() => {
-      setResults(buildResults(product, valueProp));
-      setIsLoading(false);
-    }, 900);
+    setErrorCode(null);
+    const response = await generateHeadlines(product, valueProp);
+    setIsLoading(false);
+    if (response.ok) {
+      setResults(response.data.headlines);
+    } else {
+      setErrorCode(response.errorCode);
+    }
   }
 
   return (
@@ -64,7 +61,7 @@ export default function HeadlineGeneratorView() {
               onChange={(e) => setValueProp(e.target.value)}
             />
           </Field>
-          <Button className="w-full" onClick={handleGenerate} disabled={isLoading}>
+          <Button className="w-full" onClick={handleGenerate} disabled={isLoading || !product}>
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
             {t("form.submit")}
           </Button>
@@ -76,6 +73,12 @@ export default function HeadlineGeneratorView() {
           <CardTitle className="text-base">{t("result.cardTitle")}</CardTitle>
         </CardHeader>
         <CardContent>
+          {errorCode && !isLoading && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertTitle>{tErr("title")}</AlertTitle>
+              <AlertDescription>{tErr.has(errorCode) ? tErr(errorCode) : tErr("generic")}</AlertDescription>
+            </Alert>
+          )}
           <ToolResultPanel
             isLoading={isLoading}
             hasResult={results !== null}

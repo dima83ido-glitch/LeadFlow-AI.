@@ -63,6 +63,35 @@ export const emailDraftResultSchema = z.object({
 
 export type EmailDraftResult = z.infer<typeof emailDraftResultSchema>;
 
+export const emailRewriteResultSchema = z.object({
+  rewrittenText: z.string(),
+});
+
+export type EmailRewriteResult = z.infer<typeof emailRewriteResultSchema>;
+
+export const headlineGeneratorResultSchema = z.object({
+  headlines: z.array(z.string()).min(3).max(8),
+});
+
+export type HeadlineGeneratorResult = z.infer<typeof headlineGeneratorResultSchema>;
+
+export const ctaGeneratorResultSchema = z.object({
+  ctas: z.array(z.string()).min(3).max(8),
+});
+
+export type CtaGeneratorResult = z.infer<typeof ctaGeneratorResultSchema>;
+
+const subjectVariantSchema = z.object({
+  text: z.string(),
+  openRate: z.number().min(0).max(100),
+});
+
+export const subjectGeneratorResultSchema = z.object({
+  subjects: z.array(subjectVariantSchema).min(3).max(8),
+});
+
+export type SubjectGeneratorResult = z.infer<typeof subjectGeneratorResultSchema>;
+
 // ---------------------------------------------------------------------------
 // Onboarding personalization
 // ---------------------------------------------------------------------------

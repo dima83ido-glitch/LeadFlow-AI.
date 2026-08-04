@@ -40,7 +40,7 @@ export async function analyzeSeo(url: string): Promise<AiActionResult<SeoAuditRe
     const parsed = seoAuditResultSchema.safeParse(JSON.parse(raw));
     if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
 
-    await logSystemEvent({ message: "AI SEO audit generated", feature: "ai.seoAudit" });
+    logSystemEvent({ message: "AI SEO audit generated", feature: "ai.seoAudit" }).catch(() => {});
     return { ok: true, data: parsed.data };
   } catch {
     return { ok: false, errorCode: "AI_ERROR" };

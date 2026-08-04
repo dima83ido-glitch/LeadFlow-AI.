@@ -67,7 +67,7 @@ export async function sendAssistantMessage(
       if (toolCalls.length === 0) {
         const reply = message.content?.trim();
         if (!reply) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
-        await logSystemEvent({ message: "AI assistant message", feature: "ai.assistant" });
+        logSystemEvent({ message: "AI assistant message", feature: "ai.assistant" }).catch(() => {});
         return { ok: true, data: { reply } };
       }
 
@@ -87,7 +87,7 @@ export async function sendAssistantMessage(
 
         const result = await executeAssistantTool(call.function.name, args, { workspaceId, userId, locale });
         if (result.ok) {
-          await logSystemEvent({ message: `AI assistant tool: ${call.function.name}`, feature: "ai.assistant" });
+          logSystemEvent({ message: `AI assistant tool: ${call.function.name}`, feature: "ai.assistant" }).catch(() => {});
         }
 
         messages.push({
