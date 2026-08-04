@@ -7,6 +7,9 @@
     "pageDescription": "Організації, з якими ви працюєте.",
     "emptyTitle": "Поки немає компаній",
     "emptyDescription": "Компанії, для яких ви додасте контакти або угоди, з'являться тут.",
+    "searchPlaceholder": "Пошук компаній...",
+    "noMatchTitle": "Компаній не знайдено",
+    "noMatchDescription": "Спробуйте інший запит.",
     "columns": {
       "company": "Компанія",
       "size": "Розмір",
@@ -23,7 +26,29 @@
     "deleteTitle": "Видалити цю компанію?",
     "deleteDescription": "Це назавжди видалить {name} та всі пов'язані записи з вашої CRM.",
     "deleteConfirm": "Видалити компанію",
-    "deletedToast": "{name} видалено."
+    "deletedToast": "{name} видалено.",
+    "updatedToast": "{name} оновлено.",
+    "deleteBlockedToast": "У {name} є пов'язані контакти, угоди, ліди або нотатки. Спочатку видаліть їх.",
+    "addDialog": {
+      "trigger": "Додати компанію",
+      "title": "Додати компанію",
+      "editTitle": "Редагувати компанію",
+      "editDescription": "Оновіть дані компанії.",
+      "description": "Додайте нову компанію до вашої CRM.",
+      "nameLabel": "Назва компанії",
+      "nameRequired": "Вкажіть назву компанії",
+      "domainLabel": "Домен сайту",
+      "domainPlaceholder": "наприклад, acme.com",
+      "industryLabel": "Галузь",
+      "sizeLabel": "Розмір компанії",
+      "sizePlaceholder": "наприклад, 50-200",
+      "countryLabel": "Країна",
+      "cityLabel": "Місто",
+      "addressLabel": "Адреса",
+      "submit": "Додати компанію",
+      "editSubmit": "Зберегти компанію",
+      "successToast": "{name} додано до вашої CRM."
+    }
   },
   "contacts": {
     "pageTitle": "Контакти",

@@ -7,6 +7,9 @@
     "pageDescription": "Организации, с которыми вы работаете.",
     "emptyTitle": "Пока нет компаний",
     "emptyDescription": "Компании, для которых вы добавите контакты или сделки, появятся здесь.",
+    "searchPlaceholder": "Поиск компаний...",
+    "noMatchTitle": "Компании не найдены",
+    "noMatchDescription": "Попробуйте другой запрос.",
     "columns": {
       "company": "Компания",
       "size": "Размер",
@@ -23,7 +26,29 @@
     "deleteTitle": "Удалить эту компанию?",
     "deleteDescription": "Это навсегда удалит {name} и все связанные записи из вашей CRM.",
     "deleteConfirm": "Удалить компанию",
-    "deletedToast": "{name} удалена."
+    "deletedToast": "{name} удалена.",
+    "updatedToast": "{name} обновлена.",
+    "deleteBlockedToast": "У {name} есть связанные контакты, сделки, лиды или заметки. Сначала удалите их.",
+    "addDialog": {
+      "trigger": "Добавить компанию",
+      "title": "Добавить компанию",
+      "editTitle": "Редактировать компанию",
+      "editDescription": "Обновите данные компании.",
+      "description": "Добавьте новую компанию в вашу CRM.",
+      "nameLabel": "Название компании",
+      "nameRequired": "Укажите название компании",
+      "domainLabel": "Домен сайта",
+      "domainPlaceholder": "например, acme.com",
+      "industryLabel": "Отрасль",
+      "sizeLabel": "Размер компании",
+      "sizePlaceholder": "например, 50-200",
+      "countryLabel": "Страна",
+      "cityLabel": "Город",
+      "addressLabel": "Адрес",
+      "submit": "Добавить компанию",
+      "editSubmit": "Сохранить компанию",
+      "successToast": "{name} добавлена в вашу CRM."
+    }
   },
   "contacts": {
     "pageTitle": "Контакты",

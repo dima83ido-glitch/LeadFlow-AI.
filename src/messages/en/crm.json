@@ -7,6 +7,9 @@
     "pageDescription": "Organizations you're working with.",
     "emptyTitle": "No companies yet",
     "emptyDescription": "Companies you add contacts or deals for will show up here.",
+    "searchPlaceholder": "Search companies...",
+    "noMatchTitle": "No matching companies",
+    "noMatchDescription": "Try a different search term.",
     "columns": {
       "company": "Company",
       "size": "Size",
@@ -23,7 +26,29 @@
     "deleteTitle": "Delete this company?",
     "deleteDescription": "This will permanently remove {name} and its associated records from your CRM.",
     "deleteConfirm": "Delete company",
-    "deletedToast": "{name} was deleted."
+    "deletedToast": "{name} was deleted.",
+    "updatedToast": "{name} was updated.",
+    "deleteBlockedToast": "{name} has linked contacts, deals, leads, or notes. Remove those first.",
+    "addDialog": {
+      "trigger": "Add Company",
+      "title": "Add Company",
+      "editTitle": "Edit Company",
+      "editDescription": "Update this company's details.",
+      "description": "Add a new company to your CRM.",
+      "nameLabel": "Company name",
+      "nameRequired": "Company name is required",
+      "domainLabel": "Website domain",
+      "domainPlaceholder": "e.g. acme.com",
+      "industryLabel": "Industry",
+      "sizeLabel": "Company size",
+      "sizePlaceholder": "e.g. 50-200",
+      "countryLabel": "Country",
+      "cityLabel": "City",
+      "addressLabel": "Address",
+      "submit": "Add Company",
+      "editSubmit": "Save Company",
+      "successToast": "{name} was added to your CRM."
+    }
   },
   "contacts": {
     "pageTitle": "Contacts",

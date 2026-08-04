@@ -3,7 +3,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import type { useTranslations } from "next-intl";
-import { toast } from "sonner";
 
 import type { Locale } from "@/i18n/config";
 import type { Company } from "@/types/company";
@@ -30,6 +29,7 @@ function initials(name: string) {
 export function getCompaniesColumns(
   t: ReturnType<typeof useTranslations>,
   locale: Locale,
+  handlers: { onEdit: (company: Company) => void; onDelete: (company: Company) => void },
 ): ColumnDef<Company>[] {
   return [
     {
@@ -98,7 +98,7 @@ export function getCompaniesColumns(
                 <MoreHorizontal className="size-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => toast.info(t("crm.common.editNotWired"))}>
+                <DropdownMenuItem onClick={() => handlers.onEdit(company)}>
                   <Pencil />
                   {t("common.actions.edit")}
                 </DropdownMenuItem>
@@ -117,7 +117,7 @@ export function getCompaniesColumns(
               title={t("crm.companies.deleteTitle")}
               description={t("crm.companies.deleteDescription", { name: company.name })}
               confirmLabel={t("crm.companies.deleteConfirm")}
-              onConfirm={() => toast.success(t("crm.companies.deletedToast", { name: company.name }))}
+              onConfirm={() => handlers.onDelete(company)}
             />
           </div>
         );

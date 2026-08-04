@@ -5,6 +5,7 @@ import { prisma } from "@/lib/db";
 import { getCurrentWorkspaceId } from "@/lib/workspace";
 import type { Company } from "@/types/company";
 import { PageHeader } from "@/components/shared/page-header";
+import { AddCompanyDialog } from "@/components/crm/add-company-dialog";
 import { CompaniesView } from "@/components/crm/companies-view";
 
 export const metadata: Metadata = { title: "Companies" };
@@ -37,7 +38,11 @@ export default async function CompaniesPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title={t("pageTitle")} description={t("pageDescription")} />
+      <PageHeader
+        title={t("pageTitle")}
+        description={t("pageDescription")}
+        actions={<AddCompanyDialog />}
+      />
       <CompaniesView companies={companies} />
     </div>
   );
