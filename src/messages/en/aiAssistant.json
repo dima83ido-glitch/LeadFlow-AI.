@@ -21,6 +21,23 @@
     "muteLabel": "Mute",
     "unmuteLabel": "Unmute",
     "micUnsupported": "Voice input isn't supported in this browser.",
+    "voice": {
+      "states": {
+        "idle": "Voice mode ready",
+        "listening": "Listening…",
+        "thinking": "Thinking…",
+        "speaking": "Speaking…",
+        "muted": "Muted",
+        "disabled": "Voice mode off",
+        "interruptHint": "Tap to interrupt"
+      },
+      "errors": {
+        "notSupported": "Voice input isn't supported in this browser.",
+        "permissionDenied": "Microphone access was denied — allow it in your browser settings to use Voice Mode.",
+        "micError": "There was a problem with the microphone. Please try again.",
+        "synthesisUnavailable": "Voice replies aren't supported in this browser — showing text instead."
+      }
+    },
     "errors": {
       "generic": "Something went wrong. Please try again.",
       "RATE_LIMITED": "You've sent a lot of messages — please wait a few minutes and try again.",

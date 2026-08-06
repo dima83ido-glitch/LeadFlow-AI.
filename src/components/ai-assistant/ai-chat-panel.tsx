@@ -1,13 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { Mic, Send, Sparkles, Volume2, VolumeX } from "lucide-react";
+import { Loader2, Mic, Send, Sparkles, Volume2, VolumeX } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { sendAssistantMessage } from "@/lib/actions/ai-assistant-chat";
 import { createSpeechRecognizer, isSpeechRecognitionSupported } from "@/lib/voice/speech-recognition";
 import { useVoiceMode } from "@/lib/voice/use-voice-mode";
+import { useAiAssistant } from "@/components/ai-assistant/ai-assistant-provider";
+import { EarthScene } from "@/components/ai-assistant/earth-scene";
+import { VoiceStatusBar } from "@/components/ai-assistant/voice-status-bar";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
@@ -32,11 +36,13 @@ const LOCALE_TO_BCP47: Record<string, string> = {
   uk: "uk-UA",
 };
 
-export function AiChatPanel({ className }: { className?: string }) {
+export function AiChatPanel({ className, earthSceneClassName }: { className?: string; earthSceneClassName?: string }) {
   const t = useTranslations("aiAssistant.chat");
+  const tVoiceErrors = useTranslations("aiAssistant.chat.voice.errors");
   const suggestions = t.raw("suggestions") as string[];
   const locale = useLocale();
   const bcp47Lang = LOCALE_TO_BCP47[locale] ?? "en-US";
+  const { open } = useAiAssistant();
 
   const [messages, setMessages] = React.useState<ChatMessage[]>(() => [
     { id: nextId(), role: "assistant", content: t("seedMessage") },
@@ -47,7 +53,11 @@ export function AiChatPanel({ className }: { className?: string }) {
   const listRef = React.useRef<HTMLDivElement>(null);
   const recognizerRef = React.useRef<ReturnType<typeof createSpeechRecognizer> | null>(null);
 
-  const voice = useVoiceMode(bcp47Lang);
+  const sendMessageRef = React.useRef<(text: string) => void>(() => {});
+  const voice = useVoiceMode(bcp47Lang, {
+    active: open,
+    onFinalTranscript: (text) => sendMessageRef.current(text),
+  });
   const speechSupported = React.useMemo(() => isSpeechRecognitionSupported(), []);
 
   React.useEffect(() => {
@@ -60,10 +70,18 @@ export function AiChatPanel({ className }: { className?: string }) {
     };
   }, []);
 
+  React.useEffect(() => {
+    if (!voice.lastError) return;
+    toast.error(tVoiceErrors(voice.lastError));
+  }, [voice.lastError, tVoiceErrors]);
+
   function sendMessage(text: string) {
     const trimmed = text.trim();
     if (!trimmed || isTyping) return;
 
+    // A new turn is starting — silence anything voice-related still in
+    // flight from the previous one (TTS playback or a lingering listener)
+    // before it can race with this message.
     voice.stopSpeaking();
 
     const userMessage: ChatMessage = { id: nextId(), role: "user", content: trimmed };
@@ -78,22 +96,23 @@ export function AiChatPanel({ className }: { className?: string }) {
       .then((response) => {
         if (response.ok) {
           setMessages((prev) => [...prev, { id: nextId(), role: "assistant", content: response.data.reply }]);
-          voice.speak(response.data.reply);
+          voice.speakReply(response.data.reply);
         } else {
           const errorText = t.has(`errors.${response.errorCode}`)
             ? t(`errors.${response.errorCode}`)
             : t("errors.generic");
           setMessages((prev) => [...prev, { id: nextId(), role: "assistant", content: errorText, isError: true }]);
+          voice.speakReply(errorText);
         }
       })
       .catch(() => {
-        setMessages((prev) => [
-          ...prev,
-          { id: nextId(), role: "assistant", content: t("errors.generic"), isError: true },
-        ]);
+        const errorText = t("errors.generic");
+        setMessages((prev) => [...prev, { id: nextId(), role: "assistant", content: errorText, isError: true }]);
+        voice.speakReply(errorText);
       })
       .finally(() => setIsTyping(false));
   }
+  sendMessageRef.current = sendMessage;
 
   function toggleMic() {
     if (!speechSupported) return;
@@ -122,21 +141,36 @@ export function AiChatPanel({ className }: { className?: string }) {
     recognizer.start();
   }
 
+  const voiceMicLabel = t(`voice.states.${voice.phase}`);
+  const voiceToggleDisabled = !voice.sttSupported || !voice.ttsSupported;
+
   return (
     <div className={cn("flex h-full min-h-0 flex-col", className)}>
+      <EarthScene
+        className={earthSceneClassName}
+        reactive={voice.phase === "listening" ? "listening" : voice.phase === "speaking" ? "speaking" : null}
+      />
+
       <div className="flex shrink-0 items-center justify-between gap-2 border-b px-4 py-2 sm:px-6">
-        <div className="flex items-center gap-2">
-          <Switch
-            id="voice-mode"
-            size="sm"
-            checked={voice.enabled}
-            onCheckedChange={voice.setEnabled}
-            disabled={!voice.ttsSupported}
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <div className="flex items-center gap-2">
+                <Switch
+                  id="voice-mode"
+                  size="sm"
+                  checked={voice.enabled}
+                  onCheckedChange={voice.setEnabled}
+                  disabled={voiceToggleDisabled}
+                />
+                <label htmlFor="voice-mode" className="text-muted-foreground text-xs font-medium">
+                  {t("voiceModeLabel")}
+                </label>
+              </div>
+            }
           />
-          <label htmlFor="voice-mode" className="text-muted-foreground text-xs font-medium">
-            {t("voiceModeLabel")}
-          </label>
-        </div>
+          {voiceToggleDisabled && <TooltipContent>{tVoiceErrors("notSupported")}</TooltipContent>}
+        </Tooltip>
         {voice.enabled && (
           <Button
             type="button"
@@ -159,6 +193,10 @@ export function AiChatPanel({ className }: { className?: string }) {
       </div>
 
       <div className="space-y-3 border-t bg-gradient-to-b from-transparent to-muted/30 p-3 sm:p-4">
+        {voice.enabled && voice.phase !== "disabled" && (
+          <VoiceStatusBar phase={voice.phase} micLevel={voice.micLevel} onInterrupt={voice.interrupt} />
+        )}
+
         {suggestions.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {suggestions.map((suggestion) => (
@@ -186,19 +224,42 @@ export function AiChatPanel({ className }: { className?: string }) {
               render={
                 <Button
                   type="button"
-                  variant={isListening ? "default" : "outline"}
+                  variant={voice.enabled ? (voice.phase === "listening" || voice.phase === "speaking" ? "default" : "outline") : isListening ? "default" : "outline"}
                   size="icon"
-                  aria-pressed={isListening}
-                  aria-label={t("voiceLabel")}
-                  onClick={toggleMic}
+                  aria-pressed={voice.enabled ? voice.phase === "listening" : isListening}
+                  aria-label={voice.enabled ? voiceMicLabel : t("voiceLabel")}
+                  onClick={voice.enabled ? voice.interrupt : toggleMic}
                   disabled={!speechSupported}
-                  className={cn("shrink-0", isListening && "ring-4 ring-primary/20")}
+                  className={cn(
+                    "shrink-0",
+                    !voice.enabled && isListening && "ring-4 ring-primary/20",
+                    voice.enabled && voice.phase === "listening" && "ring-4 ring-primary/20",
+                    voice.enabled && voice.phase === "speaking" && "ring-4 ring-[color-mix(in_oklch,var(--chart-3)_40%,transparent)]",
+                  )}
+                  style={
+                    voice.enabled && voice.phase === "listening"
+                      ? { transform: `scale(${1 + Math.min(1, voice.micLevel) * 0.18})` }
+                      : undefined
+                  }
                 >
-                  <Mic className={cn("size-4", isListening && "animate-pulse")} />
+                  {voice.enabled ? (
+                    voice.phase === "thinking" ? (
+                      <Loader2 className="size-4 animate-spin" />
+                    ) : voice.phase === "speaking" ? (
+                      <Volume2 className="size-4" />
+                    ) : voice.phase === "muted" ? (
+                      <VolumeX className="size-4" />
+                    ) : (
+                      <Mic className={cn("size-4", voice.phase === "listening" && "animate-pulse")} />
+                    )
+                  ) : (
+                    <Mic className={cn("size-4", isListening && "animate-pulse")} />
+                  )}
                 </Button>
               }
             />
             {!speechSupported && <TooltipContent>{t("micUnsupported")}</TooltipContent>}
+            {speechSupported && voice.enabled && <TooltipContent>{voiceMicLabel}</TooltipContent>}
           </Tooltip>
           <Textarea
             value={input}

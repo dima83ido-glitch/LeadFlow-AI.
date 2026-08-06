@@ -69,14 +69,37 @@ const SATELLITES = [
   { id: "b", radiusPct: 40, size: "size-1", duration: 50, reverse: true, tilt: 16, color: "bg-amber-200", glow: "shadow-[0_0_8px_3px_rgba(253,230,138,0.7)]" },
 ];
 
-export function EarthScene({ className }: { className?: string }) {
+export function EarthScene({
+  className,
+  reactive = null,
+}: {
+  className?: string;
+  /** Voice Mode feedback: a subtle extra glow/pulse layered on top of the scene's own ambient animation — never so strong it reads as a different component. */
+  reactive?: "listening" | "speaking" | null;
+}) {
   return (
     <div
       className={cn(
-        "relative isolate flex h-full items-center justify-center overflow-hidden bg-gradient-to-b from-[#040311] via-[#0a0722] to-[#050318]",
+        "relative isolate flex h-full items-center justify-center overflow-hidden bg-gradient-to-b from-[#040311] via-[#0a0722] to-[#050318] transition-[filter] duration-700 ease-out",
+        reactive === "listening" && "brightness-110 saturate-125",
+        reactive === "speaking" && "brightness-125 saturate-150",
         className,
       )}
     >
+      {/* Voice Mode reactive glow — cyan while listening, warm gold while speaking */}
+      {reactive && (
+        <div
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute inset-0 z-10 animate-[atmosphere-pulse_3.2s_ease-in-out_infinite] mix-blend-screen",
+            reactive === "listening" &&
+              "bg-[radial-gradient(circle_at_center,rgba(103,232,249,0.22),transparent_58%)]",
+            reactive === "speaking" &&
+              "bg-[radial-gradient(circle_at_center,rgba(217,168,74,0.28),transparent_58%)] animate-[atmosphere-pulse_1.6s_ease-in-out_infinite]",
+          )}
+        />
+      )}
+
       {/* deep space ambient wash */}
       <div
         aria-hidden

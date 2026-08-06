@@ -12,16 +12,14 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useAiAssistant } from "@/components/ai-assistant/ai-assistant-provider";
 
-// Both are only ever needed once the panel is actually opened, and the
-// Earth scene in particular is a lot of generated star/dust/meteor markup —
-// code-split them out of the main bundle instead of shipping them to every
-// page load for admins/Enterprise users who may never open the assistant.
+// Only ever needed once the panel is actually opened, and it's a lot of
+// generated star/dust/meteor markup plus the full voice-mode stack — code-
+// split it out of the main bundle instead of shipping it to every page load
+// for admins/Enterprise users who may never open the assistant. It renders
+// its own EarthScene banner internally (sized via earthSceneClassName) so
+// that Voice Mode's listening/speaking state can react on it directly.
 const AiChatPanel = dynamic(
   () => import("@/components/ai-assistant/ai-chat-panel").then((m) => m.AiChatPanel),
-  { ssr: false },
-);
-const EarthScene = dynamic(
-  () => import("@/components/ai-assistant/earth-scene").then((m) => m.EarthScene),
   { ssr: false },
 );
 
@@ -74,10 +72,10 @@ export function AiAssistantPanel() {
           </SheetHeader>
           <PanelHeader onClose={() => setOpen(false)} />
           {hasOpened && (
-            <div className="flex min-h-0 flex-1 flex-col">
-              <EarthScene className="h-48 w-full shrink-0 border-b border-white/5 sm:h-56" />
-              <AiChatPanel className="min-h-0 flex-1" />
-            </div>
+            <AiChatPanel
+              className="min-h-0 flex-1"
+              earthSceneClassName="h-48 w-full shrink-0 border-b border-white/5 sm:h-56"
+            />
           )}
         </SheetContent>
       </Sheet>
@@ -102,10 +100,10 @@ export function AiAssistantPanel() {
       >
         <PanelHeader onClose={() => setOpen(false)} />
         {hasOpened && (
-          <div className="flex min-h-0 flex-1 flex-col">
-            <EarthScene className="h-64 w-full shrink-0 border-b border-white/5 xl:h-72 2xl:h-80" />
-            <AiChatPanel className="min-h-0 flex-1" />
-          </div>
+          <AiChatPanel
+            className="min-h-0 flex-1"
+            earthSceneClassName="h-64 w-full shrink-0 border-b border-white/5 xl:h-72 2xl:h-80"
+          />
         )}
       </div>
     </>
