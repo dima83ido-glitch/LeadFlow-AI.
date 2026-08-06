@@ -24,7 +24,7 @@
     "errors": {
       "generic": "Something went wrong. Please try again.",
       "RATE_LIMITED": "You've sent a lot of messages — please wait a few minutes and try again.",
-      "MISSING_API_KEY": "AI features aren't configured yet — an OPENAI_API_KEY is required.",
+      "MISSING_API_KEY": "AI features aren't configured yet — an OPENROUTER_API_KEY is required.",
       "AI_EMPTY_RESPONSE": "The assistant didn't return a response. Please try again.",
       "AI_TOO_MANY_TOOL_CALLS": "That request needed too many steps to complete. Please try a simpler request.",
       "AI_ERROR": "The AI request failed. Please try again.",

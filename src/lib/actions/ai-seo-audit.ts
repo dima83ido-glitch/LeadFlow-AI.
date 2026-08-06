@@ -3,7 +3,7 @@
 import { getLocale } from "next-intl/server";
 
 import { requireWorkspace } from "@/lib/workspace";
-import { getOpenAIClientSafe, AI_MODEL } from "@/lib/ai/client";
+import { getAiChatCompletion } from "@/lib/ai/provider";
 import { fetchPageSignals } from "@/lib/ai/fetch-page";
 import { buildSeoAuditPrompt } from "@/lib/ai/prompts";
 import { seoAuditResultSchema, type SeoAuditResult } from "@/lib/ai/schemas";
@@ -11,12 +11,11 @@ import { logSystemEvent } from "@/lib/system-log";
 
 export type AiActionResult<T> = { ok: true; data: T } | { ok: false; errorCode: string };
 
+const FEATURE = "ai.seoAudit";
+
 export async function analyzeSeo(url: string): Promise<AiActionResult<SeoAuditResult>> {
   await requireWorkspace();
   if (!url.trim()) return { ok: false, errorCode: "URL_REQUIRED" };
-
-  const clientResult = getOpenAIClientSafe();
-  if ("error" in clientResult) return { ok: false, errorCode: clientResult.error };
 
   const pageResult = await fetchPageSignals(url);
   if (!pageResult.ok) return { ok: false, errorCode: pageResult.errorCode };
@@ -24,25 +23,34 @@ export async function analyzeSeo(url: string): Promise<AiActionResult<SeoAuditRe
   const locale = await getLocale();
   const { system, user } = buildSeoAuditPrompt(pageResult.signals, locale);
 
+  const result = await getAiChatCompletion({
+    feature: FEATURE,
+    messages: [
+      { role: "system", content: system },
+      { role: "user", content: user },
+    ],
+    jsonMode: true,
+    cache: true,
+  });
+  if (!result.ok) return { ok: false, errorCode: result.errorCode };
+
+  const raw = result.content;
+  if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
+
+  let json: unknown;
   try {
-    const completion = await clientResult.client.chat.completions.create({
-      model: AI_MODEL,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: user },
-      ],
-    });
-
-    const raw = completion.choices[0]?.message?.content;
-    if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
-
-    const parsed = seoAuditResultSchema.safeParse(JSON.parse(raw));
-    if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
-
-    logSystemEvent({ message: "AI SEO audit generated", feature: "ai.seoAudit" }).catch(() => {});
-    return { ok: true, data: parsed.data };
-  } catch {
-    return { ok: false, errorCode: "AI_ERROR" };
+    json = JSON.parse(raw);
+  } catch (err) {
+    console.error(`${FEATURE}: failed to parse AI response as JSON:`, err);
+    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
   }
+
+  const parsed = seoAuditResultSchema.safeParse(json);
+  if (!parsed.success) {
+    console.error(`${FEATURE}: AI response failed schema validation:`, parsed.error.message);
+    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
+  }
+
+  logSystemEvent({ message: "AI SEO audit generated", feature: FEATURE }).catch(() => {});
+  return { ok: true, data: parsed.data };
 }

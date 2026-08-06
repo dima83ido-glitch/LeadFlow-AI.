@@ -1,13 +1,13 @@
 "use server";
 
 import { getLocale } from "next-intl/server";
-import type OpenAI from "openai";
 
 import { prisma } from "@/lib/db";
 import { requireWorkspace } from "@/lib/workspace";
-import { getOpenAIClientSafe, AI_MODEL } from "@/lib/ai/client";
+import { getAiChatCompletion } from "@/lib/ai/provider";
+import type { AiChatMessage } from "@/lib/ai/types";
 import { buildAssistantSystemPrompt } from "@/lib/ai/prompts";
-import { getAssistantOpenAiTools, executeAssistantTool } from "@/lib/ai/assistant-tools";
+import { getAssistantTools, executeAssistantTool } from "@/lib/ai/assistant-tools";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { logSystemEvent } from "@/lib/system-log";
 
@@ -28,56 +28,38 @@ export async function sendAssistantMessage(
 
   if (history.length === 0) return { ok: false, errorCode: "EMPTY_HISTORY" };
 
-  const clientResult = getOpenAIClientSafe();
-  if ("error" in clientResult) return { ok: false, errorCode: clientResult.error };
-
-  const locale = await getLocale();
-  const workspace = await prisma.workspace.findUnique({
-    where: { id: workspaceId },
-    select: { hasExistingBusiness: true, businessType: true },
-  });
-  const businessContext =
-    workspace?.hasExistingBusiness === null || workspace?.hasExistingBusiness === undefined
-      ? null
-      : { hasExistingBusiness: workspace.hasExistingBusiness, businessType: workspace.businessType };
-  const systemPrompt = buildAssistantSystemPrompt(locale, businessContext);
-  const tools = getAssistantOpenAiTools();
-
-  const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
-    { role: "system", content: systemPrompt },
-    ...history.slice(-MAX_HISTORY_MESSAGES).map(
-      (m): OpenAI.Chat.Completions.ChatCompletionMessageParam => ({ role: m.role, content: m.content }),
-    ),
-  ];
-
   try {
+    const locale = await getLocale();
+    const workspace = await prisma.workspace.findUnique({
+      where: { id: workspaceId },
+      select: { hasExistingBusiness: true, businessType: true },
+    });
+    const businessContext =
+      workspace?.hasExistingBusiness === null || workspace?.hasExistingBusiness === undefined
+        ? null
+        : { hasExistingBusiness: workspace.hasExistingBusiness, businessType: workspace.businessType };
+    const systemPrompt = buildAssistantSystemPrompt(locale, businessContext);
+    const tools = getAssistantTools();
+
+    const messages: AiChatMessage[] = [
+      { role: "system", content: systemPrompt },
+      ...history.slice(-MAX_HISTORY_MESSAGES).map((m): AiChatMessage => ({ role: m.role, content: m.content })),
+    ];
+
     for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
-      const completion = await clientResult.client.chat.completions.create({
-        model: AI_MODEL,
-        messages,
-        tools,
-        tool_choice: "auto",
-      });
+      const result = await getAiChatCompletion({ feature: "ai.assistant", messages, tools });
+      if (!result.ok) return { ok: false, errorCode: result.errorCode };
 
-      const choice = completion.choices[0];
-      const message = choice?.message;
-      if (!message) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
-
-      const toolCalls = message.tool_calls?.filter((call) => call.type === "function") ?? [];
-      if (toolCalls.length === 0) {
-        const reply = message.content?.trim();
+      if (result.toolCalls.length === 0) {
+        const reply = result.content?.trim();
         if (!reply) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
         logSystemEvent({ message: "AI assistant message", feature: "ai.assistant" }).catch(() => {});
         return { ok: true, data: { reply } };
       }
 
-      messages.push({
-        role: "assistant",
-        content: message.content ?? null,
-        tool_calls: toolCalls,
-      });
+      messages.push({ role: "assistant", content: result.content, tool_calls: result.toolCalls });
 
-      for (const call of toolCalls) {
+      for (const call of result.toolCalls) {
         let args: unknown = {};
         try {
           args = call.function.arguments ? JSON.parse(call.function.arguments) : {};
@@ -85,21 +67,26 @@ export async function sendAssistantMessage(
           args = {};
         }
 
-        const result = await executeAssistantTool(call.function.name, args, { workspaceId, userId, locale });
-        if (result.ok) {
-          logSystemEvent({ message: `AI assistant tool: ${call.function.name}`, feature: "ai.assistant" }).catch(() => {});
+        const toolResult = await executeAssistantTool(call.function.name, args, { workspaceId, userId, locale });
+        if (toolResult.ok) {
+          logSystemEvent({ message: `AI assistant tool: ${call.function.name}`, feature: "ai.assistant" }).catch(
+            () => {},
+          );
         }
 
-        messages.push({
-          role: "tool",
-          tool_call_id: call.id,
-          content: result.summary,
-        });
+        messages.push({ role: "tool", tool_call_id: call.id, content: toolResult.summary });
       }
     }
 
     return { ok: false, errorCode: "AI_TOO_MANY_TOOL_CALLS" };
-  } catch {
+  } catch (error) {
+    console.error("sendAssistantMessage: unexpected failure:", error);
+    logSystemEvent({
+      level: "ERROR",
+      message: "AI assistant unexpected failure",
+      feature: "ai.assistant",
+      context: { error: error instanceof Error ? error.message : String(error) },
+    }).catch(() => {});
     return { ok: false, errorCode: "AI_ERROR" };
   }
 }

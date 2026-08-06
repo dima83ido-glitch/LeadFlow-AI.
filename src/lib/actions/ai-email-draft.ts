@@ -3,7 +3,7 @@
 import { getLocale } from "next-intl/server";
 
 import { requireWorkspace } from "@/lib/workspace";
-import { getOpenAIClientSafe, AI_MODEL } from "@/lib/ai/client";
+import { getAiChatCompletion } from "@/lib/ai/provider";
 import { buildEmailDraftPrompt } from "@/lib/ai/prompts";
 import { emailDraftResultSchema, type EmailDraftResult } from "@/lib/ai/schemas";
 import { logSystemEvent } from "@/lib/system-log";
@@ -17,35 +17,43 @@ export type EmailDraftInput = {
   keyPoints: string;
 };
 
+const FEATURE = "ai.emailDraft";
+
 export async function draftEmail(input: EmailDraftInput): Promise<AiActionResult<EmailDraftResult>> {
   await requireWorkspace();
   if (!input.purpose.trim()) return { ok: false, errorCode: "PURPOSE_REQUIRED" };
 
-  const clientResult = getOpenAIClientSafe();
-  if ("error" in clientResult) return { ok: false, errorCode: clientResult.error };
-
   const locale = await getLocale();
   const { system, user } = buildEmailDraftPrompt(input, locale);
 
+  const result = await getAiChatCompletion({
+    feature: FEATURE,
+    messages: [
+      { role: "system", content: system },
+      { role: "user", content: user },
+    ],
+    jsonMode: true,
+    cache: true,
+  });
+  if (!result.ok) return { ok: false, errorCode: result.errorCode };
+
+  const raw = result.content;
+  if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
+
+  let json: unknown;
   try {
-    const completion = await clientResult.client.chat.completions.create({
-      model: AI_MODEL,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: user },
-      ],
-    });
-
-    const raw = completion.choices[0]?.message?.content;
-    if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
-
-    const parsed = emailDraftResultSchema.safeParse(JSON.parse(raw));
-    if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
-
-    logSystemEvent({ message: "AI email draft generated", feature: "ai.emailDraft" }).catch(() => {});
-    return { ok: true, data: parsed.data };
-  } catch {
-    return { ok: false, errorCode: "AI_ERROR" };
+    json = JSON.parse(raw);
+  } catch (err) {
+    console.error(`${FEATURE}: failed to parse AI response as JSON:`, err);
+    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
   }
+
+  const parsed = emailDraftResultSchema.safeParse(json);
+  if (!parsed.success) {
+    console.error(`${FEATURE}: AI response failed schema validation:`, parsed.error.message);
+    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
+  }
+
+  logSystemEvent({ message: "AI email draft generated", feature: FEATURE }).catch(() => {});
+  return { ok: true, data: parsed.data };
 }

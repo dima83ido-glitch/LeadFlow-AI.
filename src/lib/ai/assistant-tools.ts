@@ -1,6 +1,6 @@
 import { z } from "zod";
-import type OpenAI from "openai";
 
+import type { AiTool } from "@/lib/ai/types";
 import { createCampaign } from "@/lib/actions/campaigns";
 import { createLead } from "@/lib/actions/leads";
 import { createContact } from "@/lib/actions/contacts";
@@ -464,7 +464,7 @@ export const ASSISTANT_TOOLS: ToolSpec<any>[] = [
   captureWebsiteBriefTool,
 ];
 
-export function getAssistantOpenAiTools(): OpenAI.Chat.Completions.ChatCompletionTool[] {
+export function getAssistantTools(): AiTool[] {
   return ASSISTANT_TOOLS.map((tool) => ({
     type: "function",
     function: {

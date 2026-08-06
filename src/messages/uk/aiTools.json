@@ -10,7 +10,7 @@
   "errors": {
     "title": "Щось пішло не так",
     "generic": "Не вдалося виконати запит. Спробуйте ще раз.",
-    "MISSING_API_KEY": "AI-функції ще не налаштовані — потрібен OPENAI_API_KEY.",
+    "MISSING_API_KEY": "AI-функції ще не налаштовані — потрібен OPENROUTER_API_KEY.",
     "URL_REQUIRED": "Спочатку вкажіть URL.",
     "TEXT_REQUIRED": "Спочатку введіть текст.",
     "INVALID_URL": "Схоже, це некоректний URL.",

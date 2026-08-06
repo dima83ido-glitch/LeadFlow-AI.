@@ -10,7 +10,7 @@
   "errors": {
     "title": "Something went wrong",
     "generic": "Couldn't complete this request. Please try again.",
-    "MISSING_API_KEY": "AI features aren't configured yet — an OPENAI_API_KEY is required.",
+    "MISSING_API_KEY": "AI features aren't configured yet — an OPENROUTER_API_KEY is required.",
     "URL_REQUIRED": "Enter a URL first.",
     "TEXT_REQUIRED": "Enter some text first.",
     "INVALID_URL": "That doesn't look like a valid URL.",

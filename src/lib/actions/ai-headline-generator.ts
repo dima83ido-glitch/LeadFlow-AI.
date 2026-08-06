@@ -3,12 +3,14 @@
 import { getLocale } from "next-intl/server";
 
 import { requireWorkspace } from "@/lib/workspace";
-import { getOpenAIClientSafe, AI_MODEL } from "@/lib/ai/client";
+import { getAiChatCompletion } from "@/lib/ai/provider";
 import { buildHeadlineGeneratorPrompt } from "@/lib/ai/prompts";
 import { headlineGeneratorResultSchema, type HeadlineGeneratorResult } from "@/lib/ai/schemas";
 import { logSystemEvent } from "@/lib/system-log";
 
 export type AiActionResult<T> = { ok: true; data: T } | { ok: false; errorCode: string };
+
+const FEATURE = "ai.headlineGenerator";
 
 export async function generateHeadlines(
   product: string,
@@ -17,31 +19,37 @@ export async function generateHeadlines(
   await requireWorkspace();
   if (!product.trim()) return { ok: false, errorCode: "PRODUCT_REQUIRED" };
 
-  const clientResult = getOpenAIClientSafe();
-  if ("error" in clientResult) return { ok: false, errorCode: clientResult.error };
-
   const locale = await getLocale();
   const { system, user } = buildHeadlineGeneratorPrompt(product, valueProp, locale);
 
+  const result = await getAiChatCompletion({
+    feature: FEATURE,
+    messages: [
+      { role: "system", content: system },
+      { role: "user", content: user },
+    ],
+    jsonMode: true,
+    cache: true,
+  });
+  if (!result.ok) return { ok: false, errorCode: result.errorCode };
+
+  const raw = result.content;
+  if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
+
+  let json: unknown;
   try {
-    const completion = await clientResult.client.chat.completions.create({
-      model: AI_MODEL,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: user },
-      ],
-    });
-
-    const raw = completion.choices[0]?.message?.content;
-    if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
-
-    const parsed = headlineGeneratorResultSchema.safeParse(JSON.parse(raw));
-    if (!parsed.success) return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
-
-    logSystemEvent({ message: "AI headlines generated", feature: "ai.headlineGenerator" }).catch(() => {});
-    return { ok: true, data: parsed.data };
-  } catch {
-    return { ok: false, errorCode: "AI_ERROR" };
+    json = JSON.parse(raw);
+  } catch (err) {
+    console.error(`${FEATURE}: failed to parse AI response as JSON:`, err);
+    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
   }
+
+  const parsed = headlineGeneratorResultSchema.safeParse(json);
+  if (!parsed.success) {
+    console.error(`${FEATURE}: AI response failed schema validation:`, parsed.error.message);
+    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
+  }
+
+  logSystemEvent({ message: "AI headlines generated", feature: FEATURE }).catch(() => {});
+  return { ok: true, data: parsed.data };
 }
