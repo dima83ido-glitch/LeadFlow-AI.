@@ -18,6 +18,7 @@
     "voiceLabel": "Голосовой ввод",
     "sendLabel": "Отправить сообщение",
     "voiceModeLabel": "Голосовой режим",
+    "languageLabel": "Язык голоса",
     "muteLabel": "Выключить звук",
     "unmuteLabel": "Включить звук",
     "micUnsupported": "Голосовой ввод не поддерживается в этом браузере.",

@@ -8,6 +8,22 @@ import { startAudioLevelMeter, type AudioLevelMeter } from "@/lib/voice/audio-le
 
 const ENABLED_KEY = "nexora:voice-mode-enabled";
 const MUTED_KEY = "nexora:voice-mode-muted";
+const LANGUAGE_KEY = "nexora:voice-mode-language";
+
+export type VoiceLanguage = "en" | "ru" | "uk";
+export const VOICE_LANGUAGES: VoiceLanguage[] = ["en", "ru", "uk"];
+
+export const VOICE_LANGUAGE_BCP47: Record<VoiceLanguage, string> = {
+  en: "en-US",
+  ru: "ru-RU",
+  uk: "uk-UA",
+};
+
+export const VOICE_LANGUAGE_LABELS: Record<VoiceLanguage, string> = {
+  ru: "Русский",
+  uk: "Українська",
+  en: "English",
+};
 
 export type VoicePhase = "disabled" | "idle" | "listening" | "thinking" | "speaking" | "muted";
 export type VoiceErrorKey = "notSupported" | "permissionDenied" | "micError" | "synthesisUnavailable";
@@ -21,26 +37,42 @@ const MUTED_DWELL_MS = 700;
 // onend/onerror can simply never fire. Without this, the hands-free loop
 // would hang in "speaking" forever instead of returning to listening.
 function speechWatchdogMs(text: string): number {
-  return Math.min(20000, Math.max(4000, text.length * 90));
+  return Math.min(45000, Math.max(4000, text.length * 90));
 }
+
+// Minimum length of an interim transcript captured while the assistant is
+// talking before it's treated as a genuine barge-in rather than mic noise
+// or the assistant's own voice leaking back through the microphone.
+const BARGE_IN_MIN_CHARS = 3;
 
 function readBoolean(key: string): boolean {
   if (typeof window === "undefined") return false;
   return window.localStorage.getItem(key) === "true";
 }
 
+function readLanguage(fallback: VoiceLanguage): VoiceLanguage {
+  if (typeof window === "undefined") return fallback;
+  const stored = window.localStorage.getItem(LANGUAGE_KEY);
+  return stored === "en" || stored === "ru" || stored === "uk" ? stored : fallback;
+}
+
 interface UseVoiceModeOptions {
   /** Whether the assistant panel is currently open — drives start/teardown of the whole session. */
   active: boolean;
+  /** Seeds the initial language before any explicit user choice has been persisted. */
+  defaultLanguage: VoiceLanguage;
   /** Called once per finished, non-empty user utterance. */
   onFinalTranscript: (text: string) => void;
 }
 
-export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoiceModeOptions) {
+type Turn = "idle" | "listening" | "thinking" | "speaking" | "muted-dwell";
+
+export function useVoiceMode({ active, defaultLanguage, onFinalTranscript }: UseVoiceModeOptions) {
   // Voice Mode is off by default per spec; persisted state is only read
   // after mount (effect below) to avoid an SSR/client hydration mismatch.
   const [enabled, setEnabledState] = React.useState(false);
   const [muted, setMutedState] = React.useState(false);
+  const [language, setLanguageState] = React.useState<VoiceLanguage>(defaultLanguage);
   const [phase, setPhase] = React.useState<VoicePhase>("disabled");
   const [micLevel, setMicLevel] = React.useState(0);
   const [lastError, setLastError] = React.useState<VoiceErrorKey | null>(null);
@@ -54,10 +86,14 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
   const errorTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Incremented on every start/teardown so async callbacks from a
-  // now-superseded recognition/speech session can recognize themselves as
-  // stale and no-op — the core defense against duplicate sessions, races,
-  // and leaks across rapid enable/disable/close/reopen cycles.
+  // now-superseded session (e.g. a TTS watchdog from a previous turn) can
+  // recognize themselves as stale and no-op.
   const sessionIdRef = React.useRef(0);
+
+  // What the hands-free loop is doing right now, tracked outside React state
+  // so recognizer callbacks (firing at arbitrary async timing) always see
+  // the live truth instead of a stale render's closure.
+  const turnRef = React.useRef<Turn>("idle");
 
   // Refs mirroring the latest props/state so stable callbacks (created once,
   // reused across renders) always see current values without needing to be
@@ -65,6 +101,7 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
   const enabledRef = React.useRef(enabled);
   const mutedRef = React.useRef(muted);
   const activeRef = React.useRef(active);
+  const languageRef = React.useRef(language);
   const onFinalTranscriptRef = React.useRef(onFinalTranscript);
   React.useEffect(() => {
     enabledRef.current = enabled;
@@ -82,6 +119,8 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
   React.useEffect(() => {
     setEnabledState(readBoolean(ENABLED_KEY));
     setMutedState(readBoolean(MUTED_KEY));
+    setLanguageState(readLanguage(defaultLanguage));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const showError = React.useCallback((key: VoiceErrorKey) => {
@@ -97,66 +136,78 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
     }
   }, []);
 
-  const startListening = React.useCallback(() => {
-    if (!enabledRef.current || !activeRef.current || !sttSupported) return;
-
-    sessionIdRef.current += 1;
-    const sessionId = sessionIdRef.current;
-
-    recognizerRef.current?.abort();
-    clearWatchdog();
+  // Lazily creates the single continuous recognizer for this session. It is
+  // never torn down between turns — it keeps listening straight through
+  // "thinking" and "speaking" so the user can barge in naturally, and so
+  // restarting it never creates a gap where speech could be missed.
+  const ensureRecognizer = React.useCallback(() => {
+    if (recognizerRef.current) return recognizerRef.current;
 
     const recognizer = createSpeechRecognizer({
-      lang,
-      onResult: (transcript, isFinal) => {
-        if (sessionIdRef.current !== sessionId || !isFinal) return;
-        const text = transcript.trim();
-        if (!text) {
-          // Recognized silence/noise as a final result with nothing said —
-          // keep the hands-free loop going rather than sending nothing.
-          if (enabledRef.current && activeRef.current) startListening();
-          else setPhase(enabledRef.current ? "idle" : "disabled");
-          return;
+      lang: VOICE_LANGUAGE_BCP47[languageRef.current],
+      onInterim: (text) => {
+        if (turnRef.current !== "speaking") return;
+        if (text.trim().length < BARGE_IN_MIN_CHARS) return;
+        // Barge-in: the user started talking while the assistant was still
+        // speaking — stop TTS immediately and hand control back to them.
+        turnRef.current = "listening";
+        cancelSpeech();
+        clearWatchdog();
+        setPhase("listening");
+      },
+      onFinal: (text) => {
+        if (!enabledRef.current || !activeRef.current) return;
+        if (turnRef.current === "thinking") return; // a turn is already in flight — drop the overlap
+        const trimmed = text.trim();
+        if (!trimmed) return;
+        if (turnRef.current === "speaking") {
+          cancelSpeech();
+          clearWatchdog();
         }
+        turnRef.current = "thinking";
         setPhase("thinking");
-        onFinalTranscriptRef.current(text);
+        onFinalTranscriptRef.current(trimmed);
       },
       onError: (error) => {
-        if (sessionIdRef.current !== sessionId) return;
-
-        if (error === "no-speech" || error === "aborted") {
-          // A pause with nothing said — not a real failure. Loop back to
-          // listening silently rather than surfacing an error on every gap.
-          if (enabledRef.current && activeRef.current) startListening();
-          else setPhase(enabledRef.current ? "idle" : "disabled");
-          return;
-        }
         if (error === "not-allowed" || error === "service-not-allowed") {
           showError("permissionDenied");
           setEnabledState(false);
           window.localStorage.setItem(ENABLED_KEY, "false");
+          turnRef.current = "idle";
           setPhase("disabled");
           return;
         }
         showError("micError");
+        turnRef.current = "idle";
         setPhase(enabledRef.current ? "idle" : "disabled");
-      },
-      onEnd: () => {
-        // Intentionally no-op: onResult/onError above own every state
-        // transition. onEnd fires after both and would otherwise race them.
       },
     });
 
+    recognizerRef.current = recognizer;
+    return recognizer;
+  }, [showError, clearWatchdog]);
+
+  const startSession = React.useCallback(() => {
+    if (!enabledRef.current || !activeRef.current) return;
+    if (!sttSupported) {
+      showError("notSupported");
+      setPhase("idle");
+      return;
+    }
+    if (enabledRef.current && !ttsSupported) showError("synthesisUnavailable");
+
+    sessionIdRef.current += 1;
+    const recognizer = ensureRecognizer();
     if (!recognizer) {
       showError("notSupported");
       setPhase("idle");
       return;
     }
 
-    recognizerRef.current = recognizer;
+    turnRef.current = "listening";
     setPhase("listening");
     recognizer.start();
-  }, [lang, sttSupported, showError, clearWatchdog]);
+  }, [sttSupported, ttsSupported, showError, ensureRecognizer]);
 
   const speakReply = React.useCallback(
     (text: string) => {
@@ -164,15 +215,18 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
       const sessionId = sessionIdRef.current;
 
       if (mutedRef.current || !ttsSupported || !text.trim()) {
+        turnRef.current = "muted-dwell";
         setPhase("muted");
         clearWatchdog();
         watchdogRef.current = setTimeout(() => {
           if (sessionIdRef.current !== sessionId) return;
-          startListening();
+          turnRef.current = "listening";
+          setPhase("listening");
         }, MUTED_DWELL_MS);
         return;
       }
 
+      turnRef.current = "speaking";
       setPhase("speaking");
       let settled = false;
       const finish = () => {
@@ -180,39 +234,49 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
         settled = true;
         clearWatchdog();
         if (sessionIdRef.current !== sessionId || !enabledRef.current || !activeRef.current) return;
-        startListening();
+        // A barge-in during playback may have already moved the turn back
+        // to "listening" — don't stomp that with a stale completion.
+        if (turnRef.current === "speaking") {
+          turnRef.current = "listening";
+          setPhase("listening");
+        }
       };
 
       clearWatchdog();
       watchdogRef.current = setTimeout(finish, speechWatchdogMs(text));
-      speakText(text, { lang, onEnd: finish, onError: finish });
+      speakText(text, { lang: VOICE_LANGUAGE_BCP47[languageRef.current], onEnd: finish, onError: finish });
     },
-    [lang, ttsSupported, startListening, clearWatchdog],
+    [ttsSupported, clearWatchdog],
   );
 
   /**
-   * Cancel whatever's currently happening without resuming — used when a new
-   * turn is about to start (e.g. the user typed instead of speaking while
-   * hands-free listening was still active). Bumps the session id so the
-   * aborted recognizer's async onerror("aborted") can't sneak in a stale
-   * restart-listening call right as we're about to move to "thinking".
+   * Silence anything voice-related still in flight without resuming — used
+   * when a new turn is about to start from typed input while hands-free
+   * mode is still active, so it can't race with the reply that's coming.
    */
   const stopSpeaking = React.useCallback(() => {
     sessionIdRef.current += 1;
     cancelSpeech();
-    recognizerRef.current?.abort();
     clearWatchdog();
+    if (enabledRef.current && activeRef.current) {
+      turnRef.current = "thinking";
+      setPhase("thinking");
+    }
   }, [clearWatchdog]);
 
-  /** User-initiated barge-in: stop the assistant talking (or listening) and immediately start listening again. */
+  /** User-initiated barge-in via the mic button: stop the assistant talking (or listening) and go straight back to listening. */
   const interrupt = React.useCallback(() => {
     sessionIdRef.current += 1;
     cancelSpeech();
-    recognizerRef.current?.abort();
     clearWatchdog();
-    if (enabledRef.current && activeRef.current) startListening();
-    else setPhase(enabledRef.current ? "idle" : "disabled");
-  }, [startListening, clearWatchdog]);
+    if (enabledRef.current && activeRef.current) {
+      turnRef.current = "listening";
+      setPhase("listening");
+    } else {
+      turnRef.current = "idle";
+      setPhase(enabledRef.current ? "idle" : "disabled");
+    }
+  }, [clearWatchdog]);
 
   const teardown = React.useCallback(() => {
     sessionIdRef.current += 1; // invalidate every in-flight callback
@@ -223,6 +287,7 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
     setMicLevel(0);
     cancelSpeech();
     clearWatchdog();
+    turnRef.current = "idle";
   }, [clearWatchdog]);
 
   const setEnabled = React.useCallback((value: boolean) => {
@@ -230,10 +295,37 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
     window.localStorage.setItem(ENABLED_KEY, String(value));
   }, []);
 
-  const setMuted = React.useCallback((value: boolean) => {
-    setMutedState(value);
-    window.localStorage.setItem(MUTED_KEY, String(value));
-    if (value) cancelSpeech();
+  const setMuted = React.useCallback(
+    (value: boolean) => {
+      setMutedState(value);
+      window.localStorage.setItem(MUTED_KEY, String(value));
+      if (value && turnRef.current === "speaking") {
+        cancelSpeech();
+        clearWatchdog();
+        turnRef.current = "listening";
+        setPhase("listening");
+      }
+    },
+    [clearWatchdog],
+  );
+
+  const setLanguage = React.useCallback((value: VoiceLanguage) => {
+    setLanguageState(value);
+    window.localStorage.setItem(LANGUAGE_KEY, value);
+    languageRef.current = value;
+    const recognizer = recognizerRef.current;
+    if (recognizer) {
+      recognizer.setLang(VOICE_LANGUAGE_BCP47[value]);
+      // Recognition language only takes effect on (re)start — restart now so
+      // switching languages mid-session is immediate rather than waiting for
+      // the next natural restart.
+      if (enabledRef.current && activeRef.current) {
+        recognizer.abort();
+        recognizer.start();
+        turnRef.current = "listening";
+        setPhase("listening");
+      }
+    }
   }, []);
 
   // The single source of truth for starting/stopping the whole hands-free
@@ -244,8 +336,9 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
   React.useEffect(() => {
     if (active && enabled) {
       setPhase("idle");
+      turnRef.current = "idle";
       audioMeterRef.current = startAudioLevelMeter(setMicLevel);
-      startListening();
+      startSession();
     } else {
       teardown();
       setPhase(enabled ? "idle" : "disabled");
@@ -268,6 +361,8 @@ export function useVoiceMode(lang: string, { active, onFinalTranscript }: UseVoi
     setEnabled,
     muted,
     setMuted,
+    language,
+    setLanguage,
     phase,
     micLevel,
     sttSupported,

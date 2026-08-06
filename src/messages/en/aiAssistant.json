@@ -18,6 +18,7 @@
     "voiceLabel": "Voice input",
     "sendLabel": "Send message",
     "voiceModeLabel": "Voice Mode",
+    "languageLabel": "Voice language",
     "muteLabel": "Mute",
     "unmuteLabel": "Unmute",
     "micUnsupported": "Voice input isn't supported in this browser.",

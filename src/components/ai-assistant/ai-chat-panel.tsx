@@ -1,18 +1,25 @@
 "use client";
 
 import * as React from "react";
-import { Loader2, Mic, Send, Sparkles, Volume2, VolumeX } from "lucide-react";
+import { Globe, Loader2, Mic, Send, Sparkles, Volume2, VolumeX } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { sendAssistantMessage } from "@/lib/actions/ai-assistant-chat";
 import { createSpeechRecognizer, isSpeechRecognitionSupported } from "@/lib/voice/speech-recognition";
-import { useVoiceMode } from "@/lib/voice/use-voice-mode";
+import {
+  useVoiceMode,
+  VOICE_LANGUAGE_BCP47,
+  VOICE_LANGUAGE_LABELS,
+  VOICE_LANGUAGES,
+  type VoiceLanguage,
+} from "@/lib/voice/use-voice-mode";
 import { useAiAssistant } from "@/components/ai-assistant/ai-assistant-provider";
 import { EarthScene } from "@/components/ai-assistant/earth-scene";
 import { VoiceStatusBar } from "@/components/ai-assistant/voice-status-bar";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -30,18 +37,16 @@ function nextId() {
   return `msg-${messageId}`;
 }
 
-const LOCALE_TO_BCP47: Record<string, string> = {
-  ru: "ru-RU",
-  en: "en-US",
-  uk: "uk-UA",
-};
+function toVoiceLanguage(locale: string): VoiceLanguage {
+  return locale === "ru" || locale === "en" || locale === "uk" ? locale : "en";
+}
 
 export function AiChatPanel({ className, earthSceneClassName }: { className?: string; earthSceneClassName?: string }) {
   const t = useTranslations("aiAssistant.chat");
   const tVoiceErrors = useTranslations("aiAssistant.chat.voice.errors");
   const suggestions = t.raw("suggestions") as string[];
   const locale = useLocale();
-  const bcp47Lang = LOCALE_TO_BCP47[locale] ?? "en-US";
+  const defaultVoiceLanguage = React.useMemo(() => toVoiceLanguage(locale), [locale]);
   const { open } = useAiAssistant();
 
   const [messages, setMessages] = React.useState<ChatMessage[]>(() => [
@@ -52,10 +57,12 @@ export function AiChatPanel({ className, earthSceneClassName }: { className?: st
   const [isListening, setIsListening] = React.useState(false);
   const listRef = React.useRef<HTMLDivElement>(null);
   const recognizerRef = React.useRef<ReturnType<typeof createSpeechRecognizer> | null>(null);
+  const dictationBaseRef = React.useRef("");
 
   const sendMessageRef = React.useRef<(text: string) => void>(() => {});
-  const voice = useVoiceMode(bcp47Lang, {
+  const voice = useVoiceMode({
     active: open,
+    defaultLanguage: defaultVoiceLanguage,
     onFinalTranscript: (text) => sendMessageRef.current(text),
   });
   const speechSupported = React.useMemo(() => isSpeechRecognitionSupported(), []);
@@ -66,7 +73,7 @@ export function AiChatPanel({ className, earthSceneClassName }: { className?: st
 
   React.useEffect(() => {
     return () => {
-      recognizerRef.current?.stop();
+      recognizerRef.current?.abort();
     };
   }, []);
 
@@ -92,7 +99,7 @@ export function AiChatPanel({ className, earthSceneClassName }: { className?: st
 
     const apiHistory = nextMessages.map((m) => ({ role: m.role, content: m.content }));
 
-    sendAssistantMessage(apiHistory)
+    sendAssistantMessage(apiHistory, voice.language)
       .then((response) => {
         if (response.ok) {
           setMessages((prev) => [...prev, { id: nextId(), role: "assistant", content: response.data.reply }]);
@@ -118,16 +125,21 @@ export function AiChatPanel({ className, earthSceneClassName }: { className?: st
     if (!speechSupported) return;
 
     if (isListening) {
-      recognizerRef.current?.stop();
+      recognizerRef.current?.abort();
+      recognizerRef.current = null;
+      setIsListening(false);
       return;
     }
 
+    dictationBaseRef.current = input;
     const recognizer = createSpeechRecognizer({
-      lang: bcp47Lang,
-      onResult: (transcript) => setInput(transcript),
-      onEnd: () => {
-        setIsListening(false);
-        recognizerRef.current = null;
+      lang: VOICE_LANGUAGE_BCP47[voice.language],
+      onInterim: (text) => {
+        setInput(dictationBaseRef.current ? `${dictationBaseRef.current} ${text}` : text);
+      },
+      onFinal: (text) => {
+        dictationBaseRef.current = dictationBaseRef.current ? `${dictationBaseRef.current} ${text}` : text;
+        setInput(dictationBaseRef.current);
       },
       onError: () => {
         setIsListening(false);
@@ -148,7 +160,15 @@ export function AiChatPanel({ className, earthSceneClassName }: { className?: st
     <div className={cn("flex h-full min-h-0 flex-col", className)}>
       <EarthScene
         className={earthSceneClassName}
-        reactive={voice.phase === "listening" ? "listening" : voice.phase === "speaking" ? "speaking" : null}
+        reactive={
+          voice.phase === "listening"
+            ? "listening"
+            : voice.phase === "speaking"
+              ? "speaking"
+              : voice.phase === "thinking"
+                ? "thinking"
+                : null
+        }
       />
 
       <div className="flex shrink-0 items-center justify-between gap-2 border-b px-4 py-2 sm:px-6">
@@ -171,18 +191,41 @@ export function AiChatPanel({ className, earthSceneClassName }: { className?: st
           />
           {voiceToggleDisabled && <TooltipContent>{tVoiceErrors("notSupported")}</TooltipContent>}
         </Tooltip>
-        {voice.enabled && (
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon-sm"
-            aria-label={voice.muted ? t("unmuteLabel") : t("muteLabel")}
-            aria-pressed={voice.muted}
-            onClick={() => voice.setMuted(!voice.muted)}
-          >
-            {voice.muted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
-          </Button>
-        )}
+
+        <div className="flex items-center gap-1">
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Select value={voice.language} onValueChange={(value) => value && voice.setLanguage(value as typeof voice.language)}>
+                  <SelectTrigger id="voice-language" size="sm" aria-label={t("languageLabel")}>
+                    <Globe className="size-3.5 text-muted-foreground" />
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {VOICE_LANGUAGES.map((lang) => (
+                      <SelectItem key={lang} value={lang}>
+                        {VOICE_LANGUAGE_LABELS[lang]}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              }
+            />
+            <TooltipContent>{t("languageLabel")}</TooltipContent>
+          </Tooltip>
+          {voice.enabled && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-sm"
+              aria-label={voice.muted ? t("unmuteLabel") : t("muteLabel")}
+              aria-pressed={voice.muted}
+              onClick={() => voice.setMuted(!voice.muted)}
+            >
+              {voice.muted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
+            </Button>
+          )}
+        </div>
       </div>
 
       <div ref={listRef} className="flex-1 min-h-0 space-y-5 overflow-y-auto px-4 py-5 sm:px-6">

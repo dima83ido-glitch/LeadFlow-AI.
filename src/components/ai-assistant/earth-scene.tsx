@@ -75,7 +75,7 @@ export function EarthScene({
 }: {
   className?: string;
   /** Voice Mode feedback: a subtle extra glow/pulse layered on top of the scene's own ambient animation — never so strong it reads as a different component. */
-  reactive?: "listening" | "speaking" | null;
+  reactive?: "listening" | "thinking" | "speaking" | null;
 }) {
   return (
     <div
@@ -86,7 +86,7 @@ export function EarthScene({
         className,
       )}
     >
-      {/* Voice Mode reactive glow — cyan while listening, warm gold while speaking */}
+      {/* Voice Mode reactive glow — cyan while listening, soft gold pulse while thinking, brighter warm gold while speaking */}
       {reactive && (
         <div
           aria-hidden
@@ -94,6 +94,8 @@ export function EarthScene({
             "pointer-events-none absolute inset-0 z-10 animate-[atmosphere-pulse_3.2s_ease-in-out_infinite] mix-blend-screen",
             reactive === "listening" &&
               "bg-[radial-gradient(circle_at_center,rgba(103,232,249,0.22),transparent_58%)]",
+            reactive === "thinking" &&
+              "bg-[radial-gradient(circle_at_center,rgba(217,168,74,0.16),transparent_58%)] animate-[atmosphere-pulse_2.4s_ease-in-out_infinite]",
             reactive === "speaking" &&
               "bg-[radial-gradient(circle_at_center,rgba(217,168,74,0.28),transparent_58%)] animate-[atmosphere-pulse_1.6s_ease-in-out_infinite]",
           )}

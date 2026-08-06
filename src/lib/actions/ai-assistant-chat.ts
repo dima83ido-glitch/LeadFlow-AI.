@@ -17,9 +17,11 @@ export type AssistantChatMessage = { role: "user" | "assistant"; content: string
 
 const MAX_HISTORY_MESSAGES = 20;
 const MAX_TOOL_ROUNDS = 4;
+const SUPPORTED_LANGUAGES = new Set(["en", "ru", "uk"]);
 
 export async function sendAssistantMessage(
   history: AssistantChatMessage[],
+  language?: string,
 ): Promise<AiActionResult<{ reply: string }>> {
   const { workspaceId, userId } = await requireWorkspace();
 
@@ -29,7 +31,10 @@ export async function sendAssistantMessage(
   if (history.length === 0) return { ok: false, errorCode: "EMPTY_HISTORY" };
 
   try {
-    const locale = await getLocale();
+    // An explicit language (e.g. from the Voice Mode language selector)
+    // overrides the UI locale, so voice replies always come back in the
+    // language the user picked regardless of which locale the app UI is in.
+    const locale = language && SUPPORTED_LANGUAGES.has(language) ? language : await getLocale();
     const workspace = await prisma.workspace.findUnique({
       where: { id: workspaceId },
       select: { hasExistingBusiness: true, businessType: true },
