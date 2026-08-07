@@ -28,6 +28,7 @@ export type AiErrorCode =
   | "MISSING_API_KEY"
   | "AI_TIMEOUT"
   | "AI_RATE_LIMITED"
+  | "AI_DAILY_LIMIT_REACHED"
   | "AI_EMPTY_RESPONSE"
   | "AI_INVALID_RESPONSE"
   | "AI_ERROR";

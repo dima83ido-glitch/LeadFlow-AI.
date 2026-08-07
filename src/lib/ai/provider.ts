@@ -32,7 +32,7 @@ export type AiChatRequest = {
   validateContent?: (content: string) => boolean;
 };
 
-type AttemptFailureKind = "timeout" | "rate_limited" | "auth" | "provider" | "network" | "invalid";
+type AttemptFailureKind = "timeout" | "rate_limited" | "daily_limit" | "auth" | "provider" | "network" | "invalid";
 
 /** Only these can plausibly succeed on an immediate retry of the *same* model — everything else is a property of the request/response itself and would fail identically again. */
 const TRANSIENT_FAILURE_KINDS = new Set<AttemptFailureKind>(["timeout", "rate_limited", "network"]);
@@ -77,22 +77,39 @@ async function callModel(model: string, apiKey: string, request: AiChatRequest):
 
     if (!response.ok) {
       const detail = await response.text().catch(() => response.statusText);
-      const upstreamProvider = (() => {
+      const errorMeta = (() => {
         try {
-          const parsed = JSON.parse(detail) as { error?: { metadata?: { provider_name?: string } } };
-          return parsed.error?.metadata?.provider_name ?? undefined;
+          const parsed = JSON.parse(detail) as {
+            error?: { metadata?: { provider_name?: string; limit_source?: string } };
+          };
+          return parsed.error?.metadata;
         } catch {
           return undefined;
         }
       })();
+      const upstreamProvider = errorMeta?.provider_name ?? undefined;
 
       if (response.status === 401 || response.status === 403) {
         return { ok: false, failure: { kind: "auth", detail, status: response.status, provider: upstreamProvider } };
       }
       if (response.status === 429) {
+        // OpenRouter's free tier caps requests *per API key per day*, not
+        // per model — confirmed directly (`limit_source:
+        // "openrouter_free_tier_daily"`, "Rate limit exceeded: free-
+        // models-per-day"). Every other model in the chain shares the same
+        // key and will hit the identical wall, so this is the one 429
+        // variant that's NOT worth retrying or falling through for — doing
+        // so just burns the rest of the chain (and the user's wait) on a
+        // guaranteed-repeat failure, exactly like an auth failure does.
+        const isDailyLimit = errorMeta?.limit_source === "openrouter_free_tier_daily";
         return {
           ok: false,
-          failure: { kind: "rate_limited", detail, status: response.status, provider: upstreamProvider },
+          failure: {
+            kind: isDailyLimit ? "daily_limit" : "rate_limited",
+            detail,
+            status: response.status,
+            provider: upstreamProvider,
+          },
         };
       }
       // 404 (model not found) / 400 ("no endpoints") / 5xx all land here —
@@ -178,6 +195,7 @@ async function callModel(model: string, apiKey: string, request: AiChatRequest):
 function classifyOverallFailure(failures: { model: string; failure: AttemptFailure }[]): AiErrorCode {
   if (failures.length === 0) return "AI_ERROR";
   if (failures.every((f) => f.failure.kind === "auth")) return "MISSING_API_KEY";
+  if (failures.some((f) => f.failure.kind === "daily_limit")) return "AI_DAILY_LIMIT_REACHED";
   if (failures.every((f) => f.failure.kind === "rate_limited")) return "AI_RATE_LIMITED";
   if (failures.every((f) => f.failure.kind === "timeout")) return "AI_TIMEOUT";
   return "AI_ERROR";
@@ -264,8 +282,11 @@ export async function getAiChatCompletion(request: AiChatRequest): Promise<AiCha
 
     // An auth failure uses the same key for every model in the chain, so
     // it will fail identically each time — stop instead of burning the
-    // rest of the chain (and the user's wait) on a foregone conclusion.
-    if (lastFailure.kind === "auth") break;
+    // rest of the chain (and the user's wait) on a foregone conclusion. The
+    // free-tier daily quota is the same story: it's capped per API key, not
+    // per model, so every other model in the chain would hit the identical
+    // wall.
+    if (lastFailure.kind === "auth" || lastFailure.kind === "daily_limit") break;
   }
 
   console.error(

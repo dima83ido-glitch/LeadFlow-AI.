@@ -11,11 +11,36 @@ export function localeToLanguageName(locale: string): string {
   return LOCALE_NAMES[locale] ?? "English";
 }
 
-export function buildWebsiteAnalysisPrompt(signals: PageSignals, locale: string) {
-  const language = localeToLanguageName(locale);
-  const system = `You are a senior website auditor producing a structured JSON report. Always respond in ${language}, including every label, detail, and recommendation string. Respond with ONLY a single JSON object matching the requested shape — no markdown, no commentary.`;
+/**
+ * Verified directly against OpenRouter (a controlled category-count sweep,
+ * all else held constant) that free-tier models reliably answer within a
+ * few seconds up to ~3 categories per request, then hang indefinitely (no
+ * response, no error — just an eventual client-side timeout) from 5
+ * categories on: the nested categories/findings JSON is a much harder
+ * generation target for a free/shared model than its size in characters
+ * suggests. Batching keeps every individual request in the proven-fast
+ * range regardless of how many categories the feature ultimately reports on.
+ */
+export const WEBSITE_ANALYSIS_CATEGORY_BATCH_SIZE = 3;
 
-  const user = `Analyze this website using the signals below (you cannot browse further, so reason from what's given plus general best practices for a site like this).
+export const WEBSITE_ANALYSIS_CATEGORY_BATCHES: (typeof WEBSITE_ANALYSIS_CATEGORIES)[number][][] = Array.from(
+  { length: Math.ceil(WEBSITE_ANALYSIS_CATEGORIES.length / WEBSITE_ANALYSIS_CATEGORY_BATCH_SIZE) },
+  (_, i) =>
+    WEBSITE_ANALYSIS_CATEGORIES.slice(
+      i * WEBSITE_ANALYSIS_CATEGORY_BATCH_SIZE,
+      (i + 1) * WEBSITE_ANALYSIS_CATEGORY_BATCH_SIZE,
+    ),
+);
+
+export function buildWebsiteAnalysisCategoryBatchPrompt(
+  signals: PageSignals,
+  locale: string,
+  categories: readonly string[],
+) {
+  const language = localeToLanguageName(locale);
+  const system = `You are a senior website auditor producing a structured JSON report. Always respond in ${language}, including every label and detail string. Respond with ONLY a single JSON object matching the requested shape — no markdown, no commentary.`;
+
+  const user = `Analyze this website using the signals below (you cannot browse further, so reason from what's given plus general best practices for a site like this), but ONLY for these categories: ${categories.join(", ")}.
 
 URL: ${signals.finalUrl}
 HTTPS: ${signals.isHttps}
@@ -27,14 +52,12 @@ Visible text sample: """${signals.textSnippet.slice(0, 2000)}"""
 
 Produce a JSON object with this exact shape:
 {
-  "overallScore": number 0-100,
   "categories": [
-    { "key": one of [${WEBSITE_ANALYSIS_CATEGORIES.map((c) => `"${c}"`).join(", ")}], "score": number 0-100, "findings": [ { "status": "good"|"warning"|"bad", "label": string, "detail": string } (1-3 per category) ] }
-  ],
-  "recommendations": [string, ...] (3-6 concrete, prioritized recommendations)
+    { "key": one of [${categories.map((c) => `"${c}"`).join(", ")}], "score": number 0-100, "findings": [ { "status": "good"|"warning"|"bad", "label": string, "detail": string } (1-2 per category) ] }
+  ]
 }
 
-Include exactly one entry per category key listed above, in that order. Every "label" and "detail" and recommendation string must be written in ${language}.`;
+Include exactly one entry per category key listed above, in that order — nothing else, no other categories. Every "label" and "detail" string must be written in ${language}.`;
 
   return { system, user };
 }

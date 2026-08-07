@@ -28,6 +28,8 @@ export const categoryResultSchema = z.object({
   findings: z.array(findingSchema).min(1).max(4),
 });
 
+export type CategoryResult = z.infer<typeof categoryResultSchema>;
+
 export const websiteAnalysisResultSchema = z.object({
   overallScore: z.number().min(0).max(100),
   categories: z.array(categoryResultSchema),
@@ -35,6 +37,23 @@ export const websiteAnalysisResultSchema = z.object({
 });
 
 export type WebsiteAnalysisResult = z.infer<typeof websiteAnalysisResultSchema>;
+
+/**
+ * A single batch's worth of the website analysis — see
+ * WEBSITE_ANALYSIS_CATEGORY_BATCHES in prompts.ts. Free-tier models were
+ * verified (against OpenRouter directly, with a controlled category-count
+ * sweep) to hang indefinitely past ~3 categories in one completion — asking
+ * for all 13 at once in a single request/schema was the actual root cause of
+ * "the AI took too long," not a bad model or a slow website. `overallScore`
+ * and `recommendations` are computed from the merged batches in code instead
+ * of asked of the model, since they're simple aggregates that don't need
+ * their own generation (or round trip).
+ */
+export const websiteAnalysisCategoryBatchSchema = z.object({
+  categories: z.array(categoryResultSchema).min(1),
+});
+
+export type WebsiteAnalysisCategoryBatch = z.infer<typeof websiteAnalysisCategoryBatchSchema>;
 
 export const landingPageAnalysisResultSchema = z.object({
   score: z.number().min(0).max(100),
