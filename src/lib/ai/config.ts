@@ -53,9 +53,21 @@ export const AI_PERMANENTLY_REMOVED_MODELS = ["openai/gpt-oss-20b:free"] as cons
 // Free-tier models can be slower under load than paid ones, but 30s left
 // users staring at a spinner through two or three full dead attempts before
 // ever reaching a model that works. Short enough to fail fast into the next
-// model in the chain, long enough not to cut off a real response for
-// small/medium JSON payloads (headlines, CTAs, single-page analyses, ...).
+// model in the chain, long enough not to cut off a real response for small
+// JSON payloads (headlines, CTAs, subject lines, translation, email
+// draft/rewrite — all a handful of short strings).
 export const AI_REQUEST_TIMEOUT_MS = 10_000;
+
+// The website/landing-page/SEO analyzers all ask for a per-category scored
+// findings array (website analysis alone covers 13 categories), which is a
+// meaningfully bigger generation than the tools above even though it's not
+// as large as the marketing plan. Verified directly against OpenRouter with
+// the app's real prompt (not a toy one): on an uncongested pool a model
+// answers in 1-8s, but free-tier capacity is genuinely volatile — the same
+// model on the same prompt was clocked anywhere from 2.4s to a full 30s
+// timeout a few requests apart. This buys real generations more room without
+// going as far as the marketing plan's budget.
+export const AI_REQUEST_TIMEOUT_MS_MEDIUM = 15_000;
 
 // A handful of features ask for a genuinely large structured JSON payload
 // (the marketing plan schema alone has 20+ fields, several of them arrays

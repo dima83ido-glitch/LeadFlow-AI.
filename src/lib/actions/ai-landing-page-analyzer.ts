@@ -4,6 +4,7 @@ import { getLocale } from "next-intl/server";
 
 import { requireWorkspace } from "@/lib/workspace";
 import { getAiChatCompletion } from "@/lib/ai/provider";
+import { AI_REQUEST_TIMEOUT_MS_MEDIUM } from "@/lib/ai/config";
 import { fetchPageSignals } from "@/lib/ai/fetch-page";
 import { buildLandingPageAnalysisPrompt } from "@/lib/ai/prompts";
 import { jsonSchemaValidator, parseAiJson } from "@/lib/ai/parse-json";
@@ -41,6 +42,9 @@ export async function analyzeLandingPage(url: string): Promise<AiActionResult<La
     ],
     jsonMode: true,
     cache: true,
+    // A multi-finding structured report is a bigger generation than this
+    // app's other AI tools — see AI_REQUEST_TIMEOUT_MS_MEDIUM.
+    timeoutMs: AI_REQUEST_TIMEOUT_MS_MEDIUM,
     validateContent: jsonSchemaValidator(landingPageAnalysisResultSchema),
   });
   if (!result.ok) return { ok: false, errorCode: result.errorCode };

@@ -4,6 +4,7 @@ import { getLocale } from "next-intl/server";
 
 import { requireWorkspace } from "@/lib/workspace";
 import { getAiChatCompletion } from "@/lib/ai/provider";
+import { AI_REQUEST_TIMEOUT_MS_MEDIUM } from "@/lib/ai/config";
 import { fetchPageSignals } from "@/lib/ai/fetch-page";
 import { buildWebsiteAnalysisPrompt } from "@/lib/ai/prompts";
 import { jsonSchemaValidator, parseAiJson } from "@/lib/ai/parse-json";
@@ -41,6 +42,9 @@ export async function analyzeWebsite(url: string): Promise<AiActionResult<Websit
     ],
     jsonMode: true,
     cache: true,
+    // 13 scored categories with findings is a meaningfully bigger generation
+    // than this app's other AI tools — see AI_REQUEST_TIMEOUT_MS_MEDIUM.
+    timeoutMs: AI_REQUEST_TIMEOUT_MS_MEDIUM,
     validateContent: jsonSchemaValidator(websiteAnalysisResultSchema),
   });
   if (!result.ok) return { ok: false, errorCode: result.errorCode };

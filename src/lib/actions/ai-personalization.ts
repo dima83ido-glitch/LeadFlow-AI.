@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { requireWorkspace } from "@/lib/workspace";
 import { getAiChatCompletion } from "@/lib/ai/provider";
+import { AI_REQUEST_TIMEOUT_MS_MEDIUM } from "@/lib/ai/config";
 import { buildPersonalizationPrompt } from "@/lib/ai/prompts";
 import { jsonSchemaValidator, parseAiJson } from "@/lib/ai/parse-json";
 import { personalizationResultSchema, type PersonalizationResult } from "@/lib/ai/schemas";
@@ -37,6 +38,10 @@ export async function generatePersonalization(businessType: string): Promise<AiA
     ],
     jsonMode: true,
     cache: true,
+    // Several arrays plus nested suggested-content/email-sequence objects —
+    // a bigger generation than this app's other AI tools, see
+    // AI_REQUEST_TIMEOUT_MS_MEDIUM.
+    timeoutMs: AI_REQUEST_TIMEOUT_MS_MEDIUM,
     validateContent: jsonSchemaValidator(personalizationResultSchema),
   });
   if (!result.ok) return { ok: false, errorCode: result.errorCode };
