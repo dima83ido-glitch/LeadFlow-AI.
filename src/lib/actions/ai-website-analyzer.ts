@@ -6,6 +6,7 @@ import { requireWorkspace } from "@/lib/workspace";
 import { getAiChatCompletion } from "@/lib/ai/provider";
 import { fetchPageSignals } from "@/lib/ai/fetch-page";
 import { buildWebsiteAnalysisPrompt } from "@/lib/ai/prompts";
+import { jsonSchemaValidator, parseAiJson } from "@/lib/ai/parse-json";
 import { websiteAnalysisResultSchema, type WebsiteAnalysisResult } from "@/lib/ai/schemas";
 import { logSystemEvent } from "@/lib/system-log";
 
@@ -40,25 +41,15 @@ export async function analyzeWebsite(url: string): Promise<AiActionResult<Websit
     ],
     jsonMode: true,
     cache: true,
+    validateContent: jsonSchemaValidator(websiteAnalysisResultSchema),
   });
   if (!result.ok) return { ok: false, errorCode: result.errorCode };
 
   const raw = result.content;
   if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
 
-  let json: unknown;
-  try {
-    json = JSON.parse(raw);
-  } catch (err) {
-    console.error(`${FEATURE}: failed to parse AI response as JSON:`, err);
-    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
-  }
-
-  const parsed = websiteAnalysisResultSchema.safeParse(json);
-  if (!parsed.success) {
-    console.error(`${FEATURE}: AI response failed schema validation:`, parsed.error.message);
-    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
-  }
+  const parsed = parseAiJson(FEATURE, websiteAnalysisResultSchema, raw);
+  if (!parsed.ok) return parsed;
 
   // Logging is a side effect, not part of the result — a DB hiccup here must
   // never discard an analysis the user already successfully got back.

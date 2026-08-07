@@ -5,6 +5,7 @@ import { getLocale } from "next-intl/server";
 import { requireWorkspace } from "@/lib/workspace";
 import { getAiChatCompletion } from "@/lib/ai/provider";
 import { buildEmailRewritePrompt } from "@/lib/ai/prompts";
+import { jsonSchemaValidator, parseAiJson } from "@/lib/ai/parse-json";
 import { emailRewriteResultSchema, type EmailRewriteResult } from "@/lib/ai/schemas";
 import { logSystemEvent } from "@/lib/system-log";
 
@@ -27,25 +28,15 @@ export async function rewriteEmail(text: string, tone: string): Promise<AiAction
     ],
     jsonMode: true,
     cache: true,
+    validateContent: jsonSchemaValidator(emailRewriteResultSchema),
   });
   if (!result.ok) return { ok: false, errorCode: result.errorCode };
 
   const raw = result.content;
   if (!raw) return { ok: false, errorCode: "AI_EMPTY_RESPONSE" };
 
-  let json: unknown;
-  try {
-    json = JSON.parse(raw);
-  } catch (err) {
-    console.error(`${FEATURE}: failed to parse AI response as JSON:`, err);
-    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
-  }
-
-  const parsed = emailRewriteResultSchema.safeParse(json);
-  if (!parsed.success) {
-    console.error(`${FEATURE}: AI response failed schema validation:`, parsed.error.message);
-    return { ok: false, errorCode: "AI_INVALID_RESPONSE" };
-  }
+  const parsed = parseAiJson(FEATURE, emailRewriteResultSchema, raw);
+  if (!parsed.ok) return parsed;
 
   logSystemEvent({ message: "AI email rewrite generated", feature: FEATURE }).catch(() => {});
   return { ok: true, data: parsed.data };
