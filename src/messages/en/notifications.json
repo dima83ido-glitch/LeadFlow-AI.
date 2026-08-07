@@ -56,5 +56,16 @@
     "successToast": "Reminders enabled — you'll get a notification 1 hour before things are due.",
     "deniedToast": "Notification permission was denied. You can enable it later in Settings or your browser.",
     "errorToast": "Couldn't enable reminders. Please try again."
+  },
+  "toggle": {
+    "enabledLabel": "Notifications enabled",
+    "disabledLabel": "Notifications disabled",
+    "enableTooltip": "Turn on notifications",
+    "disableTooltip": "Turn off notifications",
+    "enabledToast": "Notifications enabled.",
+    "disabledToast": "Notifications turned off.",
+    "deniedExplanation": "Notifications are blocked for this site in your browser. To turn them on, allow notifications for this site in your browser's settings, then try again.",
+    "unsupportedExplanation": "Your browser doesn't support push notifications.",
+    "errorToast": "Couldn't turn on notifications. Please try again."
   }
 }

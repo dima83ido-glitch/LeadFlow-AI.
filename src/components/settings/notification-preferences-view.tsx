@@ -4,12 +4,7 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
-import { getPushSubscriptionStatus } from "@/lib/actions/push";
-import {
-  disablePushNotifications,
-  enablePushNotifications,
-  getNotificationPermission,
-} from "@/lib/push-client";
+import { useNotificationToggle } from "@/components/notifications/notification-toggle-provider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
@@ -35,38 +30,28 @@ const initialChecked: Record<(typeof preferenceIds)[number], boolean> = {
 export function NotificationPreferencesView() {
   const t = useTranslations("settings.notifications");
   const [checkedState, setCheckedState] = React.useState(initialChecked);
-  const [pushEnabled, setPushEnabled] = React.useState(false);
-  const [pushBlocked, setPushBlocked] = React.useState(false);
-  const [pushBusy, setPushBusy] = React.useState(false);
+  const { status: pushStatus, busy: pushBusy, toggle: togglePushSubscription } = useNotificationToggle();
 
-  React.useEffect(() => {
-    getPushSubscriptionStatus().then(({ subscribed }) => setPushEnabled(subscribed));
-    setPushBlocked(getNotificationPermission() === "denied");
-  }, []);
+  const pushEnabled = pushStatus === "enabled";
+  const pushBlocked = pushStatus === "denied";
 
   function toggle(id: keyof typeof checkedState, checked: boolean) {
     setCheckedState((prev) => ({ ...prev, [id]: checked }));
   }
 
-  async function togglePush(checked: boolean) {
-    setPushBusy(true);
-    if (checked) {
-      const result = await enablePushNotifications();
-      if (result.ok) {
-        setPushEnabled(true);
-        toast.success(t("push.enabledToast"));
-      } else if (result.reason === "DENIED") {
-        setPushBlocked(true);
-        toast.error(t("push.deniedToast"));
-      } else {
-        toast.error(t("push.errorToast"));
-      }
-    } else {
-      await disablePushNotifications();
-      setPushEnabled(false);
-      toast.success(t("push.disabledToast"));
+  async function togglePush() {
+    const outcome = await togglePushSubscription();
+    if (outcome.ok) {
+      toast.success(outcome.status === "enabled" ? t("push.enabledToast") : t("push.disabledToast"));
+      return;
     }
-    setPushBusy(false);
+    if (outcome.reason === "DENIED") {
+      toast.error(t("push.deniedToast"));
+    } else if (outcome.reason === "UNSUPPORTED") {
+      toast.error(t("push.unsupportedToast"));
+    } else {
+      toast.error(t("push.errorToast"));
+    }
   }
 
   return (
@@ -86,7 +71,7 @@ export function NotificationPreferencesView() {
             <Switch
               id="push-notifications"
               checked={pushEnabled}
-              disabled={pushBusy || pushBlocked}
+              disabled={pushBusy || pushStatus === undefined}
               onCheckedChange={togglePush}
             />
           </Field>

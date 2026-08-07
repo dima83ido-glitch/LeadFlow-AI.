@@ -37,25 +37,32 @@ export function NotificationsPopover() {
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    getUnreadCount().then(setUnreadCount);
-    const interval = setInterval(() => getUnreadCount().then(setUnreadCount), POLL_INTERVAL_MS);
+    const poll = () =>
+      getUnreadCount()
+        .then(setUnreadCount)
+        .catch((error) => console.error("[notifications] getUnreadCount failed:", error));
+    poll();
+    const interval = setInterval(poll, POLL_INTERVAL_MS);
     return () => clearInterval(interval);
   }, []);
 
   React.useEffect(() => {
-    if (open) {
-      listNotifications().then((rows) => {
+    if (!open) return;
+    listNotifications()
+      .then((rows) => {
         setNotifications(rows);
         setUnreadCount(rows.filter((n) => !n.read).length);
-      });
-    }
+      })
+      .catch((error) => console.error("[notifications] listNotifications failed:", error));
   }, [open]);
 
   function handleOpen(notification: NotificationRow) {
     if (notification.read) return;
     setNotifications((prev) => prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n)));
     setUnreadCount((count) => Math.max(0, count - 1));
-    markNotificationRead(notification.id);
+    markNotificationRead(notification.id).catch((error) =>
+      console.error("[notifications] markNotificationRead failed:", error),
+    );
   }
 
   return (

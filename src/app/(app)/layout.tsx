@@ -8,6 +8,7 @@ import { AiAssistantPanel } from "@/components/ai-assistant/ai-assistant-panel";
 import { AiAssistantProvider } from "@/components/ai-assistant/ai-assistant-provider";
 import { AmbientBackground } from "@/components/layout/ambient-background";
 import { PageTransition } from "@/components/layout/page-transition";
+import { NotificationToggleProvider } from "@/components/notifications/notification-toggle-provider";
 import { PushPermissionBanner } from "@/components/notifications/push-permission-banner";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
@@ -30,12 +31,14 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   );
 
   return (
-    <OnboardingProvider>
-      <AmbientBackground />
-      <SidebarProvider>
-        {canUseAiAssistant ? <AiAssistantProvider>{shell}</AiAssistantProvider> : shell}
-      </SidebarProvider>
-      <PushPermissionBanner />
-    </OnboardingProvider>
+    <NotificationToggleProvider>
+      <OnboardingProvider>
+        <AmbientBackground />
+        <SidebarProvider>
+          {canUseAiAssistant ? <AiAssistantProvider>{shell}</AiAssistantProvider> : shell}
+        </SidebarProvider>
+        <PushPermissionBanner />
+      </OnboardingProvider>
+    </NotificationToggleProvider>
   );
 }

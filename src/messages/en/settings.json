@@ -61,6 +61,7 @@
       "enabledToast": "Push notifications enabled.",
       "disabledToast": "Push notifications disabled.",
       "deniedToast": "Notification permission was denied. Enable it in your browser settings to receive reminders.",
+      "unsupportedToast": "Your browser doesn't support push notifications.",
       "errorToast": "Couldn't enable push notifications. Please try again."
     },
     "emailDigest": { "label": "Weekly summary email", "description": "A digest of activity across your workspace." },

@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { NavControls } from "@/components/layout/nav-controls";
+import { NotificationToggle } from "@/components/layout/notification-toggle";
 import { NotificationsPopover } from "@/components/layout/notifications-popover";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { UserMenu } from "@/components/layout/user-menu";
@@ -25,6 +26,7 @@ export async function Topbar({ isAdmin, canUseAiAssistant }: { isAdmin: boolean;
         <CommandPalette />
         <LanguageSwitcher />
         <ThemeToggle />
+        <NotificationToggle />
         <NotificationsPopover />
         {canUseAiAssistant && (
           <>

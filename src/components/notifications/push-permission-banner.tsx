@@ -5,15 +5,16 @@ import { BellRing, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
-import { enablePushNotifications, getNotificationPermission } from "@/lib/push-client";
+import { getNotificationPermission } from "@/lib/push-client";
 import { dismissPushPrompt, hasDismissedPushPrompt } from "@/lib/push-prompt";
+import { useNotificationToggle } from "@/components/notifications/notification-toggle-provider";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export function PushPermissionBanner() {
   const t = useTranslations("notifications.pushBanner");
+  const { busy: isEnabling, toggle } = useNotificationToggle();
   const [visible, setVisible] = React.useState(false);
-  const [isEnabling, setIsEnabling] = React.useState(false);
 
   React.useEffect(() => {
     if (hasDismissedPushPrompt()) return;
@@ -27,15 +28,13 @@ export function PushPermissionBanner() {
   }
 
   async function handleEnable() {
-    setIsEnabling(true);
-    const result = await enablePushNotifications();
-    setIsEnabling(false);
+    const outcome = await toggle();
     dismissPushPrompt();
     setVisible(false);
 
-    if (result.ok) {
+    if (outcome.ok) {
       toast.success(t("successToast"));
-    } else if (result.reason === "DENIED") {
+    } else if (outcome.reason === "DENIED") {
       toast.info(t("deniedToast"));
     } else {
       toast.error(t("errorToast"));

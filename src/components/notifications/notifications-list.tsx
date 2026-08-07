@@ -35,7 +35,9 @@ export function NotificationsList() {
   const [filter, setFilter] = React.useState<"all" | "unread">("all");
 
   const refresh = React.useCallback(() => {
-    listNotifications().then(setNotifications);
+    listNotifications()
+      .then(setNotifications)
+      .catch((error) => console.error("[notifications] listNotifications failed:", error));
   }, []);
 
   React.useEffect(() => {
@@ -48,13 +50,19 @@ export function NotificationsList() {
 
   async function markAllRead() {
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-    await markAllNotificationsRead();
+    try {
+      await markAllNotificationsRead();
+    } catch (error) {
+      console.error("[notifications] markAllNotificationsRead failed:", error);
+    }
   }
 
   function handleOpen(notification: NotificationRow) {
     if (notification.read) return;
     setNotifications((prev) => prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n)));
-    markNotificationRead(notification.id);
+    markNotificationRead(notification.id).catch((error) =>
+      console.error("[notifications] markNotificationRead failed:", error),
+    );
   }
 
   return (
